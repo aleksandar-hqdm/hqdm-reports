@@ -155,8 +155,8 @@
       <div class="panel p-4">
         <ul class="comp">
           <li><span><b>Booth-type pages, only for what they offer.</b> Open-air and enclosed first (likely just descriptions of the booths they already run, near-zero effort); mirror, digital, and vintage only if they are in the real inventory. No selfie-booth page, it overlaps the existing social booth and would split it.</span></li>
-          <li><span><b>Measurement.</b> No GA4 key events are configured, so the conversions report is empty and leads have to be derived from raw form events. Set generate_lead or contact_form_submit as the key event so reporting is clean.</span></li>
-          <li><span><b>Lead source, settled.</b> CallRail is not installed for this account. Leads come from GA4 form events; phone, email, and profile clicks are charted separately. The number shown on the site differs from the GBP number by design (a call-tracking display choice), not a NAP error, so do not "unify" it.</span></li>
+          <li><span><b>Measurement.</b> Leads come from GoHighLevel (the CRM), now wired via a read-only API. A lead is a GHL opportunity tagged as a website form submission or a verified call; spam calls (off the GBP tracking number) and imported records are excluded. The genuine count runs about 9 to 15 a month and reconciles with the GA4 form events, so GA4 is a useful cross-check but not the source.</span></li>
+          <li><span><b>Lead source, settled.</b> CallRail is not installed; GoHighLevel is the system of record. The number shown on the site is a GHL call-tracking number that differs from the GBP number by design, not a NAP error, so do not "unify" it. The volume that looked like missing leads in GHL was mostly spam calls and bulk imports, not real business.</span></li>
         </ul>
       </div>
     </section>
@@ -225,7 +225,7 @@
             <tr><td class="area">Website</td><td>Link the high-traffic guides to the booth and event pages</td><td>Routes the large reading audience toward booking</td><td><span class="pri pri-high">High</span></td></tr>
             <tr><td class="area">Website</td><td>Pause new inland suburb pages</td><td>Stops feeding effort into pages that draw almost no traffic</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">Content</td><td>Add a "photo booth cost in Miami" guide</td><td>Fills the one genuine net-new content gap, decision-stage</td><td><span class="pri pri-low">Low</span></td></tr>
-            <tr><td class="area">Measurement</td><td>Set generate_lead (or contact_form_submit) as a GA4 key event</td><td>Makes the conversions report work; cleaner lead counting</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Measurement</td><td>Report leads from GoHighLevel (forms + verified calls), excluding spam and imports</td><td>Uses the CRM system of record; the true ~9 to 15 per month count</td><td><span class="pri pri-low">Low</span></td></tr>
           </tbody>
         </table>
       </div>
