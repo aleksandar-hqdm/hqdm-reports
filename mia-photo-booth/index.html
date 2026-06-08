@@ -89,7 +89,7 @@
 
   <nav class="no-print sticky top-0 z-40 bg-slate-50/95 backdrop-blur border-b border-slate-200">
     <div class="shell mx-auto px-4 sm:px-6 py-3 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-      <button class="tab-btn" data-tab="1" onclick="showTab(1)"><span class="t">Overall</span><span class="s">Summary</span></button>
+      <button class="tab-btn" data-tab="1" onclick="showTab(1)"><span class="t">Overall</span><span class="s">Lead generation</span></button>
       <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">GA4 performance</span></button>
       <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
       <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Completed and upcoming</span></button>
@@ -98,22 +98,24 @@
 
   <main class="shell mx-auto px-4 sm:px-6 py-5">
 
-    <!-- ===================== TAB 1 : OVERALL ===================== -->
+    <!-- ===================== TAB 1 : OVERALL / LEADS ===================== -->
     <section data-panel="1">
       <div class="ov-eyebrow mb-1">Overview</div>
       <ul class="ov mb-4">
+        <li>The business brings a steady <strong>9 to 15 genuine leads a month</strong> (website enquiries plus real phone calls), holding through the spring.</li>
         <li>Organic search has grown from 58 visits in August to about <strong>1,135 in May</strong>, close to twenty times where it started, and is now roughly <strong>77% of all website traffic</strong>.</li>
-        <li>The Google profile holds a <strong>5.0 rating across 103 reviews</strong>, the second-strongest review base among the Miami photo booth companies we track. That review base is a real asset.</li>
-        <li>The largest growth opportunity is Google Maps visibility in the busy event areas of Miami, covered in Map Presence and the work plan.</li>
+        <li>The Google profile holds a <strong>5.0 rating across 103 reviews</strong>, the second-strongest review base in the market. The biggest growth opportunity is Google Maps visibility in the busy event areas, covered in Map Presence.</li>
       </ul>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
-        <div class="kpi"><div class="l">Organic visits · May</div><div class="n">1,135</div><div class="s">about 77% of all traffic</div></div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+        <div class="kpi"><div class="l">Leads · last 90 days</div><div class="n">31</div><div class="s">website forms + verified calls</div></div>
+        <div class="kpi"><div class="l">Leads · May</div><div class="n">10</div><div class="s">genuine inbound</div></div>
         <div class="kpi"><div class="l">Reviews · rating</div><div class="n">103 · 5.0</div><div class="s">2nd-strongest base in the market</div></div>
-        <div class="kpi"><div class="l">Organic keywords</div><div class="n">199</div><div class="s">ahead of most local rivals</div></div>
+        <div class="kpi"><div class="l">Organic visits · May</div><div class="n">1,135</div><div class="s">about 77% of all traffic</div></div>
       </div>
-      <div class="means" style="background:#fff7ed;border-color:#fed7aa;">
-        <div class="lbl" style="color:#9a3412;">Lead reporting is on hold pending system access</div>
-        <p style="color:#7c2d12;">Leads for this account are captured in GoHighLevel (GHL), the booking and CRM system, which HQDM does not yet have reporting access to. The website's form tracking in Google Analytics changed in December 2025 and no longer records every submission, so a Google Analytics figure would undercount the real total. We are holding the lead number until GHL access is in place, then it will be reported here on the real data.</p>
+      <div class="panel p-4">
+        <div class="cardhd mb-2">Genuine leads month over month</div>
+        <div class="relative" style="height:240px;"><canvas id="leadsChart"></canvas></div>
+        <p class="ann mt-2">Leads are genuine inbound from the booking system (GoHighLevel): website form submissions plus verified phone calls. Spam calls and imported records are excluded. Completed months only; the earliest months reflect the system still being set up.</p>
       </div>
     </section>
 
@@ -249,6 +251,7 @@
 
   <script>
     const DATA = {
+      leads: { months:['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'], leads:[10,4,15,15,13,13,12,9,12,10] },
       traffic: { months:['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],
                  organic:[58,167,246,701,1110,1445,1434,1176,1013,1135] },
       mix: [['Guide articles (blog)',3378,2753,'85%'],['Booking pages (booth + home)',371,251,'8%'],['Other',321,243,'7%']],
@@ -311,6 +314,10 @@
         tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=>`${c.dataset.label}: ${c.raw!=null?c.raw.toLocaleString():'-'}`}} },
       scales:{ x:{grid:{display:false},ticks:{font:{size:10}}}, y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:9}},title:{display:true,text:yt,font:{size:9,weight:'600'},color:'#64748b'}} } });
 
+    function renderLeads(){ return new Chart(document.getElementById('leadsChart'), { type:'line',
+      data:{ labels:DATA.leads.months, datasets:[
+        {label:'Genuine leads',data:DATA.leads.leads,borderColor:'#0e7490',backgroundColor:'#0e749022',borderWidth:3,tension:0.25,pointRadius:3,pointHoverRadius:6,fill:true} ] },
+      options:opts('leads / month') }); }
     function renderTraffic(){ return new Chart(document.getElementById('trafficChart'), { type:'line',
       data:{ labels:DATA.traffic.months, datasets:[ {label:'Organic visitors',data:DATA.traffic.organic,borderColor:'#06b6d4',backgroundColor:'#06b6d422',borderWidth:3,tension:0.25,pointRadius:3,pointHoverRadius:6,fill:true} ] },
       options:opts('visitors / month') }); }
@@ -318,6 +325,7 @@
     function showTab(n){
       document.querySelectorAll('[data-tab]').forEach(el => el.classList.toggle('active', el.dataset.tab == n));
       document.querySelectorAll('[data-panel]').forEach(el => el.style.display = el.dataset.panel == n ? '' : 'none');
+      if (n==1 && !charts.leads) charts.leads = renderLeads();
       if (n==2 && !charts.traffic) charts.traffic = renderTraffic();
     }
     showTab(2);
