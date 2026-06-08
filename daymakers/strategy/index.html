@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Daymakers Moving Custom Strategy · HQDM</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { sans: ['Inter','system-ui','sans-serif'], serif: ['Lora','ui-serif','Georgia','serif'] },
+      colors: { brand: { 900:'#0b2545', 700:'#13315c', 500:'#1d5b8a', 300:'#8ecae6' } }
+    } } }
+  </script>
+  <style>
+    :root { --navy:#0b2a45; --teal:#0e7490; --teal2:#06b6d4; --tealbg:#ecfeff; --up:#16a34a; --line:#e5e9f0; }
+    body { font-family:'Inter',system-ui,sans-serif; }
+    .shell { max-width: 900px; }
+    .eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; }
+    .panel { background:#fff; border:1px solid var(--line); border-radius:0.7rem; }
+    h2.sec { font-family:'Lora',serif; font-weight:700; font-size:1.35rem; color:#0b1220; letter-spacing:-0.01em; }
+    .lead { font-size:0.95rem; line-height:1.65; color:#1f2937; }
+    .chip { display:inline-flex; align-items:baseline; gap:0.35rem; background:#f1f5f9; border:1px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; }
+    .chip .v { font-weight:800; font-size:0.8rem; color:#0b1220; } .chip .l { font-size:0.6rem; font-weight:600; color:#64748b; text-transform:uppercase; letter-spacing:0.04em; }
+    .chip.good { background:#ecfdf5; border-color:#a7f3d0; } .chip.good .v { color:#047857; }
+    .chip.bad { background:#fef2f2; border-color:#fecaca; } .chip.bad .v { color:#b91c1c; }
+    .comp li { display:flex; gap:0.5rem; align-items:flex-start; font-size:0.86rem; color:#334155; line-height:1.5; margin:0.4rem 0; }
+    .comp li::before { content:''; flex-shrink:0; width:0.4rem; height:0.4rem; border-radius:999px; background:var(--teal2); margin-top:0.5rem; }
+    .comp b { color:#0b1220; }
+    .strat { background:#fff; border:1px solid var(--line); border-left:4px solid var(--navy); border-radius:0.7rem; padding:1.05rem 1.2rem; margin-bottom:0.9rem; }
+    .strat-hd { display:flex; align-items:center; gap:0.65rem; margin-bottom:0.55rem; flex-wrap:wrap; }
+    .snum { flex-shrink:0; width:1.75rem; height:1.75rem; border-radius:0.4rem; background:var(--navy); color:#fff; font-weight:800; font-size:0.85rem; display:flex; align-items:center; justify-content:center; }
+    .strat-hd h3 { font-family:'Lora',serif; font-weight:700; font-size:1.15rem; color:#0b1220; }
+    .strat-hd .tag { font-size:0.6rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--teal); background:var(--tealbg); border:1px solid #bae6fd; border-radius:999px; padding:0.12rem 0.55rem; }
+    .wwh .row { display:grid; grid-template-columns:54px 1fr; gap:0.65rem; padding:0.5rem 0; border-top:1px solid #f1f5f9; }
+    .wwh .row:first-child { border-top:0; padding-top:0.2rem; }
+    .wwh .lbl { font-size:0.58rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal); padding-top:0.18rem; }
+    .wwh p { font-size:0.86rem; color:#334155; line-height:1.55; }
+    .wwh p b { color:#0b1220; }
+    .callout { border-radius:0.6rem; padding:0.85rem 1rem; }
+    .callout .l { font-size:0.58rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; }
+    .callout p { font-size:0.86rem; line-height:1.55; margin-top:0.15rem; }
+    .mini li { font-size:0.85rem; color:#334155; line-height:1.5; margin:0.35rem 0; }
+    .mini b { color:#0b1220; }
+    @media print { .panel,.strat{box-shadow:none;} @page{size:portrait;margin:0.5in;} }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased">
+
+  <div class="text-white" style="background:linear-gradient(135deg,#0a2540 0%,#123a5e 55%,#1a4e78 100%);">
+    <div class="shell mx-auto px-6 sm:px-8 pt-8 pb-7">
+      <div class="eyebrow text-brand-300 mb-3">HQDM Search Intelligence · Custom Strategy</div>
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+        <div>
+          <h1 class="font-serif font-bold tracking-tight text-3xl sm:text-4xl leading-tight">Daymakers Moving &amp; Storage</h1>
+          <div class="text-slate-300 mt-2 text-sm sm:text-base">What, why, and how for each strategy · 5 locations, MN &amp; WI</div>
+        </div>
+        <div class="self-start sm:self-end inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-slate-100 whitespace-nowrap">Internal · June 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="shell mx-auto px-4 sm:px-6 py-6">
+
+    <!-- THE FRAME -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">The frame</h2>
+      <div class="panel p-4" style="background:linear-gradient(180deg,#ffffff 0%,#f0fdf4 100%);">
+        <p class="lead">
+          Daymakers is a strong, established five-pin network with one of the largest review bases in its markets (<b>2,265 reviews at 4.9 to 5.0</b>) and four of five locations leading their local map. But the keyword and map data show a clear inversion. They dominate the <b>"{service} {city}" terms that almost nobody searches</b> (movers roseville, local movers lake elmo: 0 to 390 a month) and the area right next to each office, while they lose the <b>generic "movers near me / moving company / local movers" terms that carry the demand</b> (49,000 to 301,000 a month) across the wider service area. Those generic searches are the Maps-pack queries that drive about <b>88% of the CallRail leads</b>. So the play is not more zero-volume suburb pages (54 already exist and produce about 7 clicks across 90 days). It is: win the generic-term ring across each pin's service area (the Hudson model, already proven), fix Eau Claire from the ground up (its profile points at the homepage and it has 22 reviews against 400 to 700 elsewhere), clean up a spam-dragged link profile, and re-aim content from suburbs to the terms with real demand.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-3">
+          <span class="chip good"><span class="v">2,265 · 4.9 to 5.0</span><span class="l">strongest review base in market</span></span>
+          <span class="chip good"><span class="v">4 of 5</span><span class="l">locations lead their map</span></span>
+          <span class="chip bad"><span class="v">Eau Claire 22</span><span class="l">the one weak market</span></span>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-3">Search volumes are DataForSEO estimates, not literal counts, and localize to each metro. All GBP work is the five managed pins, re-pointing their service areas, not new locations.</p>
+      </div>
+    </section>
+
+    <!-- COMPETITIVE PICTURE -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">The competitive picture</h2>
+      <div class="panel p-4">
+        <p class="text-[14px] text-slate-700 leading-relaxed mb-2">The moving field here is local and won mostly on reviews and proximity, not content or links. Daymakers has the best ratings (4.9 to 5.0) and more links than any local rival, so it is not a quality problem. The edge losses split into two different causes that need two different fixes:</p>
+        <ul class="comp">
+          <li><span><b>Prominence (reviews), where the gap is real.</b> Eau Claire: <b>Elite Movers (1,171 reviews)</b> and Dan the Moving Man (878) own the market against Daymakers' 25. Roseville: the metro brands out-review Daymakers' 460, Good Stuff (1,810), You Move Me (1,696), College Hunks (2,202), Two Men and a Truck (906), and win the wider area on prominence over proximity.</span></li>
+          <li><span><b>Proximity, where Daymakers already leads on reviews.</b> Bloomington (731) and Lake Elmo (427) out-review their competitors (Minne Movers 210, WellRive 119, Minute Men 104; Two Men 679, Revival 110), so the edge losses there are to physically closer small movers, not stronger profiles. The fix is service-area signals, not reviews.</span></li>
+          <li><span><b>Hudson is the proof.</b> With 635 reviews against a field whose nearest rival has 74, Hudson leads every search across its whole area. Where Daymakers has the review lead, it wins.</span></li>
+        </ul>
+        <p class="text-[13px] text-slate-600 leading-relaxed mt-2">Authority twist: Daymakers has the most backlinks of the local field (1,229) but a <b>weaker domain authority</b> than Elite Movers, Dan, and Good Stuff, who rank stronger with a fraction of the links. The profile is dragged down by spam (a likely residue of the halted off-page program). Quantity without quality. Good Stuff also ranks for more keywords (876 vs 657) with content aimed at real metro terms.</p>
+      </div>
+    </section>
+
+    <!-- GRID READ -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">Where Daymakers is strong and weak on the map</h2>
+      <div class="panel p-4">
+        <ul class="comp">
+          <li><span><b>Strong:</b> the branded "{service} {city}" terms and the immediate area around each office. Four of five pins hold near-total top-3 coverage on their branded terms and the grid core. Hudson leads everything, edge to edge.</span></li>
+          <li><span><b>Weak:</b> the generic "near me" terms at the edges. Roseville "moving company" averages #7.6 (core #3.1, edge #9.7) and "local movers" #8.3; Bloomington "movers near me" decays to #8.7 at the edges; Eau Claire is weak everywhere, including the core.</span></li>
+          <li><span><b>Internal note, keep out of the client report:</b> "local movers near me" (about 49,500 searches) does not rank at all on the Bloomington grid, likely a GBP service or category gap. And the removed Woodbury page (/woodbury-mn-movers/) now returns a 404 after being a top-5 ranker through March; it needs a 301, not a deletion.</span></li>
+          <li><span><b>Not the fix:</b> more suburb pages. The 54 programmatic micro-neighborhood pages target near-zero-volume terms and produced about 7 organic clicks across 90 days combined.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- STRATEGIES -->
+    <section class="mb-6">
+      <h2 class="sec mb-3">The strategies</h2>
+
+      <div class="strat">
+        <div class="strat-hd"><span class="snum">1</span><h3>Win the generic searches across each service-area ring</h3><span class="tag">where the calls are</span></div>
+        <div class="wwh">
+          <div class="row"><span class="lbl">What</span><p>Shift the local effort from the branded "{service} {city}" terms (won, near-zero volume) to the generic terms (<b>movers near me, moving company, local movers</b>) across the wider service area of each pin, not just next to the office.</p></div>
+          <div class="row"><span class="lbl">Why</span><p>The generic terms carry the demand (49,000 to 301,000 versus 0 to 390 for the branded ones) and they are the Maps-pack queries that drive about 88% of leads. Daymakers ranks at the top for them in each grid core but slips to #5 to #12 at the edges, where a competitor takes the call. Hudson already wins these edge to edge, so it is proven achievable.</p></div>
+          <div class="row"><span class="lbl">How</span><p>Apply the Hudson model to Roseville, Lake Elmo, and Bloomington: a strong review base plus a complete city page plus full GBP service-area signals. Extend each profile's service area outward; for the proximity-driven pins (Bloomington, Lake Elmo) this is the main lever. Track the generic terms across the grid, not just the branded ones.</p></div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-hd"><span class="snum">2</span><h3>Fix Eau Claire from the ground up</h3><span class="tag">the one weak market</span></div>
+        <div class="wwh">
+          <div class="row"><span class="lbl">What</span><p>Repoint the Eau Claire Google profile from the homepage to <b>/eau-claire-wi-movers/</b>, build that page out with the Chippewa Valley suburbs (Chippewa Falls, Altoona, Menomonie), and grow the review base from 22 toward the level of the other markets.</p></div>
+          <div class="row"><span class="lbl">Why</span><p>Eau Claire is the weakest pin, weak even at the core, where Elite Movers (1,171 reviews) and Dan the Moving Man (878) dominate. The profile pointing at the homepage and the review desert are the binding constraints. No on-page work overcomes a 25-versus-1,171 review gap, so this is foundational.</p></div>
+          <div class="row"><span class="lbl">How</span><p>In GBP Manager, change the website link to the Eau Claire page. Build the page to match the depth of the Hudson and Bloomington pages. Reviews are a client lever (outside our standard delivery scope), so flag Eau Claire as the priority for the client to drive.</p></div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-hd"><span class="snum">3</span><h3>Clean up the links and re-aim the content</h3><span class="tag">stop the waste</span></div>
+        <div class="wwh">
+          <div class="row"><span class="lbl">What</span><p>Prune the low-quality and spam links and replace them with a small set of genuine local citations; redirect content effort from the zero-volume suburb pages to the generic and metro terms; <b>301-redirect the removed Woodbury page</b>; add a long-distance moving page tied to the Roseville profile.</p></div>
+          <div class="row"><span class="lbl">Why</span><p>Daymakers has more links than any local competitor but weaker authority, because the profile carries spam from the halted off-page program. The 54 suburb pages draw almost nothing. Woodbury was a top-5 ranker and now 404s, throwing away its value. Long distance carries the highest-value jobs (a $50 to $63 cost-per-click range) and Roseville ranks only about #10.</p></div>
+          <div class="row"><span class="lbl">How</span><div><ul class="mini" style="margin:0;">
+            <li>Audit the backlink profile, disavow or clean the spam, and build a few quality local listings.</li>
+            <li>301 /woodbury-mn-movers/ to the Lake Elmo page or the recommended-services page.</li>
+            <li>Build and link a long-distance page to the Roseville profile.</li>
+            <li>Pause new suburb pages; point content at the generic and metro terms from the keyword universe.</li>
+          </ul></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEXT PHASE / OPERATIONAL -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">Next phase and operational</h2>
+      <div class="panel p-4">
+        <ul class="comp">
+          <li><span><b>Measurement.</b> Leads come from CallRail (connected June 2026), the system of record for phone and form leads. Data begins April 2026; volume runs about 580 to 790 tracked calls a month, roughly 88% from Google Business and Maps. Each profile uses its own tracking number, so the number on a profile differs from the website number by design, not a NAP error; do not "unify" them.</span></li>
+          <li><span><b>GA4 is a cross-check, not the source.</b> GA4 conversion tracking is unreliable here and its history only starts March 2026, so the lead count comes from CallRail. Mirroring CallRail into GA4 as key events is optional measurement hygiene.</span></li>
+          <li><span><b>Reviews are a client lever.</b> Growing reviews sits outside HQDM's standard delivery scope, so it is framed as a recommendation, with Eau Claire as the clear priority.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- WHAT TO TRACK -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">What to track</h2>
+      <div class="panel p-4">
+        <ul class="mini">
+          <li>The generic "near me" terms across each pin's grid (the lead drivers), not just the branded "{service} {city}" terms the network already owns.</li>
+          <li>Eau Claire's review base and map rank as the profile and page fix settles.</li>
+          <li>CallRail call volume and the Google or Maps share, as the source of truth for leads.</li>
+          <li>The city pages' climb in Google search, the signal that the website recovery is in the money pages and not just the blog.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- MINOR / OPTIONAL -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">Minor and optional</h2>
+      <div class="panel p-4">
+        <ul class="mini">
+          <li><b>Suburb pages.</b> An active program ships them. Redirect that effort to strengthening the five pins and the generic-term ring rather than adding more neighborhoods.</li>
+          <li><b>Off-page.</b> Link quantity already leads local rivals, so the gap is quality, not more links. Cleanup beats acquisition here.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FRAMING NOTE -->
+    <section class="mb-2">
+      <div class="callout" style="background:var(--tealbg);border:1px solid #bae6fd;">
+        <div class="l" style="color:#0369a1;">A note on framing</div>
+        <p style="color:#0c4a6e;">This is a strong, winnable account. Daymakers already has the reviews, the ratings, and four dominant locations that most rivals lack. The issue is aim (the branded terms and the core instead of the generic terms and the wider area) and one weak market (Eau Claire). Re-point the existing effort at the searches that drive calls, fix Eau Claire, and the assets already in place start working harder.</p>
+      </div>
+    </section>
+
+    <!-- TASKS -->
+    <section class="mb-6">
+      <h2 class="sec mb-3">Tasks</h2>
+      <style>
+        table.tasks { width:100%; border-collapse:collapse; }
+        table.tasks th, table.tasks td { padding:0.45rem 0.55rem; vertical-align:top; border-bottom:1px solid #f1f5f9; text-align:left; }
+        table.tasks thead th { border-bottom:2px solid var(--line); color:#0b1220; font-weight:700; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.05em; }
+        table.tasks td { font-size:0.82rem; color:#334155; line-height:1.45; }
+        table.tasks td.area { font-weight:700; color:#0b1220; white-space:nowrap; }
+        .pri { display:inline-block; font-size:0.6rem; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; padding:0.12rem 0.5rem; border-radius:999px; white-space:nowrap; }
+        .pri-high { background:#fef2f2; color:#b91c1c; border:1px solid #fecaca; }
+        .pri-med { background:#fffbeb; color:#b45309; border:1px solid #fde68a; }
+        .pri-low { background:#f1f5f9; color:#475569; border:1px solid #e2e8f0; }
+        .pri-ong { background:#ecfeff; color:#0e7490; border:1px solid #bae6fd; }
+      </style>
+      <div class="panel p-4 overflow-x-auto">
+        <table class="tasks">
+          <thead><tr><th>Area</th><th>Task</th><th>What it achieves</th><th>Priority</th></tr></thead>
+          <tbody>
+            <tr><td class="area">Local focus</td><td>Win the generic searches (movers near me, moving company, local movers) across each pin's wider service area</td><td>Targets the searches that drive about 88% of calls; won at the core, lost at the edges</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">Local focus</td><td>Apply the Hudson model (strong reviews + a complete city page) to Roseville, Lake Elmo, Bloomington</td><td>Lifts the generic terms across the whole area, not just the office block</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">Local focus</td><td>Extend each profile's service area outward to the edge cells</td><td>The main lever for the proximity-driven pins (Bloomington, Lake Elmo)</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">GBP</td><td>Repoint the Eau Claire profile to its own Eau Claire page</td><td>Fixes the weakest market's biggest on-page gap</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">GBP</td><td>Build out the Eau Claire / Chippewa Valley page</td><td>Gives Eau Claire a real page to rank, matching Hudson and Bloomington</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">GBP</td><td>Grow the Eau Claire review base (client lever)</td><td>Closes the gap to Elite Movers (1,171) and Dan the Moving Man (878)</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">GBP</td><td>Confirm categories and service areas are consistent across all five profiles</td><td>Removes mismatches that cost map coverage, including the missing "local movers near me" in Bloomington</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Website</td><td>301-redirect the removed Woodbury page</td><td>Recovers a top-5 ranking page now returning a 404</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">Website</td><td>Add a long-distance moving page tied to the Roseville profile</td><td>Captures the highest-value jobs, now ranking only about #10</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Website</td><td>Re-aim content from zero-volume suburb pages to the generic and metro terms</td><td>Stops feeding effort into pages drawing about 7 clicks per 90 days</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Off-page</td><td>Prune spam links, build clean local citations</td><td>Lifts domain authority, currently weaker than rivals despite more links</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Measurement</td><td>Report leads from CallRail (about 88% Maps), not GA4</td><td>Uses the source of truth; GA4 conversions are unreliable here</td><td><span class="pri pri-low">Low</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="mt-6 pt-3 border-t border-slate-200 text-[10px] text-slate-500 flex flex-wrap items-center justify-between gap-2" style="color:#0e7490;">
+      <div class="font-semibold">HQDM SEARCH INTELLIGENCE · CUSTOM STRATEGY</div>
+      <div>DAYMAKERSMOVING.COM · Internal · June 2026</div>
+    </footer>
+  </main>
+</body>
+</html>
