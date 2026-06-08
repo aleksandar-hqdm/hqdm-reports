@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>AQMS Custom Strategy · HQDM</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { sans: ['Inter','system-ui','sans-serif'], serif: ['Lora','ui-serif','Georgia','serif'] },
+      colors: { brand: { 900:'#0b2545', 700:'#13315c', 500:'#1d5b8a', 300:'#8ecae6' } }
+    } } }
+  </script>
+  <style>
+    :root { --navy:#0b2a45; --teal:#0e7490; --teal2:#06b6d4; --tealbg:#ecfeff; --up:#16a34a; --line:#e5e9f0; }
+    body { font-family:'Inter',system-ui,sans-serif; }
+    .shell { max-width: 900px; }
+    .eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; }
+    .panel { background:#fff; border:1px solid var(--line); border-radius:0.7rem; }
+    h2.sec { font-family:'Lora',serif; font-weight:700; font-size:1.35rem; color:#0b1220; letter-spacing:-0.01em; }
+    .lead { font-size:0.95rem; line-height:1.65; color:#1f2937; }
+    .chip { display:inline-flex; align-items:baseline; gap:0.35rem; background:#f1f5f9; border:1px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; }
+    .chip .v { font-weight:800; font-size:0.8rem; color:#0b1220; } .chip .l { font-size:0.6rem; font-weight:600; color:#64748b; text-transform:uppercase; letter-spacing:0.04em; }
+    .chip.good { background:#ecfdf5; border-color:#a7f3d0; } .chip.good .v { color:#047857; }
+    .comp li { display:flex; gap:0.5rem; align-items:flex-start; font-size:0.86rem; color:#334155; line-height:1.5; margin:0.4rem 0; }
+    .comp li::before { content:''; flex-shrink:0; width:0.4rem; height:0.4rem; border-radius:999px; background:var(--teal2); margin-top:0.5rem; }
+    .comp b { color:#0b1220; }
+    /* strategy cards */
+    .strat { background:#fff; border:1px solid var(--line); border-left:4px solid var(--navy); border-radius:0.7rem; padding:1.05rem 1.2rem; margin-bottom:0.9rem; }
+    .strat-hd { display:flex; align-items:center; gap:0.65rem; margin-bottom:0.55rem; flex-wrap:wrap; }
+    .snum { flex-shrink:0; width:1.75rem; height:1.75rem; border-radius:0.4rem; background:var(--navy); color:#fff; font-weight:800; font-size:0.85rem; display:flex; align-items:center; justify-content:center; }
+    .strat-hd h3 { font-family:'Lora',serif; font-weight:700; font-size:1.15rem; color:#0b1220; }
+    .strat-hd .tag { font-size:0.6rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--teal); background:var(--tealbg); border:1px solid #bae6fd; border-radius:999px; padding:0.12rem 0.55rem; }
+    .wwh .row { display:grid; grid-template-columns:54px 1fr; gap:0.65rem; padding:0.5rem 0; border-top:1px solid #f1f5f9; }
+    .wwh .row:first-child { border-top:0; padding-top:0.2rem; }
+    .wwh .lbl { font-size:0.58rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal); padding-top:0.18rem; }
+    .wwh p { font-size:0.86rem; color:#334155; line-height:1.55; }
+    .wwh p b { color:#0b1220; }
+    .callout { border-radius:0.6rem; padding:0.85rem 1rem; }
+    .callout .l { font-size:0.58rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; }
+    .callout p { font-size:0.86rem; line-height:1.55; margin-top:0.15rem; }
+    .mini li { font-size:0.85rem; color:#334155; line-height:1.5; margin:0.35rem 0; }
+    .mini b { color:#0b1220; }
+    @media print { .panel,.strat{box-shadow:none;} @page{size:portrait;margin:0.5in;} }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased">
+
+  <div class="text-white" style="background:linear-gradient(135deg,#0a2540 0%,#123a5e 55%,#1a4e78 100%);">
+    <div class="shell mx-auto px-6 sm:px-8 pt-8 pb-7">
+      <div class="eyebrow text-brand-300 mb-3">HQDM Search Intelligence · Custom Strategy</div>
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+        <div>
+          <h1 class="font-serif font-bold tracking-tight text-3xl sm:text-4xl leading-tight">Affordable Quality Moving &amp; Storage</h1>
+          <div class="text-slate-300 mt-2 text-sm sm:text-base">What, why, and how for each strategy</div>
+        </div>
+        <div class="self-start sm:self-end inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-slate-100 whitespace-nowrap">Internal · June 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="shell mx-auto px-4 sm:px-6 py-6">
+
+    <!-- THE FRAME -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">The frame</h2>
+      <div class="panel p-4" style="background:linear-gradient(180deg,#ffffff 0%,#f0fdf4 100%);">
+        <p class="lead">
+          AQMS already out-ranks every local rival on content and links (about <b>691 ranked keywords</b> and <b>546 referring domains</b>, versus their 11 to 55 keywords and 40 to 99 domains, and none of them run a blog). The local fight is won in the map pack, which drives roughly <b>77% of AQMS's phone leads</b>. Their consolidation of location-specific pages into the major service pages is <b>deliberate and cost no real traffic</b> (GA4 organic held, 296 in April to 316 in May; the "-96% GSC impressions" is only the old www host being dropped). So the play is not more pages. It is: dominate the GBP, fix the one genuine on-page gap, and strengthen the pages that already exist, while keeping the measurement clean.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-3">
+          <span class="chip good"><span class="v">~77%</span><span class="l">of leads from Maps</span></span>
+          <span class="chip"><span class="v">691 kw · 546 ref domains</span><span class="l">vs rivals' 11-55 · 40-99</span></span>
+          <span class="chip good"><span class="v">0 new</span><span class="l">location pages in this plan</span></span>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-3">Search volumes are DataForSEO estimates, not literal counts. All GBP work is the single managed Santa Clarita pin only.</p>
+      </div>
+    </section>
+
+    <!-- COMPETITIVE PICTURE -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">The competitive picture</h2>
+      <div class="panel p-4">
+        <p class="text-[14px] text-slate-700 leading-relaxed mb-2">The local mover competitors do not out-execute AQMS on content or links. Their sites are a homepage plus one to three thin pages, no blogs, with 47 to 118 backlinks at high spam scores. They win map positions on GBP mechanics:</p>
+        <ul class="comp">
+          <li><span><b>661 Movers</b> (203 reviews, 5.0): carries "Piano moving service" as a secondary GBP category, lists piano, gun-safe, and senior-moving services, 107 photos.</span></li>
+          <li><span><b>Expert Santa Clarita Movers</b> (202 reviews, 5.0): also carries the "Piano moving service" secondary category.</span></li>
+          <li><span><b>Camelot, J&amp;G Full Service Moving, RC Moving</b>: all carry the Piano moving secondary too, and on the map grid these are the profiles that outrank AQMS in the most cells. J&amp;G is the one genuinely gaining ground across the spring scans, so it is the profile to defend against.</span></li>
+          <li><span><b>Movers Valencia</b> (193 reviews, 5.0): minimal profile, one-page site.</span></li>
+          <li><span><b>Storage pack</b> (Public Storage, Golden State, Extra Space): a different set. They win it because their primary category is "Self-storage facility" with storage-specific secondaries. AQMS is mover-primary with storage only secondary, so it sits about #9 for storage.</span></li>
+        </ul>
+        <p class="text-[13px] text-slate-600 leading-relaxed mt-2">Pattern: most rivals sit at a perfect 5.0 on a small review base; AQMS holds #1 on the core mover terms on the strength of its 453-review volume and a real storefront, and it is the clear map-grid leader. Locally, the lead lever is GBP signals, not content.</p>
+      </div>
+    </section>
+
+    <!-- GRID READ -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">Where AQMS is strong and weak on the map</h2>
+      <div class="panel p-4">
+        <ul class="comp">
+          <li><span><b>Strong:</b> the "moving company" family is top-3 in roughly two-thirds of the grid. AQMS owns the central spine (Valencia, Saugus, Newhall, Stevenson Ranch).</span></li>
+          <li><span><b>Softer:</b> "local movers" and "packing and storage" are top-3 in about half the grid, with more of the rest sitting in the 4 to 10 band. The bare term "movers" is the weakest tracked term, but on coverage, not quality: a June re-scan puts it around 31 to 41 top-3 cells (versus 90-plus for the "moving company" family), and where AQMS does appear it ranks around position 2.</span></li>
+          <li><span><b>Same weak edges on every keyword:</b> the northwest (Castaic, Val Verde), the southeast (Sand Canyon toward Sylmar), and the southwest. That is distance from one central pin, not a per-keyword problem, and not something a landing page fixes.</span></li>
+          <li><span><b>Storage</b> is the largest single pool of local demand (storage-type searches near 1,300 a month) but AQMS is absent across the grid for it, because the storage-primary facilities own that pack. Treat it as a long-tail capture on the existing page, not a pack to win.</span></li>
+          <li><span><b>Fixing the edges:</b> there is no map-side fix worth chasing. Driving-directions embeds do nothing for rank (and are part of the off-page stack being halted), and more citations are baseline prominence with steep diminishing returns. Prominence, mainly reviews (the client's lever), extends the mid-distance ring but will not beat a competitor sitting in Castaic, and the only real fix for a far cell is a presence there, which is out of scope. So the honest edge play is organic, not the map: a unique Castaic or Canyon Country page can rank in the regular results for "movers castaic" while the map pack stays proximity-locked, which is what the next-phase location-page work is for.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- STRATEGIES -->
+    <section class="mb-6">
+      <h2 class="sec mb-3">The strategies</h2>
+
+      <div class="strat">
+        <div class="strat-hd"><span class="snum">1</span><h3>Win the map pack harder</h3><span class="tag">the lead engine</span></div>
+        <div class="wwh">
+          <div class="row"><span class="lbl">What</span><p>Populate the GBP attributes AQMS is missing (online estimates, appointment required, payment options), add "Piano moving service" as a secondary category, keep the primary category as "Mover", tidy the Services list, confirm the storage categories, and keep the review and photo lead.</p></div>
+          <div class="row"><span class="lbl">Why</span><p>The GBP drives about 77% of the leads and is where local and geo-service intent actually converts. AQMS is #1 for the core mover terms, but its attributes section is nearly empty while every competitor populates it. Piano is the clearest category gap: the profiles that outrank AQMS in the most grid cells (Camelot, J&amp;G, Expert, RC, 661) all carry the Piano moving secondary and AQMS does not, even though it already does piano work. Storage is its one weak spot (about #9), but the storage categories are already present, so that is a prominence ceiling, not a missing category. These are the cheapest, highest-return moves, and they never touch the site.</p></div>
+          <div class="row"><span class="lbl">How</span><p>In GBP Manager: fill the attributes and payment options; add the "Piano moving service" secondary category; confirm the primary stays "Mover" (the live profile shows Mover, the "Removals company" label in the services tab is not the primary); tidy the Services list to one clear entry per real service and drop the duplicate and filler terms; confirm the "Self-storage facility" and "Storage facility" categories; sustain review volume to defend the #1.</p></div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-hd"><span class="snum">2</span><h3>Fix the service-page schema</h3><span class="tag">one proven on-page gap</span></div>
+        <div class="wwh">
+          <div class="row"><span class="lbl">What</span><p>Replace the Article schema on all 9 service pages with Service plus MovingCompany/LocalBusiness, add FAQPage where on-page Q&amp;A exists, and BreadcrumbList.</p></div>
+          <div class="row"><span class="lbl">Why</span><p>Verified on the live non-www pages: all 9 service pages are marked up as blog Articles (JSON-LD <code>@type</code> Article, WebPage, Person, ImageObject), with no Service, LocalBusiness, or FAQ. That tells Google these are articles, not service offerings, which forfeits rich-result eligibility and entity clarity. It is a pure fix to pages that already exist, fully on-strategy.</p></div>
+          <div class="row"><span class="lbl">How</span><p>Swap the JSON-LD to Service (provider is the moving company, areaServed is the service area, serviceType per page), add FAQPage for the existing Q&amp;A blocks, add BreadcrumbList, and roll the template across all 9.</p></div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-hd"><span class="snum">3</span><h3>Strengthen the consolidated pages</h3><span class="tag">geo + the near-wins</span></div>
+        <div class="wwh">
+          <div class="row"><span class="lbl">What</span><p>Add a map and geo signals to the existing major service pages, keep the out-of-state page (AQMS's widest organic footprint) optimized, tidy the in-content links, and bring the one thin page (furniture-moves) up to parity.</p></div>
+          <div class="row"><span class="lbl">Why</span><p>Consolidation means a single page per service carries the geo intent, so the page needs local signals to earn "[service] santa clarita" without a separate city page. The pages also have no map today, only a "rated on Google" badge, while every competitor page shows one. The out-of-state page is worth calling out: it already carries AQMS's widest organic footprint (about 65 ranked terms on one page). But a live check is sobering: page 1 for the head terms (moving companies out of state and similar, 8,100 searches each) is locked by national van lines and directories (Two Men and a Truck, United, Allied, U-Pack, moving.com, NerdWallet, Yelp), and AQMS sits around position 15 even localized. So this is not a page-1 play for the money terms; the realistic upside is harvesting the long-tail and the "near me" variants and lifting the page-3-and-beyond terms up a tier. Treat it as steady optimization of the strongest organic page, not a breakthrough.</p></div>
+          <div class="row"><span class="lbl">How</span><div><ul class="mini" style="margin:0;">
+            <li>Replace the bare "rated on Google" badge with the locations element from the next phase (a map with hours and contact per location, Santa Clarita leading), used as the same block on all 9 service pages.</li>
+            <li>Add a short local section, proof, and geo wording to each major service page. No new pages.</li>
+            <li>Optimize the existing out-of-state page for its long-tail and "near me" variants rather than the aggregator-locked head terms.</li>
+            <li>Capture storage as a long-tail on the existing storage page ("moving and storage", "storage during a move"), without expecting to win the "self storage" pack.</li>
+            <li>Point the "we also serve" in-content links at the canonical non-www pages rather than the old www host or the city duplicates, and keep /reviews linked.</li>
+            <li>Bring furniture-moves to about 1,500-plus words; keep one clear CTA per page.</li>
+          </ul></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE NEXT PHASE -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">The next phase: enrich locations and services</h2>
+      <div class="panel p-4">
+        <p class="text-[14px] text-slate-700 leading-relaxed mb-2">Consolidating the city-by-service matrix (the cross-product of every city against every service) was the right call, and it stays consolidated. What it also did was strip the site of its location and service surface. The next phase puts that back on the two axes on their own, without rebuilding the cross-product. The cross-location items are <b>recommendations for the client</b>, since HQDM manages the Santa Clarita pin only; the niche-service work sits inside the Santa Clarita scope.</p>
+        <div class="wwh">
+          <div class="row"><span class="lbl">1 · rec</span><p><b>A locations element on the service pages.</b> One map with a pin per AQMS location on all 9 service pages, each expandable to that location's hours, phone, and contact, with Santa Clarita leading. The service pages carry no map today (only a "rated on Google" badge); a single reusable block restores location presence without per-city pages. It is a trust, contact, and entity-clarity element, not a ranking lever (map embeds are not a ranking factor). Give each location its own LocalBusiness entry in the schema, which ties into Strategy 2. It spans every location, so it is a client recommendation, not Santa Clarita-only work.</p></div>
+          <div class="row"><span class="lbl">2 · rec</span><p><b>Make each location page unique through its own assets.</b> Verified live, the location pages are already solid (1,700 to 2,000 words each, with their own About-the-area section and local FAQ; two suburb pages share only about 14% of their text), so they are not thin or duplicated. The gap is the asset layer: surface that location's own Google reviews (a reviews widget or the Places API for display, with a "see all on Google" link; do not self-mark-up pulled-in reviews as your own Review schema, which breaks Google's rules), real photos of that location and crew, and that location's map, hours, and contact. An add-on, not a rewrite. The Santa Clarita page and the Santa Clarita-area suburbs are in our scope if wanted; the other locations are a recommendation.</p></div>
+          <div class="row"><span class="lbl">3 · SC</span><p><b>Cover the niche services, starting with piano.</b> Verified live, Other Services today is only packing and storage, and "piano" appears nowhere on the site, even though AQMS offers it and the competitors carry the category. Audit the services AQMS performs but does not cover (piano, plus likely specialty and heavy-item, senior or last-mile) and add them under the existing Other Services hub, depth matched to each, not a sprawling set. Pair piano on the site with the piano GBP category so the site and the profile agree.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OPERATIONAL -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">Operational (measurement and cleanup)</h2>
+      <div class="panel p-4">
+        <p class="text-[14px] text-slate-700 leading-relaxed">Google already serves the non-www host as canonical and is dropping the old www URLs, and GA4 confirms no real traffic loss, so the only thing that matters here is measurement, not a migration project. Add a domain-level (or non-www) property in Search Console so we report on the host that actually ranks, and confirm once that the old www host 301-redirects to non-www. The leftover www in-content links are handled in Strategy 3. Nothing else is needed.</p>
+      </div>
+    </section>
+
+    <!-- WHAT TO TRACK -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">What to track</h2>
+      <div class="panel p-4">
+        <ul class="mini">
+          <li>The map-grid tracker is loaded mostly with low-demand "near me" variants. Add the storage cluster (storage units near me, storage near me) so the largest local pool is visible, even though it stays a watch-only pack.</li>
+          <li>Track the out-of-state and interstate cluster in an organic rank tracker, because the map-grid tool cannot see it; it is AQMS's widest organic footprint, though page 1 for the head terms is aggregator-locked.</li>
+          <li>Keep "movers" on the Local Dominator schedule so its grid number stays current; a June re-scan confirmed it is the weakest tracked term on coverage (around 31 to 41 top-3 cells), strong where it appears.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- MINOR / OPTIONAL -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">Minor / optional</h2>
+      <div class="panel p-4">
+        <ul class="mini">
+          <li><b>Piano and niche services.</b> Covered in the next phase (Other Services coverage plus the GBP category). AQMS already performs them, so this is filling real gaps, not inventing demand.</li>
+          <li><b>Suburbs.</b> AQMS already runs an active suburb-page program (live: Canyon Country, Castaic, Newhall, Saugus, Valencia, plus the San Diego coastal set). If a suburb page is touched, strengthen an existing one in the weak northwest or southeast rather than building new, and prioritize by in-area demand, not by chasing out-of-area cities like Glendale or Thousand Oaks.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FRAMING NOTE -->
+    <section class="mb-2">
+      <div class="callout" style="background:var(--tealbg);border:1px solid #bae6fd;">
+        <div class="l" style="color:#0369a1;">A note on framing</div>
+        <p style="color:#0c4a6e;">Nothing here treats the page consolidation as damage. It was a deliberate, sound choice that cost no traffic. What was consolidated is the city-by-service matrix, the cross-product of every city against every service, and that stays consolidated; there is no case for rebuilding it. Consolidating the matrix is not the same as thinning the two axes, though. Locations and services each deserve depth on their own, which is what the next phase adds: a locations element and unique location pages on the location axis, and fuller service coverage on the service axis. Page effort goes there and into the pages that already rank, never back into the cross-product.</p>
+      </div>
+    </section>
+
+    <!-- TASKS -->
+    <section class="mb-6">
+      <h2 class="sec mb-3">Tasks</h2>
+      <style>
+        table.tasks { width:100%; border-collapse:collapse; }
+        table.tasks th, table.tasks td { padding:0.45rem 0.55rem; vertical-align:top; border-bottom:1px solid #f1f5f9; text-align:left; }
+        table.tasks thead th { border-bottom:2px solid var(--line); color:#0b1220; font-weight:700; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.05em; }
+        table.tasks td { font-size:0.82rem; color:#334155; line-height:1.45; }
+        table.tasks td.area { font-weight:700; color:#0b1220; white-space:nowrap; }
+        .pri { display:inline-block; font-size:0.6rem; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; padding:0.12rem 0.5rem; border-radius:999px; white-space:nowrap; }
+        .pri-high { background:#fef2f2; color:#b91c1c; border:1px solid #fecaca; }
+        .pri-med { background:#fffbeb; color:#b45309; border:1px solid #fde68a; }
+        .pri-low { background:#f1f5f9; color:#475569; border:1px solid #e2e8f0; }
+        .pri-ong { background:#ecfeff; color:#0e7490; border:1px solid #bae6fd; }
+      </style>
+      <div class="panel p-4 overflow-x-auto">
+        <table class="tasks">
+          <thead><tr><th>Area</th><th>Task</th><th>What it achieves</th><th>Priority</th></tr></thead>
+          <tbody>
+            <tr><td class="area">GBP</td><td>Add "Piano moving service" as a secondary category</td><td>Matches the category every profile that outranks AQMS already carries; relevance for piano intent</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">GBP</td><td>Confirm the primary category stays "Mover"</td><td>Keeps the strongest US category; clears the "Removals company" label question</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">GBP</td><td>Fill the attributes (online estimates, appointment required, payment options)</td><td>Closes the gap every competitor already fills</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">GBP</td><td>Tidy and dedupe the Services list (one entry per real service)</td><td>Cleaner relevance signal; drops the duplicate and filler terms</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">GBP</td><td>Confirm the Self-storage facility and Storage facility categories</td><td>Keeps storage eligibility (prominence, not category, is the ceiling)</td><td><span class="pri pri-low">Low</span></td></tr>
+            <tr><td class="area">GBP</td><td>Sustain the review and photo lead</td><td>Defends #1 on the core mover terms</td><td><span class="pri pri-ong">Ongoing</span></td></tr>
+            <tr><td class="area">Schema</td><td>Replace Article schema with Service + MovingCompany/LocalBusiness on all 9 service pages</td><td>Restores rich-result eligibility and entity clarity</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">Schema</td><td>Add FAQPage and BreadcrumbList in the same template pass</td><td>Completes the markup</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Pages · rec</td><td>Add a locations element (map, hours, contact per location) to the service pages</td><td>Restores location presence after the matrix consolidation; trust and entity clarity</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Pages</td><td>Add a local section, proof, and geo wording to the major service pages</td><td>Lets one page earn its "[service] santa clarita" intent</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Pages</td><td>Optimize the out-of-state page for the long-tail and near-me terms</td><td>AQMS's widest organic footprint; page 1 head terms are aggregator-locked, so harvest the tail</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Pages</td><td>Capture the storage long-tail on the existing storage page</td><td>Picks up spillover from the walled storage pack</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Pages</td><td>Repoint the "we also serve" in-content links to canonical non-www pages</td><td>Removes wasted redirect hops, away from the city duplicates</td><td><span class="pri pri-low">Low</span></td></tr>
+            <tr><td class="area">Pages</td><td>Bring furniture-moves to about 1,500-plus words</td><td>Brings the one thin page to parity with the other eight</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Location pages · rec</td><td>Give each location page its own reviews, photos, and map/hours</td><td>Makes each page unique and converts; an asset layer, not a rewrite</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Service coverage</td><td>Cover piano and the other niche services under Other Services</td><td>Fills real service gaps and matches the GBP</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Operational</td><td>Add a domain-level (or non-www) Search Console property</td><td>Measures the host that actually ranks; ends the false "collapse"</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Operational</td><td>Confirm once that the old www host 301-redirects to non-www</td><td>One-time check, closes out the migration</td><td><span class="pri pri-low">Low</span></td></tr>
+            <tr><td class="area">Tracking</td><td>Add the storage cluster to the map-grid tracker</td><td>Makes the largest local demand pool visible</td><td><span class="pri pri-low">Low</span></td></tr>
+            <tr><td class="area">Tracking</td><td>Track the out-of-state and interstate cluster in an organic rank tracker</td><td>Sees the highest-value upside the map grid cannot</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Tracking</td><td>Keep "movers" on the map-grid schedule</td><td>June re-scan confirmed it is the weakest tracked term on coverage; keep the number current</td><td><span class="pri pri-low">Low</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="mt-6 pt-3 border-t border-slate-200 text-[10px] text-slate-500 flex flex-wrap items-center justify-between gap-2" style="color:#0e7490;">
+      <div class="font-semibold">HQDM SEARCH INTELLIGENCE · CUSTOM STRATEGY</div>
+      <div>AQMSNATIONALMOVING.COM · Internal · June 2026</div>
+    </footer>
+  </main>
+</body>
+</html>
