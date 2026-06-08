@@ -142,13 +142,13 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Where the organic audience sits</div><div class="ann">last 90 days</div></div>
-          <table class="t"><thead><tr><th>Page type</th><th>Organic visits</th><th>Share</th></tr></thead><tbody id="mix"></tbody></table>
+          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Where the organic audience sits</div><div class="ann">last 90d vs previous 90d</div></div>
+          <table class="t"><thead><tr><th>Page type</th><th>Organic visits</th><th>Share</th><th>vs prev 90d</th></tr></thead><tbody id="mix"></tbody></table>
           <p class="ann mt-3">Most visitors land on guide articles. The booking pages (booth types, homepage) draw a small share today, which is the conversion opportunity.</p>
         </div>
         <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Largest organic pages</div><div class="ann">last 90 days</div></div>
-          <table class="t"><thead><tr><th>Page</th><th>Visits</th></tr></thead><tbody id="topPages"></tbody></table>
+          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Largest organic pages</div><div class="ann">last 90d vs previous 90d</div></div>
+          <table class="t"><thead><tr><th>Page</th><th>Visits</th><th>vs prev 90d</th></tr></thead><tbody id="topPages"></tbody></table>
         </div>
       </div>
     </section>
@@ -222,13 +222,13 @@
     const DATA = {
       traffic: { months:['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],
                  organic:[58,167,246,701,1110,1445,1434,1176,1013,1135] },
-      mix: [['Guide articles (blog)',2753,'85%'],['Booking pages (booth + home)',251,'8%'],['Other',243,'7%']],
+      mix: [['Guide articles (blog)',3378,2753,'85%'],['Booking pages (booth + home)',371,251,'8%'],['Other',321,243,'7%']],
       toppages: [
-        ['What size are photo booth pictures (guide)',2437],
-        ['Homepage',199],
-        ['What are photo booth pictures called (guide)',128],
-        ['360 Photo Booth page',6],
-        ['Glam Booth page',4],
+        ['What size are photo booth pictures (guide)',3164,2437],
+        ['Homepage',309,199],
+        ['What are photo booth pictures called (guide)',116,128],
+        ['360 Photo Booth page',6,6],
+        ['Glam Booth page',3,4],
       ],
       recommendations: [
         {cat:'Google Business Profile', items:[
@@ -259,12 +259,14 @@
       ],
     };
 
+    // % change vs previous 90 days
+    function chg(b,a){ if(b===0&&a>0) return '<span class="newt">New</span>'; if(b===a) return '<span class="flat">0%</span>'; const p=Math.round((a-b)/b*100); return `<span class="${p>0?'up':'dn'}">${p>0?'+':''}${p}%</span>`; }
     // tab 2 mix
-    document.getElementById('mix').innerHTML = DATA.mix.map(([s,v,sh]) =>
-      `<tr><td>${s}</td><td>${v.toLocaleString()}</td><td>${sh}</td></tr>`).join('');
+    document.getElementById('mix').innerHTML = DATA.mix.map(([s,p,v,sh]) =>
+      `<tr><td>${s}</td><td>${v.toLocaleString()}</td><td>${sh}</td><td>${chg(p,v)}</td></tr>`).join('');
     // tab 2 top pages
-    document.getElementById('topPages').innerHTML = DATA.toppages.map(([p,v]) =>
-      `<tr><td>${p}</td><td>${v.toLocaleString()}</td></tr>`).join('');
+    document.getElementById('topPages').innerHTML = DATA.toppages.map(([s,p,v]) =>
+      `<tr><td>${s}</td><td>${v.toLocaleString()}</td><td>${chg(p,v)}</td></tr>`).join('');
 
     // tab 4 grouped tables
     const grpRows = g => `<tr class="catrow"><td>${g.cat}<span class="badge">${g.items.length}</span></td><td></td></tr>` +
