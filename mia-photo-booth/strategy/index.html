@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>MIA Photo Booth Custom Strategy · HQDM</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { sans: ['Inter','system-ui','sans-serif'], serif: ['Lora','ui-serif','Georgia','serif'] },
+      colors: { brand: { 900:'#0b2545', 700:'#13315c', 500:'#1d5b8a', 300:'#8ecae6' } }
+    } } }
+  </script>
+  <style>
+    :root { --navy:#0b2a45; --teal:#0e7490; --teal2:#06b6d4; --tealbg:#ecfeff; --up:#16a34a; --line:#e5e9f0; }
+    body { font-family:'Inter',system-ui,sans-serif; }
+    .shell { max-width: 900px; }
+    .eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; }
+    .panel { background:#fff; border:1px solid var(--line); border-radius:0.7rem; }
+    h2.sec { font-family:'Lora',serif; font-weight:700; font-size:1.35rem; color:#0b1220; letter-spacing:-0.01em; }
+    .lead { font-size:0.95rem; line-height:1.65; color:#1f2937; }
+    .chip { display:inline-flex; align-items:baseline; gap:0.35rem; background:#f1f5f9; border:1px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; }
+    .chip .v { font-weight:800; font-size:0.8rem; color:#0b1220; } .chip .l { font-size:0.6rem; font-weight:600; color:#64748b; text-transform:uppercase; letter-spacing:0.04em; }
+    .chip.good { background:#ecfdf5; border-color:#a7f3d0; } .chip.good .v { color:#047857; }
+    .chip.bad { background:#fef2f2; border-color:#fecaca; } .chip.bad .v { color:#b91c1c; }
+    .comp li { display:flex; gap:0.5rem; align-items:flex-start; font-size:0.86rem; color:#334155; line-height:1.5; margin:0.4rem 0; }
+    .comp li::before { content:''; flex-shrink:0; width:0.4rem; height:0.4rem; border-radius:999px; background:var(--teal2); margin-top:0.5rem; }
+    .comp b { color:#0b1220; }
+    .strat { background:#fff; border:1px solid var(--line); border-left:4px solid var(--navy); border-radius:0.7rem; padding:1.05rem 1.2rem; margin-bottom:0.9rem; }
+    .strat-hd { display:flex; align-items:center; gap:0.65rem; margin-bottom:0.55rem; flex-wrap:wrap; }
+    .snum { flex-shrink:0; width:1.75rem; height:1.75rem; border-radius:0.4rem; background:var(--navy); color:#fff; font-weight:800; font-size:0.85rem; display:flex; align-items:center; justify-content:center; }
+    .strat-hd h3 { font-family:'Lora',serif; font-weight:700; font-size:1.15rem; color:#0b1220; }
+    .strat-hd .tag { font-size:0.6rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--teal); background:var(--tealbg); border:1px solid #bae6fd; border-radius:999px; padding:0.12rem 0.55rem; }
+    .wwh .row { display:grid; grid-template-columns:54px 1fr; gap:0.65rem; padding:0.5rem 0; border-top:1px solid #f1f5f9; }
+    .wwh .row:first-child { border-top:0; padding-top:0.2rem; }
+    .wwh .lbl { font-size:0.58rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal); padding-top:0.18rem; }
+    .wwh p { font-size:0.86rem; color:#334155; line-height:1.55; }
+    .wwh p b { color:#0b1220; }
+    .callout { border-radius:0.6rem; padding:0.85rem 1rem; }
+    .callout .l { font-size:0.58rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; }
+    .callout p { font-size:0.86rem; line-height:1.55; margin-top:0.15rem; }
+    .mini li { font-size:0.85rem; color:#334155; line-height:1.5; margin:0.35rem 0; }
+    .mini b { color:#0b1220; }
+    @media print { .panel,.strat{box-shadow:none;} @page{size:portrait;margin:0.5in;} }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased">
+
+  <div class="text-white" style="background:linear-gradient(135deg,#0a2540 0%,#123a5e 55%,#1a4e78 100%);">
+    <div class="shell mx-auto px-6 sm:px-8 pt-8 pb-7">
+      <div class="eyebrow text-brand-300 mb-3">HQDM Search Intelligence · Custom Strategy</div>
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+        <div>
+          <h1 class="font-serif font-bold tracking-tight text-3xl sm:text-4xl leading-tight">MIA Photo Booth</h1>
+          <div class="text-slate-300 mt-2 text-sm sm:text-base">What, why, and how for each strategy</div>
+        </div>
+        <div class="self-start sm:self-end inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-slate-100 whitespace-nowrap">Internal · June 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="shell mx-auto px-4 sm:px-6 py-6">
+
+    <!-- THE FRAME -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">The frame</h2>
+      <div class="panel p-4" style="background:linear-gradient(180deg,#ffffff 0%,#f0fdf4 100%);">
+        <p class="lead">
+          MIA has the assets a winner needs, but they are mis-wired. It ranks for about <b>199 keywords</b> and carries <b>87 referring domains</b>, ahead of most local rivals (Glam Shots 38, Captured Fun 51, VIP Party 45), and it holds <b>103 reviews at 5.0</b>, second only to VIP Party's 316. Organic traffic grew close to twentyfold to a January peak. Yet the Google Business Profile is categorised as a <b>photography studio, not a photo booth company</b>, and the entire local effort (the Local Dominator grid, the 33 area pages, the monthly geo tasks) points at inland-west residential Miami-Dade, while the events are on the coast. So the play is not more inland pages. It is: fix the profile category and focus, re-aim the local effort at the event corridor, and turn the large blog audience and the scattered event content into booking pages.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-3">
+          <span class="chip good"><span class="v">199 kw · 87 ref domains</span><span class="l">ahead of most local rivals</span></span>
+          <span class="chip good"><span class="v">103 · 5.0</span><span class="l">2nd-strongest reviews in market</span></span>
+          <span class="chip bad"><span class="v">Photography service</span><span class="l">GBP miscategorised</span></span>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-3">Search volumes are DataForSEO estimates, not literal counts. MIA is a service-area business; all GBP work is the single managed Miami pin, re-pointing its service area, not new locations.</p>
+      </div>
+    </section>
+
+    <!-- COMPETITIVE PICTURE -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">The competitive picture</h2>
+      <div class="panel p-4">
+        <p class="text-[14px] text-slate-700 leading-relaxed mb-2">The Miami photo booth field is fragmented and local: each operator owns a zone, won mostly on proximity and the right Google category, not on content or links. MIA actually leads most of them on reviews and authority. The winners and what they do right:</p>
+        <ul class="comp">
+          <li><span><b>Miami Event Photo Booth</b> (92 reviews, 4.8): primary category "Photo booth", nine event categories, and <b>986 profile photos</b>. The heaviest profile in the market.</span></li>
+          <li><span><b>VIP Party Photo Booth</b> (316 reviews): the review leader; wins Coral Gables and Coconut Grove.</span></li>
+          <li><span><b>Photo Booth Boutique</b> (36 reviews, 5.0, since 2012): primary "Photo booth", carries Event planner and Wedding service, address on Coral Way. Owns Coral Gables, Coconut Grove, and Key Biscayne.</span></li>
+          <li><span><b>Captured Fun</b> (35 reviews): primary "Party equipment rental service", address in Edgewater. Owns Miami Beach on a thin profile (21 photos, no description), purely on location and category.</span></li>
+          <li><span><b>Glam Shots</b> (15 reviews, 5.0): primary "Photo booth" with Event planner and Wedding service secondaries; wins inland cells on a small review base.</span></li>
+        </ul>
+        <p class="text-[13px] text-slate-600 leading-relaxed mt-2">Pattern: every winner is categorised as a <b>photo booth or event rental</b> business. MIA is the only one set up as a photography studio. The clearest single data point: Captured Fun beats MIA's far stronger profile on Miami Beach with 21 photos and no description, on location plus category alone. The corridor dominators (Photo Booth Boutique, Captured Fun, Photog Booth, Bigfoot, OMG Studio) are not even in MIA's tracked-competitor set, because the grid never looks east.</p>
+      </div>
+    </section>
+
+    <!-- GRID READ -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">Where MIA is strong and weak on the map</h2>
+      <div class="panel p-4">
+        <ul class="comp">
+          <li><span><b>Strong:</b> the inland-west home area (around Westchester and Tamiami) is the one place MIA surfaces, near position 6 to 7 on the core and 360 terms. Reviews and links lead most local rivals.</span></li>
+          <li><span><b>Weak:</b> across a fresh scan of the coastal event corridor (Miami Beach, Brickell, Wynwood, Aventura, Key Biscayne, Coral Gables, Coconut Grove), MIA does not appear in the top 20 on the core terms. Each area is held by a different local operator.</span></li>
+          <li><span><b>The grid itself is the problem:</b> it is centred on inland-west Miami-Dade (around 25.77, -80.31) and runs far west into low-event zones, while its eastern edge stops at Biscayne Bay. The highest-value event areas were never even measured.</span></li>
+          <li><span><b>Internal note, keep out of the client report:</b> the two highest-value booth terms (wedding and 360) have no top-3 footprint anywhere yet. In the client report this is framed as the corridor opportunity, not a miss.</span></li>
+          <li><span><b>Not the fix:</b> the off-page and geo stack (driving-direction signals, citations) is already heavy and is not where the gap is. The gap is the GBP category and a real focus on the corridor.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- STRATEGIES -->
+    <section class="mb-6">
+      <h2 class="sec mb-3">The strategies</h2>
+
+      <div class="strat">
+        <div class="strat-hd"><span class="snum">1</span><h3>Fix the Google Business Profile</h3><span class="tag">cheapest, highest return</span></div>
+        <div class="wwh">
+          <div class="row"><span class="lbl">What</span><p>Change the primary category from "Photography service" to <b>"Photo booth"</b>; add <b>Event planner</b> and <b>Wedding service</b> as secondaries; drop the photography-studio categories (Photo lab, Photo shop, Photo agency, Photographer, Photography studio) that mis-signal; add real event photos (the profile shows 42, versus 72 to 986 for the winners); keep the review lead.</p></div>
+          <div class="row"><span class="lbl">Why</span><p>Every competitor that wins the map is categorised as a photo booth or event rental business; MIA is the only one set up as a photography studio, so Google does not surface it for photo booth and event intent. This never touches the website and is the single biggest lever. There is no task for it on the board today.</p></div>
+          <div class="row"><span class="lbl">How</span><p>In GBP Manager: change the primary category, restack the secondaries to events, prune the photography-studio ones, upload a batch of recent event photos. Sequence the category change first and alone: a name and category change in 2025 triggered a one-month re-review, so make core edits deliberately and allow a two-to-four-week settling window before the next.</p></div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-hd"><span class="snum">2</span><h3>Re-aim the local effort at the event corridor</h3><span class="tag">point the work at the demand</span></div>
+        <div class="wwh">
+          <div class="row"><span class="lbl">What</span><p>Re-centre the Local Dominator grid and the GBP service area on the coastal and central event districts (Miami Beach, Brickell, Wynwood, Coral Gables, Coconut Grove, Aventura), and point the monthly area-page work there instead of inland-west neighborhoods.</p></div>
+          <div class="row"><span class="lbl">Why</span><p>The current grid, the 33 area pages, and the geo tasks all point at inland-west residential Miami-Dade, where there are few event venues. The venues, hotels, and weddings are on the coast and in the central districts, where MIA is invisible today and the field is fragmented and winnable. This is re-pointing the single managed service-area pin, not opening locations.</p></div>
+          <div class="row"><span class="lbl">How</span><p>Rebuild the LD grid centred on the corridor; update the GBP service-area list to lead with the corridor cities; redirect the three-area-pages-per-month effort to corridor pages tied to real venues and districts; track the corridor competitors (Photo Booth Boutique, Captured Fun, and the per-district owners) in place of the inland leaderboard.</p></div>
+        </div>
+      </div>
+
+      <div class="strat">
+        <div class="strat-hd"><span class="snum">3</span><h3>Turn the audience and event content into booking pages</h3><span class="tag">convert, then consolidate</span></div>
+        <div class="wwh">
+          <div class="row"><span class="lbl">What</span><p>Build a <b>Wedding photo booth page</b> and a <b>Corporate and events page</b> from the existing scattered posts; wire the large guide audience into the booth pages; consolidate the duplicate booth articles (twelve 360 posts, four social, four roamer, three glam) into one strong page each; pause new inland suburb pages; add one pricing guide.</p></div>
+          <div class="row"><span class="lbl">Why</span><p>About 85% of organic traffic is the blog, mostly one guide, and almost none of it reaches a page that books a booth. There are seven wedding posts and six corporate posts but no wedding or corporate page. The blog also competes with itself (twelve 360 articles against the 360 service page). The 33 inland area pages draw almost no traffic, so more of them is not the answer.</p></div>
+          <div class="row"><span class="lbl">How</span><div><ul class="mini" style="margin:0;">
+            <li>Build /wedding-photo-booth and /corporate-photo-booth; fold the matching posts into them with in-body links and a clear booking call to action.</li>
+            <li>Consolidate each duplicate cluster to the service page plus one explainer; 301 the rest.</li>
+            <li>Add internal links from the high-traffic guide articles to the matching booth and event pages.</li>
+            <li>Stop the inland suburb-page program and reallocate that effort to the corridor.</li>
+            <li>Add one guide: "How much does a photo booth cost in Miami", linked to the booth pages.</li>
+          </ul></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEXT PHASE / OPERATIONAL -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">Next phase and operational</h2>
+      <div class="panel p-4">
+        <ul class="comp">
+          <li><span><b>Booth-type pages, only for what they offer.</b> Open-air and enclosed first (likely just descriptions of the booths they already run, near-zero effort); mirror, digital, and vintage only if they are in the real inventory. No selfie-booth page, it overlaps the existing social booth and would split it.</span></li>
+          <li><span><b>Measurement.</b> No GA4 key events are configured, so the conversions report is empty and leads have to be derived from raw form events. Set generate_lead or contact_form_submit as the key event so reporting is clean.</span></li>
+          <li><span><b>Lead source, settled.</b> CallRail is not installed for this account. Leads come from GA4 form events; phone, email, and profile clicks are charted separately. The number shown on the site differs from the GBP number by design (a call-tracking display choice), not a NAP error, so do not "unify" it.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- WHAT TO TRACK -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">What to track</h2>
+      <div class="panel p-4">
+        <ul class="mini">
+          <li>Re-point the Local Dominator grid to the event corridor and track the corridor competitors, so the numbers reflect where the business should win.</li>
+          <li>Watch the two high-value booth terms (wedding, 360) for top-3 footprint as the category fix settles.</li>
+          <li>Watch the assist from the guide articles to the booth and event pages as the internal links go in, the signal that the blog audience is converting.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- MINOR / OPTIONAL -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">Minor and optional</h2>
+      <div class="panel p-4">
+        <ul class="mini">
+          <li><b>Area pages.</b> An active program already ships three per month. Redirect it to the corridor and strengthen one real corridor page rather than adding more inland neighborhoods.</li>
+          <li><b>Off-page.</b> The link and citation profile already leads most local rivals, so further off-page has steep diminishing returns and is not the gap.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FRAMING NOTE -->
+    <section class="mb-2">
+      <div class="callout" style="background:var(--tealbg);border:1px solid #bae6fd;">
+        <div class="l" style="color:#0369a1;">A note on framing</div>
+        <p style="color:#0c4a6e;">This account is recoverable without building authority from scratch. MIA already has the reviews, the links, and the organic audience that most rivals lack. The problem is configuration (a photography-studio category) and aim (inland instead of the coast). Fix those two, point the existing effort at the event corridor, and the assets that are already there start working.</p>
+      </div>
+    </section>
+
+    <!-- TASKS -->
+    <section class="mb-6">
+      <h2 class="sec mb-3">Tasks</h2>
+      <style>
+        table.tasks { width:100%; border-collapse:collapse; }
+        table.tasks th, table.tasks td { padding:0.45rem 0.55rem; vertical-align:top; border-bottom:1px solid #f1f5f9; text-align:left; }
+        table.tasks thead th { border-bottom:2px solid var(--line); color:#0b1220; font-weight:700; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.05em; }
+        table.tasks td { font-size:0.82rem; color:#334155; line-height:1.45; }
+        table.tasks td.area { font-weight:700; color:#0b1220; white-space:nowrap; }
+        .pri { display:inline-block; font-size:0.6rem; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; padding:0.12rem 0.5rem; border-radius:999px; white-space:nowrap; }
+        .pri-high { background:#fef2f2; color:#b91c1c; border:1px solid #fecaca; }
+        .pri-med { background:#fffbeb; color:#b45309; border:1px solid #fde68a; }
+        .pri-low { background:#f1f5f9; color:#475569; border:1px solid #e2e8f0; }
+        .pri-ong { background:#ecfeff; color:#0e7490; border:1px solid #bae6fd; }
+      </style>
+      <div class="panel p-4 overflow-x-auto">
+        <table class="tasks">
+          <thead><tr><th>Area</th><th>Task</th><th>What it achieves</th><th>Priority</th></tr></thead>
+          <tbody>
+            <tr><td class="area">GBP</td><td>Change the primary category to "Photo booth"</td><td>The single biggest map lever; matches every winner and clears the photography-studio mis-signal</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">GBP</td><td>Add Event planner and Wedding service categories</td><td>Signals the event intent that drives bookings</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">GBP</td><td>Drop the photography-studio secondary categories</td><td>Removes the signals pulling the profile away from photo booth intent</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">GBP</td><td>Add a batch of recent event photos (toward competitor levels)</td><td>Closes the photo gap (42 vs 72 to 986) and lifts engagement</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">GBP</td><td>Sustain the review lead</td><td>Defends the strongest asset MIA already has</td><td><span class="pri pri-ong">Ongoing</span></td></tr>
+            <tr><td class="area">Local focus</td><td>Re-centre the Local Dominator grid on the event corridor</td><td>Measures where the business should win, not the inland-west home zone</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">Local focus</td><td>Update the GBP service-area list to lead with the corridor cities</td><td>Points the single managed pin at the demand</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">Local focus</td><td>Track the corridor competitors instead of the inland leaderboard</td><td>Surfaces the operators MIA actually competes with</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Website</td><td>Build a Wedding photo booth page from the seven wedding posts</td><td>Turns the strongest event demand into a page that books</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">Website</td><td>Build a Corporate and events page from the six corporate posts</td><td>Captures high-value B2B intent with no page today</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Website</td><td>Consolidate the duplicate booth clusters (360, social, roamer, glam)</td><td>Stops the blog competing with the booth pages and itself</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Website</td><td>Link the high-traffic guides to the booth and event pages</td><td>Routes the large reading audience toward booking</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">Website</td><td>Pause new inland suburb pages</td><td>Stops feeding effort into pages that draw almost no traffic</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Content</td><td>Add a "photo booth cost in Miami" guide</td><td>Fills the one genuine net-new content gap, decision-stage</td><td><span class="pri pri-low">Low</span></td></tr>
+            <tr><td class="area">Measurement</td><td>Set generate_lead (or contact_form_submit) as a GA4 key event</td><td>Makes the conversions report work; cleaner lead counting</td><td><span class="pri pri-med">Medium</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="mt-6 pt-3 border-t border-slate-200 text-[10px] text-slate-500 flex flex-wrap items-center justify-between gap-2" style="color:#0e7490;">
+      <div class="font-semibold">HQDM SEARCH INTELLIGENCE · CUSTOM STRATEGY</div>
+      <div>MIAPHOTOBOOTH.NET · Internal · June 2026</div>
+    </footer>
+  </main>
+</body>
+</html>

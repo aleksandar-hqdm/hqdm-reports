@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>MIA Photo Booth · Performance Report · May 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { sans: ['Inter','system-ui','sans-serif'], serif: ['Lora','ui-serif','Georgia','serif'] },
+      colors: { brand: { 900:'#0b2545', 700:'#13315c', 500:'#1d5b8a', 300:'#8ecae6' } }
+    } } }
+  </script>
+  <style>
+    :root { --navy:#0b2a45; --navy2:#10395d; --teal:#0e7490; --teal2:#06b6d4; --tealbg:#ecfeff; --up:#16a34a; --dn:#dc2626; --line:#e5e9f0; }
+    * { box-sizing:border-box; }
+    body { font-family:'Inter',system-ui,sans-serif; }
+    .shell { max-width:1080px; }
+    .eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; }
+    .tab-btn { text-align:left; background:#fff; border:1px solid #e2e8f0; border-radius:0.6rem; padding:0.7rem 0.9rem; cursor:pointer; transition:border-color .12s, background .12s; }
+    .tab-btn:hover { border-color:#cbd5e1; }
+    .tab-btn .t { display:block; font-weight:700; font-size:0.95rem; color:#0b1220; line-height:1.15; }
+    .tab-btn .s { display:block; font-size:0.72rem; color:#64748b; margin-top:0.12rem; }
+    .tab-btn.active { background:#0b2545; border-color:#0b2545; }
+    .tab-btn.active .t { color:#fff; }
+    .tab-btn.active .s { color:#9bbad6; }
+    .stitle { font-size:1.3rem; font-weight:800; color:#0b1220; letter-spacing:-0.01em; }
+    .ov-eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; color:var(--teal); }
+    .ov li { display:flex; gap:0.5rem; align-items:flex-start; font-size:0.86rem; color:#334155; margin:0.3rem 0; }
+    .ov li::before { content:''; flex-shrink:0; width:0.4rem; height:0.4rem; border-radius:999px; background:var(--teal2); margin-top:0.45rem; }
+    .panel { background:#fff; border:1px solid var(--line); border-radius:0.7rem; }
+    .cardhd { font-size:0.66rem; font-weight:800; letter-spacing:0.07em; text-transform:uppercase; color:#475569; }
+    .ann { font-size:0.7rem; color:#64748b; }
+    .means { background:var(--tealbg); border:1px solid #bae6fd; border-radius:0.55rem; padding:0.7rem 0.9rem; }
+    .means .lbl { font-size:0.58rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#0369a1; }
+    .means p { font-size:0.82rem; color:#0c4a6e; margin-top:0.15rem; line-height:1.5; }
+    .kpi { border:1px solid var(--line); border-radius:0.55rem; padding:0.8rem 0.9rem; }
+    .kpi .l { font-size:0.6rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#64748b; }
+    .kpi .n { font-size:1.7rem; font-weight:800; color:#0b1220; line-height:1.05; margin-top:0.1rem; font-variant-numeric:tabular-nums; }
+    .kpi .s { font-size:0.64rem; color:#94a3b8; margin-top:0.1rem; }
+    .delta { font-size:0.72rem; font-weight:800; }
+    .delta.up::before { content:'\25B2 '; font-size:0.58rem; } .delta.dn::before { content:'\25BC '; font-size:0.58rem; }
+    .delta.up { color:var(--up); } .delta.dn { color:var(--dn); } .delta.flat { color:#94a3b8; }
+    table.t { width:100%; border-collapse:collapse; }
+    table.t th { font-size:0.58rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:#64748b; text-align:right; padding:0.45rem 0.5rem; border-bottom:1px solid var(--line); }
+    table.t th:first-child { text-align:left; }
+    table.t td { font-size:0.78rem; padding:0.42rem 0.5rem; border-bottom:1px solid #f1f5f9; text-align:right; font-variant-numeric:tabular-nums; color:#374151; }
+    table.t td:first-child { text-align:left; font-weight:600; color:#1f2937; }
+    table.t tr.tot td { font-weight:800; color:#0b1220; border-top:1px solid var(--line); border-bottom:0; }
+    .catrow td { background:#f8fafc; font-weight:800 !important; color:#0b1220 !important; border-top:1px solid var(--line); }
+    .catrow .badge { display:inline-block; font-size:0.58rem; font-weight:700; color:#0369a1; background:#e0f2fe; border-radius:0.3rem; padding:0.05rem 0.4rem; margin-left:0.4rem; }
+    .urlrow td:first-child { font-weight:400 !important; padding-left:1.1rem; }
+    .urlrow .u { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:0.72rem; color:#1d5b8a; word-break:break-all; }
+    .up { color:var(--up); font-weight:800; } .dn { color:var(--dn); font-weight:800; } .flat { color:#94a3b8; font-weight:700; }
+    .newt { color:var(--teal); font-weight:800; }
+    .chip { display:inline-flex; align-items:baseline; gap:0.35rem; background:#f1f5f9; border:1px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; }
+    .chip .v { font-weight:800; font-size:0.82rem; color:#0b1220; } .chip .l { font-size:0.62rem; font-weight:600; color:#64748b; text-transform:uppercase; }
+    .chip.good { background:#ecfdf5; border-color:#a7f3d0; } .chip.good .v { color:#047857; }
+    .ftr { color:var(--teal); }
+    @media (max-width:720px){ }
+    @media print { .no-print{display:none!important;} body{background:#fff!important;} [data-panel]{display:block!important;} .panel{box-shadow:none;} }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased">
+
+  <div class="no-print bg-white border-b border-slate-200 text-xs">
+    <div class="shell mx-auto px-4 sm:px-6 py-1.5 flex justify-end items-center gap-3">
+      <button onclick="window.print()" class="px-2.5 py-1 rounded border border-slate-300 text-slate-600 hover:bg-slate-50">Print / PDF</button>
+    </div>
+  </div>
+
+  <header class="text-white" style="background:linear-gradient(135deg,#0a2540 0%,#123a5e 55%,#1a4e78 100%);">
+    <div class="shell mx-auto px-6 sm:px-8 pt-8 pb-7">
+      <div class="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.22em] text-brand-300 mb-3">HQDM Search Intelligence · Performance Report</div>
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <div>
+          <h1 class="font-serif font-bold tracking-tight text-white text-3xl sm:text-4xl leading-tight">MIA Photo Booth</h1>
+          <div class="text-slate-300 mt-2 text-sm sm:text-base">Marketing Performance Report</div>
+        </div>
+        <div class="self-start sm:self-end inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-slate-100 whitespace-nowrap">Through May 2026</div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="no-print sticky top-0 z-40 bg-slate-50/95 backdrop-blur border-b border-slate-200">
+    <div class="shell mx-auto px-4 sm:px-6 py-3 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+      <button class="tab-btn" data-tab="1" onclick="showTab(1)"><span class="t">Overall</span><span class="s">Lead generation</span></button>
+      <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">GA4 performance</span></button>
+      <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
+      <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Completed and upcoming</span></button>
+    </div>
+  </nav>
+
+  <main class="shell mx-auto px-4 sm:px-6 py-5">
+
+    <!-- ===================== TAB 1 : OVERALL / LEADS ===================== -->
+    <section data-panel="1">
+      <div class="ov-eyebrow mb-1">Overview</div>
+      <ul class="ov mb-4">
+        <li>Organic search has grown from 58 visits in August to about <strong>1,135 in May</strong>, close to twenty times where it started, and it is now roughly <strong>77% of all website traffic</strong>. The site is doing its job of attracting visitors.</li>
+        <li>The website brings a steady <strong>9 to 16 form leads a month</strong>, and the Google profile holds a <strong>5.0 rating across 103 reviews</strong>, the second-strongest review base among the Miami photo booth companies we track. That review base is a real asset.</li>
+        <li>The largest remaining opportunity is Google Maps visibility in the busy event areas of Miami. The foundation is strong; the next step is turning it into map presence where the events are, covered in Map Presence and the work plan.</li>
+      </ul>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+        <div class="kpi"><div class="l">Form leads · last 90 days</div><div class="n">34</div><div class="s">website form submissions</div></div>
+        <div class="kpi"><div class="l">GBP profile clicks · 90d</div><div class="n">58</div><div class="s">people clicking through from Maps</div></div>
+        <div class="kpi"><div class="l">Phone + email clicks · 90d</div><div class="n">15</div><div class="s">tracked separately from form leads</div></div>
+        <div class="kpi"><div class="l">Reviews · rating</div><div class="n">103 · 5.0</div><div class="s">2nd-strongest base in the market</div></div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
+        <div class="panel p-4 lg:col-span-3">
+          <div class="cardhd mb-2">Form leads month over month</div>
+          <div class="relative" style="height:240px;"><canvas id="leadsChart"></canvas></div>
+          <p class="ann mt-2">Form leads = website contact and quote form submissions. Phone and email clicks are charted separately, not added in. Completed months only.</p>
+        </div>
+        <div class="panel p-4 lg:col-span-2">
+          <div class="cardhd mb-2">Lead and intent signals · last 90 days</div>
+          <table class="t"><thead><tr><th>Signal</th><th>Last 90 days</th></tr></thead><tbody id="signals"></tbody></table>
+          <p class="ann mt-3">Leads are the website form submissions. Phone clicks, email clicks, and Google profile clicks are early-interest signals counted on their own, never bundled into the lead number.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TAB 2 : WEBSITE TRAFFIC ===================== -->
+    <section data-panel="2">
+      <div class="ov-eyebrow mb-1">Overview</div>
+      <ul class="ov mb-4">
+        <li>Organic Search grew from <strong>58 visits in August to about 1,135 in May</strong>, close to twenty times over, and reached a peak of <strong>1,445 in January</strong>.</li>
+        <li>Organic is now <strong>about 77% of all site traffic</strong>, so the website depends mainly on Google search rather than ads or social.</li>
+        <li>The last three months eased back from the January peak, driven almost entirely by one large guide article cooling off. The opportunity is to turn that big reading audience into bookings.</li>
+      </ul>
+
+      <div class="panel p-4 mb-4">
+        <div class="flex items-baseline justify-between gap-3 mb-2">
+          <div class="cardhd">Organic visits by month</div>
+          <div class="ann">May 2026: <strong>1,135 visits</strong> · about 77% of all traffic</div>
+        </div>
+        <div class="relative" style="height:250px;"><canvas id="trafficChart"></canvas></div>
+        <p class="ann mt-2">Organic Search visits from Google, August 2025 to May 2026. Completed months only.</p>
+      </div>
+
+      <div class="means mb-5">
+        <div class="lbl">What this means</div>
+        <p>The website attracts a large and growing organic audience, almost all of it reading one popular guide article. The next step is connecting that audience to the booking pages (the booth types and the event pages), so more of those readers turn into enquiries. That is the focus of the website work in the plan.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div class="panel p-4">
+          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Where the organic audience sits</div><div class="ann">last 90 days</div></div>
+          <table class="t"><thead><tr><th>Page type</th><th>Organic visits</th><th>Share</th></tr></thead><tbody id="mix"></tbody></table>
+          <p class="ann mt-3">Most visitors land on guide articles. The booking pages (booth types, homepage) draw a small share today, which is the conversion opportunity.</p>
+        </div>
+        <div class="panel p-4">
+          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Largest organic pages</div><div class="ann">last 90 days</div></div>
+          <table class="t"><thead><tr><th>Page</th><th>Visits</th></tr></thead><tbody id="topPages"></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TAB 3 : MAP PRESENCE ===================== -->
+    <section data-panel="3">
+      <div class="means mb-4" style="background:#fff7ed;border-color:#fed7aa;">
+        <div class="lbl" style="color:#9a3412;">Why Google Maps matters most here</div>
+        <p style="color:#7c2d12;">Most people planning an event find a photo booth through Google Maps and local search. It is where booking intent is highest. MIA already holds a strong review base and a solid position in its home area. The biggest growth opportunity is becoming visible in the busy event areas of Miami, where most weddings, corporate events, and parties happen.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+        <div class="panel p-4 flex flex-col justify-center">
+          <div class="cardhd mb-2">The foundation in place</div>
+          <div class="flex flex-wrap gap-2 mb-3">
+            <span class="chip good"><span class="v">103 · 5.0</span><span class="l">reviews · rating</span></span>
+            <span class="chip good"><span class="v">2nd</span><span class="l">strongest review base in the market</span></span>
+            <span class="chip good"><span class="v">Top local</span><span class="l">link and authority profile</span></span>
+            <span class="chip"><span class="v">Since 2020</span><span class="l">established Miami brand</span></span>
+          </div>
+          <p class="text-[13px] leading-relaxed text-slate-700">MIA's review base is the second largest of any photo booth company we track in Miami, and its website authority is ahead of most local rivals. These are exactly the signals Google rewards on the map. They are simply not yet pointed at the areas with the most events.</p>
+        </div>
+        <div class="panel p-4">
+          <div class="cardhd mb-2">The opportunity · the Miami event corridor</div>
+          <p class="text-[13px] leading-relaxed text-slate-700 mb-2">Most Miami events cluster along the coast and central districts. These are the areas to win next:</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip"><span class="v">Miami Beach</span></span>
+            <span class="chip"><span class="v">Brickell</span></span>
+            <span class="chip"><span class="v">Wynwood</span></span>
+            <span class="chip"><span class="v">Coral Gables</span></span>
+            <span class="chip"><span class="v">Coconut Grove</span></span>
+            <span class="chip"><span class="v">Aventura</span></span>
+          </div>
+          <p class="ann mt-3">No single competitor dominates these areas; the market is fragmented and winnable. The work plan covers the two Google profile changes and the focus shift that open them up.</p>
+        </div>
+      </div>
+
+      <div class="means" style="background:#f0fdf4;border-color:#bbf7d0;">
+        <div class="lbl" style="color:#166534;">The single highest-value move</div>
+        <p style="color:#14532d;">The Google Business Profile is currently set up as a photography studio rather than a photo booth company. Every competitor that wins the map is categorised as a photo booth or event rental business. Correcting the profile category and focus is the cheapest, highest-return move available, and it is the first item in the work plan.</p>
+      </div>
+    </section>
+
+    <!-- ===================== TAB 4 : WORK PLAN ===================== -->
+    <section data-panel="4">
+      <div class="panel p-4 mb-4" style="border-color:#bae6fd;background:linear-gradient(180deg,#ffffff 0%,#f0f9ff 100%);">
+        <div class="flex items-baseline justify-between mb-2"><div class="cardhd" style="color:#0369a1;">Our recommendations · from the custom strategy</div><div class="ann">the priorities that move the needle next</div></div>
+        <table class="t"><thead><tr><th>Recommendation</th><th>Priority</th></tr></thead><tbody id="recommendations"></tbody></table>
+        <p class="ann mt-3">The Google Business Profile changes are the highest-value and the cheapest, they do not touch the website. The Wedding page turns existing wedding content into a page people can book from.</p>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+        <div class="panel p-4">
+          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Completed · recent months</div><div class="ann">delivered</div></div>
+          <table class="t"><thead><tr><th>Work delivered</th><th>When</th></tr></thead><tbody id="completed"></tbody></table>
+        </div>
+        <div class="panel p-4">
+          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">In the pipeline · June</div><div class="ann">scheduled</div></div>
+          <table class="t"><thead><tr><th>Scheduled</th><th>When</th></tr></thead><tbody id="pipeline"></tbody></table>
+          <p class="ann mt-3">The monthly work continues. As the strategy lands, the area-page effort shifts toward the event areas above rather than more inland neighborhoods.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="ftr mt-6 pt-3 border-t border-slate-200 text-[10px] flex flex-wrap items-center justify-between gap-2">
+      <div class="font-semibold">PREPARED BY HQDM SEARCH INTELLIGENCE</div>
+      <div>MIAPHOTOBOOTH.NET · Confidential</div>
+    </footer>
+  </main>
+
+  <script>
+    const DATA = {
+      leads: { months:['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],
+               forms:[9,11,14,15,15,16,9,10,14,10], clicks:[1,4,6,3,9,8,7,5,5,5] },
+      signals: [['Form leads (website)',34],['Google profile clicks',58],['Phone clicks',12],['Email clicks',3]],
+      traffic: { months:['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],
+                 organic:[58,167,246,701,1110,1445,1434,1176,1013,1135] },
+      mix: [['Guide articles (blog)',2753,'85%'],['Booking pages (booth + home)',251,'8%'],['Other',243,'7%']],
+      toppages: [
+        ['What size are photo booth pictures (guide)',2437],
+        ['Homepage',199],
+        ['What are photo booth pictures called (guide)',128],
+        ['360 Photo Booth page',6],
+        ['Glam Booth page',4],
+      ],
+      recommendations: [
+        {cat:'Google Business Profile', items:[
+          ['Set the primary category to "Photo booth" (the single biggest driver of map ranking)','High'],
+          ['Add Event planner and Wedding service as categories','High'],
+          ['Add more real event photos to the profile','High']]},
+        {cat:'Local focus', items:[
+          ['Point the map tracking and content at the event areas (Beach, Brickell, Gables, Grove, Aventura)','High']]},
+        {cat:'Website', items:[
+          ['Add a dedicated Wedding photo booth page, built from the existing wedding articles','High'],
+          ['Add a Corporate and events page','Medium'],
+          ['Combine the overlapping booth articles into the booth pages','Medium']]},
+        {cat:'Content', items:[
+          ['Add a photo booth pricing guide','Low']]},
+      ],
+      completed: [
+        {cat:'Reporting', items:[['Monthly performance report','Aug-May']]},
+        {cat:'Google Business Profile', items:[['Profile set up and optimised','2025'],['Business name updated','Fall 2025'],['Review program','ongoing']]},
+        {cat:'Website & on-page', items:[['Analytics and technical audit','2025'],['On-page optimisation, service and home pages','ongoing']]},
+        {cat:'Area pages published', items:[['Neighborhood area pages (3 per month)','monthly']]},
+        {cat:'Local citations & off-page', items:[['Local citations built','monthly'],['Authority link building','monthly'],['Press coverage','quarterly']]},
+      ],
+      pipeline: [
+        {cat:'Reporting', items:[['Monthly performance report','Jun']]},
+        {cat:'Website & on-page', items:[['On-page optimisation','Jun']]},
+        {cat:'Area pages', items:[['Area pages (3), shifting toward the event areas','Jun']]},
+        {cat:'Local citations & off-page', items:[['Local citations built','Jun'],['Authority link building','Jun']]},
+      ],
+    };
+
+    // tab 1 signals
+    document.getElementById('signals').innerHTML = DATA.signals.map(([s,v]) =>
+      `<tr><td>${s}</td><td>${v}</td></tr>`).join('');
+
+    // tab 2 mix
+    document.getElementById('mix').innerHTML = DATA.mix.map(([s,v,sh]) =>
+      `<tr><td>${s}</td><td>${v.toLocaleString()}</td><td>${sh}</td></tr>`).join('');
+    // tab 2 top pages
+    document.getElementById('topPages').innerHTML = DATA.toppages.map(([p,v]) =>
+      `<tr><td>${p}</td><td>${v.toLocaleString()}</td></tr>`).join('');
+
+    // tab 4 grouped tables
+    const grpRows = g => `<tr class="catrow"><td>${g.cat}<span class="badge">${g.items.length}</span></td><td></td></tr>` +
+      g.items.map(([name,when]) => `<tr class="urlrow"><td>${name}</td><td>${when}</td></tr>`).join('');
+    document.getElementById('recommendations').innerHTML = DATA.recommendations.map(grpRows).join('');
+    document.getElementById('completed').innerHTML = DATA.completed.map(grpRows).join('');
+    document.getElementById('pipeline').innerHTML = DATA.pipeline.map(grpRows).join('');
+
+    // charts
+    const charts = {};
+    const opts = yt => ({ responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
+      plugins:{ legend:{position:'bottom',labels:{font:{size:10},boxWidth:12}},
+        tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=>`${c.dataset.label}: ${c.raw!=null?c.raw.toLocaleString():'-'}`}} },
+      scales:{ x:{grid:{display:false},ticks:{font:{size:10}}}, y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:9}},title:{display:true,text:yt,font:{size:9,weight:'600'},color:'#64748b'}} } });
+
+    function renderLeads(){ return new Chart(document.getElementById('leadsChart'), { type:'line',
+      data:{ labels:DATA.leads.months, datasets:[
+        {label:'Form leads',data:DATA.leads.forms,borderColor:'#0e7490',backgroundColor:'#0e749014',borderWidth:3,tension:0.25,pointRadius:2.5,pointHoverRadius:6,fill:false},
+        {label:'Phone + email clicks',data:DATA.leads.clicks,borderColor:'#f59e0b',backgroundColor:'#f59e0b14',borderWidth:3,tension:0.25,pointRadius:2.5,pointHoverRadius:6,fill:false} ] },
+      options:opts('per month') }); }
+    function renderTraffic(){ return new Chart(document.getElementById('trafficChart'), { type:'line',
+      data:{ labels:DATA.traffic.months, datasets:[ {label:'Organic visitors',data:DATA.traffic.organic,borderColor:'#06b6d4',backgroundColor:'#06b6d422',borderWidth:3,tension:0.25,pointRadius:3,pointHoverRadius:6,fill:true} ] },
+      options:opts('visitors / month') }); }
+
+    function showTab(n){
+      document.querySelectorAll('[data-tab]').forEach(el => el.classList.toggle('active', el.dataset.tab == n));
+      document.querySelectorAll('[data-panel]').forEach(el => el.style.display = el.dataset.panel == n ? '' : 'none');
+      if (n==1 && !charts.leads) charts.leads = renderLeads();
+      if (n==2 && !charts.traffic) charts.traffic = renderTraffic();
+    }
+    showTab(2);
+  </script>
+</body>
+</html>
