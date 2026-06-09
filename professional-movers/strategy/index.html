@@ -30,6 +30,7 @@
     .comp li { display:flex; gap:0.5rem; align-items:flex-start; font-size:0.86rem; color:#334155; line-height:1.5; margin:0.4rem 0; }
     .comp li::before { content:''; flex-shrink:0; width:0.4rem; height:0.4rem; border-radius:999px; background:var(--teal2); margin-top:0.5rem; }
     .comp b { color:#0b1220; }
+    /* strategy cards */
     .strat { background:#fff; border:1px solid var(--line); border-left:4px solid var(--navy); border-radius:0.7rem; padding:1.05rem 1.2rem; margin-bottom:0.9rem; }
     .strat-hd { display:flex; align-items:center; gap:0.65rem; margin-bottom:0.55rem; flex-wrap:wrap; }
     .snum { flex-shrink:0; width:1.75rem; height:1.75rem; border-radius:0.4rem; background:var(--navy); color:#fff; font-weight:800; font-size:0.85rem; display:flex; align-items:center; justify-content:center; }
@@ -45,7 +46,37 @@
     .callout p { font-size:0.86rem; line-height:1.55; margin-top:0.15rem; }
     .mini li { font-size:0.85rem; color:#334155; line-height:1.5; margin:0.35rem 0; }
     .mini b { color:#0b1220; }
-    @media print { .panel,.strat{box-shadow:none;} @page{size:portrait;margin:0.5in;} }
+    /* dropdowns */
+    details.drop { background:#fff; border:1px solid var(--line); border-radius:0.7rem; margin-bottom:0.9rem; overflow:hidden; }
+    details.drop.strat-drop { border-left:4px solid var(--navy); }
+    details.drop > summary { list-style:none; cursor:pointer; display:flex; align-items:flex-start; gap:0.9rem; padding:0.9rem 1.1rem; }
+    details.drop > summary::-webkit-details-marker { display:none; }
+    details.drop > summary:hover { background:#fafcff; }
+    .sum-main { flex:1; min-width:0; }
+    .sum-hd { display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.3rem; }
+    .sum-hd h3 { font-family:'Lora',serif; font-weight:700; font-size:1.12rem; color:#0b1220; }
+    .sum-hd .tag { font-size:0.6rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--teal); background:var(--tealbg); border:1px solid #bae6fd; border-radius:999px; padding:0.12rem 0.55rem; }
+    .sum-txt { font-size:0.88rem; color:#475569; line-height:1.5; }
+    .sum-txt b { color:#0b1220; }
+    .lm-btn { flex-shrink:0; display:inline-flex; align-items:center; gap:0.35rem; font-size:0.64rem; font-weight:800; letter-spacing:0.04em; text-transform:uppercase; color:var(--teal); background:var(--tealbg); border:1px solid #bae6fd; border-radius:999px; padding:0.32rem 0.7rem; white-space:nowrap; margin-top:0.1rem; }
+    .lm-btn .chev { font-size:0.62rem; transition:transform .2s; }
+    details.drop[open] .lm-btn .chev { transform:rotate(180deg); }
+    .lm-btn .sl { display:none; }
+    details.drop[open] .lm-btn .lm { display:none; }
+    details.drop[open] .lm-btn .sl { display:inline; }
+    .drop-body { padding:0 1.1rem 1rem; }
+    .drop-body.has-top { border-top:1px solid #f1f5f9; padding-top:0.85rem; }
+    .drop-body > :first-child { margin-top:0; }
+    .drop-body h3.sub-h { font-family:'Lora',serif; font-weight:700; font-size:1.02rem; color:#0b1220; margin:1.1rem 0 0.4rem; }
+    details.drop-bare > summary { list-style:none; cursor:pointer; display:flex; align-items:flex-start; gap:0.9rem; }
+    details.drop-bare > summary::-webkit-details-marker { display:none; }
+    .drop-body-bare { padding-top:0.1rem; }
+    @media print {
+      .panel,.strat,details.drop{box-shadow:none;}
+      details.drop .drop-body, details.drop-bare .drop-body-bare{display:block !important;}
+      .lm-btn{display:none;}
+      @page{size:portrait;margin:0.5in;}
+    }
   </style>
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased">
@@ -95,116 +126,170 @@
     <section class="mb-6">
       <h2 class="sec mb-2">The frame</h2>
       <div class="panel p-4" style="background:linear-gradient(180deg,#ffffff 0%,#f0fdf4 100%);">
-        <p class="lead">
-          Professional Movers has the assets a winner needs. A <b>45-year Detroit-area brand</b>, full carrier credentials (USDOT, MCICC, CVED), "Best Moving Company" press recognition, the <b>#1 Google Maps position in its home market</b>, and <b>537 reviews at 4.9</b>, far ahead of any nearby local mover. The service pages still carry most of the search value. What hurt the site was a search-ranking drop in <b>September 2025</b>, lining up with a Google update, after a batch of thin templated suburb pages and a stack of low-quality links were added too fast. So the play is not new territory. It is recovery: remove what is dragging the site down, deepen the pages that already win, and keep the Google profile and the guide content strong. All map work stays on the single managed Walled Lake pin.
-        </p>
+        <details class="drop-bare">
+          <summary>
+            <p class="lead" style="margin:0;flex:1;min-width:0;">Professional Movers already wins at home, so the plan is recovery, not new territory: clear out what is dragging the site down, deepen the service pages that already win, and keep defending the #1 map position.</p>
+            <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          </summary>
+          <div class="drop-body-bare">
+            <p class="lead" style="margin-top:0.7rem;">Professional Movers has the assets a winner needs. A <b>45-year Detroit-area brand</b>, full carrier credentials (USDOT, MCICC, CVED), "Best Moving Company" press recognition, the <b>#1 Google Maps position in its home market</b>, and <b>537 reviews at 4.9</b>, far ahead of any nearby local mover. The service pages still carry most of the search value. What hurt the site was a search-ranking drop in <b>September 2025</b>, lining up with a Google update, after a batch of thin templated suburb pages and a stack of low-quality links were added too fast. So the play is not new territory. It is recovery: remove what is dragging the site down, deepen the pages that already win, and keep the Google profile and the guide content strong. All map work stays on the single managed Walled Lake pin.</p>
+            <p class="text-[11px] text-slate-500 mt-3">Search volumes referenced are DataForSEO estimates, not literal counts. Professional Movers runs three offices but HQDM manages one Google Business Profile (Walled Lake HQ); all profile work is that single pin, not new locations.</p>
+          </div>
+        </details>
         <div class="flex flex-wrap gap-2 mt-3">
           <span class="chip good"><span class="v">537 · 4.9</span><span class="l">strongest local review base</span></span>
           <span class="chip good"><span class="v">#1 home-area map</span><span class="l">on all 10 tracked searches</span></span>
           <span class="chip bad"><span class="v">Sept 2025 drop</span><span class="l">thin suburb pages + low-quality links</span></span>
         </div>
-        <p class="text-[11px] text-slate-500 mt-3">Search volumes referenced are DataForSEO estimates, not literal counts. Professional Movers runs three offices but HQDM manages one Google Business Profile (Walled Lake HQ); all profile work is that single pin, not new locations.</p>
       </div>
     </section>
 
     <!-- COMPETITIVE PICTURE -->
     <section class="mb-6">
       <h2 class="sec mb-2">The competitive picture</h2>
-      <div class="panel p-4">
-        <p class="text-[14px] text-slate-700 leading-relaxed mb-2">There are two different competitive games, and they call for two different plays:</p>
-        <ul class="comp">
-          <li><span><b>On the map, in the home market, Professional Movers dominates.</b> At the Walled Lake location it holds #1 on every tracked search. The nearest real local mover carries about 23 reviews at 4.3, against 537 at 4.9. Most of the other listings Google shows are unrelated businesses, so there is no serious local-pack challenger at home.</span></li>
-          <li><span><b>In regular Google search, the rivals are national.</b> The site competes with national van lines and comparison platforms (Two Men and a Truck, HireAHelper, Allied, All My Sons, MoveAdvisor), not the local movers. That means the service pages have to match national-grade depth to win back rankings.</span></li>
-          <li><span>The strongest existing page, the long-distance moving page, is the model: full credentials, a clear step-by-step process, pricing options, and valuation detail. The other service pages need to reach that same depth.</span></li>
-        </ul>
-      </div>
+      <details class="drop">
+        <summary>
+          <div class="sum-main"><span class="sum-txt">Two different games: at home on the map Professional Movers dominates with no real local-pack rival; in regular Google search the competition is national van lines, so the service pages have to match national-grade depth.</span></div>
+          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+        </summary>
+        <div class="drop-body has-top">
+          <p class="text-[14px] text-slate-700 leading-relaxed mb-2">There are two different competitive games, and they call for two different plays:</p>
+          <ul class="comp">
+            <li><span><b>On the map, in the home market, Professional Movers dominates.</b> At the Walled Lake location it holds #1 on every tracked search. The nearest real local mover carries about 23 reviews at 4.3, against 537 at 4.9. Most of the other listings Google shows are unrelated businesses, so there is no serious local-pack challenger at home.</span></li>
+            <li><span><b>In regular Google search, the rivals are national.</b> The site competes with national van lines and comparison platforms (Two Men and a Truck, HireAHelper, Allied, All My Sons, MoveAdvisor), not the local movers. That means the service pages have to match national-grade depth to win back rankings.</span></li>
+            <li><span>The strongest existing page, the long-distance moving page, is the model: full credentials, a clear step-by-step process, pricing options, and valuation detail. The other service pages need to reach that same depth.</span></li>
+          </ul>
+        </div>
+      </details>
     </section>
 
     <!-- STRONG / WEAK -->
     <section class="mb-6">
       <h2 class="sec mb-2">Where Professional Movers is strong and weak</h2>
-      <div class="panel p-4">
-        <ul class="comp">
-          <li><span><b>Strong:</b> the Walled Lake home-area map (#1, commanding review lead), and the specialty service pages. Hot tub, piano, and TV moving are the biggest search gainers in the last 90 days, and the guide articles are the fastest-growing content.</span></li>
-          <li><span><b>Recoverable:</b> a large band of service-page keywords sits just below the first page (positions 11 to 50). These are the pages to deepen first, because small gains here turn into real traffic.</span></li>
-          <li><span><b>The drag:</b> roughly 70 thin templated suburb pages contribute almost nothing (about 1% of impressions) and dilute the overall quality signal, and the old backlink profile carries a heavy share of low-quality and automated links. Both are clean-up items, not growth items.</span></li>
-          <li><span><b>Not the fix:</b> more thin suburb pages or more automated links. The site already has too many of both. The recovery comes from depth and clean-up, not volume.</span></li>
-        </ul>
-      </div>
+      <details class="drop">
+        <summary>
+          <div class="sum-main"><span class="sum-txt">Strong at home and on the specialty service pages and guides; a band of service keywords sits just below page one, ready to recover; the drag is the thin suburb pages and the low-quality links, both clean-up, not growth.</span></div>
+          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+        </summary>
+        <div class="drop-body has-top">
+          <ul class="comp">
+            <li><span><b>Strong:</b> the Walled Lake home-area map (#1, commanding review lead), and the specialty service pages. Hot tub, piano, and TV moving are the biggest search gainers in the last 90 days, and the guide articles are the fastest-growing content.</span></li>
+            <li><span><b>Recoverable:</b> a large band of service-page keywords sits just below the first page (positions 11 to 50). These are the pages to deepen first, because small gains here turn into real traffic.</span></li>
+            <li><span><b>The drag:</b> roughly 70 thin templated suburb pages contribute almost nothing (about 1% of impressions) and dilute the overall quality signal, and the old backlink profile carries a heavy share of low-quality and automated links. Both are clean-up items, not growth items.</span></li>
+            <li><span><b>Not the fix:</b> more thin suburb pages or more automated links. The site already has too many of both. The recovery comes from depth and clean-up, not volume.</span></li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- MEASUREMENT AND FRAMING -->
+    <section class="mb-6">
+      <h2 class="sec mb-2">Measurement and framing</h2>
+      <details class="drop">
+        <summary>
+          <div class="sum-main"><span class="sum-txt">Leads are website form enquiries, and with no call tracking installed the true total is higher; lead the client story on the recovery since February and the Google profile growth, not a single year-over-year number.</span></div>
+          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+        </summary>
+        <div class="drop-body has-top">
+          <ul class="comp">
+            <li><span><b>Leads.</b> Leads are website form enquiries from analytics (the form-submit event). There is no call tracking installed for this account, so phone calls are not counted; for a mover, calls are usually a large share, which means the true lead total is higher than what is shown.</span></li>
+            <li><span><b>The honest year-over-year read.</b> On a like-for-like basis, total form enquiries are down modestly versus a year ago, in line with the traffic drop, but they held up far better than traffic and have been recovering since February (94 to 160 by May). Lead the client story on the recovery and on the Google Business Profile growth, not on a single year-over-year total.</span></li>
+            <li><span><b>The Google Business Profile is the bright spot.</b> Profile enquiries nearly doubled year over year (about 18 to 34 a month) and convert at roughly twice the rate of regular search. It is the one channel growing in 2026.</span></li>
+            <li><span><b>Scope.</b> One managed Google profile (Walled Lake). No multi-location or new-area framing in client comms; the other offices' profiles are not under management.</span></li>
+          </ul>
+          <h3 class="sub-h">What to track</h3>
+          <ul class="mini">
+            <li>Service-page rankings in the positions 11 to 50 band, the pages where depth work pays back first.</li>
+            <li>The lift from the guides to the service pages as the internal links go in, the signal that reading traffic is converting.</li>
+            <li>The home-area map position and the lead recovery month over month.</li>
+          </ul>
+        </div>
+      </details>
     </section>
 
     <!-- STRATEGIES -->
     <section class="mb-6">
       <h2 class="sec mb-3">The strategies</h2>
 
-      <div class="strat">
-        <div class="strat-hd"><span class="snum">1</span><h3>Recover and deepen the pages that already win</h3><span class="tag">highest return</span></div>
-        <div class="wwh">
-          <div class="row"><span class="lbl">What</span><p>Deepen the priority service pages currently sitting just below page one (hot tub, piano, artwork, senior, office, local moving). Consolidate the thin suburb pages into the nearest strong page with redirects. Refocus the homepage on the brand and the core services. Route internal links and structured data to the priority pages.</p></div>
-          <div class="row"><span class="lbl">Why</span><p>Service pages already carry about half the site's search clicks, and a large band of their keywords sits at positions 11 to 50, where small gains turn into traffic. The thin suburb pages draw almost nothing and dilute quality. This is the fastest, lowest-risk path back.</p></div>
-          <div class="row"><span class="lbl">How</span><div><ul class="mini" style="margin:0;">
-            <li>Bring each priority service page up to the depth of the long-distance page: process, credentials, pricing, specialty handling, photos.</li>
-            <li>Redirect the dead suburb pages to the nearest real service or location page; keep only the few that earn impressions and make them genuinely local.</li>
-            <li>Add links from the strong pages and the guides into the priority service pages, and add structured data at publish.</li>
-          </ul></div></div>
+      <details class="drop strat-drop">
+        <summary>
+          <span class="snum">1</span>
+          <div class="sum-main">
+            <div class="sum-hd"><h3>Recover and deepen the pages that already win</h3><span class="tag">highest return</span></div>
+            <span class="sum-txt">Deepen the service pages sitting just below page one and consolidate the thin suburb pages into the nearest strong page; this is the fastest, lowest-risk path back.</span>
+          </div>
+          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+        </summary>
+        <div class="drop-body has-top">
+          <div class="wwh">
+            <div class="row"><span class="lbl">What</span><p>Deepen the priority service pages currently sitting just below page one (hot tub, piano, artwork, senior, office, local moving). Consolidate the thin suburb pages into the nearest strong page with redirects. Refocus the homepage on the brand and the core services. Route internal links and structured data to the priority pages.</p></div>
+            <div class="row"><span class="lbl">Why</span><p>Service pages already carry about half the site's search clicks, and a large band of their keywords sits at positions 11 to 50, where small gains turn into traffic. The thin suburb pages draw almost nothing and dilute quality. This is the fastest, lowest-risk path back.</p></div>
+            <div class="row"><span class="lbl">How</span><div><ul class="mini" style="margin:0;">
+              <li>Bring each priority service page up to the depth of the long-distance page: process, credentials, pricing, specialty handling, photos.</li>
+              <li>Redirect the dead suburb pages to the nearest real service or location page; keep only the few that earn impressions and make them genuinely local.</li>
+              <li>Add links from the strong pages and the guides into the priority service pages, and add structured data at publish.</li>
+            </ul></div></div>
+          </div>
         </div>
-      </div>
+      </details>
 
-      <div class="strat">
-        <div class="strat-hd"><span class="snum">2</span><h3>Strengthen the home-market Google profile</h3><span class="tag">defend the #1</span></div>
-        <div class="wwh">
-          <div class="row"><span class="lbl">What</span><p>Keep the single managed Walled Lake profile fully built out: fresh photos, a regular posting schedule, complete "from the business" details, and an accurate, locally anchored products and services list.</p></div>
-          <div class="row"><span class="lbl">Why</span><p>The map position at home is the strongest asset and the highest-intent channel for a mover. It already converts visitors to enquiries at about twice the rate of regular search. The job is to protect and reinforce it, not to chase new areas.</p></div>
-          <div class="row"><span class="lbl">How</span><p>Work the one managed pin: refresh the photo set across the main categories, keep a weekly post going, fill in the blank profile sections, and anchor the products to the home service area. Stay inside the managed pin's home radius.</p></div>
+      <details class="drop strat-drop">
+        <summary>
+          <span class="snum">2</span>
+          <div class="sum-main">
+            <div class="sum-hd"><h3>Strengthen the home-market Google profile</h3><span class="tag">defend the #1</span></div>
+            <span class="sum-txt">Keep the one managed Walled Lake profile fully built out with fresh photos, regular posts, and complete details, since the map at home is the strongest asset and the highest-intent channel.</span>
+          </div>
+          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+        </summary>
+        <div class="drop-body has-top">
+          <div class="wwh">
+            <div class="row"><span class="lbl">What</span><p>Keep the single managed Walled Lake profile fully built out: fresh photos, a regular posting schedule, complete "from the business" details, and an accurate, locally anchored products and services list.</p></div>
+            <div class="row"><span class="lbl">Why</span><p>The map position at home is the strongest asset and the highest-intent channel for a mover. It already converts visitors to enquiries at about twice the rate of regular search. The job is to protect and reinforce it, not to chase new areas.</p></div>
+            <div class="row"><span class="lbl">How</span><p>Work the one managed pin: refresh the photo set across the main categories, keep a weekly post going, fill in the blank profile sections, and anchor the products to the home service area. Stay inside the managed pin's home radius.</p></div>
+          </div>
         </div>
-      </div>
+      </details>
 
-      <div class="strat">
-        <div class="strat-hd"><span class="snum">3</span><h3>Keep the content momentum and convert the readers</h3><span class="tag">turn readers into enquiries</span></div>
-        <div class="wwh">
-          <div class="row"><span class="lbl">What</span><p>Keep the "how to pack" and "how to move" guides going, since they are the fastest-growing content, and link each guide to the matching service page. Add a small set of buyer-stage guides for the Detroit area (moving cost, what to look for, tipping).</p></div>
-          <div class="row"><span class="lbl">Why</span><p>The guides pull in a steady new audience but few of those readers reach a page that books a move. Linking them to the service pages turns reading traffic into enquiry traffic, and the buyer-stage guides catch people closer to choosing a mover.</p></div>
-          <div class="row"><span class="lbl">How</span><p>Add in-body links from the top guides to the matching service pages (pool table to piano, dishes to packing, fridge to local moving). Publish the buyer-stage guides and link them to the service pages.</p></div>
+      <details class="drop strat-drop">
+        <summary>
+          <span class="snum">3</span>
+          <div class="sum-main">
+            <div class="sum-hd"><h3>Keep the content momentum and convert the readers</h3><span class="tag">turn readers into enquiries</span></div>
+            <span class="sum-txt">The how-to guides pull in a steady new audience but few reach a page that books a move; link each guide to its matching service page and add a few buyer-stage guides.</span>
+          </div>
+          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+        </summary>
+        <div class="drop-body has-top">
+          <div class="wwh">
+            <div class="row"><span class="lbl">What</span><p>Keep the "how to pack" and "how to move" guides going, since they are the fastest-growing content, and link each guide to the matching service page. Add a small set of buyer-stage guides for the Detroit area (moving cost, what to look for, tipping).</p></div>
+            <div class="row"><span class="lbl">Why</span><p>The guides pull in a steady new audience but few of those readers reach a page that books a move. Linking them to the service pages turns reading traffic into enquiry traffic, and the buyer-stage guides catch people closer to choosing a mover.</p></div>
+            <div class="row"><span class="lbl">How</span><p>Add in-body links from the top guides to the matching service pages (pool table to piano, dishes to packing, fridge to local moving). Publish the buyer-stage guides and link them to the service pages.</p></div>
+          </div>
         </div>
-      </div>
+      </details>
 
-      <div class="strat">
-        <div class="strat-hd"><span class="snum">4</span><h3>Clean up the link profile</h3><span class="tag">remove the drag</span></div>
-        <div class="wwh">
-          <div class="row"><span class="lbl">What</span><p>Disavow the low-quality and automated backlinks, stop the low-quality link sources still running, and rebuild the earned channel slowly through real local citations and a few genuine local partners and press relationships.</p></div>
-          <div class="row"><span class="lbl">Why</span><p>A heavy share of the backlink profile is low-quality and automated, exactly the pattern that lines up with the September drop. Clearing it removes a quality drag and stops new bad links from accruing.</p></div>
-          <div class="row"><span class="lbl">How</span><p>Build and submit a disavow file, halt the automated link sources, complete the core local and industry citations, and reopen the dormant local press relationships. Slow and clean, not volume.</p></div>
+      <details class="drop strat-drop">
+        <summary>
+          <span class="snum">4</span>
+          <div class="sum-main">
+            <div class="sum-hd"><h3>Clean up the link profile</h3><span class="tag">remove the drag</span></div>
+            <span class="sum-txt">Disavow the low-quality and automated backlinks tied to the September drop, stop the bad sources, and rebuild slowly through real citations and genuine local relationships.</span>
+          </div>
+          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+        </summary>
+        <div class="drop-body has-top">
+          <div class="wwh">
+            <div class="row"><span class="lbl">What</span><p>Disavow the low-quality and automated backlinks, stop the low-quality link sources still running, and rebuild the earned channel slowly through real local citations and a few genuine local partners and press relationships.</p></div>
+            <div class="row"><span class="lbl">Why</span><p>A heavy share of the backlink profile is low-quality and automated, exactly the pattern that lines up with the September drop. Clearing it removes a quality drag and stops new bad links from accruing.</p></div>
+            <div class="row"><span class="lbl">How</span><p>Build and submit a disavow file, halt the automated link sources, complete the core local and industry citations, and reopen the dormant local press relationships. Slow and clean, not volume.</p></div>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <!-- OPERATIONAL / MEASUREMENT -->
-    <section class="mb-6">
-      <h2 class="sec mb-2">Measurement and framing</h2>
-      <div class="panel p-4">
-        <ul class="comp">
-          <li><span><b>Leads.</b> Leads are website form enquiries from analytics (the form-submit event). There is no call tracking installed for this account, so phone calls are not counted; for a mover, calls are usually a large share, which means the true lead total is higher than what is shown.</span></li>
-          <li><span><b>The honest year-over-year read.</b> On a like-for-like basis, total form enquiries are down modestly versus a year ago, in line with the traffic drop, but they held up far better than traffic and have been recovering since February (94 to 160 by May). Lead the client story on the recovery and on the Google Business Profile growth, not on a single year-over-year total.</span></li>
-          <li><span><b>The Google Business Profile is the bright spot.</b> Profile enquiries nearly doubled year over year (about 18 to 34 a month) and convert at roughly twice the rate of regular search. It is the one channel growing in 2026.</span></li>
-          <li><span><b>Scope.</b> One managed Google profile (Walled Lake). No multi-location or new-area framing in client comms; the other offices' profiles are not under management.</span></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- WHAT TO TRACK -->
-    <section class="mb-6">
-      <h2 class="sec mb-2">What to track</h2>
-      <div class="panel p-4">
-        <ul class="mini">
-          <li>Service-page rankings in the positions 11 to 50 band, the pages where depth work pays back first.</li>
-          <li>The lift from the guides to the service pages as the internal links go in, the signal that reading traffic is converting.</li>
-          <li>The home-area map position and the lead recovery month over month.</li>
-        </ul>
-      </div>
+      </details>
     </section>
 
     <!-- FRAMING NOTE -->
-    <section class="mb-2">
+    <section class="mb-6">
       <div class="callout" style="background:var(--tealbg);border:1px solid #bae6fd;">
         <div class="l" style="color:#0369a1;">A note on framing</div>
         <p style="color:#0c4a6e;">This account is recoverable without building authority from scratch. The brand, the reviews, the credentials, and the service pages are already there and already winning at home. The problems are a batch of thin suburb pages and a low-quality link profile, both added too fast and both fixable inside scope. Clean those up, deepen what already ranks, and the assets that are already there start working again.</p>
