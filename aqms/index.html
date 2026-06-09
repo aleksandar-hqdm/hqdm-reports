@@ -102,7 +102,7 @@
   <!-- TABS -->
   <nav class="no-print sticky top-0 z-40 bg-slate-50/95 backdrop-blur border-b border-slate-200">
     <div class="shell mx-auto px-4 sm:px-6 py-3 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-      <button class="tab-btn" data-tab="1" onclick="showTab(1)"><span class="t">Overall</span><span class="s">Lead generation</span></button>
+      <button class="tab-btn" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
       <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">GA4 performance</span></button>
       <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
       <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Completed and upcoming</span></button>
@@ -135,7 +135,7 @@
           <div class="ann">CallRail · May</div>
         </div>
         <div class="relative" style="height:230px;"><canvas id="sourceChart"></canvas></div>
-        <p class="ann mt-2">Tracked inbound calls by source in May. About 60% come straight from the Google Maps profile. Organic-search calls grew from 5 in January to 48 in May, SEO turning into real phone calls.</p>
+        <p class="ann mt-2">Tracked inbound calls by source in May. About 60% come straight from the Google Maps profile, and organic search has grown into a real source of phone leads, 48 calls in May.</p>
       </div>
     </section>
 
@@ -154,7 +154,7 @@
           <div class="ann">May 2026 Organic Search: <strong>470 visits</strong> · +47% vs Apr 2026 (320)</div>
         </div>
         <div class="relative" style="height:250px;"><canvas id="trafficChart"></canvas></div>
-        <p class="ann mt-2">The clean climb is March to May (109 → 320 → 470). January and February were depressed by a tracking migration, now corrected; leads in CallRail never dropped over that span.</p>
+        <p class="ann mt-2">The clean climb is March to May (109 → 320 → 470). February was depressed by a tracking migration, now corrected; leads in CallRail never dropped over that span.</p>
       </div>
 
       <div class="means mb-5">
@@ -176,19 +176,35 @@
 
     <!-- ===================== TAB 3 : SEO ===================== -->
     <section data-panel="3">
+      <div class="mb-4">
+        <div class="cardhd mb-2">Three-month map momentum · March to May</div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="panel p-4">
+            <div class="text-2xl font-bold" style="color:#0b1220;">511 <span class="text-slate-400">&rarr;</span> 557</div>
+            <div class="text-[12px] text-slate-600 mt-1">Combined top-3 map spots across tracked searches (March to May, +46). The next-closest mover sits at 348.</div>
+          </div>
+          <div class="panel p-4">
+            <div class="text-2xl font-bold" style="color:#0b1220;">77 <span class="text-slate-400">&rarr;</span> 91</div>
+            <div class="text-[12px] text-slate-600 mt-1">Top-3 map spots for <strong>moving company</strong> since March (+14).</div>
+          </div>
+          <div class="panel p-4">
+            <div class="text-2xl font-bold" style="color:#0b1220;">60 <span class="text-slate-400">&rarr;</span> 70</div>
+            <div class="text-[12px] text-slate-600 mt-1">Top-3 map spots for <strong>packing and storage</strong> since March (+10), the clearest gainer.</div>
+          </div>
+        </div>
+        <p class="ann mt-2">Each map spot is a point on the grid around the business where AQMS shows in the top 3 for that search. More spots means winning the map across a wider area.</p>
+      </div>
+
       <div class="means mb-4" style="background:#fff7ed;border-color:#fed7aa;">
         <div class="lbl" style="color:#9a3412;">Why Google Maps matters most here</div>
-        <p style="color:#7c2d12;">Google Maps is how most people find a local mover, and it is where AQMS is strongest. When someone in the Santa Clarita Valley searches for a mover, AQMS sits at the top of the map across most of the area, ahead of the nearby competition on the core searches. Holding and extending this position is the single highest-value local-search priority. Web-search (non-map) ranking is being re-baselined this month after the site moved to its new, non-www web address; meanwhile Google Maps is the live, reliable signal, and it is where most of your leads come from.</p>
+        <p style="color:#7c2d12;">Google Maps is how most people find a local mover, and it is where AQMS is strongest, sitting at the top of the map across most of the Santa Clarita Valley and ahead of the nearby competition. Holding and extending that position is the single highest-value local-search priority.</p>
       </div>
+
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
         <div class="panel p-4">
           <div class="cardhd mb-2">Google Maps presence · Santa Clarita Valley</div>
           <table class="t"><thead><tr><th>Priority search</th><th>Avg map position</th><th>Top-3 grid share</th></tr></thead><tbody id="maps"></tbody></table>
-          <p class="ann mt-2">Across a 13-by-13 grid (about 1.5 miles between points) covering the Santa Clarita Valley, May 2026. Avg map position is the typical Google Maps rank across that area; top-3 grid share is how much of it where AQMS appears in the top 3.</p>
-          <p class="text-[12px] text-slate-700 mt-2">The "moving company" searches are AQMS's strongest, top-3 across roughly seven in ten of the grid, and AQMS holds the widest top-3 coverage of any mover in the area.</p>
-        </div>
-        <div class="panel p-4 flex flex-col justify-center">
-          <div class="flex flex-wrap gap-2 mb-3">
+          <div class="flex flex-wrap gap-2 mt-4 mb-3">
             <span class="chip good"><span class="v">Top 3</span><span class="l">across most of the local grid</span></span>
             <span class="chip good"><span class="v">#1</span><span class="l">widest grid coverage of any local mover</span></span>
             <span class="chip"><span class="v">452 · 4.9</span><span class="l">reviews · rating</span></span>
@@ -196,12 +212,9 @@
           </div>
           <p class="text-[13px] leading-relaxed text-slate-700">Google Maps is the engine of the account, and AQMS is the clear leader here, holding top-3 across more of the grid than any other mover. Defending and extending that lead is the single highest-value priority.</p>
         </div>
-      </div>
-
-      <div class="mb-4">
-        <div class="cardhd mb-2">Where AQMS stands · search by search</div>
         <div class="panel p-4">
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="cardhd mb-3">Where AQMS stands · search by search</div>
+          <div class="space-y-4">
             <div>
               <div class="text-[11px] font-bold uppercase tracking-wide mb-2" style="color:#047857;">Owns the map</div>
               <ul class="space-y-1 text-[13px] text-slate-700">
@@ -220,30 +233,11 @@
             </div>
             <div>
               <div class="text-[11px] font-bold uppercase tracking-wide mb-2 text-slate-500">Good to know</div>
-              <p class="text-[12px] text-slate-600 leading-relaxed">Standalone "self storage" is a separate map pack owned by the dedicated storage facilities, so AQMS competes there on moving-plus-storage jobs rather than the bare storage search. Coverage is strongest in the core Santa Clarita Valley and tapers at the far edges, which is normal for a single location.</p>
+              <p class="text-[12px] text-slate-600 leading-relaxed">Standalone "self storage" is a separate map pack owned by the dedicated storage facilities, so AQMS competes there on moving-plus-storage jobs rather than the bare storage search.</p>
             </div>
           </div>
           <p class="ann mt-3">The share is how much of the local grid AQMS holds in the top 3 for each search (latest scan).</p>
         </div>
-      </div>
-
-      <div class="mb-2">
-        <div class="cardhd mb-2">Three-month map momentum · March to May</div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div class="panel p-4">
-            <div class="text-2xl font-bold" style="color:#0b1220;">511 <span class="text-slate-400">&rarr;</span> 557</div>
-            <div class="text-[12px] text-slate-600 mt-1">Combined top-3 map spots across tracked searches (March to May, +46). The next-closest mover sits at 348.</div>
-          </div>
-          <div class="panel p-4">
-            <div class="text-2xl font-bold" style="color:#0b1220;">77 <span class="text-slate-400">&rarr;</span> 91</div>
-            <div class="text-[12px] text-slate-600 mt-1">Top-3 map spots for <strong>moving company</strong> since March (+14).</div>
-          </div>
-          <div class="panel p-4">
-            <div class="text-2xl font-bold" style="color:#0b1220;">60 <span class="text-slate-400">&rarr;</span> 70</div>
-            <div class="text-[12px] text-slate-600 mt-1">Top-3 map spots for <strong>packing and storage</strong> since March (+10), the clearest gainer.</div>
-          </div>
-        </div>
-        <p class="ann mt-2">Each map spot is a point on the grid around the business where AQMS shows in the top 3 for that search. More spots means winning the map across a wider area.</p>
       </div>
     </section>
 
@@ -275,9 +269,9 @@
 
   <script>
     const DATA = {
-      leads: { months:['Jan','Feb','Mar','Apr','May'], total:[210,120,130,160,206], calls:[166,92,93,84,116], forms:[44,28,37,76,90] },
+      leads: { months:['Feb','Mar','Apr','May'], total:[120,130,160,206], calls:[92,93,84,116], forms:[28,37,76,90] },
       leadSrc: [['Google Maps profile',106,127,'60%'],['Organic search',26,48,'23%'],['Direct',10,23,'11%'],['Other (Craigslist, etc.)',16,13,'6%']],
-      traffic: { months:['Jan','Feb','Mar','Apr','May'], organic:[97,75,109,320,470] },
+      traffic: { months:['Feb','Mar','Apr','May'], organic:[75,109,320,470] },
       channels: [['Total',1152,1599],['Organic Search',320,470],['Direct',650,929],['Organic Social',55,79],['Referral',121,106]],
       toppages: [
         {cat:'Homepage', n:1, before:57, after:65, urls:[['/',57,65]]},
