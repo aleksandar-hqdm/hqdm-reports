@@ -106,6 +106,14 @@
         <div class="kpi"><div class="l">From Google / Maps</div><div class="n">88%</div><div class="s">of all tracked calls</div></div>
         <div class="kpi"><div class="l">Reviews · 5 profiles</div><div class="n">2,265</div><div class="s">4.9 to 5.0 stars</div></div>
       </div>
+      <div class="panel p-4 mb-4">
+        <div class="flex items-baseline justify-between gap-3 mb-2">
+          <div class="cardhd">Phone leads per month</div>
+          <div class="ann">CallRail · completed months</div>
+        </div>
+        <div class="relative" style="height:230px;"><canvas id="leadsChart"></canvas></div>
+        <p class="ann mt-2">Tracked inbound calls by month. Call tracking went live in April, so April and May are the first full months on record. The current month is still in progress and is not shown.</p>
+      </div>
       <div class="panel p-4">
         <div class="flex items-baseline justify-between gap-3 mb-2">
           <div class="cardhd">Where your phone leads come from</div>
@@ -255,6 +263,7 @@
         ['Yelp', 10],
         ['Other', 15],
       ],
+      monthly: { months:['Apr','May'], calls:[786,583] },
       traffic: { months:['May 25','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan 26','Feb','Mar','Apr','May'],
                  organic:[1208,676,591,584,715,526,432,415,465,359,491,704,706] },
       mix: [
@@ -313,6 +322,14 @@
     document.getElementById('pipeline').innerHTML = DATA.pipeline.map(grpRows).join('');
 
     const charts = {};
+    function renderLeads(){
+      return new Chart(document.getElementById('leadsChart'), { type:'bar',
+        data:{ labels:DATA.monthly.months, datasets:[{label:'Tracked calls',data:DATA.monthly.calls,
+          backgroundColor:'#0e7490',borderRadius:4,maxBarThickness:70}] },
+        options:{ responsive:true, maintainAspectRatio:false,
+          plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=>`${c.raw.toLocaleString()} calls`}} },
+          scales:{ x:{grid:{display:false},ticks:{font:{size:11}}}, y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:9}},title:{display:true,text:'calls / month',font:{size:9,weight:'600'},color:'#64748b'}} } } });
+    }
     function renderSources(){
       const rows = DATA.sources;
       return new Chart(document.getElementById('sourceChart'), { type:'bar',
@@ -331,6 +348,7 @@
     function showTab(n){
       document.querySelectorAll('[data-tab]').forEach(el => el.classList.toggle('active', el.dataset.tab == n));
       document.querySelectorAll('[data-panel]').forEach(el => el.style.display = el.dataset.panel == n ? '' : 'none');
+      if (n==1 && !charts.leads) charts.leads = renderLeads();
       if (n==1 && !charts.sources) charts.sources = renderSources();
       if (n==2 && !charts.traffic) charts.traffic = renderTraffic();
     }

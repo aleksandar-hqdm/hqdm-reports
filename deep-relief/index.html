@@ -202,6 +202,15 @@
             </table>
           </div>
         </div>
+
+        <div class="mt-6 max-w-4xl panel">
+          <div class="flex items-center justify-between flex-wrap gap-3 mb-3">
+            <h3 class="font-serif text-xl font-bold text-slate-900">Where your leads come from</h3>
+            <span class="text-[11px] font-bold uppercase tracking-widest text-slate-400">March to May 2026</span>
+          </div>
+          <div style="height: 165px;"><canvas id="leadsrc-chart"></canvas></div>
+          <p class="text-[11px] text-slate-400 mt-3">New-patient intake forms, memberships and gift cards by channel. About 70% come from organic search; the rest from direct, referral, social and paid together.</p>
+        </div>
       </section>
     </div>
 
@@ -484,11 +493,6 @@
       <span><span class="font-semibold text-slate-700">HQDM Search Intelligence</span> · Client snapshot · Aleksandar Spasevski · 2026-06-02</span>
       <span class="text-slate-400">Confidential, for Deep Relief.</span>
     </footer>
-    <p class="mt-2 text-[10px] text-slate-400 leading-relaxed">
-      Data sources: Local Falcon 13×13 geo-grid scans (4 dates, 8 tracked queries, Mar 12 → May 15 2026);
-      Google Search Console (https://deeprelief.com/ · 365-day window, 945,867 impressions / 7,839 clicks);
-      DataForSEO Maps SERP at pin coordinates (43 queries) + Austin-DMA Google Ads search volumes.
-    </p>
   </main>
 
 <!-- legacy SEO-tab renderer removed; tab 3 is now a static Map Presence section -->
@@ -542,6 +546,27 @@
         chart.data.datasets[0].data = series[m].data;
         chart.update();
       });
+    });
+  })();
+</script>
+<script>
+  (function () {
+    if (!window.Chart) return;
+    var cv = document.getElementById('leadsrc-chart');
+    if (!cv) return;
+    new Chart(cv, {
+      type: 'bar',
+      data: { labels: ['Organic search', 'All other channels'], datasets: [{
+        label: 'Leads', data: [158, 62],
+        backgroundColor: ['#13315c', '#94a3b8'], borderRadius: 4, maxBarThickness: 46
+      }] },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { backgroundColor: '#0b1220', padding: 9,
+          callbacks: { label: function (c) { return c.raw.toLocaleString() + ' leads'; } } } },
+        scales: { x: { beginAtZero: true, grid: { color: 'rgba(0,0,0,.05)' }, ticks: { font: { size: 10 } } },
+                  y: { grid: { display: false }, ticks: { font: { size: 11 } } } }
+      }
     });
   })();
 </script>

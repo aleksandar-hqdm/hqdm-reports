@@ -112,10 +112,18 @@
         <div class="kpi"><div class="l">Reviews · rating</div><div class="n">103 · 5.0</div><div class="s">2nd-strongest base in the market</div></div>
         <div class="kpi"><div class="l">Organic visits · May</div><div class="n">1,135</div><div class="s">about 77% of all traffic</div></div>
       </div>
-      <div class="panel p-4">
+      <div class="panel p-4 mb-4">
         <div class="cardhd mb-2">Genuine leads month over month</div>
         <div class="relative" style="height:240px;"><canvas id="leadsChart"></canvas></div>
         <p class="ann mt-2">Leads are genuine inbound from the booking system (GoHighLevel): website form submissions plus verified phone calls. Spam calls and imported records are excluded. Completed months only; the earliest months reflect the system still being set up.</p>
+      </div>
+      <div class="panel p-4">
+        <div class="flex items-baseline justify-between gap-3 mb-2">
+          <div class="cardhd">Where your leads come from</div>
+          <div class="ann">GoHighLevel · Aug 2025 to May 2026</div>
+        </div>
+        <div class="relative" style="height:170px;"><canvas id="sourceChart"></canvas></div>
+        <p class="ann mt-2">Genuine leads by how they reach you. Almost all come through the website contact form, with a few by phone. The booking system does not tag a marketing channel for each lead; the website traffic mix (about 77% organic) is shown under Website Traffic.</p>
       </div>
     </section>
 
@@ -252,6 +260,7 @@
   <script>
     const DATA = {
       leads: { months:['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'], leads:[10,4,15,15,13,13,12,9,12,10] },
+      leadSrc: [['Website contact form',105],['Phone call',8]],
       traffic: { months:['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],
                  organic:[58,167,246,701,1110,1445,1434,1176,1013,1135] },
       mix: [['Guide articles (blog)',3378,2753,'85%'],['Booking pages (booth + home)',371,251,'8%'],['Other',321,243,'7%']],
@@ -322,14 +331,21 @@
     function renderTraffic(){ return new Chart(document.getElementById('trafficChart'), { type:'line',
       data:{ labels:DATA.traffic.months, datasets:[ {label:'Organic visitors',data:DATA.traffic.organic,borderColor:'#06b6d4',backgroundColor:'#06b6d422',borderWidth:3,tension:0.25,pointRadius:3,pointHoverRadius:6,fill:true} ] },
       options:opts('visitors / month') }); }
+    function renderSources(){ const rows=DATA.leadSrc; return new Chart(document.getElementById('sourceChart'), { type:'bar',
+      data:{ labels:rows.map(r=>r[0]), datasets:[{label:'Leads',data:rows.map(r=>r[1]),
+        backgroundColor:rows.map((r,i)=> i===0 ? '#0e7490' : '#94a3b8'),borderRadius:4}] },
+      options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=>`${c.raw.toLocaleString()} leads`}} },
+        scales:{ x:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:10}}}, y:{grid:{display:false},ticks:{font:{size:11}}} } } }); }
 
     function showTab(n){
       document.querySelectorAll('[data-tab]').forEach(el => el.classList.toggle('active', el.dataset.tab == n));
       document.querySelectorAll('[data-panel]').forEach(el => el.style.display = el.dataset.panel == n ? '' : 'none');
       if (n==1 && !charts.leads) charts.leads = renderLeads();
+      if (n==1 && !charts.sources) charts.sources = renderSources();
       if (n==2 && !charts.traffic) charts.traffic = renderTraffic();
     }
-    showTab(2);
+    showTab(1);
   </script>
 </body>
 </html>

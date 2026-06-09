@@ -124,17 +124,18 @@
         <div class="kpi"><div class="l">Form submissions</div><div class="n">90</div><div class="delta up">+18%</div><div class="s">vs 76 in April</div></div>
         <div class="kpi"><div class="l">Organic visits</div><div class="n">470</div><div class="delta up">+47%</div><div class="s">vs 320 in April</div></div>
       </div>
-      <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
-        <div class="panel p-4 lg:col-span-3">
-          <div class="cardhd mb-2">Leads month over month</div>
-          <div class="relative" style="height:240px;"><canvas id="leadsChart"></canvas></div>
-          <p class="ann mt-2">New leads = first-time callers plus form submissions (repeat callers excluded). Completed months only.</p>
+      <div class="panel p-4 mb-4">
+        <div class="cardhd mb-2">Leads month over month</div>
+        <div class="relative" style="height:240px;"><canvas id="leadsChart"></canvas></div>
+        <p class="ann mt-2">New leads = first-time callers plus form submissions (repeat callers excluded). Completed months only.</p>
+      </div>
+      <div class="panel p-4">
+        <div class="flex items-baseline justify-between gap-3 mb-2">
+          <div class="cardhd">Where your leads come from</div>
+          <div class="ann">CallRail · May</div>
         </div>
-        <div class="panel p-4 lg:col-span-2">
-          <div class="cardhd mb-2">Where the calls come from</div>
-          <table class="t"><thead><tr><th>Source</th><th>Apr</th><th>May</th><th>Share</th><th>Chg</th></tr></thead><tbody id="leadSrc"></tbody></table>
-          <p class="ann mt-3">Organic-search calls grew from 5 in January to <strong>48 in May</strong>: SEO turning into real phone calls.</p>
-        </div>
+        <div class="relative" style="height:230px;"><canvas id="sourceChart"></canvas></div>
+        <p class="ann mt-2">Tracked inbound calls by source in May. About 60% come straight from the Google Maps profile. Organic-search calls grew from 5 in January to 48 in May, SEO turning into real phone calls.</p>
       </div>
     </section>
 
@@ -318,10 +319,6 @@
       return `<span class="${p>0?'up':'dn'}">${p>0?'+':''}${p}%</span>`;
     }
 
-    // tab 1 lead source
-    document.getElementById('leadSrc').innerHTML = DATA.leadSrc.map(([s,p,c,sh]) =>
-      `<tr><td>${s}</td><td>${p}</td><td>${c}</td><td>${sh}</td><td>${chg(p,c)}</td></tr>`).join('') +
-      `<tr class="tot"><td>All calls</td><td>158</td><td>211</td><td>100%</td><td>${chg(158,211)}</td></tr>`;
 
     // tab 2 channels
     document.getElementById('channels').innerHTML = DATA.channels.map(([n,p,c],i) =>
@@ -365,14 +362,21 @@
     function renderTraffic(){ return new Chart(document.getElementById('trafficChart'), { type:'line',
       data:{ labels:DATA.traffic.months, datasets:[ {label:'Organic visitors',data:DATA.traffic.organic,borderColor:'#06b6d4',backgroundColor:'#06b6d422',borderWidth:3,tension:0.25,pointRadius:3,pointHoverRadius:6,fill:true} ] },
       options:opts('visitors / month') }); }
+    function renderSources(){ const rows=DATA.leadSrc; return new Chart(document.getElementById('sourceChart'), { type:'bar',
+      data:{ labels:rows.map(r=>r[0]), datasets:[{label:'Tracked calls',data:rows.map(r=>r[2]),
+        backgroundColor:rows.map((r,i)=> i===0 ? '#0e7490' : '#94a3b8'),borderRadius:4}] },
+      options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=>`${c.raw.toLocaleString()} calls`}} },
+        scales:{ x:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:10}}}, y:{grid:{display:false},ticks:{font:{size:11}}} } } }); }
 
     function showTab(n){
       document.querySelectorAll('[data-tab]').forEach(el => el.classList.toggle('active', el.dataset.tab == n));
       document.querySelectorAll('[data-panel]').forEach(el => el.style.display = el.dataset.panel == n ? '' : 'none');
       if (n==1 && !charts.leads) charts.leads = renderLeads();
+      if (n==1 && !charts.sources) charts.sources = renderSources();
       if (n==2 && !charts.traffic) charts.traffic = renderTraffic();
     }
-    showTab(2); // default to Website Traffic, the tab in focus
+    showTab(1);
   </script>
 </body>
 </html>
