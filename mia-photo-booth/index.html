@@ -21,7 +21,11 @@
     * { box-sizing:border-box; }
     body { font-family:'Inter',system-ui,sans-serif; }
     .shell { max-width:1080px; }
+    .hdr { background:linear-gradient(120deg,#0b2a45 0%,#10395d 60%,#155177 100%); color:#fff; }
     .eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; }
+    .datepill { border:1px solid rgba(255,255,255,0.35); border-radius:999px; padding:0.3rem 0.85rem; font-size:0.72rem; font-weight:600; color:#e2f2fb; white-space:nowrap; }
+    /* tabs - house style (matches client snapshot.html .tab-btn) */
+    .tabs { display:grid; grid-template-columns:repeat(4,1fr); gap:0.6rem; }
     .tab-btn { text-align:left; background:#fff; border:1px solid #e2e8f0; border-radius:0.6rem; padding:0.7rem 0.9rem; cursor:pointer; transition:border-color .12s, background .12s; }
     .tab-btn:hover { border-color:#cbd5e1; }
     .tab-btn .t { display:block; font-weight:700; font-size:0.95rem; color:#0b1220; line-height:1.15; }
@@ -29,29 +33,35 @@
     .tab-btn.active { background:#0b2545; border-color:#0b2545; }
     .tab-btn.active .t { color:#fff; }
     .tab-btn.active .s { color:#9bbad6; }
+    /* section */
+    .sbadge { width:1.7rem; height:1.7rem; border-radius:0.4rem; background:var(--navy); color:#fff; font-weight:800; font-size:0.8rem; display:flex; align-items:center; justify-content:center; }
     .stitle { font-size:1.3rem; font-weight:800; color:#0b1220; letter-spacing:-0.01em; }
+    .ssub { font-size:0.8rem; color:var(--teal); font-weight:600; }
     .ov-eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; color:var(--teal); }
-    .ov li { position:relative; padding-left:0.95rem; font-size:0.86rem; color:#334155; margin:0.35rem 0; line-height:1.55; }
-    .ov li::before { content:''; position:absolute; left:0; top:0.6rem; width:0.4rem; height:0.4rem; border-radius:999px; background:var(--teal2); }
+    .ov li { display:flex; gap:0.5rem; align-items:flex-start; font-size:0.86rem; color:#334155; margin:0.3rem 0; }
+    .ov li::before { content:''; flex-shrink:0; width:0.4rem; height:0.4rem; border-radius:999px; background:var(--teal2); margin-top:0.45rem; }
     .panel { background:#fff; border:1px solid var(--line); border-radius:0.7rem; }
     .cardhd { font-size:0.66rem; font-weight:800; letter-spacing:0.07em; text-transform:uppercase; color:#475569; }
     .ann { font-size:0.7rem; color:#64748b; }
     .means { background:var(--tealbg); border:1px solid #bae6fd; border-radius:0.55rem; padding:0.7rem 0.9rem; }
     .means .lbl { font-size:0.58rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#0369a1; }
     .means p { font-size:0.82rem; color:#0c4a6e; margin-top:0.15rem; line-height:1.5; }
+    /* kpi */
     .kpi { border:1px solid var(--line); border-radius:0.55rem; padding:0.8rem 0.9rem; }
     .kpi .l { font-size:0.6rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#64748b; }
-    .kpi .n { font-size:1.7rem; font-weight:800; color:#0b1220; line-height:1.05; margin-top:0.1rem; font-variant-numeric:tabular-nums; }
+    .kpi .n { font-size:1.85rem; font-weight:800; color:#0b1220; line-height:1.05; margin-top:0.1rem; font-variant-numeric:tabular-nums; }
     .kpi .s { font-size:0.64rem; color:#94a3b8; margin-top:0.1rem; }
     .delta { font-size:0.72rem; font-weight:800; }
     .delta.up::before { content:'\25B2 '; font-size:0.58rem; } .delta.dn::before { content:'\25BC '; font-size:0.58rem; }
     .delta.up { color:var(--up); } .delta.dn { color:var(--dn); } .delta.flat { color:#94a3b8; }
+    /* tables */
     table.t { width:100%; border-collapse:collapse; }
     table.t th { font-size:0.58rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:#64748b; text-align:right; padding:0.45rem 0.5rem; border-bottom:1px solid var(--line); }
     table.t th:first-child { text-align:left; }
     table.t td { font-size:0.78rem; padding:0.42rem 0.5rem; border-bottom:1px solid #f1f5f9; text-align:right; font-variant-numeric:tabular-nums; color:#374151; }
     table.t td:first-child { text-align:left; font-weight:600; color:#1f2937; }
     table.t tr.tot td { font-weight:800; color:#0b1220; border-top:1px solid var(--line); border-bottom:0; }
+    /* top pages */
     .catrow td { background:#f8fafc; font-weight:800 !important; color:#0b1220 !important; border-top:1px solid var(--line); }
     .catrow .badge { display:inline-block; font-size:0.58rem; font-weight:700; color:#0369a1; background:#e0f2fe; border-radius:0.3rem; padding:0.05rem 0.4rem; margin-left:0.4rem; }
     .urlrow td:first-child { font-weight:400 !important; padding-left:1.1rem; }
@@ -62,7 +72,7 @@
     .chip .v { font-weight:800; font-size:0.82rem; color:#0b1220; } .chip .l { font-size:0.62rem; font-weight:600; color:#64748b; text-transform:uppercase; }
     .chip.good { background:#ecfdf5; border-color:#a7f3d0; } .chip.good .v { color:#047857; }
     .ftr { color:var(--teal); }
-    @media (max-width:720px){ }
+    @media (max-width:720px){ .tabs{ grid-template-columns:repeat(2,1fr);} }
     @media print { .no-print{display:none!important;} body{background:#fff!important;} [data-panel]{display:block!important;} .panel{box-shadow:none;} }
   </style>
 </head>
@@ -89,7 +99,7 @@
 
   <nav class="no-print sticky top-0 z-40 bg-slate-50/95 backdrop-blur border-b border-slate-200">
     <div class="shell mx-auto px-4 sm:px-6 py-3 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-      <button class="tab-btn" data-tab="1" onclick="showTab(1)"><span class="t">Overall</span><span class="s">Lead generation</span></button>
+      <button class="tab-btn" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
       <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">GA4 performance</span></button>
       <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
       <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Completed and upcoming</span></button>
@@ -102,9 +112,9 @@
     <section data-panel="1">
       <div class="ov-eyebrow mb-1">Overview</div>
       <ul class="ov mb-4">
-        <li>The business brings a steady <strong>9 to 15 genuine leads a month</strong> (website enquiries plus real phone calls), holding through the spring.</li>
-        <li>Organic search has grown from 58 visits in August to about <strong>1,135 in May</strong>, close to twenty times where it started, and is now roughly <strong>77% of all website traffic</strong>.</li>
-        <li>The Google profile holds a <strong>5.0 rating across 103 reviews</strong>, the second-strongest review base in the market. The biggest growth opportunity is Google Maps visibility in the busy event areas, covered in Map Presence.</li>
+        <li><span>The business brings a steady <strong>9 to 15 genuine leads a month</strong> (website enquiries plus real phone calls), holding through the spring.</span></li>
+        <li><span>Organic search has grown from 58 visits in August to about <strong>1,135 in May</strong>, close to twenty times where it started, and is now roughly <strong>77% of all website traffic</strong>.</span></li>
+        <li><span>The Google profile holds a <strong>5.0 rating across 103 reviews</strong>, the second-strongest review base in the market. The biggest growth opportunity is Google Maps visibility in the busy event areas, covered in Map Presence.</span></li>
       </ul>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
         <div class="kpi"><div class="l">Leads · last 90 days</div><div class="n">31</div><div class="s">website forms + verified calls</div></div>
@@ -131,9 +141,9 @@
     <section data-panel="2">
       <div class="ov-eyebrow mb-1">Overview</div>
       <ul class="ov mb-4">
-        <li>Organic Search grew from <strong>58 visits in August to about 1,135 in May</strong>, close to twenty times over, and reached a peak of <strong>1,445 in January</strong>.</li>
-        <li>Organic is now <strong>about 77% of all site traffic</strong>, so the website depends mainly on Google search rather than ads or social.</li>
-        <li>The last three months eased back from the January peak, driven almost entirely by one large guide article cooling off. The opportunity is to turn that big reading audience into bookings.</li>
+        <li><span>Organic Search grew from <strong>58 visits in August to about 1,135 in May</strong>, close to twenty times over, and reached a peak of <strong>1,445 in January</strong>.</span></li>
+        <li><span>Organic is now <strong>about 77% of all site traffic</strong>, so the website depends mainly on Google search rather than ads or social.</span></li>
+        <li><span>The last three months eased back from the January peak, driven almost entirely by one large guide article cooling off. The opportunity is to turn that big reading audience into bookings.</span></li>
       </ul>
 
       <div class="panel p-4 mb-4">
@@ -154,7 +164,7 @@
         <div class="panel p-4">
           <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Where the organic audience sits</div><div class="ann">last 90d vs previous 90d</div></div>
           <table class="t"><thead><tr><th>Page type</th><th>Organic visits</th><th>Share</th><th>vs prev 90d</th></tr></thead><tbody id="mix"></tbody></table>
-          <p class="ann mt-3">Most visitors land on guide articles. The booking pages (booth types, homepage) draw a small share today, which is the conversion opportunity.</p>
+          <p class="ann mt-3">Most visitors land on guide articles. The booking pages (booth types, homepage) draw a small share today, which is the opportunity: turn those readers into bookings.</p>
         </div>
         <div class="panel p-4">
           <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Largest organic pages</div><div class="ann">last 90d vs previous 90d</div></div>
