@@ -67,10 +67,13 @@
     .drop-body.has-top { border-top:1px solid #f1f5f9; padding-top:0.85rem; }
     .drop-body > :first-child { margin-top:0; }
     .drop-body h3.sub-h { font-family:'Lora',serif; font-weight:700; font-size:1.02rem; color:#0b1220; margin:1.1rem 0 0.4rem; }
+    details.drop-bare > summary { list-style:none; cursor:pointer; display:flex; align-items:flex-start; gap:0.9rem; }
+    details.drop-bare > summary::-webkit-details-marker { display:none; }
+    .drop-body-bare { padding-top:0.1rem; }
     @media print {
       .panel,.strat,details.drop{box-shadow:none;}
-      details.drop .drop-body{display:block !important;}
-      details.drop .lm-btn{display:none;}
+      details.drop .drop-body, details.drop-bare .drop-body-bare{display:block !important;}
+      .lm-btn{display:none;}
       @page{size:portrait;margin:0.5in;}
     }
   </style>
@@ -122,15 +125,21 @@
     <section class="mb-6">
       <h2 class="sec mb-2">The frame</h2>
       <div class="panel p-4" style="background:linear-gradient(180deg,#ffffff 0%,#f0fdf4 100%);">
-        <p class="lead">
-          AQMS already out-ranks every local rival on content and links (about <b>691 ranked keywords</b> and <b>546 referring domains</b>, versus their 11 to 55 keywords and 40 to 99 domains, and none of them run a blog). The local fight is won in the map pack, which drives roughly <b>77% of AQMS's phone leads</b>. Their consolidation of location-specific pages into the major service pages is <b>deliberate and cost no real traffic</b> (GA4 organic held, 296 in April to 316 in May; the "-96% GSC impressions" is only the old www host being dropped). So the play is not rebuilding the city-by-service grid. It is: dominate the GBP, fix the one genuine on-page gap, strengthen the service pages that already exist, and add depth on the two axes (niche services and richer location pages), while keeping the measurement clean.
-        </p>
+        <details class="drop-bare">
+          <summary>
+            <p class="lead" style="margin:0;flex:1;min-width:0;">AQMS already wins on content and links, so the plan is to dominate the Maps profile, fix the one real on-page gap, and deepen the pages that already exist, not build new ones.</p>
+            <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          </summary>
+          <div class="drop-body-bare">
+            <p class="lead" style="margin-top:0.7rem;">AQMS already out-ranks every local rival on content and links (about <b>691 ranked keywords</b> and <b>546 referring domains</b>, versus their 11 to 55 keywords and 40 to 99 domains, and none of them run a blog). The local fight is won in the map pack, which drives roughly <b>77% of AQMS's phone leads</b>. Their consolidation of location-specific pages into the major service pages is <b>deliberate and cost no real traffic</b> (GA4 organic held, 296 in April to 316 in May; the "-96% GSC impressions" is only the old www host being dropped). So the play is not rebuilding the city-by-service grid. It is: dominate the GBP, fix the one genuine on-page gap, strengthen the service pages that already exist, and add depth on the two axes (niche services and richer location pages), while keeping the measurement clean.</p>
+            <p class="text-[11px] text-slate-500 mt-3">Search volumes are DataForSEO estimates, not literal counts. All GBP work is the single managed Santa Clarita pin only.</p>
+          </div>
+        </details>
         <div class="flex flex-wrap gap-2 mt-3">
           <span class="chip good"><span class="v">~77%</span><span class="l">of leads from Maps</span></span>
           <span class="chip"><span class="v">691 kw · 546 ref domains</span><span class="l">vs rivals' 11-55 · 40-99</span></span>
           <span class="chip good"><span class="v">0 new</span><span class="l">location pages in this plan</span></span>
         </div>
-        <p class="text-[11px] text-slate-500 mt-3">Search volumes are DataForSEO estimates, not literal counts. All GBP work is the single managed Santa Clarita pin only.</p>
       </div>
     </section>
 
