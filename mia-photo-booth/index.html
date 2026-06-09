@@ -162,13 +162,13 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Where the organic audience sits</div><div class="ann">last 90d vs previous 90d</div></div>
-          <table class="t"><thead><tr><th>Page type</th><th>Organic visits</th><th>Share</th><th>vs prev 90d</th></tr></thead><tbody id="mix"></tbody></table>
-          <p class="ann mt-3">Most visitors land on guide articles. The booking pages (booth types, homepage) draw a small share today, which is the opportunity: turn those readers into bookings.</p>
+          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Where the organic audience sits</div><div class="ann">last 6 months vs previous period</div></div>
+          <table class="t"><thead><tr><th>Page type</th><th>Organic visits</th><th>Share</th><th>vs prev 6mo</th></tr></thead><tbody id="mix"></tbody></table>
+          <p class="ann mt-3">Most visitors land on guide articles, and that traffic grew sharply over the last six months. The booking pages (booth types, homepage) still draw a small share, which is the opportunity: turn those readers into bookings.</p>
         </div>
         <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Largest organic pages</div><div class="ann">last 90d vs previous 90d</div></div>
-          <table class="t"><thead><tr><th>Page</th><th>Visits</th><th>vs prev 90d</th></tr></thead><tbody id="topPages"></tbody></table>
+          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Largest organic pages</div><div class="ann">last 6 months vs previous period</div></div>
+          <table class="t"><thead><tr><th>Page</th><th>Visits</th><th>vs prev 6mo</th></tr></thead><tbody id="topPages"></tbody></table>
         </div>
       </div>
     </section>
@@ -273,13 +273,13 @@
       visitorSrc: { total:4358, rows:[['Organic search',3282],['Direct',750],['Social',154],['Referral',106],['Other',66]] },
       traffic: { months:['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],
                  organic:[58,167,246,701,1110,1445,1434,1176,1013,1135] },
-      mix: [['Guide articles (blog)',3378,2753,'85%'],['Booking pages (booth + home)',371,251,'8%'],['Other',321,243,'7%']],
+      mix: [['Guide articles (blog)',927,6293,'91%'],['Booking pages (booth + home)',406,538,'8%'],['Other',50,85,'1%']],
       toppages: [
-        ['What size are photo booth pictures (guide)',3164,2437],
-        ['Homepage',309,199],
-        ['What are photo booth pictures called (guide)',116,128],
-        ['360 Photo Booth page',6,6],
-        ['Glam Booth page',3,4],
+        ['What size are photo booth pictures (guide)',851,5758],
+        ['Homepage',387,511],
+        ['What are photo booth pictures called (guide)',38,245],
+        ['How to make photo booth props (guide)',3,54],
+        ['How to take a Boomerang photo (guide)',3,42],
       ],
       recommendations: [
         {cat:'Google Business Profile', items:[
@@ -310,7 +310,7 @@
       ],
     };
 
-    // % change vs previous 90 days
+    // % change vs previous period
     function chg(b,a){ if(b===0&&a>0) return '<span class="newt">New</span>'; if(b===a) return '<span class="flat">0%</span>'; const p=Math.round((a-b)/b*100); return `<span class="${p>0?'up':'dn'}">${p>0?'+':''}${p}%</span>`; }
     // tab 2 mix
     document.getElementById('mix').innerHTML = DATA.mix.map(([s,p,v,sh]) =>
