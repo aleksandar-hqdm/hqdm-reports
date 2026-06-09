@@ -112,13 +112,13 @@
     <section data-panel="1">
       <div class="ov-eyebrow mb-1">Overview</div>
       <ul class="ov mb-4">
-        <li>Website leads have been climbing back since February, from <strong>94 in February to 160 in May</strong>, the strongest month so far this year.</li>
-        <li>Your Google Business Profile is the <strong>fastest-growing source of leads</strong>, nearly doubling year over year, and its visitors send an enquiry at about <strong>twice the rate</strong> of regular Google search.</li>
+        <li>Website leads have been climbing back since February, from <strong>42 in February to 101 in May</strong>, the strongest month so far this year.</li>
+        <li><strong>Organic search drives most of the form leads</strong> we can measure, about three-quarters. Phone calls from your Google Business Profile are not tracked, so the profile's real contribution is larger than the form numbers alone show.</li>
         <li>On Google Maps in your home area you hold the <strong>#1 spot across all ten tracked searches</strong>, backed by <strong>537 reviews at 4.9 stars</strong>, the strongest review base among local movers nearby.</li>
       </ul>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-        <div class="kpi"><div class="l">Leads · last 90 days</div><div class="n">419</div><div class="s">website form enquiries</div></div>
-        <div class="kpi"><div class="l">Leads · May</div><div class="n">160</div><div class="delta up">+18%</div><div class="s">vs 136 in April</div></div>
+        <div class="kpi"><div class="l">Leads · last 90 days</div><div class="n">236</div><div class="s">website form enquiries</div></div>
+        <div class="kpi"><div class="l">Leads · May</div><div class="n">101</div><div class="delta up">+55%</div><div class="s">vs 65 in April</div></div>
         <div class="kpi"><div class="l">Reviews · rating</div><div class="n">537 · 4.9</div><div class="s">strongest local review base</div></div>
         <div class="kpi"><div class="l">Google Maps · home area</div><div class="n">#1</div><div class="s">on all 10 tracked searches</div></div>
       </div>
@@ -128,7 +128,7 @@
           <div class="ann">recovering since February</div>
         </div>
         <div class="relative" style="height:240px;"><canvas id="leadsChart"></canvas></div>
-        <p class="ann mt-2">Website form enquiries by month. Completed months only. Leads dipped over the winter and have been climbing back since February.</p>
+        <p class="ann mt-2">Website moving-inquiry form submissions by month, excluding job applications, the corporate relocation portals (HFHS, Cardinal Health, Ascension), and thank-you page double-counts. Completed months only. Leads dipped over the winter and have been climbing back since February.</p>
       </div>
       <div class="panel p-4">
         <div class="flex items-baseline justify-between gap-3 mb-2">
@@ -136,7 +136,7 @@
           <div class="ann">last 90 days</div>
         </div>
         <div class="relative" style="height:180px;"><canvas id="sourceChart"></canvas></div>
-        <p class="ann mt-2">Website form enquiries by how the visitor reached the site. Direct and brand searches lead, and the Google Business Profile is the fastest-growing source. Google Business Profile visitors send an enquiry at about twice the rate of regular search.</p>
+        <p class="ann mt-2">Website moving-inquiry form submissions by how the visitor reached the site. Organic search is the largest source by far, ahead of direct and brand visits. Phone calls are not tracked, so the Google Business Profile's contribution is understated here.</p>
       </div>
     </section>
 
@@ -247,8 +247,8 @@
   <script>
     const DATA = {
       leads: { months:['May 25','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan 26','Feb','Mar','Apr','May'],
-               leads:[182,200,213,181,180,189,173,159,132,94,123,136,160] },
-      leadSrc: [['Direct / brand',152],['Organic search',144],['Google Business Profile',74],['Referral',35]],
+               leads:[92,101,99,70,79,86,62,53,48,42,70,65,101] },
+      leadSrc: [['Organic search',179],['Direct / brand',46],['Referral',7],['Other',4]],
       gaining: [
         ['Hot Tub Moving','service',31],
         ['How to Pack Weights (guide)','content',9],
