@@ -21,7 +21,11 @@
     * { box-sizing:border-box; }
     body { font-family:'Inter',system-ui,sans-serif; }
     .shell { max-width:1080px; }
+    .hdr { background:linear-gradient(120deg,#0b2a45 0%,#10395d 60%,#155177 100%); color:#fff; }
     .eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; }
+    .datepill { border:1px solid rgba(255,255,255,0.35); border-radius:999px; padding:0.3rem 0.85rem; font-size:0.72rem; font-weight:600; color:#e2f2fb; white-space:nowrap; }
+    /* tabs - house style (matches client snapshot.html .tab-btn) */
+    .tabs { display:grid; grid-template-columns:repeat(4,1fr); gap:0.6rem; }
     .tab-btn { text-align:left; background:#fff; border:1px solid #e2e8f0; border-radius:0.6rem; padding:0.7rem 0.9rem; cursor:pointer; transition:border-color .12s, background .12s; }
     .tab-btn:hover { border-color:#cbd5e1; }
     .tab-btn .t { display:block; font-weight:700; font-size:0.95rem; color:#0b1220; line-height:1.15; }
@@ -29,34 +33,46 @@
     .tab-btn.active { background:#0b2545; border-color:#0b2545; }
     .tab-btn.active .t { color:#fff; }
     .tab-btn.active .s { color:#9bbad6; }
+    /* section */
+    .sbadge { width:1.7rem; height:1.7rem; border-radius:0.4rem; background:var(--navy); color:#fff; font-weight:800; font-size:0.8rem; display:flex; align-items:center; justify-content:center; }
     .stitle { font-size:1.3rem; font-weight:800; color:#0b1220; letter-spacing:-0.01em; }
+    .ssub { font-size:0.8rem; color:var(--teal); font-weight:600; }
     .ov-eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; color:var(--teal); }
-    .ov li { position:relative; padding-left:0.95rem; font-size:0.86rem; color:#334155; margin:0.35rem 0; line-height:1.55; }
-    .ov li::before { content:''; position:absolute; left:0; top:0.6rem; width:0.4rem; height:0.4rem; border-radius:999px; background:var(--teal2); }
+    .ov li { display:flex; gap:0.5rem; align-items:flex-start; font-size:0.86rem; color:#334155; margin:0.3rem 0; }
+    .ov li::before { content:''; flex-shrink:0; width:0.4rem; height:0.4rem; border-radius:999px; background:var(--teal2); margin-top:0.45rem; }
     .panel { background:#fff; border:1px solid var(--line); border-radius:0.7rem; }
     .cardhd { font-size:0.66rem; font-weight:800; letter-spacing:0.07em; text-transform:uppercase; color:#475569; }
     .ann { font-size:0.7rem; color:#64748b; }
     .means { background:var(--tealbg); border:1px solid #bae6fd; border-radius:0.55rem; padding:0.7rem 0.9rem; }
     .means .lbl { font-size:0.58rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#0369a1; }
     .means p { font-size:0.82rem; color:#0c4a6e; margin-top:0.15rem; line-height:1.5; }
+    /* kpi */
     .kpi { border:1px solid var(--line); border-radius:0.55rem; padding:0.8rem 0.9rem; }
     .kpi .l { font-size:0.6rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#64748b; }
-    .kpi .n { font-size:1.7rem; font-weight:800; color:#0b1220; line-height:1.05; margin-top:0.1rem; font-variant-numeric:tabular-nums; }
+    .kpi .n { font-size:1.85rem; font-weight:800; color:#0b1220; line-height:1.05; margin-top:0.1rem; font-variant-numeric:tabular-nums; }
     .kpi .s { font-size:0.64rem; color:#94a3b8; margin-top:0.1rem; }
+    .delta { font-size:0.72rem; font-weight:800; }
+    .delta.up::before { content:'\25B2 '; font-size:0.58rem; } .delta.dn::before { content:'\25BC '; font-size:0.58rem; }
+    .delta.up { color:var(--up); } .delta.dn { color:var(--dn); } .delta.flat { color:#94a3b8; }
+    /* tables */
     table.t { width:100%; border-collapse:collapse; }
     table.t th { font-size:0.58rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:#64748b; text-align:right; padding:0.45rem 0.5rem; border-bottom:1px solid var(--line); }
     table.t th:first-child { text-align:left; }
     table.t td { font-size:0.78rem; padding:0.42rem 0.5rem; border-bottom:1px solid #f1f5f9; text-align:right; font-variant-numeric:tabular-nums; color:#374151; }
     table.t td:first-child { text-align:left; font-weight:600; color:#1f2937; }
+    table.t tr.tot td { font-weight:800; color:#0b1220; border-top:1px solid var(--line); border-bottom:0; }
+    /* top pages */
     .catrow td { background:#f8fafc; font-weight:800 !important; color:#0b1220 !important; border-top:1px solid var(--line); }
     .catrow .badge { display:inline-block; font-size:0.58rem; font-weight:700; color:#0369a1; background:#e0f2fe; border-radius:0.3rem; padding:0.05rem 0.4rem; margin-left:0.4rem; }
     .urlrow td:first-child { font-weight:400 !important; padding-left:1.1rem; }
+    .urlrow .u { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:0.72rem; color:#1d5b8a; word-break:break-all; }
     .up { color:var(--up); font-weight:800; } .dn { color:var(--dn); font-weight:800; } .flat { color:#94a3b8; font-weight:700; }
     .newt { color:var(--teal); font-weight:800; }
     .chip { display:inline-flex; align-items:baseline; gap:0.35rem; background:#f1f5f9; border:1px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; }
     .chip .v { font-weight:800; font-size:0.82rem; color:#0b1220; } .chip .l { font-size:0.62rem; font-weight:600; color:#64748b; text-transform:uppercase; }
     .chip.good { background:#ecfdf5; border-color:#a7f3d0; } .chip.good .v { color:#047857; }
     .ftr { color:var(--teal); }
+    @media (max-width:720px){ .tabs{ grid-template-columns:repeat(2,1fr);} }
     @media print { .no-print{display:none!important;} body{background:#fff!important;} [data-panel]{display:block!important;} .panel{box-shadow:none;} }
   </style>
 </head>
@@ -83,10 +99,10 @@
 
   <nav class="no-print sticky top-0 z-40 bg-slate-50/95 backdrop-blur border-b border-slate-200">
     <div class="shell mx-auto px-4 sm:px-6 py-3 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-      <button class="tab-btn" data-tab="1" onclick="showTab(1)"><span class="t">Overall</span><span class="s">Where leads come from</span></button>
+      <button class="tab-btn" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
       <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">Google search performance</span></button>
       <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps across 5 pins</span></button>
-      <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Recommendations and work</span></button>
+      <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Completed and upcoming</span></button>
     </div>
   </nav>
 
@@ -96,9 +112,9 @@
     <section data-panel="1">
       <div class="ov-eyebrow mb-1">Overview</div>
       <ul class="ov mb-4">
-        <li>Phone leads are now tracked in CallRail. The first complete months show a healthy volume: <strong>786 tracked calls in April and 583 in May</strong>, with the busy spring season the high point.</li>
-        <li>About <strong>88% of those calls come straight from Google Business and Maps</strong>, so the Google profiles are by far the biggest source of new business.</li>
-        <li>The five Google profiles hold a combined <strong>2,265 reviews at 4.9 to 5.0 stars</strong>, one of the strongest review bases in the markets you serve, and four of the five lead their local map.</li>
+        <li><span>Phone leads are now tracked in CallRail. The first complete months show a healthy volume: <strong>786 tracked calls in April and 583 in May</strong>, with the busy spring season the high point.</span></li>
+        <li><span>About <strong>88% of those calls come straight from Google Business and Maps</strong>, so the Google profiles are by far the biggest source of new business.</span></li>
+        <li><span>The five Google profiles hold a combined <strong>2,265 reviews at 4.9 to 5.0 stars</strong>, one of the strongest review bases in the markets you serve, and four of the five lead their local map.</span></li>
       </ul>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
         <div class="kpi"><div class="l">Tracked calls · April</div><div class="n">786</div><div class="s">first full month of tracking</div></div>
@@ -109,10 +125,10 @@
       <div class="panel p-4 mb-4">
         <div class="flex items-baseline justify-between gap-3 mb-2">
           <div class="cardhd">Phone leads per month</div>
-          <div class="ann">CallRail · completed months</div>
+          <div class="ann">CallRail · Apr-May actual · Jun estimate</div>
         </div>
         <div class="relative" style="height:230px;"><canvas id="leadsChart"></canvas></div>
-        <p class="ann mt-2">Tracked inbound calls by month. Call tracking went live in April, so April and May are the first full months on record. The current month is still in progress and is not shown.</p>
+        <p class="ann mt-2">Tracked inbound calls by month. Call tracking went live in April, so April and May are the first full months on record. June (dashed) is an estimate, projected from the calls tracked through June 8 at the current monthly pace.</p>
       </div>
       <div class="panel p-4">
         <div class="flex items-baseline justify-between gap-3 mb-2">
@@ -128,9 +144,9 @@
     <section data-panel="2">
       <div class="ov-eyebrow mb-1">Overview</div>
       <ul class="ov mb-4">
-        <li>Website visits from Google search dipped through 2025 to a low in February, then <strong>rebounded every month since</strong>, from 359 in February to about <strong>706 in May</strong>.</li>
-        <li>The recovery is led by the <strong>local city pages</strong> (Hudson, Lake Elmo, Bloomington, Roseville), which all climbed in Google over the last three months.</li>
-        <li>A large share of visits land on one popular blog article about Minnesota. That is good for awareness, but the new business comes through the city pages and the Google profiles, which is where the focus sits.</li>
+        <li><span>Website visits from Google search dipped through 2025 to a low in February, then <strong>rebounded every month since</strong>, from 359 in February to about <strong>706 in May</strong>.</span></li>
+        <li><span>The recovery is led by the <strong>local city pages</strong> (Hudson, Lake Elmo, Bloomington, Roseville), which all climbed in Google over the last three months.</span></li>
+        <li><span>A large share of visits land on one popular blog article about Minnesota. That is good for awareness, but the new business comes through the city pages and the Google profiles, which is where the focus sits.</span></li>
       </ul>
 
       <div class="panel p-4 mb-4">
@@ -263,7 +279,7 @@
         ['Yelp', 10],
         ['Other', 15],
       ],
-      monthly: { months:['Apr','May'], calls:[786,583] },
+      monthly: { months:['Apr','May','Jun'], calls:[786,583,null], estimate:[null,583,670] },
       traffic: { months:['May 25','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan 26','Feb','Mar','Apr','May'],
                  organic:[1208,676,591,584,715,526,432,415,465,359,491,704,706] },
       mix: [
@@ -323,11 +339,14 @@
 
     const charts = {};
     function renderLeads(){
-      return new Chart(document.getElementById('leadsChart'), { type:'bar',
-        data:{ labels:DATA.monthly.months, datasets:[{label:'Tracked calls',data:DATA.monthly.calls,
-          backgroundColor:'#0e7490',borderRadius:4,maxBarThickness:70}] },
-        options:{ responsive:true, maintainAspectRatio:false,
-          plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=>`${c.raw.toLocaleString()} calls`}} },
+      const m = DATA.monthly;
+      return new Chart(document.getElementById('leadsChart'), { type:'line',
+        data:{ labels:m.months, datasets:[
+          {label:'Tracked calls',data:m.calls,borderColor:'#0e7490',backgroundColor:'#0e749014',borderWidth:3,tension:0.25,pointRadius:4,pointHoverRadius:6,fill:false,spanGaps:false},
+          {label:'June (estimate)',data:m.estimate,borderColor:'#0e7490',borderDash:[5,4],borderWidth:2.5,tension:0.25,pointRadius:[0,0,4],pointHoverRadius:6,pointStyle:'circle',pointBackgroundColor:'#ffffff',pointBorderColor:'#0e7490',pointBorderWidth:2,fill:false,spanGaps:true} ] },
+        options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'nearest',intersect:true},
+          plugins:{ legend:{position:'bottom',labels:{font:{size:10},boxWidth:16}},
+            tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=> c.raw==null ? null : (c.dataset.label==='June (estimate)' ? `≈ ${c.raw.toLocaleString()} calls (estimate)` : `${c.raw.toLocaleString()} calls`)}} },
           scales:{ x:{grid:{display:false},ticks:{font:{size:11}}}, y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:9}},title:{display:true,text:'calls / month',font:{size:9,weight:'600'},color:'#64748b'}} } } });
     }
     function renderSources(){
