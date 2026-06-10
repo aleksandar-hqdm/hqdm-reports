@@ -120,6 +120,22 @@
     if (panel) window.rebuildCharts(panel);
   };
 
+  /* ---------- copy the draft client email ---------- */
+  window.copyEmail = function (btn) {
+    var win = btn.closest('.win');
+    var box = win ? win.querySelector('.emailcopy') : null;
+    if (!box) return;
+    var text = box.innerText.trim();
+    var restore = function (msg) {
+      if (!btn.getAttribute('data-label')) btn.setAttribute('data-label', btn.textContent);
+      btn.textContent = msg;
+      setTimeout(function () { btn.textContent = btn.getAttribute('data-label'); }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { restore('Copied to clipboard'); }, function () { restore('Press Ctrl + C'); });
+    } else { restore('Select the text and copy'); }
+  };
+
   /* ---------- nav scroll state + year ---------- */
   var nav = document.querySelector('.nav');
   if (nav) { var onScroll = function () { nav.classList.toggle('is-scrolled', window.scrollY > 10); }; onScroll(); window.addEventListener('scroll', onScroll, { passive: true }); }

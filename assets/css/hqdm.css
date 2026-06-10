@@ -835,6 +835,15 @@ table.dt td.area { font-weight: 700; color: var(--ink); white-space: nowrap; }
 .reportbar ~ .sndtoggle { bottom: 58px; }
 @media (max-width: 600px) { .reportbar__lbl { font-size: 0.66rem; } .reportbar .btn { padding: 7px 11px; font-size: 0.74rem; } .reportbar__inner { padding: 6px 12px; } }
 
+/* draft client email block (below the tasks on each strategy) */
+.emailsub { font-size: 0.86rem; color: var(--ink); padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1px dashed var(--line); }
+.emailsub b { font-family: var(--font-display); }
+.emailbody { font-size: 0.92rem; line-height: 1.62; color: var(--ink-soft); }
+.emailbody p { margin: 0; }
+.emailbody p + p { margin-top: 12px; }
+.emailbody strong { color: var(--ink); }
+.emailcopy { background: var(--paper); padding: 16px 18px; border: 1px solid; border-color: var(--b-dark) var(--b-light) var(--b-light) var(--b-dark); }
+
 /* negative / down deltas (the design base only shipped up + new) */
 .kpi .delta.dn { color: var(--rose); } .kpi .delta.dn::before { content: "\25BC "; font-size: 0.58rem; }
 .delta.dn { color: var(--rose); }
