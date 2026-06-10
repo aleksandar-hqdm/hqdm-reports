@@ -138,7 +138,7 @@
   /* ---------- retro sound (default OFF on client reports) ---------- */
   (function () {
     var KEY = 'hqdm-sound';
-    var enabled = (localStorage.getItem(KEY) || 'off') === 'on';
+    var enabled = (localStorage.getItem(KEY) || 'on') === 'on';
     var unlocked = false, ctx = null, master = null;
     function ensureCtx() {
       if (ctx) return ctx;

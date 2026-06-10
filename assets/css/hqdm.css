@@ -814,6 +814,15 @@ table.dt .new { color: var(--violet); font-weight: 700; }
 .pri-ong { background: rgba(91,75,208,0.1); color: var(--violet); border-color: rgba(91,75,208,0.4); }
 table.dt td.area { font-weight: 700; color: var(--ink); white-space: nowrap; }
 
+/* strategy pages: hold the whole document in one light boxed panel */
+.strat .container {
+  background: var(--paper);
+  border: 2px solid; border-color: var(--b-light) var(--b-dark) var(--b-dark) var(--b-light);
+  box-shadow: inset -1px -1px 0 var(--b-lo), inset 1px 1px 0 var(--b-hi), var(--shadow-hard);
+  padding: clamp(16px, 3vw, 28px);
+}
+@media (max-width: 600px) { .strat .container { padding: 14px; } }
+
 /* negative / down deltas (the design base only shipped up + new) */
 .kpi .delta.dn { color: var(--rose); } .kpi .delta.dn::before { content: "\25BC "; font-size: 0.58rem; }
 .delta.dn { color: var(--rose); }
