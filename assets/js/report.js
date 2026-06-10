@@ -125,7 +125,18 @@
     var win = btn.closest('.win');
     var box = win ? win.querySelector('.emailcopy') : null;
     if (!box) return;
-    var text = box.innerText.trim();
+    var out = [];
+    var sub = box.querySelector('.emailsub');
+    if (sub) out.push(sub.innerText.trim());
+    var body = box.querySelector('.emailbody');
+    if (body) {
+      Array.prototype.forEach.call(body.children, function (el) {
+        if (el.tagName === 'UL') {
+          out.push(Array.prototype.map.call(el.querySelectorAll('li'), function (li) { return '- ' + li.innerText.trim(); }).join('\n'));
+        } else { out.push(el.innerText.trim()); }
+      });
+    }
+    var text = out.join('\n\n');
     var restore = function (msg) {
       if (!btn.getAttribute('data-label')) btn.setAttribute('data-label', btn.textContent);
       btn.textContent = msg;
