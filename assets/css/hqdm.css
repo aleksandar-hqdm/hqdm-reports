@@ -823,6 +823,18 @@ table.dt td.area { font-weight: 700; color: var(--ink); white-space: nowrap; }
 }
 @media (max-width: 600px) { .strat .container { padding: 14px; } }
 
+/* strategy: thin sticky bottom bar linking to the client report */
+.reportbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 65;
+  background: var(--face); border-top: 2px solid var(--b-light);
+  box-shadow: 0 -1px 0 var(--b-lo), 0 -8px 20px -10px rgba(20,24,33,0.30); }
+.reportbar__inner { max-width: 920px; margin-inline: auto; padding: 7px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.reportbar__lbl { display: inline-flex; align-items: center; gap: 8px; font-size: 0.74rem; font-weight: 700; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.reportbar__lbl .dot { width: 8px; height: 8px; flex: none; background: var(--violet-bright); box-shadow: 0 0 0 1px var(--violet); }
+.reportbar .btn { padding: 7px 16px; font-size: 0.82rem; }
+.strat { padding-bottom: 66px; }
+.reportbar ~ .sndtoggle { bottom: 58px; }
+@media (max-width: 600px) { .reportbar__lbl { font-size: 0.66rem; } .reportbar .btn { padding: 7px 11px; font-size: 0.74rem; } .reportbar__inner { padding: 6px 12px; } }
+
 /* negative / down deltas (the design base only shipped up + new) */
 .kpi .delta.dn { color: var(--rose); } .kpi .delta.dn::before { content: "\25BC "; font-size: 0.58rem; }
 .delta.dn { color: var(--rose); }
