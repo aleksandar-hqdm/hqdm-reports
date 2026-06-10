@@ -152,6 +152,125 @@
   if (nav) { var onScroll = function () { nav.classList.toggle('is-scrolled', window.scrollY > 10); }; onScroll(); window.addEventListener('scroll', onScroll, { passive: true }); }
   var y = document.querySelector('[data-year]'); if (y) y.textContent = new Date().getFullYear();
 
+  /* ---------- QA actions: task column, issue + request, notify relay ---------- */
+  (function () {
+    var NOTIFY_URL = window.NOTIFY_URL || '/api/notify';
+    function clientName() {
+      var h = document.querySelector('h1.display');
+      if (h) return h.textContent.trim();
+      return (document.title || '').replace(/Custom Strategy.*/i, '').replace(/[·|].*/, '').trim();
+    }
+    function notify(payload) {
+      return fetch(NOTIFY_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return true; });
+    }
+    function toast(msg) {
+      var t = document.querySelector('.rpttoast');
+      if (!t) { t = document.createElement('div'); t.className = 'rpttoast no-print'; document.body.appendChild(t); }
+      t.textContent = msg; t.classList.add('is-in');
+      clearTimeout(t._h); t._h = setTimeout(function () { t.classList.remove('is-in'); }, 2400);
+    }
+
+    var modal;
+    function buildModal() {
+      if (modal) return modal;
+      modal = document.createElement('div'); modal.className = 'modal no-print'; modal.hidden = true;
+      modal.innerHTML =
+        '<div class="modal__scrim" data-close></div>' +
+        '<div class="modal__panel win"><div class="win__bar"><span class="ic">&#9635;</span><span class="ttl" data-title></span>' +
+        '<span class="win__controls"><b data-close>&times;</b></span></div>' +
+        '<div class="win__body"><div class="modal__ctx" data-ctx hidden></div>' +
+        '<label data-namewrap hidden><span>Your name</span><input type="text" data-name placeholder="Your name" autocomplete="name"></label>' +
+        '<label><span data-label>Message</span><textarea data-text rows="4" placeholder="Write your message"></textarea></label>' +
+        '<div class="modal__status" data-status></div>' +
+        '<div class="modal__actions"><button class="btn" type="button" data-close>Cancel</button>' +
+        '<button class="btn btn--primary" type="button" data-send>Send</button></div></div></div>';
+      document.body.appendChild(modal);
+      modal.addEventListener('click', function (e) { if (e.target.hasAttribute('data-close')) closeModal(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal && !modal.hidden) closeModal(); });
+      return modal;
+    }
+    function closeModal() { if (modal) modal.hidden = true; }
+    function openModal(opts) {
+      buildModal();
+      modal.querySelector('[data-title]').textContent = opts.title;
+      var ctx = modal.querySelector('[data-ctx]');
+      if (opts.ctx) { ctx.textContent = opts.ctx; ctx.hidden = false; } else { ctx.hidden = true; }
+      modal.querySelector('[data-namewrap]').hidden = !opts.askName;
+      modal.querySelector('[data-label]').textContent = opts.label || 'Message';
+      var nameI = modal.querySelector('[data-name]'); nameI.value = '';
+      var textI = modal.querySelector('[data-text]'); textI.value = ''; textI.placeholder = opts.placeholder || 'Write your message';
+      var status = modal.querySelector('[data-status]'); status.textContent = ''; status.className = 'modal__status';
+      var send = modal.querySelector('[data-send]'); send.disabled = false; send.textContent = opts.sendLabel || 'Send';
+      modal.hidden = false;
+      setTimeout(function () { (opts.askName ? nameI : textI).focus(); }, 30);
+      send.onclick = function () {
+        var text = textI.value.trim(), name = nameI.value.trim();
+        if (!text) { status.textContent = 'Please write a message first.'; status.className = 'modal__status err'; return; }
+        if (opts.askName && !name) { status.textContent = 'Please add your name.'; status.className = 'modal__status err'; return; }
+        send.disabled = true; send.textContent = 'Sending...'; status.textContent = ''; status.className = 'modal__status';
+        notify(opts.payload(name, text)).then(function () {
+          status.textContent = 'Sent, thank you.'; status.className = 'modal__status ok'; send.textContent = 'Sent';
+          setTimeout(closeModal, 1100);
+        }).catch(function () {
+          status.textContent = 'Could not send. The notifier is not set up yet.'; status.className = 'modal__status err';
+          send.disabled = false; send.textContent = opts.sendLabel || 'Send';
+        });
+      };
+    }
+    function openIssue(client, task) {
+      openModal({ title: 'Raise an issue', ctx: client + '   ' + task, askName: false, label: 'What is the issue?',
+        placeholder: 'Describe the issue with this task', sendLabel: 'Send',
+        payload: function (name, text) { return { type: 'issue', client: client, taskTitle: task, comment: text }; } });
+    }
+    function openRequest(client) {
+      openModal({ title: 'Request', askName: true, label: 'Your message', placeholder: 'What do you need?', sendLabel: 'Submit',
+        payload: function (name, text) { return { type: 'request', person: name, client: client, message: text }; } });
+    }
+
+    // add the Action column to the strategy tasks table (the one with priority pills)
+    (function initTasks() {
+      var tables = [].slice.call(document.querySelectorAll('table.dt')), table = null;
+      for (var i = 0; i < tables.length; i++) { if (tables[i].querySelector('.pri')) { table = tables[i]; break; } }
+      if (!table) return;
+      var client = clientName();
+      var headRow = table.querySelector('thead tr');
+      if (headRow && !headRow.querySelector('.actcol')) {
+        var th = document.createElement('th'); th.className = 'actcol'; th.textContent = 'Action'; headRow.appendChild(th);
+      }
+      [].slice.call(table.querySelectorAll('tbody tr')).forEach(function (tr) {
+        if (tr.querySelector('.task-action')) return;
+        var task = (tr.children[1] ? tr.children[1].textContent : '').trim();
+        var td = document.createElement('td'); td.className = 'task-action no-print'; tr.appendChild(td);
+        function render(cancelled) {
+          if (cancelled) {
+            td.innerHTML = '<button class="tact tact--revert" type="button">Revert</button>';
+            td.querySelector('.tact--revert').onclick = function () { tr.classList.remove('task-cancelled'); render(false); };
+          } else {
+            td.innerHTML = '<button class="tact tact--push" type="button" title="Push to client Asana board (coming soon)">Push</button>' +
+              '<button class="tact tact--issue" type="button">Issue</button>' +
+              '<button class="tact tact--cancel" type="button">Cancel</button>';
+            td.querySelector('.tact--push').onclick = function () { toast('Asana push is not connected yet.'); };
+            td.querySelector('.tact--issue').onclick = function () { openIssue(client, task); };
+            td.querySelector('.tact--cancel').onclick = function () { tr.classList.add('task-cancelled'); render(true); };
+          }
+        }
+        render(false);
+      });
+    })();
+
+    // add the Request button to the bottom bar
+    (function initRequest() {
+      var inner = document.querySelector('.reportbar__inner');
+      if (!inner || inner.querySelector('.reportbar__req')) return;
+      var client = clientName();
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'btn reportbar__req'; b.textContent = 'Request';
+      b.onclick = function () { openRequest(client); };
+      var link = inner.querySelector('a.btn');
+      if (link) inner.insertBefore(b, link); else inner.appendChild(b);
+    })();
+  })();
+
   /* ---------- reveal ---------- */
   var reveals = document.querySelectorAll('.reveal');
   if (reveals.length) {

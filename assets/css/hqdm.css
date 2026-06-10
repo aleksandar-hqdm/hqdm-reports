@@ -847,6 +847,45 @@ table.dt td.area { font-weight: 700; color: var(--ink); white-space: nowrap; }
 .emailbody li { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.55; padding-left: 16px; position: relative; }
 .emailbody li::before { content: "-"; position: absolute; left: 2px; color: var(--muted-2); font-weight: 700; }
 
+/* ---- QA actions: task Action column, modals, request, toast ---- */
+.reportbar__inner { justify-content: flex-start; }
+.reportbar__lbl { margin-right: auto; }
+
+.actcol { white-space: nowrap; }
+.task-action { white-space: nowrap; text-align: right; }
+.tact { font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;
+  padding: 3px 8px; margin-left: 4px; cursor: pointer; color: var(--ink); background: var(--face);
+  border: 1px solid; border-color: var(--b-light) var(--b-dark) var(--b-dark) var(--b-light); }
+.tact:active { border-color: var(--b-dark) var(--b-light) var(--b-light) var(--b-dark); }
+.tact--issue { color: var(--violet); }
+.tact--cancel { color: var(--rose); }
+.tact--revert { color: var(--mint); }
+tr.task-cancelled { opacity: 0.5; }
+tr.task-cancelled td:not(.task-action) { text-decoration: line-through; }
+
+.modal { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 18px; }
+.modal[hidden] { display: none; }
+.modal__scrim { position: absolute; inset: 0; background: rgba(20,24,33,0.5); }
+.modal__panel { position: relative; width: 100%; max-width: 440px; }
+.modal__panel .win__body { display: grid; gap: 12px; }
+.modal__ctx { font-size: 0.78rem; color: var(--ink-soft); background: var(--paper); padding: 8px 11px; border: 1px solid var(--line); }
+.modal label { display: grid; gap: 5px; font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted-2); }
+.modal input, .modal textarea { font-family: var(--font-mono); font-size: 0.9rem; color: var(--ink); background: var(--panel); padding: 9px 11px; width: 100%;
+  border: 1px solid; border-color: var(--b-dark) var(--b-light) var(--b-light) var(--b-dark); }
+.modal textarea { resize: vertical; line-height: 1.5; }
+.modal input:focus, .modal textarea:focus { outline: 2px solid var(--violet); outline-offset: 0; }
+.modal__actions { display: flex; gap: 9px; justify-content: flex-end; }
+.modal__status { font-size: 0.8rem; min-height: 1.1em; color: var(--muted); }
+.modal__status.ok { color: var(--mint); } .modal__status.err { color: var(--rose); }
+
+.rpttoast { position: fixed; left: 50%; bottom: 80px; transform: translateX(-50%); z-index: 95;
+  background: var(--ink); color: #fff; font-size: 0.8rem; font-weight: 600; padding: 9px 15px;
+  border: 2px solid; border-color: rgba(255,255,255,0.3) rgba(0,0,0,0.4) rgba(0,0,0,0.4) rgba(255,255,255,0.3);
+  box-shadow: var(--shadow-hard); opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+.rpttoast.is-in { opacity: 1; }
+
+@media print { .task-action, .actcol, .modal, .rpttoast { display: none !important; } }
+
 /* negative / down deltas (the design base only shipped up + new) */
 .kpi .delta.dn { color: var(--rose); } .kpi .delta.dn::before { content: "\25BC "; font-size: 0.58rem; }
 .delta.dn { color: var(--rose); }
