@@ -44,7 +44,12 @@ module.exports = async function handler(req, res) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text })
     });
-    res.status(r.ok ? 200 : 502).json({ ok: r.ok });
+    // Slack returns the literal body "ok" on success. Checking the body (not
+    // just the 2xx status) catches a misconfigured URL that answers 2xx but is
+    // not the webhook, instead of falsely reporting success.
+    const reply = (await r.text()).trim();
+    const ok = r.ok && reply === 'ok';
+    res.status(ok ? 200 : 502).json({ ok: ok, slack: reply.slice(0, 120) });
   } catch (e) {
     res.status(500).json({ ok: false, error: String((e && e.message) || e) });
   }
