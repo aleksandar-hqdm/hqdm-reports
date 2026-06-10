@@ -1,361 +1,283 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex, nofollow, noarchive" />
-  <title>MIA Photo Booth · Performance Report · May 2026</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = { theme: { extend: {
-      fontFamily: { sans: ['Inter','system-ui','sans-serif'], serif: ['Lora','ui-serif','Georgia','serif'] },
-      colors: { brand: { 900:'#0b2545', 700:'#13315c', 500:'#1d5b8a', 300:'#8ecae6' } }
-    } } }
-  </script>
-  <style>
-    :root { --navy:#0b2a45; --navy2:#10395d; --teal:#0e7490; --teal2:#06b6d4; --tealbg:#ecfeff; --up:#16a34a; --dn:#dc2626; --line:#e5e9f0; }
-    * { box-sizing:border-box; }
-    body { font-family:'Inter',system-ui,sans-serif; }
-    .shell { max-width:1080px; }
-    .hdr { background:linear-gradient(120deg,#0b2a45 0%,#10395d 60%,#155177 100%); color:#fff; }
-    .eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; }
-    .datepill { border:1px solid rgba(255,255,255,0.35); border-radius:999px; padding:0.3rem 0.85rem; font-size:0.72rem; font-weight:600; color:#e2f2fb; white-space:nowrap; }
-    /* tabs - house style (matches client snapshot.html .tab-btn) */
-    .tabs { display:grid; grid-template-columns:repeat(4,1fr); gap:0.6rem; }
-    .tab-btn { text-align:left; background:#fff; border:1px solid #e2e8f0; border-radius:0.6rem; padding:0.7rem 0.9rem; cursor:pointer; transition:border-color .12s, background .12s; }
-    .tab-btn:hover { border-color:#cbd5e1; }
-    .tab-btn .t { display:block; font-weight:700; font-size:0.95rem; color:#0b1220; line-height:1.15; }
-    .tab-btn .s { display:block; font-size:0.72rem; color:#64748b; margin-top:0.12rem; }
-    .tab-btn.active { background:#0b2545; border-color:#0b2545; }
-    .tab-btn.active .t { color:#fff; }
-    .tab-btn.active .s { color:#9bbad6; }
-    /* section */
-    .sbadge { width:1.7rem; height:1.7rem; border-radius:0.4rem; background:var(--navy); color:#fff; font-weight:800; font-size:0.8rem; display:flex; align-items:center; justify-content:center; }
-    .stitle { font-size:1.3rem; font-weight:800; color:#0b1220; letter-spacing:-0.01em; }
-    .ssub { font-size:0.8rem; color:var(--teal); font-weight:600; }
-    .ov-eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; color:var(--teal); }
-    .ov li { position:relative; padding-left:0.9rem; font-size:0.86rem; color:#334155; margin:0.3rem 0; }
-    .ov li::before { content:''; position:absolute; left:0; top:0.5rem; width:0.4rem; height:0.4rem; border-radius:999px; background:var(--teal2); }
-    .panel { background:#fff; border:1px solid var(--line); border-radius:0.7rem; }
-    .cardhd { font-size:0.66rem; font-weight:800; letter-spacing:0.07em; text-transform:uppercase; color:#475569; }
-    .ann { font-size:0.7rem; color:#64748b; }
-    .means { background:var(--tealbg); border:1px solid #bae6fd; border-radius:0.55rem; padding:0.7rem 0.9rem; }
-    .means .lbl { font-size:0.58rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#0369a1; }
-    .means p { font-size:0.82rem; color:#0c4a6e; margin-top:0.15rem; line-height:1.5; }
-    /* kpi */
-    .kpi { border:1px solid var(--line); border-radius:0.55rem; padding:0.8rem 0.9rem; }
-    .kpi .l { font-size:0.6rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#64748b; }
-    .kpi .n { font-size:1.85rem; font-weight:800; color:#0b1220; line-height:1.05; margin-top:0.1rem; font-variant-numeric:tabular-nums; }
-    .kpi .s { font-size:0.64rem; color:#94a3b8; margin-top:0.1rem; }
-    .delta { font-size:0.72rem; font-weight:800; }
-    .delta.up::before { content:'\25B2 '; font-size:0.58rem; } .delta.dn::before { content:'\25BC '; font-size:0.58rem; }
-    .delta.up { color:var(--up); } .delta.dn { color:var(--dn); } .delta.flat { color:#94a3b8; }
-    /* tables */
-    table.t { width:100%; border-collapse:collapse; }
-    table.t th { font-size:0.58rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:#64748b; text-align:right; padding:0.45rem 0.5rem; border-bottom:1px solid var(--line); }
-    table.t th:first-child { text-align:left; }
-    table.t td { font-size:0.78rem; padding:0.42rem 0.5rem; border-bottom:1px solid #f1f5f9; text-align:right; font-variant-numeric:tabular-nums; color:#374151; }
-    table.t td:first-child { text-align:left; font-weight:600; color:#1f2937; }
-    table.t tr.tot td { font-weight:800; color:#0b1220; border-top:1px solid var(--line); border-bottom:0; }
-    /* top pages */
-    .catrow td { background:#f8fafc; font-weight:800 !important; color:#0b1220 !important; border-top:1px solid var(--line); }
-    .catrow .badge { display:inline-block; font-size:0.58rem; font-weight:700; color:#0369a1; background:#e0f2fe; border-radius:0.3rem; padding:0.05rem 0.4rem; margin-left:0.4rem; }
-    .urlrow td:first-child { font-weight:400 !important; padding-left:1.1rem; }
-    .urlrow .u { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:0.72rem; color:#1d5b8a; word-break:break-all; }
-    .up { color:var(--up); font-weight:800; } .dn { color:var(--dn); font-weight:800; } .flat { color:#94a3b8; font-weight:700; }
-    .newt { color:var(--teal); font-weight:800; }
-    .chip { display:inline-flex; align-items:baseline; gap:0.35rem; background:#f1f5f9; border:1px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; }
-    .chip .v { font-weight:800; font-size:0.82rem; color:#0b1220; } .chip .l { font-size:0.62rem; font-weight:600; color:#64748b; text-transform:uppercase; }
-    .chip.good { background:#ecfdf5; border-color:#a7f3d0; } .chip.good .v { color:#047857; }
-    .ftr { color:var(--teal); }
-    @media (max-width:720px){ .tabs{ grid-template-columns:repeat(2,1fr);} }
-    @media print { .no-print{display:none!important;} body{background:#fff!important;} [data-panel]{display:block!important;} .panel{box-shadow:none;} }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>MIA Photo Booth · Performance Report · May 2026</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/hqdm.css">
 </head>
-<body class="bg-slate-100 text-slate-800 antialiased">
+<body>
 
-  <div class="no-print bg-white border-b border-slate-200 text-xs">
-    <div class="shell mx-auto px-4 sm:px-6 py-1.5 flex justify-end items-center gap-3">
-      <button onclick="window.print()" class="px-2.5 py-1 rounded border border-slate-300 text-slate-600 hover:bg-slate-50">Print / PDF</button>
-    </div>
-  </div>
-
-  <header class="text-white" style="background:linear-gradient(135deg,#0a2540 0%,#123a5e 55%,#1a4e78 100%);">
-    <div class="shell mx-auto px-6 sm:px-8 pt-8 pb-7">
-      <div class="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.22em] text-brand-300 mb-3">HQDM Search Intelligence · Performance Report</div>
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-        <div>
-          <h1 class="font-serif font-bold tracking-tight text-white text-3xl sm:text-4xl leading-tight">MIA Photo Booth</h1>
-          <div class="text-slate-300 mt-2 text-sm sm:text-base">Marketing Performance Report</div>
-        </div>
-        <div class="self-start sm:self-end inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-slate-100 whitespace-nowrap">Through May 2026</div>
-      </div>
-    </div>
-  </header>
-
-  <nav class="no-print sticky top-0 z-40 bg-slate-50/95 backdrop-blur border-b border-slate-200">
-    <div class="shell mx-auto px-4 sm:px-6 py-3 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-      <button class="tab-btn" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
-      <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">GA4 performance</span></button>
-      <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
-      <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Completed and upcoming</span></button>
-    </div>
+<div class="nav-wrap no-print">
+  <nav class="nav container" style="max-width:1000px">
+    <a class="brand" href="index.html"><span class="mark">H</span> <span>HQDM<small>search intelligence</small></span></a>
+    <button class="btn" onclick="window.print()" style="padding:8px 15px; font-size:0.8rem">Print / PDF</button>
   </nav>
+</div>
 
-  <main class="shell mx-auto px-4 sm:px-6 py-5">
+<main class="section section--tight">
+  <div class="container" style="max-width:1000px">
 
-    <!-- ===================== TAB 1 : OVERALL / LEADS ===================== -->
-    <section data-panel="1">
-      <div class="ov-eyebrow mb-1">Overview</div>
-      <ul class="ov mb-4">
-        <li><span>The business brings a steady <strong>9 to 15 genuine leads a month</strong> (website enquiries plus real phone calls), holding through the spring.</span></li>
-        <li><span>Organic search has grown from 58 visits in August to about <strong>1,135 in May</strong>, close to twenty times where it started, and now brings about <strong>three-quarters of all website traffic</strong>.</span></li>
-        <li><span>The Google profile holds a <strong>5.0 rating across 103 reviews</strong>, the second-strongest review base in the market. The biggest growth opportunity is Google Maps visibility in the busy event areas, covered in Map Presence.</span></li>
-      </ul>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-        <div class="kpi"><div class="l">Leads · last 90 days</div><div class="n">31</div><div class="s">website forms + verified calls</div></div>
-        <div class="kpi"><div class="l">Leads · May</div><div class="n">10</div><div class="s">genuine inbound</div></div>
-        <div class="kpi"><div class="l">Reviews · rating</div><div class="n">103 · 5.0</div><div class="s">2nd-strongest base in the market</div></div>
-        <div class="kpi"><div class="l">Organic visits · May</div><div class="n">1,135</div><div class="s">about three-quarters of all traffic</div></div>
+    <div class="win">
+      <div class="win__bar">
+        <span class="ic">&#9635;</span>
+        <span class="ttl">performance-report.hqdm &ndash; MIA Photo Booth</span>
+        <span class="win__controls"><b>_</b><b>&#9633;</b><b>&times;</b></span>
       </div>
-      <div class="panel p-4 mb-4">
-        <div class="cardhd mb-2">Genuine leads month over month</div>
-        <div class="relative" style="height:240px;"><canvas id="leadsChart"></canvas></div>
-        <p class="ann mt-2">Genuine inbound from the booking system (GoHighLevel): real website enquiries plus verified phone calls. The system also holds many records added by hand or imported in bulk (about a quarter of all entries), plus auto-flagged spam calls; those are excluded here so the trend shows real inbound only. Completed months only; the earliest months reflect the system still being set up.</p>
-      </div>
-      <div class="panel p-4">
-        <div class="flex items-baseline justify-between gap-3 mb-2">
-          <div class="cardhd">Where your leads come from</div>
-          <div class="ann">Website visitors by channel · GA4 · last 90 days</div>
-        </div>
-        <div class="relative" style="height:185px;"><canvas id="sourceChart"></canvas></div>
-        <p class="ann mt-2">The booking system records each lead but cannot tag a marketing channel for it, and nearly every booked lead arrives through the website contact form (phone calls go to the main business line and are not captured there). So the most reliable read on where leads come from is where the website's visitors come from, measured by Google Analytics. Organic search (free Google results) brings about three-quarters of all website visits, well ahead of direct and social.</p>
-      </div>
-    </section>
+      <div class="win__body">
 
-    <!-- ===================== TAB 2 : WEBSITE TRAFFIC ===================== -->
-    <section data-panel="2">
-      <div class="ov-eyebrow mb-1">Overview</div>
-      <ul class="ov mb-4">
-        <li><span>Organic Search grew from <strong>58 visits in August to about 1,135 in May</strong>, close to twenty times over, and reached a peak of <strong>1,445 in January</strong>.</span></li>
-        <li><span>Organic is now <strong>about three-quarters of all site traffic</strong>, so the website depends mainly on Google search rather than ads or social.</span></li>
-        <li><span>The last three months eased back from the January peak, driven almost entirely by one large guide article cooling off. The opportunity is to turn that big reading audience into bookings.</span></li>
-      </ul>
-
-      <div class="panel p-4 mb-4">
-        <div class="flex items-baseline justify-between gap-3 mb-2">
-          <div class="cardhd">Organic visits by month</div>
-          <div class="ann">May 2026: <strong>1,135 visits</strong> · about three-quarters of all traffic</div>
-        </div>
-        <div class="relative" style="height:250px;"><canvas id="trafficChart"></canvas></div>
-        <p class="ann mt-2">Organic Search visits from Google, August 2025 to May 2026. Completed months only.</p>
-      </div>
-
-      <div class="means mb-5">
-        <div class="lbl">What this means</div>
-        <p>The website attracts a large and growing organic audience, almost all of it reading one popular guide article. The next step is connecting that audience to the booking pages (the booth types and the event pages), so more of those readers turn into enquiries. That is the focus of the website work in the plan.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Where the organic audience sits</div><div class="ann">last 6 months vs previous period</div></div>
-          <table class="t"><thead><tr><th>Page type</th><th>Organic visits</th><th>Share</th><th>vs prev 6mo</th></tr></thead><tbody id="mix"></tbody></table>
-          <p class="ann mt-3">Most visitors land on guide articles, and that traffic grew sharply over the last six months. The booking pages (booth types, homepage) still draw a small share, which is the opportunity: turn those readers into bookings.</p>
-        </div>
-        <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Largest organic pages</div><div class="ann">last 6 months vs previous period</div></div>
-          <table class="t"><thead><tr><th>Page</th><th>Visits</th><th>vs prev 6mo</th></tr></thead><tbody id="topPages"></tbody></table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== TAB 3 : MAP PRESENCE ===================== -->
-    <section data-panel="3">
-      <div class="means mb-4" style="background:#fff7ed;border-color:#fed7aa;">
-        <div class="lbl" style="color:#9a3412;">Why Google Maps matters most here</div>
-        <p style="color:#7c2d12;">Most people planning an event find a photo booth through Google Maps and local search. It is where booking intent is highest. MIA already holds a strong review base and a solid position in its home area. The biggest growth opportunity is becoming visible in the busy event areas of Miami, where most weddings, corporate events, and parties happen.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-        <div class="panel p-4 flex flex-col justify-center">
-          <div class="cardhd mb-2">The foundation in place</div>
-          <div class="flex flex-wrap gap-2 mb-3">
-            <span class="chip good"><span class="v">103 · 5.0</span><span class="l">reviews · rating</span></span>
-            <span class="chip good"><span class="v">2nd</span><span class="l">strongest review base in the market</span></span>
-            <span class="chip good"><span class="v">Top local</span><span class="l">link and authority profile</span></span>
-            <span class="chip"><span class="v">Since 2020</span><span class="l">established Miami brand</span></span>
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:16px">
+          <div>
+            <div class="eyebrow">Marketing Performance Report</div>
+            <h1 class="display" style="font-size:clamp(1.5rem,2.8vw,2.1rem); margin-top:8px">MIA Photo Booth</h1>
+            <p class="muted small" style="margin-top:4px">Miami photo booth rental &middot; prepared by HQDM</p>
           </div>
-          <p class="text-[13px] leading-relaxed text-slate-700">MIA's review base is the second largest of any photo booth company we track in Miami, and its website authority is ahead of most local rivals. These are exactly the signals Google rewards on the map. They are simply not yet pointed at the areas with the most events.</p>
+          <span class="pill"><span class="dot"></span>Through May 2026</span>
         </div>
-        <div class="panel p-4">
-          <div class="cardhd mb-2">The opportunity · the Miami event corridor</div>
-          <p class="text-[13px] leading-relaxed text-slate-700 mb-2">Most Miami events cluster along the coast and central districts. These are the areas to win next:</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="chip"><span class="v">Miami Beach</span></span>
-            <span class="chip"><span class="v">Brickell</span></span>
-            <span class="chip"><span class="v">Wynwood</span></span>
-            <span class="chip"><span class="v">Coral Gables</span></span>
-            <span class="chip"><span class="v">Coconut Grove</span></span>
-            <span class="chip"><span class="v">Aventura</span></span>
-          </div>
-          <p class="ann mt-3">No single competitor dominates these areas; the market is fragmented and winnable. The work plan covers the two Google profile changes and the focus shift that open them up.</p>
-        </div>
-      </div>
 
-      <div class="mb-4">
-        <div class="cardhd mb-2">Where MIA already wins</div>
-        <div class="panel p-4">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div>
-              <div class="text-[11px] font-bold uppercase tracking-wide mb-2" style="color:#047857;">Top-3 on Google Maps in the home area</div>
-              <table class="t"><thead><tr><th>Core search</th><th>Top-3 map spots</th></tr></thead><tbody>
-                <tr><td>miami photo booth</td><td>11</td></tr>
-                <tr><td>photo booth rentals in miami</td><td>10</td></tr>
-                <tr><td>miami photo booth rental</td><td>8</td></tr>
-                <tr><td>photo booth rental near me</td><td>7</td></tr>
-                <tr><td>photo booth miami</td><td>7</td></tr>
-              </tbody></table>
-              <p class="ann mt-2">Grid points where MIA shows in the Maps top 3 across its home area, on high-value commercial searches. "photo booth rentals in miami" was built from zero to 10 of these since February.</p>
+        <div class="tabs no-print">
+          <button class="tab-btn active" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
+          <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">Search performance</span></button>
+          <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps</span></button>
+          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Done &amp; upcoming</span></button>
+        </div>
+
+        <hr class="divider" style="margin:18px 0">
+
+        <!-- TAB 1: LEAD GENERATION -->
+        <section data-panel="1">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>The business brings a steady <strong>9 to 15 genuine leads a month</strong> (website enquiries plus real phone calls), holding through the spring.</li>
+            <li>Organic search has grown from 58 visits in August to about <strong>1,135 in May</strong>, close to twenty times where it started, and now brings about <strong>three-quarters of all website traffic</strong>.</li>
+            <li>The Google profile holds a <strong>5.0 rating across 103 reviews</strong>, the second-strongest review base in the market. The biggest growth opportunity is Google Maps visibility in the busy event areas, covered in Map Presence.</li>
+          </ul>
+          <div class="kpis" style="margin-bottom:18px">
+            <div class="kpi"><div class="l">Leads &middot; last 90 days</div><div class="n">31</div><div class="s">website forms + verified calls</div></div>
+            <div class="kpi"><div class="l">Leads &middot; May</div><div class="n">10</div><div class="s">genuine inbound</div></div>
+            <div class="kpi"><div class="l">Reviews &middot; rating</div><div class="n">103 &middot; 5.0</div><div class="s">2nd-strongest base in market</div></div>
+            <div class="kpi"><div class="l">Organic visits &middot; May</div><div class="n">1,135</div><div class="s">~three-quarters of all traffic</div></div>
+          </div>
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Genuine leads month over month</h3><span class="muted tiny">Aug 2025 &ndash; May 2026</span></div>
+            <div class="chart-wrap"><canvas id="leadsChart"></canvas></div>
+            <p class="chart-note">Genuine inbound from the booking system (GoHighLevel): real website enquiries plus verified phone calls. Records added by hand or imported in bulk (about a quarter of all entries) and auto-flagged spam calls are excluded, so the trend shows real inbound only. Completed months only; the earliest months reflect the system still being set up.</p>
+          </div>
+          <div class="card chart-card">
+            <div class="chart-head"><h3 class="display">Where your leads come from</h3><span class="muted tiny">website visitors by channel &middot; GA4 &middot; last 90 days</span></div>
+            <div class="chart-wrap chart-wrap--sm"><canvas id="sourceChart"></canvas></div>
+            <p class="chart-note">The booking system records each lead but cannot tag a marketing channel, and nearly every booked lead arrives through the website contact form. So the most reliable read on where leads come from is where the website's visitors come from. Organic search (free Google results) brings about three-quarters of all website visits, well ahead of direct and social.</p>
+          </div>
+        </section>
+
+        <!-- TAB 2: WEBSITE TRAFFIC -->
+        <section data-panel="2" style="display:none">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Organic Search grew from <strong>58 visits in August to about 1,135 in May</strong>, close to twenty times over, and reached a peak of <strong>1,445 in January</strong>.</li>
+            <li>Organic is now <strong>about three-quarters of all site traffic</strong>, so the website depends mainly on Google search rather than ads or social.</li>
+            <li>The last three months eased back from the January peak, driven almost entirely by one large guide article cooling off. The opportunity is to turn that big reading audience into bookings.</li>
+          </ul>
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Organic visits by month</h3><span class="muted tiny">May 2026: <strong>1,135 visits</strong> &middot; ~three-quarters of all traffic</span></div>
+            <div class="chart-wrap"><canvas id="trafficChart"></canvas></div>
+            <p class="chart-note">Organic Search visits from Google, August 2025 to May 2026. Completed months only.</p>
+          </div>
+          <div class="notice notice--good notice__col" style="margin-bottom:18px">
+            <span class="tag tag--mint">What this means</span>
+            <p>The website attracts a large and growing organic audience, almost all of it reading one popular guide article. The next step is connecting that audience to the booking pages (the booth types and the event pages), so more of those readers turn into enquiries. That is the focus of the website work in the plan.</p>
+          </div>
+          <div class="grid grid--2" style="gap:16px; align-items:start">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Where the organic audience sits</div>
+              <table class="dt">
+                <thead><tr><th>Page type</th><th>Visits</th><th>Share</th><th>vs prev 6mo</th></tr></thead>
+                <tbody>
+                  <tr><td>Guide articles (blog)</td><td>6,293</td><td>91%</td><td class="up">+579%</td></tr>
+                  <tr><td>Booking pages (booth + home)</td><td>538</td><td>8%</td><td class="up">+33%</td></tr>
+                  <tr><td>Other</td><td>85</td><td>1%</td><td class="up">+70%</td></tr>
+                </tbody>
+              </table>
+              <p class="chart-note">Most visitors land on guide articles, and that traffic grew sharply. The booking pages still draw a small share: the opportunity is to turn those readers into bookings.</p>
             </div>
-            <div>
-              <div class="text-[11px] font-bold uppercase tracking-wide mb-2" style="color:#0e7490;">Owns a topic in Google search</div>
-              <p class="text-[13px] text-slate-700 leading-relaxed">MIA ranks <strong>#1 in Google</strong> for the whole "photo booth photo and strip size" topic, more than twenty search variations, and that single topic drives the website's largest stream of visitors.</p>
-              <div class="text-[11px] font-bold uppercase tracking-wide mb-2 mt-4" style="color:#047857;">What the work has built</div>
-              <ul class="space-y-1 text-[13px] text-slate-700">
-                <li>Organic visitors up close to <strong>twenty times</strong> since the engagement began, peaking in January.</li>
-                <li>Reviews grown from 92 to <strong>103 at a perfect 5.0</strong>, the second-strongest base in the market.</li>
-                <li>Website authority now ahead of most local rivals.</li>
-              </ul>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Largest organic pages</div>
+              <table class="dt">
+                <thead><tr><th>Page</th><th>Visits</th><th>vs prev 6mo</th></tr></thead>
+                <tbody>
+                  <tr><td>What size are photo booth pictures (guide)</td><td>5,758</td><td class="up">+577%</td></tr>
+                  <tr><td>Homepage</td><td>511</td><td class="up">+32%</td></tr>
+                  <tr><td>What are photo booth pictures called (guide)</td><td>245</td><td class="up">+545%</td></tr>
+                  <tr><td>How to make photo booth props (guide)</td><td>54</td><td class="up">+1,700%</td></tr>
+                  <tr><td>How to take a Boomerang photo (guide)</td><td>42</td><td class="up">+1,300%</td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
-        </div>
+        </section>
+
+        <!-- TAB 3: MAP PRESENCE -->
+        <section data-panel="3" style="display:none">
+          <div class="notice notice--warn notice__col" style="margin-bottom:16px">
+            <span class="tag tag--amber">Why Google Maps matters most here</span>
+            <p>Most people planning an event find a photo booth through Google Maps and local search. It is where booking intent is highest. MIA already holds a strong review base and a solid position in its home area. The biggest growth opportunity is becoming visible in the busy event areas of Miami, where most weddings, corporate events and parties happen.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start; margin-bottom:16px">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">The foundation in place</div>
+              <div class="chips-wrap" style="margin-bottom:12px">
+                <span class="vchip good"><b>103 &middot; 5.0</b> reviews &middot; rating</span>
+                <span class="vchip good"><b>2nd</b> strongest review base</span>
+                <span class="vchip good"><b>Top local</b> link &amp; authority</span>
+                <span class="vchip"><b>Since 2020</b> Miami brand</span>
+              </div>
+              <p class="small" style="color:var(--ink-soft)">MIA's review base is the second largest of any photo booth company we track in Miami, and its website authority is ahead of most local rivals. These are exactly the signals Google rewards on the map. They are simply not yet pointed at the areas with the most events.</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">The opportunity &middot; the Miami event corridor</div>
+              <p class="small" style="color:var(--ink-soft); margin-bottom:10px">Most Miami events cluster along the coast and central districts. These are the areas to win next:</p>
+              <div class="chips-wrap">
+                <span class="tag">Miami Beach</span><span class="tag">Brickell</span><span class="tag">Wynwood</span>
+                <span class="tag">Coral Gables</span><span class="tag">Coconut Grove</span><span class="tag">Aventura</span>
+              </div>
+              <p class="chart-note" style="margin-top:12px">No single competitor dominates these areas; the market is fragmented and winnable. The work plan covers the two Google profile changes and the focus shift that open them up.</p>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:16px">
+            <div class="cardhd" style="margin-bottom:12px">Where MIA already wins</div>
+            <div class="grid grid--2" style="gap:18px; align-items:start">
+              <div>
+                <div class="tag tag--mint" style="margin-bottom:10px">Top-3 on Google Maps in the home area</div>
+                <table class="dt">
+                  <thead><tr><th>Core search</th><th>Top-3 map spots</th></tr></thead>
+                  <tbody>
+                    <tr><td>miami photo booth</td><td>11</td></tr>
+                    <tr><td>photo booth rentals in miami</td><td>10</td></tr>
+                    <tr><td>miami photo booth rental</td><td>8</td></tr>
+                    <tr><td>photo booth rental near me</td><td>7</td></tr>
+                    <tr><td>photo booth miami</td><td>7</td></tr>
+                  </tbody>
+                </table>
+                <p class="chart-note">Grid points where MIA shows in the Maps top 3 across its home area, on high-value commercial searches. "photo booth rentals in miami" was built from zero to 10 of these since February.</p>
+              </div>
+              <div>
+                <div class="tag" style="margin-bottom:10px">Owns a topic in Google search</div>
+                <p class="small" style="color:var(--ink-soft)">MIA ranks <strong>#1 in Google</strong> for the whole "photo booth photo and strip size" topic, more than twenty search variations, and that single topic drives the website's largest stream of visitors.</p>
+                <div class="tag tag--mint" style="margin:14px 0 8px">What the work has built</div>
+                <ul class="ov">
+                  <li>Organic visitors up close to <strong>twenty times</strong> since the engagement began, peaking in January.</li>
+                  <li>Reviews grown from 92 to <strong>103 at a perfect 5.0</strong>, the second-strongest base in the market.</li>
+                  <li>Website authority now ahead of most local rivals.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="notice notice--good notice__col">
+            <span class="tag tag--mint">The single highest-value move</span>
+            <p>The Google Business Profile is currently set up as a photography studio rather than a photo booth company. Every competitor that wins the map is categorised as a photo booth or event rental business. Correcting the profile category and focus is the cheapest, highest-return move available, and it is the first item in the work plan.</p>
+          </div>
+        </section>
+
+        <!-- TAB 4: WORK PLAN -->
+        <section data-panel="4" style="display:none">
+          <div class="notice notice__col" style="margin-bottom:16px">
+            <span class="tag">Our recommendations &middot; from the custom strategy</span>
+            <table class="dt">
+              <thead><tr><th>Recommendation</th><th>Priority</th></tr></thead>
+              <tbody>
+                <tr class="catrow"><td>Google Business Profile <span class="badge">2</span></td><td></td></tr>
+                <tr class="itemrow"><td>Set the primary category to "Photo booth" (the single biggest driver of map ranking)</td><td><span class="priohi">High</span></td></tr>
+                <tr class="itemrow"><td>Add Event planner and Wedding service as categories</td><td><span class="priohi">High</span></td></tr>
+                <tr class="catrow"><td>Local focus <span class="badge">2</span></td><td></td></tr>
+                <tr class="itemrow"><td>Point the map tracking and content at the event areas (Beach, Brickell, Gables, Grove, Aventura)</td><td><span class="priohi">High</span></td></tr>
+                <tr class="itemrow"><td>Strengthen the corridor pages that exist and add the missing districts, each tied to real venues</td><td><span class="priohi">High</span></td></tr>
+                <tr class="catrow"><td>Website <span class="badge">3</span></td><td></td></tr>
+                <tr class="itemrow"><td>Add a dedicated Wedding photo booth page, built from the existing wedding articles</td><td><span class="priohi">High</span></td></tr>
+                <tr class="itemrow"><td>Add a Corporate and events page</td><td><span class="priomed">Medium</span></td></tr>
+                <tr class="itemrow"><td>Combine the overlapping booth articles into the booth pages</td><td><span class="priomed">Medium</span></td></tr>
+                <tr class="catrow"><td>Content <span class="badge">1</span></td><td></td></tr>
+                <tr class="itemrow"><td>Add a photo booth pricing guide</td><td><span class="priolow">Low</span></td></tr>
+              </tbody>
+            </table>
+            <p class="chart-note">The Google Business Profile changes are the highest-value and the cheapest, they do not touch the website. The Wedding page turns existing wedding content into a page people can book from.</p>
+          </div>
+          <div class="grid grid--2" style="gap:16px; align-items:start">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Completed &middot; recent months</div>
+              <table class="dt">
+                <thead><tr><th>Work delivered</th><th>When</th></tr></thead>
+                <tbody>
+                  <tr class="catrow"><td>Reporting <span class="badge">1</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Monthly performance report</td><td>Aug-May</td></tr>
+                  <tr class="catrow"><td>Google Business Profile <span class="badge">2</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Profile set up and optimised</td><td>2025</td></tr>
+                  <tr class="itemrow"><td>Business name updated</td><td>Fall 2025</td></tr>
+                  <tr class="catrow"><td>Website &amp; on-page <span class="badge">2</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Analytics and technical audit</td><td>2025</td></tr>
+                  <tr class="itemrow"><td>On-page optimisation, service and home pages</td><td>ongoing</td></tr>
+                  <tr class="catrow"><td>Area pages published <span class="badge">1</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Neighborhood area pages (3 per month)</td><td>monthly</td></tr>
+                  <tr class="catrow"><td>Local presence <span class="badge">1</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Custom Local Placements</td><td>monthly</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">In the pipeline &middot; June</div>
+              <table class="dt">
+                <thead><tr><th>Scheduled</th><th>When</th></tr></thead>
+                <tbody>
+                  <tr class="catrow"><td>Reporting <span class="badge">1</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Monthly performance report</td><td>Jun</td></tr>
+                  <tr class="catrow"><td>Website &amp; on-page <span class="badge">1</span></td><td></td></tr>
+                  <tr class="itemrow"><td>On-page optimisation</td><td>Jun</td></tr>
+                  <tr class="catrow"><td>Area pages <span class="badge">1</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Area pages (3), shifting toward the event areas</td><td>Jun</td></tr>
+                  <tr class="catrow"><td>Local presence <span class="badge">1</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Custom Local Placements</td><td>Jun</td></tr>
+                </tbody>
+              </table>
+              <p class="chart-note">The monthly work continues, adding the event areas alongside the other neighborhoods we are targeting.</p>
+            </div>
+          </div>
+        </section>
+
       </div>
-
-      <div class="means" style="background:#f0fdf4;border-color:#bbf7d0;">
-        <div class="lbl" style="color:#166534;">The single highest-value move</div>
-        <p style="color:#14532d;">The Google Business Profile is currently set up as a photography studio rather than a photo booth company. Every competitor that wins the map is categorised as a photo booth or event rental business. Correcting the profile category and focus is the cheapest, highest-return move available, and it is the first item in the work plan.</p>
+      <div class="win__status">
+        <span class="cell grow">Marketing Performance Report &middot; MIA Photo Booth</span>
+        <span class="cell">Through May 2026</span>
+        <span class="cell">Confidential</span>
       </div>
-    </section>
+    </div>
 
-    <!-- ===================== TAB 4 : WORK PLAN ===================== -->
-    <section data-panel="4">
-      <div class="panel p-4 mb-4" style="border-color:#bae6fd;background:linear-gradient(180deg,#ffffff 0%,#f0f9ff 100%);">
-        <div class="flex items-baseline justify-between mb-2"><div class="cardhd" style="color:#0369a1;">Our recommendations · from the custom strategy</div><div class="ann">the priorities that move the needle next</div></div>
-        <table class="t"><thead><tr><th>Recommendation</th><th>Priority</th></tr></thead><tbody id="recommendations"></tbody></table>
-        <p class="ann mt-3">The Google Business Profile changes are the highest-value and the cheapest, they do not touch the website. The Wedding page turns existing wedding content into a page people can book from.</p>
-      </div>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
-        <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Completed · recent months</div><div class="ann">delivered</div></div>
-          <table class="t"><thead><tr><th>Work delivered</th><th>When</th></tr></thead><tbody id="completed"></tbody></table>
-        </div>
-        <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">In the pipeline · June</div><div class="ann">scheduled</div></div>
-          <table class="t"><thead><tr><th>Scheduled</th><th>When</th></tr></thead><tbody id="pipeline"></tbody></table>
-          <p class="ann mt-3">The monthly work continues, adding the event areas above alongside the other neighborhoods we are targeting.</p>
-        </div>
-      </div>
-    </section>
+    <p class="tiny muted center" style="margin-top:18px">Prepared by HQDM Search Intelligence &middot; miaphotobooth.net &middot; Confidential</p>
+  </div>
+</main>
 
-    <footer class="ftr mt-6 pt-3 border-t border-slate-200 text-[10px] flex flex-wrap items-center justify-between gap-2">
-      <div class="font-semibold">PREPARED BY HQDM SEARCH INTELLIGENCE</div>
-      <div>MIAPHOTOBOOTH.NET · Confidential</div>
-    </footer>
-  </main>
-
-  <script>
-    const DATA = {
-      leads: { months:['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'], leads:[10,4,15,15,13,13,12,9,12,10] },
-      visitorSrc: { total:4358, rows:[['Organic search',3282],['Direct',750],['Social',154],['Referral',106],['Other',66]] },
-      traffic: { months:['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],
-                 organic:[58,167,246,701,1110,1445,1434,1176,1013,1135] },
-      mix: [['Guide articles (blog)',927,6293,'91%'],['Booking pages (booth + home)',406,538,'8%'],['Other',50,85,'1%']],
-      toppages: [
-        ['What size are photo booth pictures (guide)',851,5758],
-        ['Homepage',387,511],
-        ['What are photo booth pictures called (guide)',38,245],
-        ['How to make photo booth props (guide)',3,54],
-        ['How to take a Boomerang photo (guide)',3,42],
-      ],
-      recommendations: [
-        {cat:'Google Business Profile', items:[
-          ['Set the primary category to "Photo booth" (the single biggest driver of map ranking)','High'],
-          ['Add Event planner and Wedding service as categories','High']]},
-        {cat:'Local focus', items:[
-          ['Point the map tracking and content at the event areas (Beach, Brickell, Gables, Grove, Aventura)','High'],
-          ['Strengthen the corridor pages that already exist and add the missing corridor districts and the other neighborhoods we want to target, each tied to real venues','High']]},
-        {cat:'Website', items:[
-          ['Add a dedicated Wedding photo booth page, built from the existing wedding articles','High'],
-          ['Add a Corporate and events page','Medium'],
-          ['Combine the overlapping booth articles into the booth pages','Medium']]},
-        {cat:'Content', items:[
-          ['Add a photo booth pricing guide','Low']]},
-      ],
-      completed: [
-        {cat:'Reporting', items:[['Monthly performance report','Aug-May']]},
-        {cat:'Google Business Profile', items:[['Profile set up and optimised','2025'],['Business name updated','Fall 2025']]},
-        {cat:'Website & on-page', items:[['Analytics and technical audit','2025'],['On-page optimisation, service and home pages','ongoing']]},
-        {cat:'Area pages published', items:[['Neighborhood area pages (3 per month)','monthly']]},
-        {cat:'Local presence', items:[['Custom Local Placements','monthly']]},
-      ],
-      pipeline: [
-        {cat:'Reporting', items:[['Monthly performance report','Jun']]},
-        {cat:'Website & on-page', items:[['On-page optimisation','Jun']]},
-        {cat:'Area pages', items:[['Area pages (3), shifting toward the event areas','Jun']]},
-        {cat:'Local presence', items:[['Custom Local Placements','Jun']]},
-      ],
-    };
-
-    // % change vs previous period
-    function chg(b,a){ if(b===0&&a>0) return '<span class="newt">New</span>'; if(b===a) return '<span class="flat">0%</span>'; const p=Math.round((a-b)/b*100); return `<span class="${p>0?'up':'dn'}">${p>0?'+':''}${p}%</span>`; }
-    // tab 2 mix
-    document.getElementById('mix').innerHTML = DATA.mix.map(([s,p,v,sh]) =>
-      `<tr><td>${s}</td><td>${v.toLocaleString()}</td><td>${sh}</td><td>${chg(p,v)}</td></tr>`).join('');
-    // tab 2 top pages
-    document.getElementById('topPages').innerHTML = DATA.toppages.map(([s,p,v]) =>
-      `<tr><td>${s}</td><td>${v.toLocaleString()}</td><td>${chg(p,v)}</td></tr>`).join('');
-
-    // tab 4 grouped tables
-    const grpRows = g => `<tr class="catrow"><td>${g.cat}<span class="badge">${g.items.length}</span></td><td></td></tr>` +
-      g.items.map(([name,when]) => `<tr class="urlrow"><td>${name}</td><td>${when}</td></tr>`).join('');
-    document.getElementById('recommendations').innerHTML = DATA.recommendations.map(grpRows).join('');
-    document.getElementById('completed').innerHTML = DATA.completed.map(grpRows).join('');
-    document.getElementById('pipeline').innerHTML = DATA.pipeline.map(grpRows).join('');
-
-    // charts
-    const charts = {};
-    const opts = yt => ({ responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
-      plugins:{ legend:{position:'bottom',labels:{font:{size:10},boxWidth:12}},
-        tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=>`${c.dataset.label}: ${c.raw!=null?c.raw.toLocaleString():'-'}`}} },
-      scales:{ x:{grid:{display:false},ticks:{font:{size:10}}}, y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:9}},title:{display:true,text:yt,font:{size:9,weight:'600'},color:'#64748b'}} } });
-
-    function renderLeads(){ return new Chart(document.getElementById('leadsChart'), { type:'line',
-      data:{ labels:DATA.leads.months, datasets:[
-        {label:'Genuine leads',data:DATA.leads.leads,borderColor:'#0e7490',backgroundColor:'#0e749022',borderWidth:3,tension:0.25,pointRadius:3,pointHoverRadius:6,fill:true} ] },
-      options:opts('leads / month') }); }
-    function renderTraffic(){ return new Chart(document.getElementById('trafficChart'), { type:'line',
-      data:{ labels:DATA.traffic.months, datasets:[ {label:'Organic visitors',data:DATA.traffic.organic,borderColor:'#06b6d4',backgroundColor:'#06b6d422',borderWidth:3,tension:0.25,pointRadius:3,pointHoverRadius:6,fill:true} ] },
-      options:opts('visitors / month') }); }
-    function renderSources(){ const t=DATA.visitorSrc.total, rows=DATA.visitorSrc.rows, pct=rows.map(r=>Math.round(100*r[1]/t));
-      return new Chart(document.getElementById('sourceChart'), { type:'bar',
-      data:{ labels:rows.map(r=>r[0]), datasets:[{label:'Share of visits',data:pct,
-        backgroundColor:rows.map((r,i)=> i===0 ? '#0e7490' : '#94a3b8'),borderRadius:4}] },
-      options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
-        plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=>`${rows[c.dataIndex][1].toLocaleString()} visits · ${c.raw}% of all visits`}} },
-        scales:{ x:{beginAtZero:true,max:80,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:10},callback:v=>v+'%'}}, y:{grid:{display:false},ticks:{font:{size:11}}} } } }); }
-
-    function showTab(n){
-      document.querySelectorAll('[data-tab]').forEach(el => el.classList.toggle('active', el.dataset.tab == n));
-      document.querySelectorAll('[data-panel]').forEach(el => el.style.display = el.dataset.panel == n ? '' : 'none');
-      if (n==1 && !charts.leads) charts.leads = renderLeads();
-      if (n==1 && !charts.sources) charts.sources = renderSources();
-      if (n==2 && !charts.traffic) charts.traffic = renderTraffic();
-    }
-    showTab(1);
-  </script>
+<script>
+var MONTHS = ['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'];
+window.CHART_FACTORIES = {
+  leadsChart: function (cv) { return RPT.line(cv, MONTHS, [{ label: 'Genuine leads', data: [10,4,15,15,13,13,12,9,12,10], color: RPT.C.mint, fill: true }]); },
+  trafficChart: function (cv) { return RPT.line(cv, MONTHS, [{ label: 'Organic visitors', data: [58,167,246,701,1110,1445,1434,1176,1013,1135], color: RPT.C.violet, fill: true }]); },
+  sourceChart: function (cv) {
+    var rows = [['Organic search',3282],['Direct',750],['Social',154],['Referral',106],['Other',66]], total = 4358;
+    var pct = rows.map(function (r) { return Math.round(100 * r[1] / total); });
+    return RPT.barH(cv, rows.map(function (r) { return r[0]; }), pct,
+      [RPT.C.mint, RPT.C.grey, RPT.C.grey, RPT.C.grey, RPT.C.grey],
+      function (c) { return rows[c.dataIndex][1].toLocaleString() + ' visits . ' + c.parsed.x + '% of all visits'; }, 80);
+  }
+};
+</script>
+<script src="../assets/js/chart.umd.min.js"></script>
+<script src="../assets/js/report.js"></script>
+<script>showTab(1);</script>
 </body>
 </html>

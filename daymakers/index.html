@@ -1,380 +1,310 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex, nofollow, noarchive" />
-  <title>Daymakers Moving · Performance Report · May 2026</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = { theme: { extend: {
-      fontFamily: { sans: ['Inter','system-ui','sans-serif'], serif: ['Lora','ui-serif','Georgia','serif'] },
-      colors: { brand: { 900:'#0b2545', 700:'#13315c', 500:'#1d5b8a', 300:'#8ecae6' } }
-    } } }
-  </script>
-  <style>
-    :root { --navy:#0b2a45; --navy2:#10395d; --teal:#0e7490; --teal2:#06b6d4; --tealbg:#ecfeff; --up:#16a34a; --dn:#dc2626; --line:#e5e9f0; }
-    * { box-sizing:border-box; }
-    body { font-family:'Inter',system-ui,sans-serif; }
-    .shell { max-width:1080px; }
-    .hdr { background:linear-gradient(120deg,#0b2a45 0%,#10395d 60%,#155177 100%); color:#fff; }
-    .eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; }
-    .datepill { border:1px solid rgba(255,255,255,0.35); border-radius:999px; padding:0.3rem 0.85rem; font-size:0.72rem; font-weight:600; color:#e2f2fb; white-space:nowrap; }
-    /* tabs - house style (matches client snapshot.html .tab-btn) */
-    .tabs { display:grid; grid-template-columns:repeat(4,1fr); gap:0.6rem; }
-    .tab-btn { text-align:left; background:#fff; border:1px solid #e2e8f0; border-radius:0.6rem; padding:0.7rem 0.9rem; cursor:pointer; transition:border-color .12s, background .12s; }
-    .tab-btn:hover { border-color:#cbd5e1; }
-    .tab-btn .t { display:block; font-weight:700; font-size:0.95rem; color:#0b1220; line-height:1.15; }
-    .tab-btn .s { display:block; font-size:0.72rem; color:#64748b; margin-top:0.12rem; }
-    .tab-btn.active { background:#0b2545; border-color:#0b2545; }
-    .tab-btn.active .t { color:#fff; }
-    .tab-btn.active .s { color:#9bbad6; }
-    /* section */
-    .sbadge { width:1.7rem; height:1.7rem; border-radius:0.4rem; background:var(--navy); color:#fff; font-weight:800; font-size:0.8rem; display:flex; align-items:center; justify-content:center; }
-    .stitle { font-size:1.3rem; font-weight:800; color:#0b1220; letter-spacing:-0.01em; }
-    .ssub { font-size:0.8rem; color:var(--teal); font-weight:600; }
-    .ov-eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; color:var(--teal); }
-    .ov li { position:relative; padding-left:0.9rem; font-size:0.86rem; color:#334155; margin:0.3rem 0; }
-    .ov li::before { content:''; position:absolute; left:0; top:0.5rem; width:0.4rem; height:0.4rem; border-radius:999px; background:var(--teal2); }
-    .panel { background:#fff; border:1px solid var(--line); border-radius:0.7rem; }
-    .cardhd { font-size:0.66rem; font-weight:800; letter-spacing:0.07em; text-transform:uppercase; color:#475569; }
-    .ann { font-size:0.7rem; color:#64748b; }
-    .means { background:var(--tealbg); border:1px solid #bae6fd; border-radius:0.55rem; padding:0.7rem 0.9rem; }
-    .means .lbl { font-size:0.58rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#0369a1; }
-    .means p { font-size:0.82rem; color:#0c4a6e; margin-top:0.15rem; line-height:1.5; }
-    /* kpi */
-    .kpi { border:1px solid var(--line); border-radius:0.55rem; padding:0.8rem 0.9rem; }
-    .kpi .l { font-size:0.6rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#64748b; }
-    .kpi .n { font-size:1.85rem; font-weight:800; color:#0b1220; line-height:1.05; margin-top:0.1rem; font-variant-numeric:tabular-nums; }
-    .kpi .s { font-size:0.64rem; color:#94a3b8; margin-top:0.1rem; }
-    .delta { font-size:0.72rem; font-weight:800; }
-    .delta.up::before { content:'\25B2 '; font-size:0.58rem; } .delta.dn::before { content:'\25BC '; font-size:0.58rem; }
-    .delta.up { color:var(--up); } .delta.dn { color:var(--dn); } .delta.flat { color:#94a3b8; }
-    /* tables */
-    table.t { width:100%; border-collapse:collapse; }
-    table.t th { font-size:0.58rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:#64748b; text-align:right; padding:0.45rem 0.5rem; border-bottom:1px solid var(--line); }
-    table.t th:first-child { text-align:left; }
-    table.t td { font-size:0.78rem; padding:0.42rem 0.5rem; border-bottom:1px solid #f1f5f9; text-align:right; font-variant-numeric:tabular-nums; color:#374151; }
-    table.t td:first-child { text-align:left; font-weight:600; color:#1f2937; }
-    table.t tr.tot td { font-weight:800; color:#0b1220; border-top:1px solid var(--line); border-bottom:0; }
-    /* top pages */
-    .catrow td { background:#f8fafc; font-weight:800 !important; color:#0b1220 !important; border-top:1px solid var(--line); }
-    .catrow .badge { display:inline-block; font-size:0.58rem; font-weight:700; color:#0369a1; background:#e0f2fe; border-radius:0.3rem; padding:0.05rem 0.4rem; margin-left:0.4rem; }
-    .urlrow td:first-child { font-weight:400 !important; padding-left:1.1rem; }
-    .urlrow .u { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:0.72rem; color:#1d5b8a; word-break:break-all; }
-    .up { color:var(--up); font-weight:800; } .dn { color:var(--dn); font-weight:800; } .flat { color:#94a3b8; font-weight:700; }
-    .newt { color:var(--teal); font-weight:800; }
-    .chip { display:inline-flex; align-items:baseline; gap:0.35rem; background:#f1f5f9; border:1px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; }
-    .chip .v { font-weight:800; font-size:0.82rem; color:#0b1220; } .chip .l { font-size:0.62rem; font-weight:600; color:#64748b; text-transform:uppercase; }
-    .chip.good { background:#ecfdf5; border-color:#a7f3d0; } .chip.good .v { color:#047857; }
-    .ftr { color:var(--teal); }
-    @media (max-width:720px){ .tabs{ grid-template-columns:repeat(2,1fr);} }
-    @media print { .no-print{display:none!important;} body{background:#fff!important;} [data-panel]{display:block!important;} .panel{box-shadow:none;} }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Daymakers Moving · Performance Report · May 2026</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/hqdm.css">
 </head>
-<body class="bg-slate-100 text-slate-800 antialiased">
+<body>
 
-  <div class="no-print bg-white border-b border-slate-200 text-xs">
-    <div class="shell mx-auto px-4 sm:px-6 py-1.5 flex justify-end items-center gap-3">
-      <button onclick="window.print()" class="px-2.5 py-1 rounded border border-slate-300 text-slate-600 hover:bg-slate-50">Print / PDF</button>
-    </div>
-  </div>
-
-  <header class="text-white" style="background:linear-gradient(135deg,#0a2540 0%,#123a5e 55%,#1a4e78 100%);">
-    <div class="shell mx-auto px-6 sm:px-8 pt-8 pb-7">
-      <div class="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.22em] text-brand-300 mb-3">HQDM Search Intelligence · Performance Report</div>
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-        <div>
-          <h1 class="font-serif font-bold tracking-tight text-white text-3xl sm:text-4xl leading-tight">Daymakers Moving &amp; Storage</h1>
-          <div class="text-slate-300 mt-2 text-sm sm:text-base">Marketing Performance Report · 5 locations (MN &amp; WI)</div>
-        </div>
-        <div class="self-start sm:self-end inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-slate-100 whitespace-nowrap">Through May 2026</div>
-      </div>
-    </div>
-  </header>
-
-  <nav class="no-print sticky top-0 z-40 bg-slate-50/95 backdrop-blur border-b border-slate-200">
-    <div class="shell mx-auto px-4 sm:px-6 py-3 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-      <button class="tab-btn" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
-      <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">Google search performance</span></button>
-      <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps across 5 pins</span></button>
-      <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Completed and upcoming</span></button>
-    </div>
+<div class="nav-wrap no-print">
+  <nav class="nav container" style="max-width:1000px">
+    <a class="brand" href="index.html"><span class="mark">H</span> <span>HQDM<small>search intelligence</small></span></a>
+    <button class="btn" onclick="window.print()" style="padding:8px 15px; font-size:0.8rem">Print / PDF</button>
   </nav>
+</div>
 
-  <main class="shell mx-auto px-4 sm:px-6 py-5">
+<main class="section section--tight">
+  <div class="container" style="max-width:1000px">
 
-    <!-- ===================== TAB 1 : OVERALL / LEADS ===================== -->
-    <section data-panel="1">
-      <div class="ov-eyebrow mb-1">Overview</div>
-      <ul class="ov mb-4">
-        <li><span>Phone leads are now tracked in CallRail. The first complete months show a healthy volume: <strong>786 tracked calls in April and 583 in May</strong>, with the busy spring season the high point.</span></li>
-        <li><span>About <strong>88% of those calls come straight from Google Business and Maps</strong>, so the Google profiles are by far the biggest source of new business.</span></li>
-        <li><span>The five Google profiles hold a combined <strong>2,265 reviews at 4.9 to 5.0 stars</strong>, one of the strongest review bases in the markets you serve, and four of the five lead their local map.</span></li>
-      </ul>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-        <div class="kpi"><div class="l">Tracked calls · April</div><div class="n">786</div><div class="s">first full month of tracking</div></div>
-        <div class="kpi"><div class="l">Tracked calls · May</div><div class="n">583</div><div class="s">after the spring peak</div></div>
-        <div class="kpi"><div class="l">From Google / Maps</div><div class="n">88%</div><div class="s">of all tracked calls</div></div>
-        <div class="kpi"><div class="l">Reviews · 5 profiles</div><div class="n">2,265</div><div class="s">4.9 to 5.0 stars</div></div>
+    <div class="win">
+      <div class="win__bar">
+        <span class="ic">&#9635;</span>
+        <span class="ttl">performance-report.hqdm &ndash; Daymakers Moving &amp; Storage</span>
+        <span class="win__controls"><b>_</b><b>&#9633;</b><b>&times;</b></span>
       </div>
-      <div class="panel p-4 mb-4">
-        <div class="flex items-baseline justify-between gap-3 mb-2">
-          <div class="cardhd">Phone leads per month</div>
-          <div class="ann">CallRail · completed months</div>
-        </div>
-        <div class="relative" style="height:230px;"><canvas id="leadsChart"></canvas></div>
-        <p class="ann mt-2">Tracked inbound calls by month. Call tracking went live in April, so April and May are the first full months on record. The current month is in progress and is not shown.</p>
-      </div>
-      <div class="panel p-4">
-        <div class="flex items-baseline justify-between gap-3 mb-2">
-          <div class="cardhd">Where your phone leads come from</div>
-          <div class="ann">CallRail · since tracking began</div>
-        </div>
-        <div class="relative" style="height:250px;"><canvas id="sourceChart"></canvas></div>
-        <p class="ann mt-2">Tracked inbound calls by source. Each Google profile uses its own tracking number, which is why the number on a profile differs from the one on the website. That is how the source of every call is identified, not an error. Google Business and Maps account for about 88% of calls.</p>
-      </div>
-    </section>
+      <div class="win__body">
 
-    <!-- ===================== TAB 2 : WEBSITE TRAFFIC ===================== -->
-    <section data-panel="2">
-      <div class="ov-eyebrow mb-1">Overview</div>
-      <ul class="ov mb-4">
-        <li><span>Website visits from Google search dipped through 2025 to a low in February, then <strong>rebounded every month since</strong>, from 359 in February to about <strong>706 in May</strong>.</span></li>
-        <li><span>The recovery is led by the <strong>local city pages</strong> (Hudson, Lake Elmo, Bloomington, Roseville), which all climbed in Google over the last three months.</span></li>
-        <li><span>A large share of visits land on one popular blog article about Minnesota. That is good for awareness, but the new business comes through the city pages and the Google profiles, which is where the focus sits.</span></li>
-      </ul>
-
-      <div class="panel p-4 mb-4">
-        <div class="flex items-baseline justify-between gap-3 mb-2">
-          <div class="cardhd">Website visits from Google search, by month</div>
-          <div class="ann">May 2026: <strong>706 visits</strong></div>
-        </div>
-        <div class="relative" style="height:250px;"><canvas id="trafficChart"></canvas></div>
-        <p class="ann mt-2">Organic Search clicks from Google, trailing 13 completed months. The current month is in progress and is not shown.</p>
-      </div>
-
-      <div class="means mb-5">
-        <div class="lbl">What this means</div>
-        <p>Search traffic is recovering, and the recovery is in the right place: the local city pages that bring in moving jobs. The biggest single page is an awareness blog article, so the next step is to keep strengthening the city and service pages that actually convert, which the work plan covers.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Where the search visitors land</div><div class="ann">last 90d vs previous 90d</div></div>
-          <table class="t"><thead><tr><th>Page type</th><th>Visits</th><th>Share</th><th>vs prev 90d</th></tr></thead><tbody id="mix"></tbody></table>
-          <p class="ann mt-3">The local city pages now draw the most visits and are growing fastest, which is exactly where moving enquiries come from.</p>
-        </div>
-        <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Largest pages from Google search</div><div class="ann">last 90d vs previous 90d</div></div>
-          <table class="t"><thead><tr><th>Page</th><th>Visits</th><th>vs prev 90d</th></tr></thead><tbody id="topPages"></tbody></table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== TAB 3 : MAP PRESENCE ===================== -->
-    <section data-panel="3">
-      <div class="means mb-4" style="background:#fff7ed;border-color:#fed7aa;">
-        <div class="lbl" style="color:#9a3412;">Why Google Maps matters most here</div>
-        <p style="color:#7c2d12;">Most people looking for movers find one through Google Maps and the local pack, and that is where buying intent is highest. It shows in your own numbers: about 88% of tracked calls come from the Google profiles. Four of your five locations already lead their local map. The growth is in two places, covered below: the wider service area around each office, and the newest location in Eau Claire.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-        <div class="panel p-4 flex flex-col justify-center">
-          <div class="cardhd mb-2">The foundation in place</div>
-          <div class="flex flex-wrap gap-2 mb-3">
-            <span class="chip good"><span class="v">2,265 · 4.9 to 5.0</span><span class="l">reviews across 5 profiles</span></span>
-            <span class="chip good"><span class="v">4 of 5</span><span class="l">locations lead their map</span></span>
-            <span class="chip good"><span class="v">88%</span><span class="l">of calls from Google / Maps</span></span>
-            <span class="chip"><span class="v">MN &amp; WI</span><span class="l">Twin Cities + St Croix Valley</span></span>
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:16px">
+          <div>
+            <div class="eyebrow">Marketing Performance Report</div>
+            <h1 class="display" style="font-size:clamp(1.5rem,2.8vw,2.1rem); margin-top:8px">Daymakers Moving &amp; Storage</h1>
+            <p class="muted small" style="margin-top:4px">5 locations (MN &amp; WI) &middot; prepared by HQDM</p>
           </div>
-          <p class="text-[13px] leading-relaxed text-slate-700">Daymakers holds a top rating in every market and one of the largest review bases of any mover in these areas. These are the exact signals Google rewards on the map, and they are already winning four of the five home markets outright.</p>
+          <span class="pill"><span class="dot"></span>Through May 2026</span>
         </div>
-        <div class="panel p-4">
-          <div class="cardhd mb-2">The opportunity · two clear places to grow</div>
-          <p class="text-[13px] leading-relaxed text-slate-700 mb-2">You dominate the searches right next to each office. The growth is in the wider service area, and in the newest market:</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="chip"><span class="v">"movers near me"</span></span>
-            <span class="chip"><span class="v">"moving company"</span></span>
-            <span class="chip"><span class="v">"local movers"</span></span>
-            <span class="chip" style="background:#fff7ed;border-color:#fed7aa;"><span class="v" style="color:#9a3412;">Eau Claire</span></span>
-          </div>
-          <p class="ann mt-3">On the generic searches that bring the most calls, you rank at the top next to each office but slip further out in the service area. Eau Claire is the newest profile and the one place to build from the ground up.</p>
-        </div>
-      </div>
 
-      <div class="mb-4">
-        <div class="cardhd mb-2">Where Daymakers already wins on the map</div>
-        <div class="panel p-4">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div>
-              <div class="text-[11px] font-bold uppercase tracking-wide mb-2" style="color:#047857;">Top of the map across each home market</div>
-              <table class="t"><thead><tr><th>Location</th><th>Reviews</th><th>Map position</th></tr></thead><tbody>
-                <tr><td>Hudson, WI</td><td>635</td><td>#1, all searches</td></tr>
-                <tr><td>Bloomington, MN</td><td>729</td><td>#1 home market</td></tr>
-                <tr><td>Roseville, MN</td><td>457</td><td>#1 home market</td></tr>
-                <tr><td>Lake Elmo, MN</td><td>422</td><td>#1 to #2 home market</td></tr>
-                <tr><td>Eau Claire, WI</td><td>22</td><td>building</td></tr>
-              </tbody></table>
-              <p class="ann mt-2">Map position on the core searches in each location's immediate area. Hudson is the standout, leading every search across its whole area.</p>
+        <div class="tabs no-print">
+          <button class="tab-btn active" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
+          <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">Google search performance</span></button>
+          <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps across 5 pins</span></button>
+          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Completed and upcoming</span></button>
+        </div>
+
+        <hr class="divider" style="margin:18px 0">
+
+        <!-- TAB 1: LEAD GENERATION -->
+        <section data-panel="1">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Phone leads are now tracked in CallRail. The first complete months show a healthy volume: <strong>786 tracked calls in April and 583 in May</strong>, with the busy spring season the high point.</li>
+            <li>About <strong>88% of those calls come straight from Google Business and Maps</strong>, so the Google profiles are by far the biggest source of new business.</li>
+            <li>The five Google profiles hold a combined <strong>2,265 reviews at 4.9 to 5.0 stars</strong>, one of the strongest review bases in the markets you serve, and four of the five lead their local map.</li>
+          </ul>
+          <div class="kpis" style="margin-bottom:18px">
+            <div class="kpi"><div class="l">Tracked calls &middot; April</div><div class="n">786</div><div class="s">first full month of tracking</div></div>
+            <div class="kpi"><div class="l">Tracked calls &middot; May</div><div class="n">583</div><div class="s">after the spring peak</div></div>
+            <div class="kpi"><div class="l">From Google / Maps</div><div class="n">88%</div><div class="s">of all tracked calls</div></div>
+            <div class="kpi"><div class="l">Reviews &middot; 5 profiles</div><div class="n">2,265</div><div class="s">4.9 to 5.0 stars</div></div>
+          </div>
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Phone leads per month</h3><span class="muted tiny">CallRail &middot; completed months</span></div>
+            <div class="chart-wrap"><canvas id="leadsChart"></canvas></div>
+            <p class="chart-note">Tracked inbound calls by month. Call tracking went live in April, so April and May are the first full months on record. The current month is in progress and is not shown.</p>
+          </div>
+          <div class="card chart-card">
+            <div class="chart-head"><h3 class="display">Where your phone leads come from</h3><span class="muted tiny">CallRail &middot; since tracking began</span></div>
+            <div class="chart-wrap"><canvas id="sourceChart"></canvas></div>
+            <p class="chart-note">Tracked inbound calls by source. Each Google profile uses its own tracking number, which is why the number on a profile differs from the one on the website. That is how the source of every call is identified, not an error. Google Business and Maps account for about 88% of calls.</p>
+          </div>
+        </section>
+
+        <!-- TAB 2: WEBSITE TRAFFIC -->
+        <section data-panel="2" style="display:none">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Website visits from Google search dipped through 2025 to a low in February, then <strong>rebounded every month since</strong>, from 359 in February to about <strong>706 in May</strong>.</li>
+            <li>The recovery is led by the <strong>local city pages</strong> (Hudson, Lake Elmo, Bloomington, Roseville), which all climbed in Google over the last three months.</li>
+            <li>A large share of visits land on one popular blog article about Minnesota. That is good for awareness, but the new business comes through the city pages and the Google profiles, which is where the focus sits.</li>
+          </ul>
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Website visits from Google search, by month</h3><span class="muted tiny">May 2026: <strong>706 visits</strong></span></div>
+            <div class="chart-wrap"><canvas id="trafficChart"></canvas></div>
+            <p class="chart-note">Organic Search clicks from Google, trailing 13 completed months. The current month is in progress and is not shown.</p>
+          </div>
+          <div class="notice notice--good notice__col" style="margin-bottom:18px">
+            <span class="tag tag--mint">What this means</span>
+            <p>Search traffic is recovering, and the recovery is in the right place: the local city pages that bring in moving jobs. The biggest single page is an awareness blog article, so the next step is to keep strengthening the city and service pages that actually convert, which the work plan covers.</p>
+          </div>
+          <div class="grid grid--2" style="gap:16px; align-items:start">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Where the search visitors land</div>
+              <table class="dt">
+                <thead><tr><th>Page type</th><th>Visits</th><th>Share</th><th>vs prev 90d</th></tr></thead>
+                <tbody id="mix"></tbody>
+              </table>
+              <p class="chart-note">The local city pages now draw the most visits and are growing fastest, which is exactly where moving enquiries come from.</p>
             </div>
-            <div>
-              <div class="text-[11px] font-bold uppercase tracking-wide mb-2" style="color:#0e7490;">Hudson shows what is possible</div>
-              <p class="text-[13px] text-slate-700 leading-relaxed">Hudson leads the map for every search, all the way across its service area, not just next to the office. It does it with a strong review base (635) and a well-built city page. That is the model for lifting Roseville, Lake Elmo, and Bloomington across their wider areas too.</p>
-              <div class="text-[11px] font-bold uppercase tracking-wide mb-2 mt-4" style="color:#047857;">The assets already in place</div>
-              <ul class="space-y-1 text-[13px] text-slate-700">
-                <li>A combined <strong>2,265 reviews at 4.9 to 5.0</strong>, among the strongest in these markets.</li>
-                <li><strong>Four of five</strong> locations leading their home map.</li>
-                <li>Search traffic rebounding every month since February, led by the city pages.</li>
-              </ul>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Largest pages from Google search</div>
+              <table class="dt">
+                <thead><tr><th>Page</th><th>Visits</th><th>vs prev 90d</th></tr></thead>
+                <tbody id="topPages"></tbody>
+              </table>
             </div>
           </div>
-        </div>
+        </section>
+
+        <!-- TAB 3: MAP PRESENCE -->
+        <section data-panel="3" style="display:none">
+          <div class="notice notice--warn notice__col" style="margin-bottom:16px">
+            <span class="tag tag--amber">Why Google Maps matters most here</span>
+            <p>Most people looking for movers find one through Google Maps and the local pack, and that is where buying intent is highest. It shows in your own numbers: about 88% of tracked calls come from the Google profiles. Four of your five locations already lead their local map. The growth is in two places, covered below: the wider service area around each office, and the newest location in Eau Claire.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start; margin-bottom:16px">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">The foundation in place</div>
+              <div class="chips-wrap" style="margin-bottom:12px">
+                <span class="vchip good"><b>2,265 &middot; 4.9 to 5.0</b> reviews across 5 profiles</span>
+                <span class="vchip good"><b>4 of 5</b> locations lead their map</span>
+                <span class="vchip good"><b>88%</b> of calls from Google / Maps</span>
+                <span class="vchip"><b>MN &amp; WI</b> Twin Cities + St Croix Valley</span>
+              </div>
+              <p class="small" style="color:var(--ink-soft)">Daymakers holds a top rating in every market and one of the largest review bases of any mover in these areas. These are the exact signals Google rewards on the map, and they are already winning four of the five home markets outright.</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">The opportunity &middot; two clear places to grow</div>
+              <p class="small" style="color:var(--ink-soft); margin-bottom:10px">You dominate the searches right next to each office. The growth is in the wider service area, and in the newest market:</p>
+              <div class="chips-wrap">
+                <span class="tag">movers near me</span>
+                <span class="tag">moving company</span>
+                <span class="tag">local movers</span>
+                <span class="tag tag--amber">Eau Claire</span>
+              </div>
+              <p class="chart-note" style="margin-top:12px">On the generic searches that bring the most calls, you rank at the top next to each office but slip further out in the service area. Eau Claire is the newest profile and the one place to build from the ground up.</p>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:16px">
+            <div class="cardhd" style="margin-bottom:12px">Where Daymakers already wins on the map</div>
+            <div class="grid grid--2" style="gap:18px; align-items:start">
+              <div>
+                <div class="tag tag--mint" style="margin-bottom:10px">Top of the map across each home market</div>
+                <table class="dt">
+                  <thead><tr><th>Location</th><th>Reviews</th><th>Map position</th></tr></thead>
+                  <tbody>
+                    <tr><td>Hudson, WI</td><td>635</td><td>#1, all searches</td></tr>
+                    <tr><td>Bloomington, MN</td><td>729</td><td>#1 home market</td></tr>
+                    <tr><td>Roseville, MN</td><td>457</td><td>#1 home market</td></tr>
+                    <tr><td>Lake Elmo, MN</td><td>422</td><td>#1 to #2 home market</td></tr>
+                    <tr><td>Eau Claire, WI</td><td>22</td><td>building</td></tr>
+                  </tbody>
+                </table>
+                <p class="chart-note">Map position on the core searches in each location's immediate area. Hudson is the standout, leading every search across its whole area.</p>
+              </div>
+              <div>
+                <div class="tag" style="margin-bottom:10px">Hudson shows what is possible</div>
+                <p class="small" style="color:var(--ink-soft)">Hudson leads the map for every search, all the way across its service area, not just next to the office. It does it with a strong review base (635) and a well-built city page. That is the model for lifting Roseville, Lake Elmo, and Bloomington across their wider areas too.</p>
+                <div class="tag tag--mint" style="margin:14px 0 8px">The assets already in place</div>
+                <ul class="ov">
+                  <li>A combined <strong>2,265 reviews at 4.9 to 5.0</strong>, among the strongest in these markets.</li>
+                  <li><strong>Four of five</strong> locations leading their home map.</li>
+                  <li>Search traffic rebounding every month since February, led by the city pages.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="notice notice--good notice__col">
+            <span class="tag tag--mint">The single highest-value move</span>
+            <p>Eau Claire is the newest location and the one with the most room. Its Google profile currently sends visitors to the homepage instead of its own Eau Claire page, and its review base (22) is far behind the others. Pointing the profile to a proper Eau Claire page and growing that review base is the highest-return move available, and it is the first item in the work plan.</p>
+          </div>
+        </section>
+
+        <!-- TAB 4: WORK PLAN -->
+        <section data-panel="4" style="display:none">
+          <div class="notice notice__col" style="margin-bottom:16px">
+            <span class="tag">Our recommendations &middot; from the custom strategy</span>
+            <table class="dt">
+              <thead><tr><th>Recommendation</th><th>Priority</th></tr></thead>
+              <tbody id="recommendations"></tbody>
+            </table>
+            <p class="chart-note">The Google profile and service-area work is the highest-value and does not require new pages. The same monthly page work is pointed at strengthening the five locations and the searches that bring calls.</p>
+          </div>
+          <div class="grid grid--2" style="gap:16px; align-items:start">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Completed &middot; recent</div>
+              <table class="dt">
+                <thead><tr><th>Work delivered</th><th>When</th></tr></thead>
+                <tbody id="completed"></tbody>
+              </table>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">In the pipeline &middot; June</div>
+              <table class="dt">
+                <thead><tr><th>Scheduled</th><th>When</th></tr></thead>
+                <tbody id="pipeline"></tbody>
+              </table>
+              <p class="chart-note">The monthly work continues, with the focus moving toward the five locations and the wider service area around each.</p>
+            </div>
+          </div>
+        </section>
+
       </div>
-
-      <div class="means" style="background:#f0fdf4;border-color:#bbf7d0;">
-        <div class="lbl" style="color:#166534;">The single highest-value move</div>
-        <p style="color:#14532d;">Eau Claire is the newest location and the one with the most room. Its Google profile currently sends visitors to the homepage instead of its own Eau Claire page, and its review base (22) is far behind the others. Pointing the profile to a proper Eau Claire page and growing that review base is the highest-return move available, and it is the first item in the work plan.</p>
+      <div class="win__status">
+        <span class="cell grow">Marketing Performance Report &middot; Daymakers Moving &amp; Storage</span>
+        <span class="cell">Through May 2026</span>
+        <span class="cell">Confidential</span>
       </div>
-    </section>
+    </div>
 
-    <!-- ===================== TAB 4 : WORK PLAN ===================== -->
-    <section data-panel="4">
-      <div class="panel p-4 mb-4" style="border-color:#bae6fd;background:linear-gradient(180deg,#ffffff 0%,#f0f9ff 100%);">
-        <div class="flex items-baseline justify-between mb-2"><div class="cardhd" style="color:#0369a1;">Our recommendations · from the custom strategy</div><div class="ann">the priorities that move the needle next</div></div>
-        <table class="t"><thead><tr><th>Recommendation</th><th>Priority</th></tr></thead><tbody id="recommendations"></tbody></table>
-        <p class="ann mt-3">The Google profile and service-area work is the highest-value and does not require new pages. The same monthly page work is pointed at strengthening the five locations and the searches that bring calls.</p>
-      </div>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
-        <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Completed · recent</div><div class="ann">delivered</div></div>
-          <table class="t"><thead><tr><th>Work delivered</th><th>When</th></tr></thead><tbody id="completed"></tbody></table>
-        </div>
-        <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">In the pipeline · June</div><div class="ann">scheduled</div></div>
-          <table class="t"><thead><tr><th>Scheduled</th><th>When</th></tr></thead><tbody id="pipeline"></tbody></table>
-          <p class="ann mt-3">The monthly work continues, with the focus moving toward the five locations and the wider service area around each.</p>
-        </div>
-      </div>
-    </section>
+    <p class="tiny muted center" style="margin-top:18px">Prepared by HQDM Search Intelligence &middot; daymakersmoving.com &middot; Confidential</p>
+  </div>
+</main>
 
-    <footer class="ftr mt-6 pt-3 border-t border-slate-200 text-[10px] flex flex-wrap items-center justify-between gap-2">
-      <div class="font-semibold">PREPARED BY HQDM SEARCH INTELLIGENCE</div>
-      <div>DAYMAKERSMOVING.COM · Confidential</div>
-    </footer>
-  </main>
+<script>
+var DATA = {
+  sources: [
+    ['Google Business / Maps', 1354],
+    ['Google Organic search', 50],
+    ['Direct', 49],
+    ['Google Ads', 37],
+    ['Local Services Ads', 33],
+    ['Yelp', 10],
+    ['Other', 15]
+  ],
+  monthly: { months: ['Apr','May'], calls: [786,583] },
+  traffic: { months: ['May 25','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan 26','Feb','Mar','Apr','May'],
+             organic: [1208,676,591,584,715,526,432,415,465,359,491,704,706] },
+  mix: [
+    ['Local city pages',366,736,'40%'],
+    ['Blog / guides',607,717,'39%'],
+    ['Home and core pages',172,333,'18%'],
+    ['Service pages',21,30,'2%']
+  ],
+  toppages: [
+    ['20 fun facts about Minnesota (blog)',512,634],
+    ['Hudson movers page',201,367],
+    ['Homepage',143,278],
+    ['Lake Elmo movers page',0,144],
+    ['Bloomington movers page',75,109],
+    ['Roseville movers page',58,70]
+  ],
+  recommendations: [
+    {cat:'Google Business Profile', items:[
+      ['Point the Eau Claire profile to its own Eau Claire page, not the homepage','High'],
+      ['Confirm categories and service areas are consistent across all five profiles','Medium']]},
+    {cat:'Local focus', items:[
+      ['Win the generic searches (movers near me, moving company, local movers) across the wider service area of each location','High'],
+      ['Apply the Hudson model (strong reviews + a complete city page) to Roseville, Lake Elmo, and Bloomington','High'],
+      ['Grow the Eau Claire review base toward the level of the other markets','High'],
+      ['Custom Local Placements (managed local listings across the locations)','Medium']]},
+    {cat:'Website', items:[
+      ['Redirect the removed Woodbury page so its search value is not lost','High'],
+      ['Point the Roseville profile and internal links at the stronger of the two existing long-distance pages so they stop competing (high-value work)','Medium'],
+      ['Aim the monthly page work at the searches with real demand across the wider service area of each location','Medium']]},
+    {cat:'Off-page', items:[
+      ['Audit the backlink profile and disavow the spam','Medium']]}
+  ],
+  completed: [
+    {cat:'Reporting', items:[['Monthly performance report','ongoing'],['Call tracking connected (CallRail)','Jun']]},
+    {cat:'Search intelligence', items:[['Google Maps and keyword study across all 5 locations','Jun'],['Competitor analysis per market','Jun']]},
+    {cat:'Website and on-page', items:[['On-page optimisation, service and city pages','monthly'],['Blog content','monthly']]},
+    {cat:'Local profiles', items:[['Profile management across the 5 locations','ongoing'],['GBP posts, video and social','monthly']]},
+    {cat:'Local placements', items:[['Custom Local Placements','monthly']]}
+  ],
+  pipeline: [
+    {cat:'Reporting', items:[['Monthly performance report','Jun']]},
+    {cat:'Local profiles', items:[['GBP posts, video and social across the 5 locations','Jun']]},
+    {cat:'Website and on-page', items:[['Service and city pages','Jun'],['Blog content','Jun']]},
+    {cat:'Local placements', items:[['Custom Local Placements','Jun']]},
+    {cat:'Off-page', items:[['Press releases','Jun']]},
+    {cat:'Technical', items:[['Indexing check and technical fixes','Jun']]}
+  ]
+};
 
-  <script>
-    const DATA = {
-      sources: [
-        ['Google Business / Maps', 1354],
-        ['Google Organic search', 50],
-        ['Direct', 49],
-        ['Google Ads', 37],
-        ['Local Services Ads', 33],
-        ['Yelp', 10],
-        ['Other', 15],
-      ],
-      monthly: { months:['Apr','May'], calls:[786,583] },
-      traffic: { months:['May 25','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan 26','Feb','Mar','Apr','May'],
-                 organic:[1208,676,591,584,715,526,432,415,465,359,491,704,706] },
-      mix: [
-        ['Local city pages',366,736,'40%'],
-        ['Blog / guides',607,717,'39%'],
-        ['Home and core pages',172,333,'18%'],
-        ['Service pages',21,30,'2%'],
-      ],
-      toppages: [
-        ['20 fun facts about Minnesota (blog)',512,634],
-        ['Hudson movers page',201,367],
-        ['Homepage',143,278],
-        ['Lake Elmo movers page',0,144],
-        ['Bloomington movers page',75,109],
-        ['Roseville movers page',58,70],
-      ],
-      recommendations: [
-        {cat:'Google Business Profile', items:[
-          ['Point the Eau Claire profile to its own Eau Claire page, not the homepage','High'],
-          ['Confirm categories and service areas are consistent across all five profiles','Medium']]},
-        {cat:'Local focus', items:[
-          ['Win the generic searches (movers near me, moving company, local movers) across the wider service area of each location','High'],
-          ['Apply the Hudson model (strong reviews + a complete city page) to Roseville, Lake Elmo, and Bloomington','High'],
-          ['Grow the Eau Claire review base toward the level of the other markets','High'],
-          ['Custom Local Placements (managed local listings across the locations)','Medium']]},
-        {cat:'Website', items:[
-          ['Redirect the removed Woodbury page so its search value is not lost','High'],
-          ['Point the Roseville profile and internal links at the stronger of the two existing long-distance pages so they stop competing (high-value work)','Medium'],
-          ['Aim the monthly page work at the searches with real demand across the wider service area of each location','Medium']]},
-        {cat:'Off-page', items:[
-          ['Audit the backlink profile and disavow the spam','Medium']]},
-      ],
-      completed: [
-        {cat:'Reporting', items:[['Monthly performance report','ongoing'],['Call tracking connected (CallRail)','Jun']]},
-        {cat:'Search intelligence', items:[['Google Maps and keyword study across all 5 locations','Jun'],['Competitor analysis per market','Jun']]},
-        {cat:'Website and on-page', items:[['On-page optimisation, service and city pages','monthly'],['Blog content','monthly']]},
-        {cat:'Local profiles', items:[['Profile management across the 5 locations','ongoing'],['GBP posts, video and social','monthly']]},
-        {cat:'Local placements', items:[['Custom Local Placements','monthly']]},
-      ],
-      pipeline: [
-        {cat:'Reporting', items:[['Monthly performance report','Jun']]},
-        {cat:'Local profiles', items:[['GBP posts, video and social across the 5 locations','Jun']]},
-        {cat:'Website and on-page', items:[['Service and city pages','Jun'],['Blog content','Jun']]},
-        {cat:'Local placements', items:[['Custom Local Placements','Jun']]},
-        {cat:'Off-page', items:[['Press releases','Jun']]},
-        {cat:'Technical', items:[['Indexing check and technical fixes','Jun']]},
-      ],
-    };
+function chg(b,a){ if(b===0&&a>0) return '<span class="new">New</span>'; if(b===a) return '<span class="flat">0%</span>'; var p=Math.round((a-b)/b*100); return '<span class="'+(p>0?'up':'dn')+'">'+(p>0?'+':'')+p+'%</span>'; }
+document.getElementById('mix').innerHTML = DATA.mix.map(function(r){ var s=r[0],p=r[1],v=r[2],sh=r[3];
+  return '<tr><td>'+s+'</td><td>'+v.toLocaleString()+'</td><td>'+sh+'</td><td>'+chg(p,v)+'</td></tr>'; }).join('');
+document.getElementById('topPages').innerHTML = DATA.toppages.map(function(r){ var s=r[0],p=r[1],v=r[2];
+  return '<tr><td>'+s+'</td><td>'+v.toLocaleString()+'</td><td>'+chg(p,v)+'</td></tr>'; }).join('');
 
-    function chg(b,a){ if(b===0&&a>0) return '<span class="newt">New</span>'; if(b===a) return '<span class="flat">0%</span>'; const p=Math.round((a-b)/b*100); return `<span class="${p>0?'up':'dn'}">${p>0?'+':''}${p}%</span>`; }
-    document.getElementById('mix').innerHTML = DATA.mix.map(([s,p,v,sh]) =>
-      `<tr><td>${s}</td><td>${v.toLocaleString()}</td><td>${sh}</td><td>${chg(p,v)}</td></tr>`).join('');
-    document.getElementById('topPages').innerHTML = DATA.toppages.map(([s,p,v]) =>
-      `<tr><td>${s}</td><td>${v.toLocaleString()}</td><td>${chg(p,v)}</td></tr>`).join('');
+var grpRows = function(g){ return '<tr class="catrow"><td>'+g.cat+'<span class="badge">'+g.items.length+'</span></td><td></td></tr>' +
+  g.items.map(function(it){ return '<tr class="itemrow"><td>'+it[0]+'</td><td>'+it[1]+'</td></tr>'; }).join(''); };
+document.getElementById('recommendations').innerHTML = DATA.recommendations.map(grpRows).join('');
+document.getElementById('completed').innerHTML = DATA.completed.map(grpRows).join('');
+document.getElementById('pipeline').innerHTML = DATA.pipeline.map(grpRows).join('');
 
-    const grpRows = g => `<tr class="catrow"><td>${g.cat}<span class="badge">${g.items.length}</span></td><td></td></tr>` +
-      g.items.map(([name,when]) => `<tr class="urlrow"><td>${name}</td><td>${when}</td></tr>`).join('');
-    document.getElementById('recommendations').innerHTML = DATA.recommendations.map(grpRows).join('');
-    document.getElementById('completed').innerHTML = DATA.completed.map(grpRows).join('');
-    document.getElementById('pipeline').innerHTML = DATA.pipeline.map(grpRows).join('');
-
-    const charts = {};
-    function renderLeads(){
-      const m = DATA.monthly;
-      return new Chart(document.getElementById('leadsChart'), { type:'line',
-        data:{ labels:m.months, datasets:[
-          {label:'Tracked calls',data:m.calls,borderColor:'#0e7490',backgroundColor:'#0e749014',borderWidth:3,tension:0.25,pointRadius:4,pointHoverRadius:6,fill:false,spanGaps:false} ] },
-        options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'nearest',intersect:true},
-          plugins:{ legend:{position:'bottom',labels:{font:{size:10},boxWidth:16}},
-            tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=> `${c.raw.toLocaleString()} calls`}} },
-          scales:{ x:{grid:{display:false},ticks:{font:{size:11}}}, y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:9}},title:{display:true,text:'calls / month',font:{size:9,weight:'600'},color:'#64748b'}} } } });
-    }
-    function renderSources(){
-      const rows = DATA.sources;
-      return new Chart(document.getElementById('sourceChart'), { type:'bar',
-        data:{ labels:rows.map(r=>r[0]), datasets:[{label:'Tracked calls',data:rows.map(r=>r[1]),
-          backgroundColor:rows.map((r,i)=> i===0 ? '#0e7490' : '#94a3b8'),borderRadius:4}] },
-        options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
-          plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=>`${c.raw.toLocaleString()} calls`}} },
-          scales:{ x:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:10}}}, y:{grid:{display:false},ticks:{font:{size:11}}} } } });
-    }
-    function renderTraffic(){ return new Chart(document.getElementById('trafficChart'), { type:'line',
-      data:{ labels:DATA.traffic.months, datasets:[ {label:'Visits from Google search',data:DATA.traffic.organic,borderColor:'#06b6d4',backgroundColor:'#06b6d422',borderWidth:3,tension:0.25,pointRadius:3,pointHoverRadius:6,fill:true} ] },
-      options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
-        plugins:{ legend:{position:'bottom',labels:{font:{size:10},boxWidth:12}}, tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=>`${c.dataset.label}: ${c.raw!=null?c.raw.toLocaleString():'-'}`}} },
-        scales:{ x:{grid:{display:false},ticks:{font:{size:10}}}, y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:9}},title:{display:true,text:'visits / month',font:{size:9,weight:'600'},color:'#64748b'}} } } }); }
-
-    function showTab(n){
-      document.querySelectorAll('[data-tab]').forEach(el => el.classList.toggle('active', el.dataset.tab == n));
-      document.querySelectorAll('[data-panel]').forEach(el => el.style.display = el.dataset.panel == n ? '' : 'none');
-      if (n==1 && !charts.leads) charts.leads = renderLeads();
-      if (n==1 && !charts.sources) charts.sources = renderSources();
-      if (n==2 && !charts.traffic) charts.traffic = renderTraffic();
-    }
-    showTab(1);
-  </script>
+window.CHART_FACTORIES = {
+  leadsChart: function (cv) { return RPT.line(cv, DATA.monthly.months, [{ label: 'Tracked calls', data: DATA.monthly.calls, color: RPT.C.mint, fill: false }], 'calls / month'); },
+  trafficChart: function (cv) { return RPT.line(cv, DATA.traffic.months, [{ label: 'Visits from Google search', data: DATA.traffic.organic, color: RPT.C.violet, fill: true }], 'visits / month'); },
+  sourceChart: function (cv) {
+    var rows = DATA.sources;
+    return RPT.barH(cv, rows.map(function (r) { return r[0]; }), rows.map(function (r) { return r[1]; }),
+      rows.map(function (r, i) { return i === 0 ? RPT.C.mint : RPT.C.grey; }),
+      function (c) { return c.parsed.x.toLocaleString() + ' calls'; });
+  }
+};
+</script>
+<script src="../assets/js/chart.umd.min.js"></script>
+<script src="../assets/js/report.js"></script>
+<script>showTab(1);</script>
 </body>
 </html>

@@ -1,390 +1,305 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex, nofollow, noarchive" />
-  <title>Deep Relief Custom Strategy · HQDM</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = { theme: { extend: {
-      fontFamily: { sans: ['Inter','system-ui','sans-serif'], serif: ['Lora','ui-serif','Georgia','serif'] },
-      colors: { brand: { 900:'#0b2545', 700:'#13315c', 500:'#1d5b8a', 300:'#8ecae6' } }
-    } } }
-  </script>
-  <style>
-    :root { --navy:#0b2a45; --teal:#0e7490; --teal2:#06b6d4; --tealbg:#ecfeff; --up:#16a34a; --line:#e5e9f0; }
-    body { font-family:'Inter',system-ui,sans-serif; }
-    .shell { max-width: 900px; }
-    .eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; }
-    .panel { background:#fff; border:1px solid var(--line); border-radius:0.7rem; }
-    h2.sec { font-family:'Lora',serif; font-weight:700; font-size:1.35rem; color:#0b1220; letter-spacing:-0.01em; }
-    .lead { font-size:0.95rem; line-height:1.65; color:#1f2937; }
-    .chip { display:inline-flex; align-items:baseline; gap:0.35rem; background:#f1f5f9; border:1px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; }
-    .chip .v { font-weight:800; font-size:0.8rem; color:#0b1220; } .chip .l { font-size:0.6rem; font-weight:600; color:#64748b; text-transform:uppercase; letter-spacing:0.04em; }
-    .chip.good { background:#ecfdf5; border-color:#a7f3d0; } .chip.good .v { color:#047857; }
-    .chip.warn { background:#fef2f2; border-color:#fecaca; } .chip.warn .v { color:#b91c1c; }
-    .comp li { display:flex; gap:0.5rem; align-items:flex-start; font-size:0.86rem; color:#334155; line-height:1.5; margin:0.4rem 0; }
-    .comp li::before { content:''; flex-shrink:0; width:0.4rem; height:0.4rem; border-radius:999px; background:var(--teal2); margin-top:0.5rem; }
-    .comp b { color:#0b1220; }
-    /* strategy cards */
-    .strat { background:#fff; border:1px solid var(--line); border-left:4px solid var(--navy); border-radius:0.7rem; padding:1.05rem 1.2rem; margin-bottom:0.9rem; }
-    .strat-hd { display:flex; align-items:center; gap:0.65rem; margin-bottom:0.55rem; flex-wrap:wrap; }
-    .snum { flex-shrink:0; width:1.75rem; height:1.75rem; border-radius:0.4rem; background:var(--navy); color:#fff; font-weight:800; font-size:0.85rem; display:flex; align-items:center; justify-content:center; }
-    .strat-hd h3 { font-family:'Lora',serif; font-weight:700; font-size:1.15rem; color:#0b1220; }
-    .strat-hd .tag { font-size:0.6rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--teal); background:var(--tealbg); border:1px solid #bae6fd; border-radius:999px; padding:0.12rem 0.55rem; }
-    .wwh .row { display:grid; grid-template-columns:54px 1fr; gap:0.65rem; padding:0.5rem 0; border-top:1px solid #f1f5f9; }
-    .wwh .row:first-child { border-top:0; padding-top:0.2rem; }
-    .wwh .lbl { font-size:0.58rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal); padding-top:0.18rem; }
-    .wwh p { font-size:0.86rem; color:#334155; line-height:1.55; }
-    .wwh p b { color:#0b1220; }
-    .callout { border-radius:0.6rem; padding:0.85rem 1rem; }
-    .callout .l { font-size:0.58rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; }
-    .callout p { font-size:0.86rem; line-height:1.55; margin-top:0.15rem; }
-    .mini li { font-size:0.85rem; color:#334155; line-height:1.5; margin:0.35rem 0; }
-    .mini b { color:#0b1220; }
-    /* dropdowns */
-    details.drop { background:#fff; border:1px solid var(--line); border-radius:0.7rem; margin-bottom:0.9rem; overflow:hidden; }
-    details.drop.strat-drop { border-left:4px solid var(--navy); }
-    details.drop > summary { list-style:none; cursor:pointer; display:flex; align-items:flex-start; gap:0.9rem; padding:0.9rem 1.1rem; }
-    details.drop > summary::-webkit-details-marker { display:none; }
-    details.drop > summary:hover { background:#fafcff; }
-    .sum-main { flex:1; min-width:0; }
-    .sum-hd { display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.3rem; }
-    .sum-hd h3 { font-family:'Lora',serif; font-weight:700; font-size:1.12rem; color:#0b1220; }
-    .sum-hd .tag { font-size:0.6rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--teal); background:var(--tealbg); border:1px solid #bae6fd; border-radius:999px; padding:0.12rem 0.55rem; }
-    .sum-txt { font-size:0.88rem; color:#475569; line-height:1.5; }
-    .sum-txt b { color:#0b1220; }
-    .lm-btn { flex-shrink:0; display:inline-flex; align-items:center; gap:0.35rem; font-size:0.64rem; font-weight:800; letter-spacing:0.04em; text-transform:uppercase; color:var(--teal); background:var(--tealbg); border:1px solid #bae6fd; border-radius:999px; padding:0.32rem 0.7rem; white-space:nowrap; margin-top:0.1rem; }
-    .lm-btn .chev { font-size:0.62rem; transition:transform .2s; }
-    details.drop[open] .lm-btn .chev { transform:rotate(180deg); }
-    .lm-btn .sl { display:none; }
-    details.drop[open] .lm-btn .lm { display:none; }
-    details.drop[open] .lm-btn .sl { display:inline; }
-    .drop-body { padding:0 1.1rem 1rem; }
-    .drop-body.has-top { border-top:1px solid #f1f5f9; padding-top:0.85rem; }
-    .drop-body > :first-child { margin-top:0; }
-    .drop-body h3.sub-h { font-family:'Lora',serif; font-weight:700; font-size:1.02rem; color:#0b1220; margin:1.1rem 0 0.4rem; }
-    details.drop-bare > summary { list-style:none; cursor:pointer; display:flex; align-items:flex-start; gap:0.9rem; }
-    details.drop-bare > summary::-webkit-details-marker { display:none; }
-    .drop-body-bare { padding-top:0.1rem; }
-    /* evidence grid tables */
-    table.grid { width:100%; border-collapse:collapse; font-size:0.8rem; margin-top:0.3rem; }
-    table.grid th { text-align:left; font-size:0.58rem; text-transform:uppercase; letter-spacing:0.06em; color:#64748b; border-bottom:1px solid var(--line); padding:0.3rem 0.4rem; }
-    table.grid td { padding:0.3rem 0.4rem; border-bottom:1px solid #f1f5f9; color:#334155; }
-    table.grid td b { color:#0b1220; }
-    .pill { font-size:0.6rem; font-weight:700; border-radius:999px; padding:0.05rem 0.45rem; }
-    .pill.own { background:#ecfdf5; color:#047857; } .pill.win { background:#fff7ed; color:#c2410c; } .pill.skip { background:#f1f5f9; color:#64748b; }
-    @media print {
-      .panel,.strat,details.drop{box-shadow:none;}
-      details.drop .drop-body, details.drop-bare .drop-body-bare{display:block !important;}
-      .lm-btn{display:none;}
-      @page{size:portrait;margin:0.5in;}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Deep Relief Custom Strategy · HQDM</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/hqdm.css">
 </head>
-<body class="bg-slate-100 text-slate-800 antialiased">
+<body>
 
-  <div class="text-white" style="background:linear-gradient(135deg,#0a2540 0%,#123a5e 55%,#1a4e78 100%);">
-    <div class="shell mx-auto px-6 sm:px-8 pt-8 pb-7">
-      <div class="eyebrow text-brand-300 mb-3">HQDM Search Intelligence · Custom Strategy</div>
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
-        <div>
-          <h1 class="font-serif font-bold tracking-tight text-3xl sm:text-4xl leading-tight">Deep Relief</h1>
-          <div class="text-slate-300 mt-2 text-sm sm:text-base">What, why, and how for each strategy</div>
+<div class="nav-wrap no-print">
+  <nav class="nav container" style="max-width:920px">
+    <a class="brand" href="index.html"><span class="mark">H</span> <span>HQDM<small>search intelligence</small></span></a>
+    <button class="btn" onclick="window.print()" style="padding:8px 15px; font-size:0.8rem">Print / PDF</button>
+  </nav>
+</div>
+
+<main class="section section--tight">
+  <div class="container" style="max-width:920px">
+
+    <!-- header window -->
+    <div class="win" style="margin-bottom:22px">
+      <div class="win__bar">
+        <span class="ic">&#9635;</span>
+        <span class="ttl">custom-strategy.hqdm &ndash; Deep Relief</span>
+        <span class="win__controls"><b>_</b><b>&#9633;</b><b>&times;</b></span>
+      </div>
+      <div class="win__body">
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between">
+          <div>
+            <div class="eyebrow">Custom Strategy</div>
+            <h1 class="display" style="font-size:clamp(1.5rem,2.8vw,2.1rem); margin-top:8px">Deep Relief</h1>
+            <p class="muted small" style="margin-top:4px">What, why, and how for each strategy &middot; prepared by HQDM</p>
+          </div>
+          <span class="pill"><span class="dot dot--violet"></span>Internal &middot; June 2026</span>
         </div>
-        <div class="self-start sm:self-end inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-slate-100 whitespace-nowrap">Internal · June 2026</div>
       </div>
     </div>
-  </div>
 
-  <main class="shell mx-auto px-4 sm:px-6 py-6">
-
-    <!-- THE SHORT VERSION (plain-English summary) -->
-    <section class="mb-6">
-      <style>
-        .tldr { background:linear-gradient(180deg,#fffdf6 0%,#fffaec 100%); border:1px solid #fcd34d; border-left:5px solid #f59e0b; border-radius:0.7rem; padding:1.05rem 1.25rem; }
-        .tldr .kicker { font-size:0.58rem; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#b45309; }
-        .tldr h2.sv { font-family:'Lora',serif; font-weight:700; font-size:1.3rem; color:#0b1220; margin:0.2rem 0 0.1rem; }
-        .tldr .sub { font-size:0.8rem; color:#92722a; margin-bottom:0.7rem; }
-        .tldr ul { margin:0; }
-        .tldr li { display:flex; gap:0.6rem; align-items:flex-start; font-size:0.95rem; line-height:1.55; color:#1f2937; margin:0.5rem 0; }
-        .tldr li::before { content:''; flex-shrink:0; width:0.5rem; height:0.5rem; border-radius:999px; background:#f59e0b; margin-top:0.52rem; }
-        .tldr li b { color:#0b1220; }
-      </style>
-      <div class="tldr">
-        <div class="kicker">Start here</div>
-        <h2 class="sv">The short version</h2>
-        <div class="sub">Where this brand stands now, and what to focus on next.</div>
-        <ul>
-          <li><span>At their own location they rank at or near the top for almost every service. <b>That part is already won.</b></span></li>
-          <li><span>The real game is the <b>wider neighborhood</b>. Deep tissue, cupping, and sports already win the inner area, and the popular "near me" searches are one push from winning.</span></li>
-          <li><span><b>Their website holds them back, not their reputation.</b> Google likes them on Maps, but the service pages are thin and barely link to each other, so the homepage shows up instead of the right page.</span></li>
-          <li><span>Focus: make the service pages fuller and link them together, build a couple of pages people search for (like couples massage), and rebuild the Oak Hill page that was deleted.</span></li>
-          <li><span>Some of their best services are not even being tracked. Start watching cupping and sports massage so wins do not slip by.</span></li>
-        </ul>
-      </div>
-    </section>
+    <!-- THE SHORT VERSION -->
+    <div class="tldr" style="margin-bottom:24px">
+      <div class="kicker">Start here</div>
+      <h2>The short version</h2>
+      <div class="sub">Where this brand stands now, and what to focus on next.</div>
+      <ul>
+        <li><span>At their own location they rank at or near the top for almost every service. <b>That part is already won.</b></span></li>
+        <li><span>The real game is the <b>wider neighborhood</b>. Deep tissue, cupping, and sports already win the inner area, and the popular "near me" searches are one push from winning.</span></li>
+        <li><span><b>Their website holds them back, not their reputation.</b> Google likes them on Maps, but the service pages are thin and barely link to each other, so the homepage shows up instead of the right page.</span></li>
+        <li><span>Focus: make the service pages fuller and link them together, build a couple of pages people search for (like couples massage), and rebuild the Oak Hill page that was deleted.</span></li>
+        <li><span>Some of their best services are not even being tracked. Start watching cupping and sports massage so wins do not slip by.</span></li>
+      </ul>
+    </div>
 
     <!-- THE FRAME -->
-    <section class="mb-6">
-      <h2 class="sec mb-2">The frame</h2>
-      <div class="panel p-4" style="background:linear-gradient(180deg,#ffffff 0%,#f0fdf4 100%);">
-        <details class="drop-bare">
-          <summary>
-            <p class="lead" style="margin:0;flex:1;min-width:0;">At the clinic Deep Relief already ranks at or near the top for almost every service, so the growth is in the wider neighborhood, and the thing holding it back is the website structure, not the reputation.</p>
-            <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
-          </summary>
-          <div class="drop-body-bare">
-            <p class="lead" style="margin-top:0.7rem;">At the storefront Deep Relief ranks #1 to #3 on nearly every service, but that is table stakes. The number that matters is the rank averaged across the whole service-area grid, and that is where the real picture lives. Deep tissue, orthopedic, cupping, and sports already <b>own the inner three miles</b> (grid average under 5). The high-volume "near me" terms sit <b>orange across a wide band</b> (position 4 to 10), one push from green. And cupping and sports are untracked. Traffic held through the restructure (leads are up, organic flat), the live menu is healthy, and reviews lead the market. The focus is radius expansion on the services and directions where Deep Relief can take cells, south and west into the residential service area.</p>
-            <p class="text-[11px] text-slate-500 mt-3">Grid figures are Local Dominator (tracked terms, 13x13 / 6 mi) plus a fresh DataForSEO Maps grid (untracked services, 7x7 / 3 mi). All GBP work is the single managed Deep Relief pin.</p>
-          </div>
-        </details>
-        <div class="flex flex-wrap gap-2 mt-3">
-          <span class="chip good"><span class="v">3.7 / 4.2 / 4.3 / 4.6</span><span class="l">grid avg: deep tissue, cupping, sports, orthopedic</span></span>
-          <span class="chip"><span class="v">50+ orange cells</span><span class="l">on the near-me terms (winnable)</span></span>
-          <span class="chip warn"><span class="v">gray 103/133</span><span class="l">chiropractor = pin-only</span></span>
-          <span class="chip good"><span class="v">454 · 4.9</span><span class="l">reviews (a lead, not a gap)</span></span>
+    <section style="margin-bottom:24px">
+      <h2 class="sec">The frame</h2>
+      <details class="sdrop">
+        <summary>
+          <div class="sum-main"><span class="sum-txt">At the clinic Deep Relief already ranks at or near the top for almost every service, so the growth is in the wider neighborhood, and the thing holding it back is the website structure, not the reputation.</span></div>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+        </summary>
+        <div class="sdrop__body has-top">
+          <p class="lead2">At the storefront Deep Relief ranks #1 to #3 on nearly every service, but that is table stakes. The number that matters is the rank averaged across the whole service-area grid, and that is where the real picture lives. Deep tissue, orthopedic, cupping, and sports already <b>own the inner three miles</b> (grid average under 5). The high-volume "near me" terms sit <b>orange across a wide band</b> (position 4 to 10), one push from green. And cupping and sports are untracked. Traffic held through the restructure (leads are up, organic flat), the live menu is healthy, and reviews lead the market. The focus is radius expansion on the services and directions where Deep Relief can take cells, south and west into the residential service area.</p>
+          <p class="tiny muted" style="margin-top:12px">Grid figures are Local Dominator (tracked terms, 13x13 / 6 mi) plus a fresh DataForSEO Maps grid (untracked services, 7x7 / 3 mi). All GBP work is the single managed Deep Relief pin.</p>
         </div>
+      </details>
+      <div class="chips-wrap" style="margin-top:12px">
+        <span class="vchip good"><b>3.7 / 4.2 / 4.3 / 4.6</b> grid avg: deep tissue, cupping, sports, orthopedic</span>
+        <span class="vchip"><b>50+ orange cells</b> on the near-me terms (winnable)</span>
+        <span class="vchip bad"><b>gray 103/133</b> chiropractor = pin-only</span>
+        <span class="vchip good"><b>454 &middot; 4.9</b> reviews (a lead, not a gap)</span>
       </div>
     </section>
 
     <!-- THE RADIUS, BY SERVICE -->
-    <section class="mb-6">
-      <h2 class="sec mb-2">The radius, by service</h2>
-      <details class="drop">
+    <section style="margin-bottom:24px">
+      <h2 class="sec">The radius, by service</h2>
+      <details class="sdrop">
         <summary>
           <div class="sum-main"><span class="sum-txt">At the pin Deep Relief is #1 to #3 almost everywhere; across the grid, deep tissue, cupping, sports, and orthopedic already own the inner three miles, and the "near me" terms sit one push from green.</span></div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <p class="text-[14px] text-slate-700 leading-relaxed mb-2">Where each service stands across the service-area grid, and what to do with it. <b>Grid avg</b> = Maps rank averaged across the grid. <b>Organic avg</b> = organic position averaged across the service's non-brand queries (GSC, 90d). The gap between the two is the infrastructure problem: strong in Maps, buried in organic. "Own" = mostly green, defend. "Push" = mostly orange, convert to green. "Pin-only" = green at the store, gray across the grid.</p>
-          <table class="grid" style="table-layout:fixed">
-            <colgroup><col style="width:26%"><col style="width:11%"><col style="width:12%"><col style="width:29%"><col style="width:22%"></colgroup>
+        <div class="sdrop__body has-top">
+          <p class="small" style="color:var(--ink-soft); margin-bottom:8px">Where each service stands across the service-area grid, and what to do with it. <b>Grid avg</b> = Maps rank averaged across the grid. <b>Organic avg</b> = organic position averaged across the service's non-brand queries (GSC, 90d). The gap between the two is the infrastructure problem: strong in Maps, buried in organic. "Own" = mostly green, defend. "Push" = mostly orange, convert to green. "Pin-only" = green at the store, gray across the grid.</p>
+          <div style="overflow-x:auto">
+          <table class="dt">
             <thead><tr><th>Service</th><th>Grid avg</th><th>Organic avg</th><th>Shape</th><th>Move</th></tr></thead>
-            <tbody>
-              <tr><td><b>Deep tissue</b></td><td>3.7</td><td>12.8</td><td>green core, fades past 3 mi</td><td><span class="pill own">own + extend</span></td></tr>
-              <tr><td><b>Cupping</b> <span class="text-[10px] text-orange-700">untracked</span></td><td>4.2</td><td>23.7</td><td>mostly green inner</td><td><span class="pill own">track + defend</span></td></tr>
-              <tr><td><b>Sports massage</b> <span class="text-[10px] text-orange-700">untracked</span></td><td>4.3</td><td>18.5</td><td>mostly green inner</td><td><span class="pill own">track + defend</span></td></tr>
-              <tr><td><b>Orthopedic</b> (head term #1)</td><td>4.6</td><td>12.1</td><td>green core</td><td><span class="pill own">own + extend</span></td></tr>
-              <tr><td><b>Pregnancy / prenatal</b></td><td>6.8 - 8.2</td><td>40.4</td><td>green core, big orange band</td><td><span class="pill win">push (vs Sage Blossom)</span></td></tr>
-              <tr><td><b>Massage therapy near me</b></td><td>6.9</td><td>15.8</td><td>50 orange cells</td><td><span class="pill win">push</span></td></tr>
-              <tr><td><b>Swedish</b> <span class="text-[10px] text-orange-700">untracked</span></td><td>7.7</td><td>38.0</td><td>28 orange cells</td><td><span class="pill win">push</span></td></tr>
-              <tr><td><b>Lymphatic</b></td><td>9.9</td><td>28.9</td><td>orange (Lotus owns it)</td><td><span class="pill win">push, watch</span></td></tr>
-              <tr><td>Thai, acupuncture, dry needling</td><td>10.6 - 11.1</td><td>17.0</td><td>weak, mostly gray</td><td><span class="pill skip">low priority</span></td></tr>
-              <tr><td>Chiropractor</td><td>13.6</td><td>8.3</td><td>pin-only (gray 103/133)</td><td><span class="pill skip">pin-only</span></td></tr>
-              <tr><td>Cold laser</td><td>11.6</td><td>16.4</td><td>Laser Therapy Clinic owns 133/133</td><td><span class="pill skip">concede</span></td></tr>
+            <tbody style="text-align:left">
+              <tr><td><b>Deep tissue</b></td><td style="text-align:left">3.7</td><td style="text-align:left">12.8</td><td style="text-align:left">green core, fades past 3 mi</td><td style="text-align:left"><span class="tag tag--mint">own + extend</span></td></tr>
+              <tr><td><b>Cupping</b> <span class="tiny u-amber">untracked</span></td><td style="text-align:left">4.2</td><td style="text-align:left">23.7</td><td style="text-align:left">mostly green inner</td><td style="text-align:left"><span class="tag tag--mint">track + defend</span></td></tr>
+              <tr><td><b>Sports massage</b> <span class="tiny u-amber">untracked</span></td><td style="text-align:left">4.3</td><td style="text-align:left">18.5</td><td style="text-align:left">mostly green inner</td><td style="text-align:left"><span class="tag tag--mint">track + defend</span></td></tr>
+              <tr><td><b>Orthopedic</b> (head term #1)</td><td style="text-align:left">4.6</td><td style="text-align:left">12.1</td><td style="text-align:left">green core</td><td style="text-align:left"><span class="tag tag--mint">own + extend</span></td></tr>
+              <tr><td><b>Pregnancy / prenatal</b></td><td style="text-align:left">6.8 - 8.2</td><td style="text-align:left">40.4</td><td style="text-align:left">green core, big orange band</td><td style="text-align:left"><span class="tag tag--amber">push (vs Sage Blossom)</span></td></tr>
+              <tr><td><b>Massage therapy near me</b></td><td style="text-align:left">6.9</td><td style="text-align:left">15.8</td><td style="text-align:left">50 orange cells</td><td style="text-align:left"><span class="tag tag--amber">push</span></td></tr>
+              <tr><td><b>Swedish</b> <span class="tiny u-amber">untracked</span></td><td style="text-align:left">7.7</td><td style="text-align:left">38.0</td><td style="text-align:left">28 orange cells</td><td style="text-align:left"><span class="tag tag--amber">push</span></td></tr>
+              <tr><td><b>Lymphatic</b></td><td style="text-align:left">9.9</td><td style="text-align:left">28.9</td><td style="text-align:left">orange (Lotus owns it)</td><td style="text-align:left"><span class="tag tag--amber">push, watch</span></td></tr>
+              <tr><td>Thai, acupuncture, dry needling</td><td style="text-align:left">10.6 - 11.1</td><td style="text-align:left">17.0</td><td style="text-align:left">weak, mostly gray</td><td style="text-align:left"><span class="tag" style="color:var(--muted); background:rgba(92,99,110,0.1); border-color:var(--line-hard)">low priority</span></td></tr>
+              <tr><td>Chiropractor</td><td style="text-align:left">13.6</td><td style="text-align:left">8.3</td><td style="text-align:left">pin-only (gray 103/133)</td><td style="text-align:left"><span class="tag" style="color:var(--muted); background:rgba(92,99,110,0.1); border-color:var(--line-hard)">pin-only</span></td></tr>
+              <tr><td>Cold laser</td><td style="text-align:left">11.6</td><td style="text-align:left">16.4</td><td style="text-align:left">Laser Therapy Clinic owns 133/133</td><td style="text-align:left"><span class="tag" style="color:var(--muted); background:rgba(92,99,110,0.1); border-color:var(--line-hard)">concede</span></td></tr>
             </tbody>
           </table>
-          <p class="text-[13px] text-slate-600 leading-relaxed mt-2">The winnable cells cluster <b>south (Shady Hollow, Manchaca), southwest (Circle C, Bear Creek), and north (Westlake, Rollingwood)</b>. Downtown and east go gray and are proximity-bound, so they are not the place to spend.</p>
+          </div>
+          <p class="small" style="color:var(--muted); margin-top:10px">The winnable cells cluster <b>south (Shady Hollow, Manchaca), southwest (Circle C, Bear Creek), and north (Westlake, Rollingwood)</b>. Downtown and east go gray and are proximity-bound, so they are not the place to spend.</p>
         </div>
       </details>
     </section>
 
     <!-- COMPETITIVE PICTURE -->
-    <section class="mb-6">
-      <h2 class="sec mb-2">The competitive picture</h2>
-      <details class="drop">
+    <section style="margin-bottom:24px">
+      <h2 class="sec">The competitive picture</h2>
+      <details class="sdrop">
         <summary>
           <div class="sum-main"><span class="sum-txt">Rivals do not beat Deep Relief at the pin, on reviews, or on links; they win citywide on deeper content, exact GBP categories, and turning bookings into indexed pages.</span></div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <p class="text-[14px] text-slate-700 leading-relaxed mb-2">Rivals are not beating Deep Relief at the pin, on reviews, or on links. They win citywide on deeper content, a niche category, and turning conversions into pages. What each does that Deep Relief does not:</p>
+        <div class="sdrop__body has-top">
+          <p class="small" style="color:var(--ink-soft); margin-bottom:10px">Rivals are not beating Deep Relief at the pin, on reviews, or on links. They win citywide on deeper content, a niche category, and turning conversions into pages. What each does that Deep Relief does not:</p>
           <ul class="comp">
             <li><span><b>Sage Blossom Massage</b> (the threat, about 5x the organic on ~2,000 keywords): a clean, siloed content library under /massage-menu/ and /spa-menu/, a dedicated well-optimized page per service, each pulling 100 to 200 keywords versus Deep Relief's 20 to 30. It includes a <b>couples-massage page</b> (Deep Relief has none), <b>gift-certificate, membership, and specials pages that rank</b>, and a <b>/locations/oak-hill/ page aimed at Deep Relief's own backyard</b>. Plus two GBP listings.</span></li>
             <li><span><b>Lotus Lymphatic</b> ranks #1 for lymphatic on a <b>category-exact GBP</b> (primary category "Lymph drainage therapist"), not on content or links (about 110 keywords). Same mechanism as cold laser. Concede it.</span></li>
             <li><span><b>Heeling Hands</b> is smaller but rising on a <b>blog that ranks</b> (its #1 page is a blog post) and on <b>precise GBP categories Deep Relief lacks</b> ("Sports massage therapist," "Lymph drainage therapist").</span></li>
             <li><span><b>Deep Relief</b> owns the pin, the reviews (454 at 4.9, well ahead of the set), and actually runs <b>more backlinks and citations than any of them</b>, yet organic fell. The exposure is content, structure, and categories, not Maps, reviews, or links.</span></li>
           </ul>
-          <p class="text-[13px] text-slate-600 leading-relaxed mt-2">So the counter is not more reviews and not more links. It is to publish and structure like Sage Blossom, fix the GBP categories, and turn conversions (gift certificates, membership) into indexed pages.</p>
+          <p class="small" style="color:var(--muted); margin-top:10px">So the counter is not more reviews and not more links. It is to publish and structure like Sage Blossom, fix the GBP categories, and turn conversions (gift certificates, membership) into indexed pages.</p>
         </div>
       </details>
     </section>
 
     <!-- OFF-PAGE -->
-    <section class="mb-6">
-      <h2 class="sec mb-2">Where to put the off-page effort</h2>
-      <details class="drop">
+    <section style="margin-bottom:24px">
+      <h2 class="sec">Where to put the off-page effort</h2>
+      <details class="sdrop">
         <summary>
           <div class="sum-main"><span class="sum-txt">Deep Relief already out-links the rising rivals, so the return is aiming the link effort at the buried service pages and moving the rest into content, not earning more links.</span></div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <p class="text-[14px] text-slate-700 leading-relaxed">Put the link effort behind the buried service pages and into content, and keep real citation NAP consistency for Maps. The numbers behind this: Deep Relief already has more referring domains than the rising rivals (105 versus Heeling's 51 and Lotus's 42), about <b>195 of 220 backlinks land on the homepage</b> rather than the service pages, and <b>37% are nofollow with 28% high-spam</b>. The link count is high; the rivals grew on content. So the return is in aiming the link effort at the right pages and shifting the rest into content and on-page.</p>
+        <div class="sdrop__body has-top">
+          <p class="small" style="color:var(--ink-soft)">Put the link effort behind the buried service pages and into content, and keep real citation NAP consistency for Maps. The numbers behind this: Deep Relief already has more referring domains than the rising rivals (105 versus Heeling's 51 and Lotus's 42), about <b>195 of 220 backlinks land on the homepage</b> rather than the service pages, and <b>37% are nofollow with 28% high-spam</b>. The link count is high; the rivals grew on content. So the return is in aiming the link effort at the right pages and shifting the rest into content and on-page.</p>
         </div>
       </details>
     </section>
 
     <!-- MAPS VS ORGANIC -->
-    <section class="mb-6">
-      <h2 class="sec mb-2">Maps says #1, organic says page two</h2>
-      <details class="drop">
+    <section style="margin-bottom:24px">
+      <h2 class="sec">Maps says #1, organic says page two</h2>
+      <details class="sdrop">
         <summary>
           <div class="sum-main"><span class="sum-txt">Google already ranks Deep Relief #1 to #3 in Maps for the core services but page two in organic; the gap is website structure, not authority, so these are the highest-confidence wins.</span></div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <p class="text-[14px] text-slate-700 leading-relaxed mb-2">For most core services Google already ranks Deep Relief <b>#1 to #3 in Maps at the pin</b>, so the local relevance and prominence are proven. Yet the organic listing for the same service sits on page two or worse. That gap is <b>infrastructure, not authority</b>: the homepage absorbs the ranking (it takes 78% of organic clicks) and the service pages are thin and have almost no internal links pointing at them, so Google falls back to the homepage. These are the highest-confidence organic plays, because we are not earning trust Google withheld, we are unblocking rankings it already wants to give.</p>
-          <table class="grid" style="table-layout:fixed">
-            <colgroup><col style="width:34%"><col style="width:18%"><col style="width:24%"><col style="width:24%"></colgroup>
+        <div class="sdrop__body has-top">
+          <p class="small" style="color:var(--ink-soft); margin-bottom:10px">For most core services Google already ranks Deep Relief <b>#1 to #3 in Maps at the pin</b>, so the local relevance and prominence are proven. Yet the organic listing for the same service sits on page two or worse. That gap is <b>infrastructure, not authority</b>: the homepage absorbs the ranking (it takes 78% of organic clicks) and the service pages are thin and have almost no internal links pointing at them, so Google falls back to the homepage. These are the highest-confidence organic plays, because we are not earning trust Google withheld, we are unblocking rankings it already wants to give.</p>
+          <div style="overflow-x:auto">
+          <table class="dt">
             <thead><tr><th>Service</th><th>Maps @ pin</th><th>Organic</th><th>The gap</th></tr></thead>
-            <tbody>
-              <tr><td><b>Acupuncture</b></td><td>#1</td><td>not in top 100</td><td>absent</td></tr>
-              <tr><td><b>Prenatal massage</b></td><td>#1</td><td>#40</td><td>page 4</td></tr>
-              <tr><td><b>Dry needling</b></td><td>#2</td><td>#42</td><td>page 4</td></tr>
-              <tr><td><b>Sports massage</b></td><td>#1</td><td>#21 (homepage ranks)</td><td>page 2-3</td></tr>
-              <tr><td><b>Cupping</b></td><td>#1</td><td>#13</td><td>page 2</td></tr>
-              <tr><td><b>Trigger point</b></td><td>#1</td><td>#13</td><td>page 2</td></tr>
-              <tr><td><b>Massage therapy (general)</b></td><td>#1</td><td>#12 (homepage ranks)</td><td>page 2</td></tr>
-              <tr><td><b>Swedish</b></td><td>#2</td><td>#12</td><td>page 2</td></tr>
-              <tr><td><b>Thai</b></td><td>#2</td><td>#10</td><td>page 1-2</td></tr>
-              <tr><td><b>Ashiatsu</b></td><td>#1</td><td>#9</td><td>foot of page 1</td></tr>
-              <tr><td><b>Relaxation</b></td><td>#1</td><td>#9 (homepage ranks)</td><td>foot of page 1</td></tr>
-              <tr><td><b>Deep tissue</b></td><td>#1</td><td>#6 (homepage ranks)</td><td>foot of page 1</td></tr>
-              <tr><td>Orthopedic (the model)</td><td>#1</td><td><b>#1</b></td><td>aligned</td></tr>
+            <tbody style="text-align:left">
+              <tr><td><b>Acupuncture</b></td><td style="text-align:left">#1</td><td style="text-align:left">not in top 100</td><td style="text-align:left">absent</td></tr>
+              <tr><td><b>Prenatal massage</b></td><td style="text-align:left">#1</td><td style="text-align:left">#40</td><td style="text-align:left">page 4</td></tr>
+              <tr><td><b>Dry needling</b></td><td style="text-align:left">#2</td><td style="text-align:left">#42</td><td style="text-align:left">page 4</td></tr>
+              <tr><td><b>Sports massage</b></td><td style="text-align:left">#1</td><td style="text-align:left">#21 (homepage ranks)</td><td style="text-align:left">page 2-3</td></tr>
+              <tr><td><b>Cupping</b></td><td style="text-align:left">#1</td><td style="text-align:left">#13</td><td style="text-align:left">page 2</td></tr>
+              <tr><td><b>Trigger point</b></td><td style="text-align:left">#1</td><td style="text-align:left">#13</td><td style="text-align:left">page 2</td></tr>
+              <tr><td><b>Massage therapy (general)</b></td><td style="text-align:left">#1</td><td style="text-align:left">#12 (homepage ranks)</td><td style="text-align:left">page 2</td></tr>
+              <tr><td><b>Swedish</b></td><td style="text-align:left">#2</td><td style="text-align:left">#12</td><td style="text-align:left">page 2</td></tr>
+              <tr><td><b>Thai</b></td><td style="text-align:left">#2</td><td style="text-align:left">#10</td><td style="text-align:left">page 1-2</td></tr>
+              <tr><td><b>Ashiatsu</b></td><td style="text-align:left">#1</td><td style="text-align:left">#9</td><td style="text-align:left">foot of page 1</td></tr>
+              <tr><td><b>Relaxation</b></td><td style="text-align:left">#1</td><td style="text-align:left">#9 (homepage ranks)</td><td style="text-align:left">foot of page 1</td></tr>
+              <tr><td><b>Deep tissue</b></td><td style="text-align:left">#1</td><td style="text-align:left">#6 (homepage ranks)</td><td style="text-align:left">foot of page 1</td></tr>
+              <tr><td>Orthopedic (the model)</td><td style="text-align:left">#1</td><td style="text-align:left"><b>#1</b></td><td style="text-align:left">aligned</td></tr>
             </tbody>
           </table>
-          <p class="text-[13px] text-slate-600 leading-relaxed mt-2">Orthopedic is the proof case: a real, well-built service page that other pages actually link to, and it ranks #1 in both Maps and organic. When the page is right and is internally linked, the ranking follows. The unlock is the on-page work in Strategies 2 to 4: give each service page internal links and depth, and a consistent structure, so the service page, not the homepage, ranks for its term.</p>
+          </div>
+          <p class="small" style="color:var(--muted); margin-top:10px">Orthopedic is the proof case: a real, well-built service page that other pages actually link to, and it ranks #1 in both Maps and organic. When the page is right and is internally linked, the ranking follows. The unlock is the on-page work in Strategies 2 to 4: give each service page internal links and depth, and a consistent structure, so the service page, not the homepage, ranks for its term.</p>
         </div>
       </details>
     </section>
 
     <!-- STRATEGIES -->
-    <section class="mb-6">
-      <h2 class="sec mb-3">The strategies</h2>
+    <section style="margin-bottom:24px">
+      <h2 class="sec">The strategies</h2>
 
-      <details class="drop strat-drop">
+      <details class="sdrop sdrop--num">
         <summary>
           <span class="snum">1</span>
           <div class="sum-main">
-            <div class="sum-hd"><h3>Win the grid radius</h3><span class="tag">the growth lever</span></div>
+            <div class="sum-hd"><h3>Win the grid radius</h3><span class="tag tag--mint">the growth lever</span></div>
             <span class="sum-txt">Build the high-volume "near me" pages and sharpen the handful of suburb pages already sitting in winnable positions; the close-in area is already won at the pin.</span>
           </div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <div class="wwh">
-            <div class="row"><span class="lbl">What</span><p>On the radius, build the <b>money-cluster pages</b> (the high-volume "near me" terms), strengthen the handful of <b>existing suburb pages that already sit in winnable (orange) positions</b>, and keep the suburb-page program running. The biggest radius gains come from the money-term intent plus sharpening the pages that can win.</p></div>
-            <div class="row"><span class="lbl">Why</span><p>At the pin Deep Relief is #1 to #3, but the grid average is the real measure. The close-in south and southwest cells are <b>already green</b>, so the pin wins them and they need no page. Of the roughly 22 suburb pages already built, most sit in those green areas or too far out to rank; only <b>five</b> sit in the winnable orange ring (Bannockburn and Woodstone Village at about a mile out, Travis Country and Foothills of Barton Creek to the northeast, Barton Creek West to the north), and those five are thin. The biggest radius upside is the money-term "near me" intent plus sharpening those five pages, alongside the suburb pages already in production.</p></div>
-            <div class="row"><span class="lbl">How</span><p>Point the new-page slot at money-cluster pages: a net-new <b>Couples Massage in Austin</b> page (a clear gap, pin already #2 in Maps), a Gift Certificates page, and money-intent posts on the clusters DR owns. For suburbs, strengthen the five thin orange-ring pages: <b>Bannockburn, Woodstone Village, Travis Country, Foothills of Barton Creek, and Barton Creek West</b>. Sunset Valley, Shady Hollow, and Tanglewood Forest are already in production. See the task list below for the exact pages.</p></div>
+        <div class="sdrop__body has-top">
+          <div class="wwh__bd" style="padding:0">
+            <div class="row"><div class="k">What</div><div class="v">On the radius, build the <b>money-cluster pages</b> (the high-volume "near me" terms), strengthen the handful of <b>existing suburb pages that already sit in winnable (orange) positions</b>, and keep the suburb-page program running. The biggest radius gains come from the money-term intent plus sharpening the pages that can win.</div></div>
+            <div class="row"><div class="k">Why</div><div class="v">At the pin Deep Relief is #1 to #3, but the grid average is the real measure. The close-in south and southwest cells are <b>already green</b>, so the pin wins them and they need no page. Of the roughly 22 suburb pages already built, most sit in those green areas or too far out to rank; only <b>five</b> sit in the winnable orange ring (Bannockburn and Woodstone Village at about a mile out, Travis Country and Foothills of Barton Creek to the northeast, Barton Creek West to the north), and those five are thin. The biggest radius upside is the money-term "near me" intent plus sharpening those five pages, alongside the suburb pages already in production.</div></div>
+            <div class="row"><div class="k">How</div><div class="v">Point the new-page slot at money-cluster pages: a net-new <b>Couples Massage in Austin</b> page (a clear gap, pin already #2 in Maps), a Gift Certificates page, and money-intent posts on the clusters DR owns. For suburbs, strengthen the five thin orange-ring pages: <b>Bannockburn, Woodstone Village, Travis Country, Foothills of Barton Creek, and Barton Creek West</b>. Sunset Valley, Shady Hollow, and Tanglewood Forest are already in production. See the task list below for the exact pages.</div></div>
           </div>
         </div>
       </details>
 
-      <details class="drop strat-drop">
+      <details class="sdrop sdrop--num">
         <summary>
           <span class="snum">2</span>
           <div class="sum-main">
-            <div class="sum-hd"><h3>Unblock the buried service pages</h3><span class="tag">the organic lever</span></div>
+            <div class="sum-hd"><h3>Unblock the buried service pages</h3><span class="tag tag--mint">the organic lever</span></div>
             <span class="sum-txt">Give the service pages internal links and depth so the right page ranks instead of the homepage, which absorbs 78% of organic clicks today.</span>
           </div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <div class="wwh">
-            <div class="row"><span class="lbl">What</span><p>Give the service pages what they are missing: <b>internal links</b> pointing at them, and <b>depth</b> on the page. Both unblock the same buried pages so the service page, not the homepage, ranks for its term.</p></div>
-            <div class="row"><span class="lbl">Why</span><p><b>Internal links first.</b> On the live site every service page carries about 20 menu and footer links but only zero to three in-content links, and the few that exist are a repeated "cupping and insurance" block, not real context. The services hub links to <b>none</b> of the services, and the money pages (deep tissue, prenatal, sports) get almost no contextual links pointing at them, so Google keeps the homepage as the answer (the homepage takes 78% of organic clicks). <b>Then depth.</b> The pages that already rank are the deep ones (the rivals' winning pages run 1,000-plus words); the buried near-wins sit at the bottom of page one or top of page two because they are thin, not because the titles read badly, and Deep Relief has zero AI Overview presence today. Orthopedic proves both: a real, internally linked, deep page that ranks #1.</p></div>
-            <div class="row"><span class="lbl">How</span><p>Add in-content links from the homepage and the hub down to each priority service page using the service term as the anchor; cross-link related services (deep tissue to sports and trigger point, prenatal to swedish); link each existing blog to the service it is about; and replace the boilerplate "cupping and insurance" links with ones that fit the page. Then deepen each near-win page to the depth that already ranks, with a structured FAQ block that AI Overviews can pull from. Where a service runs several competing pages (prenatal, chiropractic, acupuncture, migraine, and the duplicated Austin brand page), consolidate them to one canonical and 301 the rest so the links and depth land on a single page; the homepage today links both Austin brand pages, which keeps both alive.</p></div>
+        <div class="sdrop__body has-top">
+          <div class="wwh__bd" style="padding:0">
+            <div class="row"><div class="k">What</div><div class="v">Give the service pages what they are missing: <b>internal links</b> pointing at them, and <b>depth</b> on the page. Both unblock the same buried pages so the service page, not the homepage, ranks for its term.</div></div>
+            <div class="row"><div class="k">Why</div><div class="v"><b>Internal links first.</b> On the live site every service page carries about 20 menu and footer links but only zero to three in-content links, and the few that exist are a repeated "cupping and insurance" block, not real context. The services hub links to <b>none</b> of the services, and the money pages (deep tissue, prenatal, sports) get almost no contextual links pointing at them, so Google keeps the homepage as the answer (the homepage takes 78% of organic clicks). <b>Then depth.</b> The pages that already rank are the deep ones (the rivals' winning pages run 1,000-plus words); the buried near-wins sit at the bottom of page one or top of page two because they are thin, not because the titles read badly, and Deep Relief has zero AI Overview presence today. Orthopedic proves both: a real, internally linked, deep page that ranks #1.</div></div>
+            <div class="row"><div class="k">How</div><div class="v">Add in-content links from the homepage and the hub down to each priority service page using the service term as the anchor; cross-link related services (deep tissue to sports and trigger point, prenatal to swedish); link each existing blog to the service it is about; and replace the boilerplate "cupping and insurance" links with ones that fit the page. Then deepen each near-win page to the depth that already ranks, with a structured FAQ block that AI Overviews can pull from. Where a service runs several competing pages (prenatal, chiropractic, acupuncture, migraine, and the duplicated Austin brand page), consolidate them to one canonical and 301 the rest so the links and depth land on a single page; the homepage today links both Austin brand pages, which keeps both alive.</div></div>
           </div>
         </div>
       </details>
 
-      <details class="drop strat-drop">
+      <details class="sdrop sdrop--num">
         <summary>
           <span class="snum">3</span>
           <div class="sum-main">
-            <div class="sum-hd"><h3>Formalize the untracked services they own</h3><span class="tag">hidden wins</span></div>
+            <div class="sum-hd"><h3>Formalize the untracked services they own</h3><span class="tag tag--mint">hidden wins</span></div>
             <span class="sum-txt">Cupping and sports massage already own the inner radius but are not tracked or defended; add them to tracking and give each a content and GBP pass.</span>
           </div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <div class="wwh">
-            <div class="row"><span class="lbl">What</span><p>Add cupping therapy and sports massage to tracking and reporting, and give each a light content and GBP pass to defend.</p></div>
-            <div class="row"><span class="lbl">Why</span><p>Both already own the three-mile radius (cupping grid average 4.2, sports 4.3, mostly green) but neither is in the Local Dominator tracking, so no one is watching or defending them. They are wins hiding in plain sight, surfaced only by looking beyond the tracked set. Orthopedic (4.6) is the same story and is already the #1 organic page.</p></div>
-            <div class="row"><span class="lbl">How</span><p>Add cupping and sports to the tracking grid and confirm orthopedic is on it; make sure each has a strong service page and the matching GBP service entries; defend on the normal monthly schedule. Where a specific high-intent condition or occasion has real demand and no page yet (a sports or marathon recovery focus, or desk and posture pain, for example), give it one unique page tied to booking, but check the live pages first so it does not split one that already exists; judge these by bookings, not traffic.</p></div>
+        <div class="sdrop__body has-top">
+          <div class="wwh__bd" style="padding:0">
+            <div class="row"><div class="k">What</div><div class="v">Add cupping therapy and sports massage to tracking and reporting, and give each a light content and GBP pass to defend.</div></div>
+            <div class="row"><div class="k">Why</div><div class="v">Both already own the three-mile radius (cupping grid average 4.2, sports 4.3, mostly green) but neither is in the Local Dominator tracking, so no one is watching or defending them. They are wins hiding in plain sight, surfaced only by looking beyond the tracked set. Orthopedic (4.6) is the same story and is already the #1 organic page.</div></div>
+            <div class="row"><div class="k">How</div><div class="v">Add cupping and sports to the tracking grid and confirm orthopedic is on it; make sure each has a strong service page and the matching GBP service entries; defend on the normal monthly schedule. Where a specific high-intent condition or occasion has real demand and no page yet (a sports or marathon recovery focus, or desk and posture pain, for example), give it one unique page tied to booking, but check the live pages first so it does not split one that already exists; judge these by bookings, not traffic.</div></div>
           </div>
         </div>
       </details>
 
-      <details class="drop strat-drop">
+      <details class="sdrop sdrop--num">
         <summary>
           <span class="snum">4</span>
           <div class="sum-main">
-            <div class="sum-hd"><h3>Standardize the service-page structure</h3><span class="tag">consistency</span></div>
+            <div class="sum-hd"><h3>Standardize the service-page structure</h3><span class="tag tag--mint">consistency</span></div>
             <span class="sum-txt">Put every service page on one template, same schema, outline, and minimum depth, since the deep, consistent pages are the ones that rank.</span>
           </div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <div class="wwh">
-            <div class="row"><span class="lbl">What</span><p>Put service pages on one template: consistent schema (Service plus FAQ plus BreadcrumbList), a consistent heading outline, and a minimum content depth.</p></div>
-            <div class="row"><span class="lbl">Why</span><p>From the archived pages, schema and depth are inconsistent (service schema on some, none on others, no breadcrumbs, depth from 200 to 1,800 words), and the deep pages are the ones that rank. This was read from archived copies because the live site blocks crawlers, so confirm on a couple of live pages before rolling it out.</p></div>
-            <div class="row"><span class="lbl">How</span><p>Confirm the current state on two live pages, build one canonical template, roll it across the service pages, fix the pages with no schema, and bring the thin rankers up to the depth that already wins.</p></div>
+        <div class="sdrop__body has-top">
+          <div class="wwh__bd" style="padding:0">
+            <div class="row"><div class="k">What</div><div class="v">Put service pages on one template: consistent schema (Service plus FAQ plus BreadcrumbList), a consistent heading outline, and a minimum content depth.</div></div>
+            <div class="row"><div class="k">Why</div><div class="v">From the archived pages, schema and depth are inconsistent (service schema on some, none on others, no breadcrumbs, depth from 200 to 1,800 words), and the deep pages are the ones that rank. This was read from archived copies because the live site blocks crawlers, so confirm on a couple of live pages before rolling it out.</div></div>
+            <div class="row"><div class="k">How</div><div class="v">Confirm the current state on two live pages, build one canonical template, roll it across the service pages, fix the pages with no schema, and bring the thin rankers up to the depth that already wins.</div></div>
           </div>
         </div>
       </details>
 
-      <details class="drop strat-drop">
+      <details class="sdrop sdrop--num">
         <summary>
           <span class="snum">5</span>
           <div class="sum-main">
-            <div class="sum-hd"><h3>Wire GA4 lead attribution</h3><span class="tag">measurement</span></div>
+            <div class="sum-hd"><h3>Wire GA4 lead attribution</h3><span class="tag tag--mint">measurement</span></div>
             <span class="sum-txt">Leads are healthy and tracked in the booking systems, but GA4 has zero lead events, so fire them to make the radius work measurable.</span>
           </div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <div class="wwh">
-            <div class="row"><span class="lbl">What</span><p>Fire the lead events in GA4 (Holbie intake form, Meevo membership and e-gift clicks) so organic-to-lead attribution sits in one place.</p></div>
-            <div class="row"><span class="lbl">Why</span><p>Leads are healthy and rising and are already tracked through CallRail, Holbie, and Meevo, so this is not a crisis. But GA4 has zero conversion events, so we cannot see which channel and which pages drive them without manual export. Wiring it makes the radius work measurable.</p></div>
-            <div class="row"><span class="lbl">How</span><p>Wire form_submit and the Meevo click events, mark them as Key Events, keep phone and GBP clicks tracked separately, and reconcile to the booking system.</p></div>
+        <div class="sdrop__body has-top">
+          <div class="wwh__bd" style="padding:0">
+            <div class="row"><div class="k">What</div><div class="v">Fire the lead events in GA4 (Holbie intake form, Meevo membership and e-gift clicks) so organic-to-lead attribution sits in one place.</div></div>
+            <div class="row"><div class="k">Why</div><div class="v">Leads are healthy and rising and are already tracked through CallRail, Holbie, and Meevo, so this is not a crisis. But GA4 has zero conversion events, so we cannot see which channel and which pages drive them without manual export. Wiring it makes the radius work measurable.</div></div>
+            <div class="row"><div class="k">How</div><div class="v">Wire form_submit and the Meevo click events, mark them as Key Events, keep phone and GBP clicks tracked separately, and reconcile to the booking system.</div></div>
           </div>
         </div>
       </details>
 
-      <details class="drop strat-drop">
+      <details class="sdrop sdrop--num">
         <summary>
           <span class="snum">6</span>
           <div class="sum-main">
-            <div class="sum-hd"><h3>Tighten the GBP and the booking loop</h3><span class="tag">the lead engine</span></div>
+            <div class="sum-hd"><h3>Tighten the GBP and the booking loop</h3><span class="tag tag--mint">the lead engine</span></div>
             <span class="sum-txt">Fix the empty booking button, clean and complete the services list and categories, and turn gift-voucher redemptions into footfall.</span>
           </div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <div class="wwh">
-            <div class="row"><span class="lbl">What</span><p>Fix the booking button, complete and de-duplicate the services list, add the secondary categories they qualify for, and turn gift-voucher redemptions into footfall.</p></div>
-            <div class="row"><span class="lbl">Why</span><p>The profile is the lead engine and several things are loose. The "Book online" action is empty (the Meevo link only sits in the contact field). The services list has three duplicate pairs (craniosacral, deep tissue, lymphatic) and is missing services they offer and rank for (thai, trigger point, orthopedic, swedish, cold laser, cryotherapy, couples). They hold only three categories, yet they are #1 in Maps for sports massage with no "Sports massage therapist" category. And they sell Meevo e-gifts, but the person the gift is bought for is never pointed to the location.</p></div>
-            <div class="row"><span class="lbl">How</span><p>Set the Book Online button to the Meevo link; remove the duplicate services and add the missing ones; add "Sports massage therapist" as a secondary category and evaluate "Massage spa" for the couples and gifting intent (only categories they genuinely fit, since wrong ones can hurt); and wire the gift-voucher redemption to surface the location and a "get directions" prompt, so gifts bought for other people become real direction requests and visits.</p></div>
+        <div class="sdrop__body has-top">
+          <div class="wwh__bd" style="padding:0">
+            <div class="row"><div class="k">What</div><div class="v">Fix the booking button, complete and de-duplicate the services list, add the secondary categories they qualify for, and turn gift-voucher redemptions into footfall.</div></div>
+            <div class="row"><div class="k">Why</div><div class="v">The profile is the lead engine and several things are loose. The "Book online" action is empty (the Meevo link only sits in the contact field). The services list has three duplicate pairs (craniosacral, deep tissue, lymphatic) and is missing services they offer and rank for (thai, trigger point, orthopedic, swedish, cold laser, cryotherapy, couples). They hold only three categories, yet they are #1 in Maps for sports massage with no "Sports massage therapist" category. And they sell Meevo e-gifts, but the person the gift is bought for is never pointed to the location.</div></div>
+            <div class="row"><div class="k">How</div><div class="v">Set the Book Online button to the Meevo link; remove the duplicate services and add the missing ones; add "Sports massage therapist" as a secondary category and evaluate "Massage spa" for the couples and gifting intent (only categories they genuinely fit, since wrong ones can hurt); and wire the gift-voucher redemption to surface the location and a "get directions" prompt, so gifts bought for other people become real direction requests and visits.</div></div>
           </div>
         </div>
       </details>
     </section>
 
     <!-- TASKS -->
-    <section class="mb-6">
-      <h2 class="sec mb-3">Tasks</h2>
-      <style>
-        table.tasks { width:100%; border-collapse:collapse; }
-        table.tasks th, table.tasks td { padding:0.45rem 0.55rem; vertical-align:top; border-bottom:1px solid #f1f5f9; text-align:left; }
-        table.tasks thead th { border-bottom:2px solid var(--line); color:#0b1220; font-weight:700; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.05em; }
-        table.tasks td { font-size:0.82rem; color:#334155; line-height:1.45; }
-        table.tasks td.area { font-weight:700; color:#0b1220; white-space:nowrap; }
-        .pri { display:inline-block; font-size:0.6rem; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; padding:0.12rem 0.5rem; border-radius:999px; white-space:nowrap; }
-        .pri-high { background:#fef2f2; color:#b91c1c; border:1px solid #fecaca; }
-        .pri-med { background:#fffbeb; color:#b45309; border:1px solid #fde68a; }
-        .pri-low { background:#f1f5f9; color:#475569; border:1px solid #e2e8f0; }
-        .pri-ong { background:#ecfeff; color:#0e7490; border:1px solid #bae6fd; }
-      </style>
-      <div class="panel p-4 overflow-x-auto">
-        <table class="tasks">
+    <section style="margin-bottom:24px">
+      <h2 class="sec">Tasks</h2>
+      <div class="card" style="overflow-x:auto">
+        <table class="dt">
           <thead><tr><th>Area</th><th>Task</th><th>What it achieves</th><th>Priority</th></tr></thead>
-          <tbody>
+          <tbody style="text-align:left">
             <tr><td class="area">Pages</td><td>Build a Couples Massage in Austin page (none today; the pin already ranks #2 in Maps, only King Spa ahead)</td><td>Captures the clearest money-term gap, with proven Maps demand</td><td><span class="pri pri-high">High</span></td></tr>
             <tr><td class="area">Pages</td><td>Build an indexed Gift Certificates page wired to a get-directions prompt, and optimize the existing Membership page</td><td>Turns gifting and membership into indexed, rankable pages and supports the voucher loop</td><td><span class="pri pri-high">High</span></td></tr>
             <tr><td class="area">Pages</td><td>Rebuild the Oak Hill location page at the original /oak-hill/ URL</td><td>Recovers the clinic's strongest neighborhood page (~116 clicks, ~20K impressions) removed Dec 2025</td><td><span class="pri pri-high">High</span></td></tr>
@@ -411,10 +326,11 @@
       </div>
     </section>
 
-    <footer class="mt-6 pt-3 border-t border-slate-200 text-[10px] text-slate-500 flex flex-wrap items-center justify-between gap-2" style="color:#0e7490;">
-      <div class="font-semibold">HQDM SEARCH INTELLIGENCE · CUSTOM STRATEGY</div>
-      <div>DEEPRELIEF.COM · Internal · June 2026</div>
-    </footer>
-  </main>
+    <p class="tiny muted center" style="margin-top:8px">HQDM Search Intelligence &middot; Custom Strategy &middot; deeprelief.com &middot; Internal &middot; June 2026</p>
+  </div>
+</main>
+
+<script src="../../assets/js/chart.umd.min.js"></script>
+<script src="../../assets/js/report.js"></script>
 </body>
 </html>

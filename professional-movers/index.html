@@ -1,354 +1,280 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex, nofollow, noarchive" />
-  <title>Professional Movers · Performance Report · May 2026</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = { theme: { extend: {
-      fontFamily: { sans: ['Inter','system-ui','sans-serif'], serif: ['Lora','ui-serif','Georgia','serif'] },
-      colors: { brand: { 900:'#0b2545', 700:'#13315c', 500:'#1d5b8a', 300:'#8ecae6' } }
-    } } }
-  </script>
-  <style>
-    :root { --navy:#0b2a45; --navy2:#10395d; --teal:#0e7490; --teal2:#06b6d4; --tealbg:#ecfeff; --up:#16a34a; --dn:#dc2626; --line:#e5e9f0; }
-    * { box-sizing:border-box; }
-    body { font-family:'Inter',system-ui,sans-serif; }
-    .shell { max-width:1080px; }
-    .hdr { background:linear-gradient(120deg,#0b2a45 0%,#10395d 60%,#155177 100%); color:#fff; }
-    .eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; }
-    .datepill { border:1px solid rgba(255,255,255,0.35); border-radius:999px; padding:0.3rem 0.85rem; font-size:0.72rem; font-weight:600; color:#e2f2fb; white-space:nowrap; }
-    /* tabs - house style (matches client snapshot.html .tab-btn) */
-    .tabs { display:grid; grid-template-columns:repeat(4,1fr); gap:0.6rem; }
-    .tab-btn { text-align:left; background:#fff; border:1px solid #e2e8f0; border-radius:0.6rem; padding:0.7rem 0.9rem; cursor:pointer; transition:border-color .12s, background .12s; }
-    .tab-btn:hover { border-color:#cbd5e1; }
-    .tab-btn .t { display:block; font-weight:700; font-size:0.95rem; color:#0b1220; line-height:1.15; }
-    .tab-btn .s { display:block; font-size:0.72rem; color:#64748b; margin-top:0.12rem; }
-    .tab-btn.active { background:#0b2545; border-color:#0b2545; }
-    .tab-btn.active .t { color:#fff; }
-    .tab-btn.active .s { color:#9bbad6; }
-    /* section */
-    .sbadge { width:1.7rem; height:1.7rem; border-radius:0.4rem; background:var(--navy); color:#fff; font-weight:800; font-size:0.8rem; display:flex; align-items:center; justify-content:center; }
-    .stitle { font-size:1.3rem; font-weight:800; color:#0b1220; letter-spacing:-0.01em; }
-    .ssub { font-size:0.8rem; color:var(--teal); font-weight:600; }
-    .ov-eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; color:var(--teal); }
-    .ov li { position:relative; padding-left:0.9rem; font-size:0.86rem; color:#334155; margin:0.3rem 0; }
-    .ov li::before { content:''; position:absolute; left:0; top:0.5rem; width:0.4rem; height:0.4rem; border-radius:999px; background:var(--teal2); }
-    .panel { background:#fff; border:1px solid var(--line); border-radius:0.7rem; }
-    .cardhd { font-size:0.66rem; font-weight:800; letter-spacing:0.07em; text-transform:uppercase; color:#475569; }
-    .ann { font-size:0.7rem; color:#64748b; }
-    .means { background:var(--tealbg); border:1px solid #bae6fd; border-radius:0.55rem; padding:0.7rem 0.9rem; }
-    .means .lbl { font-size:0.58rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#0369a1; }
-    .means p { font-size:0.82rem; color:#0c4a6e; margin-top:0.15rem; line-height:1.5; }
-    /* kpi */
-    .kpi { border:1px solid var(--line); border-radius:0.55rem; padding:0.8rem 0.9rem; }
-    .kpi .l { font-size:0.6rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#64748b; }
-    .kpi .n { font-size:1.85rem; font-weight:800; color:#0b1220; line-height:1.05; margin-top:0.1rem; font-variant-numeric:tabular-nums; }
-    .kpi .s { font-size:0.64rem; color:#94a3b8; margin-top:0.1rem; }
-    .delta { font-size:0.72rem; font-weight:800; }
-    .delta.up::before { content:'\25B2 '; font-size:0.58rem; } .delta.dn::before { content:'\25BC '; font-size:0.58rem; }
-    .delta.up { color:var(--up); } .delta.dn { color:var(--dn); } .delta.flat { color:#94a3b8; }
-    /* tables */
-    table.t { width:100%; border-collapse:collapse; }
-    table.t th { font-size:0.58rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:#64748b; text-align:right; padding:0.45rem 0.5rem; border-bottom:1px solid var(--line); }
-    table.t th:first-child { text-align:left; }
-    table.t td { font-size:0.78rem; padding:0.42rem 0.5rem; border-bottom:1px solid #f1f5f9; text-align:right; font-variant-numeric:tabular-nums; color:#374151; }
-    table.t td:first-child { text-align:left; font-weight:600; color:#1f2937; }
-    table.t tr.tot td { font-weight:800; color:#0b1220; border-top:1px solid var(--line); border-bottom:0; }
-    /* top pages */
-    .catrow td { background:#f8fafc; font-weight:800 !important; color:#0b1220 !important; border-top:1px solid var(--line); }
-    .catrow .badge { display:inline-block; font-size:0.58rem; font-weight:700; color:#0369a1; background:#e0f2fe; border-radius:0.3rem; padding:0.05rem 0.4rem; margin-left:0.4rem; }
-    .urlrow td:first-child { font-weight:400 !important; padding-left:1.1rem; }
-    .urlrow .u { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:0.72rem; color:#1d5b8a; word-break:break-all; }
-    .up { color:var(--up); font-weight:800; } .dn { color:var(--dn); font-weight:800; } .flat { color:#94a3b8; font-weight:700; }
-    .newt { color:var(--teal); font-weight:800; }
-    .chip { display:inline-flex; align-items:baseline; gap:0.35rem; background:#f1f5f9; border:1px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; }
-    .chip .v { font-weight:800; font-size:0.82rem; color:#0b1220; } .chip .l { font-size:0.62rem; font-weight:600; color:#64748b; text-transform:uppercase; }
-    .chip.good { background:#ecfdf5; border-color:#a7f3d0; } .chip.good .v { color:#047857; }
-    .ftr { color:var(--teal); }
-    @media (max-width:720px){ .tabs{ grid-template-columns:repeat(2,1fr);} }
-    @media print { .no-print{display:none!important;} body{background:#fff!important;} [data-panel]{display:block!important;} .panel{box-shadow:none;} }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Professional Movers · Performance Report · May 2026</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/hqdm.css">
 </head>
-<body class="bg-slate-100 text-slate-800 antialiased">
+<body>
 
-  <div class="no-print bg-white border-b border-slate-200 text-xs">
-    <div class="shell mx-auto px-4 sm:px-6 py-1.5 flex justify-end items-center gap-3">
-      <button onclick="window.print()" class="px-2.5 py-1 rounded border border-slate-300 text-slate-600 hover:bg-slate-50">Print / PDF</button>
-    </div>
-  </div>
-
-  <header class="text-white" style="background:linear-gradient(135deg,#0a2540 0%,#123a5e 55%,#1a4e78 100%);">
-    <div class="shell mx-auto px-6 sm:px-8 pt-8 pb-7">
-      <div class="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.22em] text-brand-300 mb-3">HQDM Search Intelligence · Performance Report</div>
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-        <div>
-          <h1 class="font-serif font-bold tracking-tight text-white text-3xl sm:text-4xl leading-tight">Professional Movers.com</h1>
-          <div class="text-slate-300 mt-2 text-sm sm:text-base">Marketing Performance Report</div>
-        </div>
-        <div class="self-start sm:self-end inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-slate-100 whitespace-nowrap">Through May 2026</div>
-      </div>
-    </div>
-  </header>
-
-  <nav class="no-print sticky top-0 z-40 bg-slate-50/95 backdrop-blur border-b border-slate-200">
-    <div class="shell mx-auto px-4 sm:px-6 py-3 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-      <button class="tab-btn" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
-      <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">What is gaining</span></button>
-      <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
-      <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Completed and upcoming</span></button>
-    </div>
+<div class="nav-wrap no-print">
+  <nav class="nav container" style="max-width:1000px">
+    <a class="brand" href="index.html"><span class="mark">H</span> <span>HQDM<small>search intelligence</small></span></a>
+    <button class="btn" onclick="window.print()" style="padding:8px 15px; font-size:0.8rem">Print / PDF</button>
   </nav>
+</div>
 
-  <main class="shell mx-auto px-4 sm:px-6 py-5">
+<main class="section section--tight">
+  <div class="container" style="max-width:1000px">
 
-    <!-- ===================== TAB 1 : OVERALL / LEADS ===================== -->
-    <section data-panel="1">
-      <div class="ov-eyebrow mb-1">Overview</div>
-      <ul class="ov mb-4">
-        <li>Website leads have been climbing back since February, from <strong>42 in February to 101 in May</strong>, the strongest month so far this year.</li>
-        <li><strong>Organic search drives most of the form leads</strong> we can measure, about three-quarters. Phone calls from your Google Business Profile are not tracked, so the profile's real contribution is larger than the form numbers alone show.</li>
-        <li>On Google Maps in your home area you hold the <strong>#1 spot across all ten tracked searches</strong>, backed by <strong>537 reviews at 4.9 stars</strong>, the strongest review base among local movers nearby.</li>
-      </ul>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-        <div class="kpi"><div class="l">Leads · last 90 days</div><div class="n">236</div><div class="s">website form enquiries</div></div>
-        <div class="kpi"><div class="l">Leads · May</div><div class="n">101</div><div class="delta up">+55%</div><div class="s">vs 65 in April</div></div>
-        <div class="kpi"><div class="l">Reviews · rating</div><div class="n">537 · 4.9</div><div class="s">strongest local review base</div></div>
-        <div class="kpi"><div class="l">Google Maps · home area</div><div class="n">#1</div><div class="s">on all 10 tracked searches</div></div>
+    <div class="win">
+      <div class="win__bar">
+        <span class="ic">&#9635;</span>
+        <span class="ttl">performance-report.hqdm &ndash; Professional Movers</span>
+        <span class="win__controls"><b>_</b><b>&#9633;</b><b>&times;</b></span>
       </div>
-      <div class="panel p-4 mb-4">
-        <div class="flex items-baseline justify-between gap-3 mb-2">
-          <div class="cardhd">Website leads month over month</div>
-          <div class="ann">recovering since February</div>
-        </div>
-        <div class="relative" style="height:240px;"><canvas id="leadsChart"></canvas></div>
-        <p class="ann mt-2">Website moving-inquiry form submissions by month, excluding job applications, the corporate relocation portals (HFHS, Cardinal Health, Ascension), and thank-you page double-counts. Completed months only. Leads dipped over the winter and have been climbing back since February.</p>
-      </div>
-      <div class="panel p-4">
-        <div class="flex items-baseline justify-between gap-3 mb-2">
-          <div class="cardhd">Where your leads come from</div>
-          <div class="ann">last 90 days</div>
-        </div>
-        <div class="relative" style="height:180px;"><canvas id="sourceChart"></canvas></div>
-        <p class="ann mt-2">Website moving-inquiry form submissions by how the visitor reached the site. Organic search is the largest source by far, ahead of direct and brand visits. Phone calls are not tracked, so the Google Business Profile's contribution is understated here.</p>
-      </div>
-    </section>
+      <div class="win__body">
 
-    <!-- ===================== TAB 2 : WEBSITE TRAFFIC ===================== -->
-    <section data-panel="2">
-      <div class="ov-eyebrow mb-1">Overview</div>
-      <ul class="ov mb-4">
-        <li>Over the last 90 days, search traffic is <strong>gaining across the board</strong>: service pages, local pages, and guides all grew versus the prior 90 days.</li>
-        <li>Specialty services are pulling traffic up. <strong>Hot tub moving is the single biggest gainer</strong>, with piano moving and TV moving also climbing.</li>
-        <li>The <strong>guide articles are the fastest-growing content</strong>, bringing in new readers on "how to pack" and "how to move" searches.</li>
-      </ul>
-
-      <div class="panel p-4 mb-4">
-        <div class="flex items-baseline justify-between gap-3 mb-2">
-          <div class="cardhd">What is gaining · top pages</div>
-          <div class="ann">added search clicks · last 90 days vs prior 90 days</div>
-        </div>
-        <div class="relative" style="height:340px;"><canvas id="gainChart"></canvas></div>
-        <div class="flex flex-wrap gap-3 justify-center mt-2 text-[11px]" style="color:#475569;">
-          <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#0b2545;margin-right:4px;vertical-align:middle;"></span>Service</span>
-          <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#c97a17;margin-right:4px;vertical-align:middle;"></span>Local</span>
-          <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#16a34a;margin-right:4px;vertical-align:middle;"></span>Content</span>
-        </div>
-        <p class="ann mt-2">Pages with the largest gains in Google search clicks, colored by type. Gains span service pages, local pages, and guide articles.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Gains by page type</div><div class="ann">search clicks · last 90d vs prev 90d</div></div>
-          <table class="t"><thead><tr><th>Page type</th><th>Clicks (90d)</th><th>vs prev 90d</th></tr></thead><tbody id="mix"></tbody></table>
-          <p class="ann mt-3">Every page group grew. Local pages and guides grew fastest in percentage terms; service pages remain the largest group.</p>
-        </div>
-        <div class="means">
-          <div class="lbl">What this means</div>
-          <p>The recovery is taking hold across the site, not in one place. Specialty services like hot tub and piano moving are pulling traffic up, and the guide articles are bringing in a steady new audience. The next step is to keep deepening the service pages that are winning and to point more of the guide readers toward the matching service pages, which is the focus of the website work in the plan.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== TAB 3 : MAP PRESENCE ===================== -->
-    <section data-panel="3">
-      <div class="means mb-4" style="background:#fff7ed;border-color:#fed7aa;">
-        <div class="lbl" style="color:#9a3412;">Why Google Maps matters most here</div>
-        <p style="color:#7c2d12;">Most people choosing a mover start on Google Maps and local search, where booking intent is highest. In your home area around Walled Lake, Professional Movers holds the top spot and the strongest review base of any nearby mover. That is the position the map work is built to defend and strengthen.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-        <div class="panel p-4 flex flex-col justify-center">
-          <div class="cardhd mb-2">The foundation in place</div>
-          <div class="flex flex-wrap gap-2 mb-3">
-            <span class="chip good"><span class="v">537 · 4.9</span><span class="l">reviews · rating</span></span>
-            <span class="chip good"><span class="v">#1</span><span class="l">on all 10 tracked map searches</span></span>
-            <span class="chip good"><span class="v">45 years</span><span class="l">established Detroit-area brand</span></span>
-            <span class="chip"><span class="v">Award</span><span class="l">"Best Moving Company" press coverage</span></span>
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:16px">
+          <div>
+            <div class="eyebrow">Marketing Performance Report</div>
+            <h1 class="display" style="font-size:clamp(1.5rem,2.8vw,2.1rem); margin-top:8px">Professional Movers.com</h1>
+            <p class="muted small" style="margin-top:4px">Walled Lake moving company &middot; prepared by HQDM</p>
           </div>
-          <p class="text-[13px] leading-relaxed text-slate-700">Your review base is the largest of any local mover we track near Walled Lake, and the profile carries the full license and credential signals Google rewards (USDOT, MCICC, CVED). These are exactly the signals that hold the top map position in your home market.</p>
+          <span class="pill"><span class="dot"></span>Through May 2026</span>
         </div>
-        <div class="panel p-4">
-          <div class="cardhd mb-2">Your review lead over the nearest local mover</div>
-          <table class="t"><thead><tr><th>Business</th><th>Reviews</th><th>Rating</th></tr></thead><tbody>
-            <tr><td>Professional Movers.com</td><td>537</td><td>4.9</td></tr>
-            <tr><td>Nearest local mover</td><td>23</td><td>4.3</td></tr>
-          </tbody></table>
-          <p class="ann mt-2">On the same map searches, the nearest competing local mover carries a small fraction of your reviews at a lower rating. The other movers Google shows rank well below you on reviews and rating, which underlines how strong your position is at home.</p>
+
+        <div class="tabs no-print">
+          <button class="tab-btn active" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
+          <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">What is gaining</span></button>
+          <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
+          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Completed and upcoming</span></button>
         </div>
+
+        <hr class="divider" style="margin:18px 0">
+
+        <!-- TAB 1: LEAD GENERATION -->
+        <section data-panel="1">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Website leads have been climbing back since February, from <strong>42 in February to 101 in May</strong>, the strongest month so far this year.</li>
+            <li><strong>Organic search drives most of the form leads</strong> we can measure, about three-quarters. Phone calls from your Google Business Profile are not tracked, so the profile's real contribution is larger than the form numbers alone show.</li>
+            <li>On Google Maps in your home area you hold the <strong>#1 spot across all ten tracked searches</strong>, backed by <strong>537 reviews at 4.9 stars</strong>, the strongest review base among local movers nearby.</li>
+          </ul>
+          <div class="kpis" style="margin-bottom:18px">
+            <div class="kpi"><div class="l">Leads &middot; last 90 days</div><div class="n">236</div><div class="s">website form enquiries</div></div>
+            <div class="kpi"><div class="l">Leads &middot; May</div><div class="n">101</div><div class="delta up">+55%</div><div class="s">vs 65 in April</div></div>
+            <div class="kpi"><div class="l">Reviews &middot; rating</div><div class="n">537 &middot; 4.9</div><div class="s">strongest local review base</div></div>
+            <div class="kpi"><div class="l">Google Maps &middot; home area</div><div class="n">#1</div><div class="s">on all 10 tracked searches</div></div>
+          </div>
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Website leads month over month</h3><span class="muted tiny">recovering since February</span></div>
+            <div class="chart-wrap"><canvas id="leadsChart"></canvas></div>
+            <p class="chart-note">Website moving-inquiry form submissions by month, excluding job applications, the corporate relocation portals (HFHS, Cardinal Health, Ascension), and thank-you page double-counts. Completed months only. Leads dipped over the winter and have been climbing back since February.</p>
+          </div>
+          <div class="card chart-card">
+            <div class="chart-head"><h3 class="display">Where your leads come from</h3><span class="muted tiny">last 90 days</span></div>
+            <div class="chart-wrap chart-wrap--sm"><canvas id="sourceChart"></canvas></div>
+            <p class="chart-note">Website moving-inquiry form submissions by how the visitor reached the site. Organic search is the largest source by far, ahead of direct and brand visits. Phone calls are not tracked, so the Google Business Profile's contribution is understated here.</p>
+          </div>
+        </section>
+
+        <!-- TAB 2: WEBSITE TRAFFIC -->
+        <section data-panel="2" style="display:none">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Over the last 90 days, search traffic is <strong>gaining across the board</strong>: service pages, local pages, and guides all grew versus the prior 90 days.</li>
+            <li>Specialty services are pulling traffic up. <strong>Hot tub moving is the single biggest gainer</strong>, with piano moving and TV moving also climbing.</li>
+            <li>The <strong>guide articles are the fastest-growing content</strong>, bringing in new readers on "how to pack" and "how to move" searches.</li>
+          </ul>
+
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">What is gaining &middot; top pages</h3><span class="muted tiny">added search clicks &middot; last 90 days vs prior 90 days</span></div>
+            <div class="chart-wrap chart-wrap--lg"><canvas id="gainChart"></canvas></div>
+            <div class="legend" style="justify-content:center; margin-top:10px">
+              <span><i style="background:#079A6B"></i>Service</span>
+              <span><i style="background:#C77B05"></i>Local</span>
+              <span><i style="background:#5B4BD0"></i>Content</span>
+            </div>
+            <p class="chart-note">Pages with the largest gains in Google search clicks, colored by type. Gains span service pages, local pages, and guide articles.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Gains by page type</div>
+              <table class="dt">
+                <thead><tr><th>Page type</th><th>Clicks (90d)</th><th>vs prev 90d</th></tr></thead>
+                <tbody>
+                  <tr><td>Service pages</td><td>334</td><td class="up">+2%</td></tr>
+                  <tr><td>Local pages</td><td>35</td><td class="up">+40%</td></tr>
+                  <tr><td>Guides (content)</td><td>77</td><td class="up">+60%</td></tr>
+                </tbody>
+              </table>
+              <p class="chart-note">Every page group grew. Local pages and guides grew fastest in percentage terms; service pages remain the largest group.</p>
+            </div>
+            <div class="notice notice--good notice__col">
+              <span class="tag tag--mint">What this means</span>
+              <p>The recovery is taking hold across the site, not in one place. Specialty services like hot tub and piano moving are pulling traffic up, and the guide articles are bringing in a steady new audience. The next step is to keep deepening the service pages that are winning and to point more of the guide readers toward the matching service pages, which is the focus of the website work in the plan.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3: MAP PRESENCE -->
+        <section data-panel="3" style="display:none">
+          <div class="notice notice--warn notice__col" style="margin-bottom:16px">
+            <span class="tag tag--amber">Why Google Maps matters most here</span>
+            <p>Most people choosing a mover start on Google Maps and local search, where booking intent is highest. In your home area around Walled Lake, Professional Movers holds the top spot and the strongest review base of any nearby mover. That is the position the map work is built to defend and strengthen.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start; margin-bottom:16px">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">The foundation in place</div>
+              <div class="chips-wrap" style="margin-bottom:12px">
+                <span class="vchip good"><b>537 &middot; 4.9</b> reviews &middot; rating</span>
+                <span class="vchip good"><b>#1</b> on all 10 tracked map searches</span>
+                <span class="vchip good"><b>45 years</b> established Detroit-area brand</span>
+                <span class="vchip"><b>Award</b> "Best Moving Company" press coverage</span>
+              </div>
+              <p class="small" style="color:var(--ink-soft)">Your review base is the largest of any local mover we track near Walled Lake, and the profile carries the full license and credential signals Google rewards (USDOT, MCICC, CVED). These are exactly the signals that hold the top map position in your home market.</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Your review lead over the nearest local mover</div>
+              <table class="dt">
+                <thead><tr><th>Business</th><th>Reviews</th><th>Rating</th></tr></thead>
+                <tbody>
+                  <tr><td>Professional Movers.com</td><td>537</td><td>4.9</td></tr>
+                  <tr><td>Nearest local mover</td><td>23</td><td>4.3</td></tr>
+                </tbody>
+              </table>
+              <p class="chart-note">On the same map searches, the nearest competing local mover carries a small fraction of your reviews at a lower rating. The other movers Google shows rank well below you on reviews and rating, which underlines how strong your position is at home.</p>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:16px">
+            <div class="cardhd" style="margin-bottom:12px">Where Professional Movers ranks #1 on Google Maps</div>
+            <table class="dt">
+              <thead><tr><th>Tracked search</th><th>Map rank</th></tr></thead>
+              <tbody>
+                <tr><td>moving companies near me</td><td><span class="up">#1</span></td></tr>
+                <tr><td>cheap movers near me</td><td><span class="up">#1</span></td></tr>
+                <tr><td>Detroit moving services</td><td><span class="up">#1</span></td></tr>
+                <tr><td>movers in Detroit MI</td><td><span class="up">#1</span></td></tr>
+                <tr><td>Detroit relocation specialists</td><td><span class="up">#1</span></td></tr>
+                <tr><td>affordable moving assistance in Detroit</td><td><span class="up">#1</span></td></tr>
+                <tr><td>best local movers for apartments in Detroit</td><td><span class="up">#1</span></td></tr>
+                <tr><td>professional packing services Detroit</td><td><span class="up">#1</span></td></tr>
+                <tr><td>movers</td><td><span class="up">#1</span></td></tr>
+                <tr><td>moving services</td><td><span class="up">#1</span></td></tr>
+              </tbody>
+            </table>
+            <p class="chart-note">Live Google Maps results centered on the Walled Lake location. Professional Movers holds the #1 spot on every tracked search in its home area.</p>
+          </div>
+
+          <div class="notice notice--good notice__col">
+            <span class="tag tag--mint">The focus from here</span>
+            <p>The home-market position is strong and the goal is to protect and strengthen it: keep the Google profile fully built out and complete, and keep the website and content recovery feeding the same searches. The work plan covers each of these.</p>
+          </div>
+        </section>
+
+        <!-- TAB 4: WORK PLAN -->
+        <section data-panel="4" style="display:none">
+          <div class="notice notice__col" style="margin-bottom:16px">
+            <span class="tag">Our recommendations &middot; from the custom strategy</span>
+            <table class="dt">
+              <thead><tr><th>Recommendation</th><th>Priority</th></tr></thead>
+              <tbody>
+                <tr class="catrow"><td>Google Business Profile <span class="badge">2</span></td><td></td></tr>
+                <tr class="itemrow"><td>Keep the Walled Lake profile fully built out: complete business details, products and services</td><td><span class="priohi">High</span></td></tr>
+                <tr class="itemrow"><td>Strengthen the products and services listed on the profile</td><td><span class="priomed">Medium</span></td></tr>
+                <tr class="catrow"><td>Website <span class="badge">2</span></td><td></td></tr>
+                <tr class="itemrow"><td>Deepen the service pages that are winning (hot tub, piano, artwork, senior, office moving)</td><td><span class="priohi">High</span></td></tr>
+                <tr class="itemrow"><td>Refocus the homepage on the brand and the core services</td><td><span class="priomed">Medium</span></td></tr>
+                <tr class="catrow"><td>Internal links &amp; structure <span class="badge">1</span></td><td></td></tr>
+                <tr class="itemrow"><td>Route links to the priority service pages and add structured data where it is missing</td><td><span class="priohi">High</span></td></tr>
+                <tr class="catrow"><td>Content <span class="badge">2</span></td><td></td></tr>
+                <tr class="itemrow"><td>Keep the guide momentum and link guides to the matching service pages</td><td><span class="priohi">High</span></td></tr>
+                <tr class="itemrow"><td>Link the existing cost and what-to-look-for guides to the service pages, and add a tipping guide if missing</td><td><span class="priomed">Medium</span></td></tr>
+              </tbody>
+            </table>
+            <p class="chart-note">The plan focuses on recovering and strengthening what is already there: deepen the service pages that are winning, keep the suburb-page program going, and keep the Google profile and the guide content strong.</p>
+          </div>
+          <div class="grid grid--2" style="gap:16px; align-items:start">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Completed &middot; recent months</div>
+              <table class="dt">
+                <thead><tr><th>Work delivered</th><th>When</th></tr></thead>
+                <tbody>
+                  <tr class="catrow"><td>Reporting &amp; strategy <span class="badge">2</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Monthly performance report</td><td>ongoing</td></tr>
+                  <tr class="itemrow"><td>Custom recovery strategy</td><td>May 2026</td></tr>
+                  <tr class="catrow"><td>Google Business Profile <span class="badge">1</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Profile optimisation, Walled Lake</td><td>ongoing</td></tr>
+                  <tr class="catrow"><td>Website &amp; on-page <span class="badge">2</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Analytics and site review</td><td>2026</td></tr>
+                  <tr class="itemrow"><td>Service-page and blog drafts prepared</td><td>ongoing</td></tr>
+                  <tr class="catrow"><td>Measurement <span class="badge">1</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Lead tracking set up in analytics</td><td>2026</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">In the pipeline &middot; June</div>
+              <table class="dt">
+                <thead><tr><th>Scheduled</th><th>When</th></tr></thead>
+                <tbody>
+                  <tr class="catrow"><td>Reporting <span class="badge">1</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Monthly performance report</td><td>Jun</td></tr>
+                  <tr class="catrow"><td>Website &amp; on-page <span class="badge">1</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Deepen priority service pages</td><td>Jun</td></tr>
+                  <tr class="catrow"><td>Content <span class="badge">1</span></td><td></td></tr>
+                  <tr class="itemrow"><td>Guide updates with service-page links</td><td>Jun</td></tr>
+                </tbody>
+              </table>
+              <p class="chart-note">The monthly work continues, with the on-page effort pointed at deepening the strongest service pages and the ongoing suburb-page program.</p>
+            </div>
+          </div>
+        </section>
+
       </div>
-
-      <div class="mb-4">
-        <div class="cardhd mb-2">Where Professional Movers ranks #1 on Google Maps</div>
-        <div class="panel p-4">
-          <table class="t"><thead><tr><th>Tracked search</th><th>Map rank</th></tr></thead><tbody id="mapWins"></tbody></table>
-          <p class="ann mt-3">Live Google Maps results centered on the Walled Lake location. Professional Movers holds the #1 spot on every tracked search in its home area.</p>
-        </div>
+      <div class="win__status">
+        <span class="cell grow">Marketing Performance Report &middot; Professional Movers.com</span>
+        <span class="cell">Through May 2026</span>
+        <span class="cell">Confidential</span>
       </div>
+    </div>
 
-      <div class="means" style="background:#f0fdf4;border-color:#bbf7d0;">
-        <div class="lbl" style="color:#166534;">The focus from here</div>
-        <p style="color:#14532d;">The home-market position is strong and the goal is to protect and strengthen it: keep the Google profile fully built out and complete, and keep the website and content recovery feeding the same searches. The work plan covers each of these.</p>
-      </div>
-    </section>
+    <p class="tiny muted center" style="margin-top:18px">Prepared by HQDM Search Intelligence &middot; professionalmovers.com &middot; Confidential</p>
+  </div>
+</main>
 
-    <!-- ===================== TAB 4 : WORK PLAN ===================== -->
-    <section data-panel="4">
-      <div class="panel p-4 mb-4" style="border-color:#bae6fd;background:linear-gradient(180deg,#ffffff 0%,#f0f9ff 100%);">
-        <div class="flex items-baseline justify-between mb-2"><div class="cardhd" style="color:#0369a1;">Our recommendations · from the custom strategy</div><div class="ann">the priorities that move the needle next</div></div>
-        <table class="t"><thead><tr><th>Recommendation</th><th>Priority</th></tr></thead><tbody id="recommendations"></tbody></table>
-        <p class="ann mt-3">The plan focuses on recovering and strengthening what is already there: deepen the service pages that are winning, keep the suburb-page program going, and keep the Google profile and the guide content strong.</p>
-      </div>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
-        <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">Completed · recent months</div><div class="ann">delivered</div></div>
-          <table class="t"><thead><tr><th>Work delivered</th><th>When</th></tr></thead><tbody id="completed"></tbody></table>
-        </div>
-        <div class="panel p-4">
-          <div class="flex items-baseline justify-between mb-2"><div class="cardhd">In the pipeline · June</div><div class="ann">scheduled</div></div>
-          <table class="t"><thead><tr><th>Scheduled</th><th>When</th></tr></thead><tbody id="pipeline"></tbody></table>
-          <p class="ann mt-3">The monthly work continues, with the on-page effort pointed at deepening the strongest service pages and the ongoing suburb-page program.</p>
-        </div>
-      </div>
-    </section>
-
-    <footer class="ftr mt-6 pt-3 border-t border-slate-200 text-[10px] flex flex-wrap items-center justify-between gap-2">
-      <div class="font-semibold">PREPARED BY HQDM SEARCH INTELLIGENCE</div>
-      <div>PROFESSIONALMOVERS.COM · Confidential</div>
-    </footer>
-  </main>
-
-  <script>
-    const DATA = {
-      leads: { months:['May 25','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan 26','Feb','Mar','Apr','May'],
-               leads:[92,101,99,70,79,86,62,53,48,42,70,65,101] },
-      leadSrc: [['Organic search',179],['Direct / brand',46],['Referral',7],['Other',4]],
-      gaining: [
-        ['Hot Tub Moving','service',31],
-        ['How to Pack Weights (guide)','content',9],
-        ['Walled Lake (local page)','location',8],
-        ['LCD / Plasma TV Moving','service',6],
-        ['How to Move a Pool Table (guide)','content',6],
-        ['Piano Moving','service',5],
-        ['How to Pack Dishes (guide)','content',4],
-        ['Picture Hanging','service',3],
-        ['Rochester (local page)','location',3],
-        ['Blog guides index','content',3],
-      ],
-      mix: [['Service pages',329,334],['Local pages',25,35],['Guides (content)',48,77]],
-      mapWins: [
-        ['moving companies near me','#1'],['cheap movers near me','#1'],['Detroit moving services','#1'],
-        ['movers in Detroit MI','#1'],['Detroit relocation specialists','#1'],['affordable moving assistance in Detroit','#1'],
-        ['best local movers for apartments in Detroit','#1'],['professional packing services Detroit','#1'],
-        ['movers','#1'],['moving services','#1'],
-      ],
-      recommendations: [
-        {cat:'Google Business Profile', items:[
-          ['Keep the Walled Lake profile fully built out: complete business details, products and services','High'],
-          ['Strengthen the products and services listed on the profile','Medium']]},
-        {cat:'Website', items:[
-          ['Deepen the service pages that are winning (hot tub, piano, artwork, senior, office moving)','High'],
-          ['Refocus the homepage on the brand and the core services','Medium']]},
-        {cat:'Internal links & structure', items:[
-          ['Route links to the priority service pages and add structured data where it is missing','High']]},
-        {cat:'Content', items:[
-          ['Keep the guide momentum and link guides to the matching service pages','High'],
-          ['Link the existing cost and what-to-look-for guides to the service pages, and add a tipping guide if missing','Medium']]},      ],
-      completed: [
-        {cat:'Reporting & strategy', items:[['Monthly performance report','ongoing'],['Custom recovery strategy','May 2026']]},
-        {cat:'Google Business Profile', items:[['Profile optimisation, Walled Lake','ongoing']]},
-        {cat:'Website & on-page', items:[['Analytics and site review','2026'],['Service-page and blog drafts prepared','ongoing']]},
-        {cat:'Measurement', items:[['Lead tracking set up in analytics','2026']]},
-      ],
-      pipeline: [
-        {cat:'Reporting', items:[['Monthly performance report','Jun']]},
-        {cat:'Website & on-page', items:[['Deepen priority service pages','Jun']]},
-        {cat:'Content', items:[['Guide updates with service-page links','Jun']]},      ],
-    };
-
-    // % change vs previous 90 days
-    function chg(b, a) {
-      if (b === 0 && a > 0) return '<span class="newt">New</span>';
-      if (b === a) return '<span class="flat">0%</span>';
-      const p = Math.round((a - b) / b * 100);
-      return `<span class="${p>0?'up':'dn'}">${p>0?'+':''}${p}%</span>`;
-    }
-
-    // tab 2 mix
-    document.getElementById('mix').innerHTML = DATA.mix.map(([s,p,v]) =>
-      `<tr><td>${s}</td><td>${v.toLocaleString()}</td><td>${chg(p,v)}</td></tr>`).join('');
-    // tab 3 map wins
-    document.getElementById('mapWins').innerHTML = DATA.mapWins.map(([s,r]) =>
-      `<tr><td>${s}</td><td><span class="up">${r}</span></td></tr>`).join('');
-
-    // tab 4 grouped tables
-    const grpRows = g => `<tr class="catrow"><td>${g.cat}<span class="badge">${g.items.length}</span></td><td></td></tr>` +
-      g.items.map(([name,when]) => `<tr class="urlrow"><td>${name}</td><td>${when}</td></tr>`).join('');
-    document.getElementById('recommendations').innerHTML = DATA.recommendations.map(grpRows).join('');
-    document.getElementById('completed').innerHTML = DATA.completed.map(grpRows).join('');
-    document.getElementById('pipeline').innerHTML = DATA.pipeline.map(grpRows).join('');
-
-    // charts
-    const charts = {};
-    const GROUP_COLORS = { service:'#0b2545', location:'#c97a17', content:'#16a34a' };
-    const lineOpts = yt => ({ responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
-      plugins:{ legend:{display:false},
-        tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=>`${c.dataset.label}: ${c.raw!=null?c.raw.toLocaleString():'-'}`}} },
-      scales:{ x:{grid:{display:false},ticks:{font:{size:10}}}, y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:9}},title:{display:true,text:yt,font:{size:9,weight:'600'},color:'#64748b'}} } });
-
-    function renderLeads(){ return new Chart(document.getElementById('leadsChart'), { type:'line',
-      data:{ labels:DATA.leads.months, datasets:[
-        {label:'Website leads',data:DATA.leads.leads,borderColor:'#0e7490',backgroundColor:'#0e749022',borderWidth:3,tension:0.25,pointRadius:3,pointHoverRadius:6,fill:true} ] },
-      options:lineOpts('leads / month') }); }
-
-    function renderSources(){ const rows=DATA.leadSrc; return new Chart(document.getElementById('sourceChart'), { type:'bar',
-      data:{ labels:rows.map(r=>r[0]), datasets:[{label:'Leads',data:rows.map(r=>r[1]),
-        backgroundColor:rows.map(r=> r[0].indexOf('Google Business')===0 ? '#c97a17' : '#0e7490'),borderRadius:4}] },
-      options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
-        plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=>`${c.raw.toLocaleString()} leads`}} },
-        scales:{ x:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:10}}}, y:{grid:{display:false},ticks:{font:{size:11}}} } } }); }
-
-    function renderGain(){ const rows=DATA.gaining; return new Chart(document.getElementById('gainChart'), { type:'bar',
-      data:{ labels:rows.map(r=>r[0]), datasets:[{label:'Added clicks',data:rows.map(r=>r[2]),
-        backgroundColor:rows.map(r=>GROUP_COLORS[r[1]]),borderRadius:4}] },
-      options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
-        plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#0b2a45',padding:9,callbacks:{label:c=>`+${c.raw} clicks vs prior 90 days`}} },
-        scales:{ x:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:10}},title:{display:true,text:'added search clicks',font:{size:9,weight:'600'},color:'#64748b'}}, y:{grid:{display:false},ticks:{font:{size:10.5}}} } } }); }
-
-    function showTab(n){
-      document.querySelectorAll('[data-tab]').forEach(el => el.classList.toggle('active', el.dataset.tab == n));
-      document.querySelectorAll('[data-panel]').forEach(el => el.style.display = el.dataset.panel == n ? '' : 'none');
-      if (n==1 && !charts.leads) charts.leads = renderLeads();
-      if (n==1 && !charts.sources) charts.sources = renderSources();
-      if (n==2 && !charts.gain) charts.gain = renderGain();
-    }
-    showTab(1);
-  </script>
+<script>
+var MONTHS = ['May 25','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan 26','Feb','Mar','Apr','May'];
+window.CHART_FACTORIES = {
+  leadsChart: function (cv) { return RPT.line(cv, MONTHS, [{ label: 'Website leads', data: [92,101,99,70,79,86,62,53,48,42,70,65,101], color: RPT.C.mint, fill: true }]); },
+  sourceChart: function (cv) {
+    var rows = [['Organic search',179],['Direct / brand',46],['Referral',7],['Other',4]];
+    return RPT.barH(cv, rows.map(function (r) { return r[0]; }), rows.map(function (r) { return r[1]; }),
+      [RPT.C.mint, RPT.C.grey, RPT.C.grey, RPT.C.grey],
+      function (c) { return c.parsed.x.toLocaleString() + ' leads'; });
+  },
+  gainChart: function (cv) {
+    var GROUP_COLORS = { service: RPT.C.mint, location: RPT.C.amber, content: RPT.C.violet };
+    var rows = [
+      ['Hot Tub Moving','service',31],
+      ['How to Pack Weights (guide)','content',9],
+      ['Walled Lake (local page)','location',8],
+      ['LCD / Plasma TV Moving','service',6],
+      ['How to Move a Pool Table (guide)','content',6],
+      ['Piano Moving','service',5],
+      ['How to Pack Dishes (guide)','content',4],
+      ['Picture Hanging','service',3],
+      ['Rochester (local page)','location',3],
+      ['Blog guides index','content',3]
+    ];
+    return RPT.barH(cv, rows.map(function (r) { return r[0]; }), rows.map(function (r) { return r[2]; }),
+      rows.map(function (r) { return GROUP_COLORS[r[1]]; }),
+      function (c) { return '+' + c.parsed.x + ' clicks vs prior 90 days'; });
+  }
+};
+</script>
+<script src="../assets/js/chart.umd.min.js"></script>
+<script src="../assets/js/report.js"></script>
+<script>showTab(1);</script>
 </body>
 </html>

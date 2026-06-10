@@ -1,159 +1,91 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex, nofollow, noarchive" />
-  <title>Professional Movers Custom Strategy · HQDM</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = { theme: { extend: {
-      fontFamily: { sans: ['Inter','system-ui','sans-serif'], serif: ['Lora','ui-serif','Georgia','serif'] },
-      colors: { brand: { 900:'#0b2545', 700:'#13315c', 500:'#1d5b8a', 300:'#8ecae6' } }
-    } } }
-  </script>
-  <style>
-    :root { --navy:#0b2a45; --teal:#0e7490; --teal2:#06b6d4; --tealbg:#ecfeff; --up:#16a34a; --line:#e5e9f0; }
-    body { font-family:'Inter',system-ui,sans-serif; }
-    .shell { max-width: 900px; }
-    .eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; }
-    .panel { background:#fff; border:1px solid var(--line); border-radius:0.7rem; }
-    h2.sec { font-family:'Lora',serif; font-weight:700; font-size:1.35rem; color:#0b1220; letter-spacing:-0.01em; }
-    .lead { font-size:0.95rem; line-height:1.65; color:#1f2937; }
-    .chip { display:inline-flex; align-items:baseline; gap:0.35rem; background:#f1f5f9; border:1px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; }
-    .chip .v { font-weight:800; font-size:0.8rem; color:#0b1220; } .chip .l { font-size:0.6rem; font-weight:600; color:#64748b; text-transform:uppercase; letter-spacing:0.04em; }
-    .chip.good { background:#ecfdf5; border-color:#a7f3d0; } .chip.good .v { color:#047857; }
-    .chip.bad { background:#fef2f2; border-color:#fecaca; } .chip.bad .v { color:#b91c1c; }
-    .comp li { display:flex; gap:0.5rem; align-items:flex-start; font-size:0.86rem; color:#334155; line-height:1.5; margin:0.4rem 0; }
-    .comp li::before { content:''; flex-shrink:0; width:0.4rem; height:0.4rem; border-radius:999px; background:var(--teal2); margin-top:0.5rem; }
-    .comp b { color:#0b1220; }
-    /* strategy cards */
-    .strat { background:#fff; border:1px solid var(--line); border-left:4px solid var(--navy); border-radius:0.7rem; padding:1.05rem 1.2rem; margin-bottom:0.9rem; }
-    .strat-hd { display:flex; align-items:center; gap:0.65rem; margin-bottom:0.55rem; flex-wrap:wrap; }
-    .snum { flex-shrink:0; width:1.75rem; height:1.75rem; border-radius:0.4rem; background:var(--navy); color:#fff; font-weight:800; font-size:0.85rem; display:flex; align-items:center; justify-content:center; }
-    .strat-hd h3 { font-family:'Lora',serif; font-weight:700; font-size:1.15rem; color:#0b1220; }
-    .strat-hd .tag { font-size:0.6rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--teal); background:var(--tealbg); border:1px solid #bae6fd; border-radius:999px; padding:0.12rem 0.55rem; }
-    .wwh .row { display:grid; grid-template-columns:54px 1fr; gap:0.65rem; padding:0.5rem 0; border-top:1px solid #f1f5f9; }
-    .wwh .row:first-child { border-top:0; padding-top:0.2rem; }
-    .wwh .lbl { font-size:0.58rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal); padding-top:0.18rem; }
-    .wwh p { font-size:0.86rem; color:#334155; line-height:1.55; }
-    .wwh p b { color:#0b1220; }
-    .callout { border-radius:0.6rem; padding:0.85rem 1rem; }
-    .callout .l { font-size:0.58rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; }
-    .callout p { font-size:0.86rem; line-height:1.55; margin-top:0.15rem; }
-    .mini li { font-size:0.85rem; color:#334155; line-height:1.5; margin:0.35rem 0; }
-    .mini b { color:#0b1220; }
-    /* dropdowns */
-    details.drop { background:#fff; border:1px solid var(--line); border-radius:0.7rem; margin-bottom:0.9rem; overflow:hidden; }
-    details.drop.strat-drop { border-left:4px solid var(--navy); }
-    details.drop > summary { list-style:none; cursor:pointer; display:flex; align-items:flex-start; gap:0.9rem; padding:0.9rem 1.1rem; }
-    details.drop > summary::-webkit-details-marker { display:none; }
-    details.drop > summary:hover { background:#fafcff; }
-    .sum-main { flex:1; min-width:0; }
-    .sum-hd { display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.3rem; }
-    .sum-hd h3 { font-family:'Lora',serif; font-weight:700; font-size:1.12rem; color:#0b1220; }
-    .sum-hd .tag { font-size:0.6rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--teal); background:var(--tealbg); border:1px solid #bae6fd; border-radius:999px; padding:0.12rem 0.55rem; }
-    .sum-txt { font-size:0.88rem; color:#475569; line-height:1.5; }
-    .sum-txt b { color:#0b1220; }
-    .lm-btn { flex-shrink:0; display:inline-flex; align-items:center; gap:0.35rem; font-size:0.64rem; font-weight:800; letter-spacing:0.04em; text-transform:uppercase; color:var(--teal); background:var(--tealbg); border:1px solid #bae6fd; border-radius:999px; padding:0.32rem 0.7rem; white-space:nowrap; margin-top:0.1rem; }
-    .lm-btn .chev { font-size:0.62rem; transition:transform .2s; }
-    details.drop[open] .lm-btn .chev { transform:rotate(180deg); }
-    .lm-btn .sl { display:none; }
-    details.drop[open] .lm-btn .lm { display:none; }
-    details.drop[open] .lm-btn .sl { display:inline; }
-    .drop-body { padding:0 1.1rem 1rem; }
-    .drop-body.has-top { border-top:1px solid #f1f5f9; padding-top:0.85rem; }
-    .drop-body > :first-child { margin-top:0; }
-    .drop-body h3.sub-h { font-family:'Lora',serif; font-weight:700; font-size:1.02rem; color:#0b1220; margin:1.1rem 0 0.4rem; }
-    details.drop-bare > summary { list-style:none; cursor:pointer; display:flex; align-items:flex-start; gap:0.9rem; }
-    details.drop-bare > summary::-webkit-details-marker { display:none; }
-    .drop-body-bare { padding-top:0.1rem; }
-    @media print {
-      .panel,.strat,details.drop{box-shadow:none;}
-      details.drop .drop-body, details.drop-bare .drop-body-bare{display:block !important;}
-      .lm-btn{display:none;}
-      @page{size:portrait;margin:0.5in;}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Professional Movers Custom Strategy · HQDM</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/hqdm.css">
 </head>
-<body class="bg-slate-100 text-slate-800 antialiased">
+<body>
 
-  <div class="text-white" style="background:linear-gradient(135deg,#0a2540 0%,#123a5e 55%,#1a4e78 100%);">
-    <div class="shell mx-auto px-6 sm:px-8 pt-8 pb-7">
-      <div class="eyebrow text-brand-300 mb-3">HQDM Search Intelligence · Custom Strategy</div>
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
-        <div>
-          <h1 class="font-serif font-bold tracking-tight text-3xl sm:text-4xl leading-tight">Professional Movers.com</h1>
-          <div class="text-slate-300 mt-2 text-sm sm:text-base">What, why, and how for each strategy</div>
+<div class="nav-wrap no-print">
+  <nav class="nav container" style="max-width:920px">
+    <a class="brand" href="index.html"><span class="mark">H</span> <span>HQDM<small>search intelligence</small></span></a>
+    <button class="btn" onclick="window.print()" style="padding:8px 15px; font-size:0.8rem">Print / PDF</button>
+  </nav>
+</div>
+
+<main class="section section--tight">
+  <div class="container" style="max-width:920px">
+
+    <!-- header window -->
+    <div class="win" style="margin-bottom:22px">
+      <div class="win__bar">
+        <span class="ic">&#9635;</span>
+        <span class="ttl">custom-strategy.hqdm &ndash; Professional Movers</span>
+        <span class="win__controls"><b>_</b><b>&#9633;</b><b>&times;</b></span>
+      </div>
+      <div class="win__body">
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between">
+          <div>
+            <div class="eyebrow">Custom Strategy</div>
+            <h1 class="display" style="font-size:clamp(1.5rem,2.8vw,2.1rem); margin-top:8px">Professional Movers.com</h1>
+            <p class="muted small" style="margin-top:4px">What, why, and how for each strategy &middot; prepared by HQDM</p>
+          </div>
+          <span class="pill"><span class="dot dot--violet"></span>Internal &middot; June 2026</span>
         </div>
-        <div class="self-start sm:self-end inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-slate-100 whitespace-nowrap">Internal · June 2026</div>
       </div>
     </div>
-  </div>
 
-  <main class="shell mx-auto px-4 sm:px-6 py-6">
-
-    <!-- THE SHORT VERSION (plain-English summary) -->
-    <section class="mb-6">
-      <style>
-        .tldr { background:linear-gradient(180deg,#fffdf6 0%,#fffaec 100%); border:1px solid #fcd34d; border-left:5px solid #f59e0b; border-radius:0.7rem; padding:1.05rem 1.25rem; }
-        .tldr .kicker { font-size:0.58rem; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#b45309; }
-        .tldr h2.sv { font-family:'Lora',serif; font-weight:700; font-size:1.3rem; color:#0b1220; margin:0.2rem 0 0.1rem; }
-        .tldr .sub { font-size:0.8rem; color:#92722a; margin-bottom:0.7rem; }
-        .tldr ul { margin:0; }
-        .tldr li { display:flex; gap:0.6rem; align-items:flex-start; font-size:0.95rem; line-height:1.55; color:#1f2937; margin:0.5rem 0; }
-        .tldr li::before { content:''; flex-shrink:0; width:0.5rem; height:0.5rem; border-radius:999px; background:#f59e0b; margin-top:0.52rem; }
-        .tldr li b { color:#0b1220; }
-      </style>
-      <div class="tldr">
-        <div class="kicker">Start here</div>
-        <h2 class="sv">The short version</h2>
-        <div class="sub">Where this brand stands now, and what to focus on next.</div>
-        <ul>
-          <li><span>They are the <b>biggest, most trusted mover in their home area</b>: 537 reviews at 4.9 stars and the #1 spot on Google Maps at home. The job is to protect this.</span></li>
-          <li><span>Last September their Google rankings dropped in an algorithmic update. They have been recovering since February, and the fastest path back is to deepen the pages that already rank.</span></li>
-          <li><span>The fix is to <b>deepen the pages that already rank</b> and keep the home-market Google profile strong.</span></li>
-          <li><span>Make the main service pages (piano, hot tub, office moving) as complete as their best page, because those are the pages that win customers.</span></li>
-          <li><span>Their "how to pack" guides get lots of readers but few become jobs. Link those guides to the pages where people actually book a move.</span></li>
-        </ul>
-      </div>
-    </section>
+    <!-- THE SHORT VERSION -->
+    <div class="tldr" style="margin-bottom:24px">
+      <div class="kicker">Start here</div>
+      <h2>The short version</h2>
+      <div class="sub">Where this brand stands now, and what to focus on next.</div>
+      <ul>
+        <li><span>They are the <b>biggest, most trusted mover in their home area</b>: 537 reviews at 4.9 stars and the #1 spot on Google Maps at home. The job is to protect this.</span></li>
+        <li><span>Last September their Google rankings dropped in an algorithmic update. They have been recovering since February, and the fastest path back is to deepen the pages that already rank.</span></li>
+        <li><span>The fix is to <b>deepen the pages that already rank</b> and keep the home-market Google profile strong.</span></li>
+        <li><span>Make the main service pages (piano, hot tub, office moving) as complete as their best page, because those are the pages that win customers.</span></li>
+        <li><span>Their "how to pack" guides get lots of readers but few become jobs. Link those guides to the pages where people actually book a move.</span></li>
+      </ul>
+    </div>
 
     <!-- THE FRAME -->
-    <section class="mb-6">
-      <h2 class="sec mb-2">The frame</h2>
-      <div class="panel p-4" style="background:linear-gradient(180deg,#ffffff 0%,#f0fdf4 100%);">
-        <details class="drop-bare">
-          <summary>
-            <p class="lead" style="margin:0;flex:1;min-width:0;">Professional Movers already wins at home, so the plan is recovery, not new territory: clear out what is dragging the site down, deepen the service pages that already win, and keep defending the #1 map position.</p>
-            <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
-          </summary>
-          <div class="drop-body-bare">
-            <p class="lead" style="margin-top:0.7rem;">Professional Movers has the assets a winner needs. A <b>45-year Detroit-area brand</b>, full carrier credentials (USDOT, MCICC, CVED), "Best Moving Company" press recognition, the <b>#1 Google Maps position in its home market</b>, and <b>537 reviews at 4.9</b>, far ahead of any nearby local mover. The service pages still carry most of the search value. What hurt the site was a search-ranking drop in <b>September 2025</b>, lining up with a Google update, after a batch of thin templated suburb pages and a stack of low-quality links were added too fast. So the play is not new territory. It is recovery: remove what is dragging the site down, deepen the pages that already win, and keep the Google profile and the guide content strong. All map work stays on the single managed Walled Lake pin.</p>
-            <p class="text-[11px] text-slate-500 mt-3">Search volumes referenced are DataForSEO estimates, not literal counts. Professional Movers runs three offices but HQDM manages one Google Business Profile (Walled Lake HQ); all profile work is that single pin, not new locations.</p>
-          </div>
-        </details>
-        <div class="flex flex-wrap gap-2 mt-3">
-          <span class="chip good"><span class="v">537 · 4.9</span><span class="l">strongest local review base</span></span>
-          <span class="chip good"><span class="v">#1 home-area map</span><span class="l">on all 10 tracked searches</span></span>
-          <span class="chip bad"><span class="v">Sept 2025 drop</span><span class="l">algorithmic demotion, recovering</span></span>
+    <section style="margin-bottom:24px">
+      <h2 class="sec">The frame</h2>
+      <details class="sdrop">
+        <summary>
+          <div class="sum-main"><span class="sum-txt">Professional Movers already wins at home, so the plan is recovery, not new territory: clear out what is dragging the site down, deepen the service pages that already win, and keep defending the #1 map position.</span></div>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+        </summary>
+        <div class="sdrop__body has-top">
+          <p class="lead2">Professional Movers has the assets a winner needs. A <b>45-year Detroit-area brand</b>, full carrier credentials (USDOT, MCICC, CVED), "Best Moving Company" press recognition, the <b>#1 Google Maps position in its home market</b>, and <b>537 reviews at 4.9</b>, far ahead of any nearby local mover. The service pages still carry most of the search value. What hurt the site was a search-ranking drop in <b>September 2025</b>, lining up with a Google update, after a batch of thin templated suburb pages and a stack of low-quality links were added too fast. So the play is not new territory. It is recovery: remove what is dragging the site down, deepen the pages that already win, and keep the Google profile and the guide content strong. All map work stays on the single managed Walled Lake pin.</p>
+          <p class="tiny muted" style="margin-top:12px">Search volumes referenced are DataForSEO estimates, not literal counts. Professional Movers runs three offices but HQDM manages one Google Business Profile (Walled Lake HQ); all profile work is that single pin, not new locations.</p>
         </div>
+      </details>
+      <div class="chips-wrap" style="margin-top:12px">
+        <span class="vchip good"><b>537 &middot; 4.9</b> strongest local review base</span>
+        <span class="vchip good"><b>#1 home-area map</b> on all 10 tracked searches</span>
+        <span class="vchip bad"><b>Sept 2025 drop</b> algorithmic demotion, recovering</span>
       </div>
     </section>
 
     <!-- COMPETITIVE PICTURE -->
-    <section class="mb-6">
-      <h2 class="sec mb-2">The competitive picture</h2>
-      <details class="drop">
+    <section style="margin-bottom:24px">
+      <h2 class="sec">The competitive picture</h2>
+      <details class="sdrop">
         <summary>
           <div class="sum-main"><span class="sum-txt">Two different games: at home on the map Professional Movers dominates with no real local-pack rival; in regular Google search the competition is national van lines, so the service pages have to match national-grade depth.</span></div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <p class="text-[14px] text-slate-700 leading-relaxed mb-2">There are two different competitive games, and they call for two different plays:</p>
+        <div class="sdrop__body has-top">
+          <p class="lead2" style="margin-bottom:10px">There are two different competitive games, and they call for two different plays:</p>
           <ul class="comp">
             <li><span><b>On the map, in the home market, Professional Movers dominates.</b> At the Walled Lake location it holds #1 on every tracked search. The nearest real local mover carries about 23 reviews at 4.3, against 537 at 4.9. The other movers in the pack rank well below Professional Movers on reviews and rating, so there is no serious local-pack challenger at home.</span></li>
             <li><span><b>In regular Google search, the rivals are national.</b> The site competes with national van lines and comparison platforms (Two Men and a Truck, HireAHelper, Allied, All My Sons, MoveAdvisor), not the local movers. That means the service pages have to match national-grade depth to win back rankings.</span></li>
@@ -164,31 +96,32 @@
     </section>
 
     <!-- STRONG / WEAK -->
-    <section class="mb-6">
-      <h2 class="sec mb-2">Where Professional Movers is strong and weak</h2>
-      <details class="drop">
+    <section style="margin-bottom:24px">
+      <h2 class="sec">Where Professional Movers is strong and weak</h2>
+      <details class="sdrop">
         <summary>
           <div class="sum-main"><span class="sum-txt">Strong at home and on the specialty service pages and guides; a band of service keywords sits just below page one, ready to recover; the fastest path back is deepening those pages.</span></div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
+        <div class="sdrop__body has-top">
           <ul class="comp">
             <li><span><b>Strong:</b> the Walled Lake home-area map (#1, commanding review lead), and the specialty service pages. Hot tub, piano, and TV moving are the biggest search gainers in the last 90 days, and the guide articles are the fastest-growing content.</span></li>
             <li><span><b>Recoverable:</b> a large band of service-page keywords sits just below the first page (positions 11 to 50). These are the pages to deepen first, because small gains here turn into real traffic.</span></li>
-            <li><span><b>The opportunity:</b> a large band of service-page keywords sits at positions 11 to 50, where small gains turn into traffic. Deepening those pages is where the recovery comes from.</span></li>          </ul>
+            <li><span><b>The opportunity:</b> a large band of service-page keywords sits at positions 11 to 50, where small gains turn into traffic. Deepening those pages is where the recovery comes from.</span></li>
+          </ul>
         </div>
       </details>
     </section>
 
     <!-- MEASUREMENT AND FRAMING -->
-    <section class="mb-6">
-      <h2 class="sec mb-2">Measurement and framing</h2>
-      <details class="drop">
+    <section style="margin-bottom:24px">
+      <h2 class="sec">Measurement and framing</h2>
+      <details class="sdrop">
         <summary>
           <div class="sum-main"><span class="sum-txt">Leads are website form enquiries, and with no call tracking installed the true total is higher; lead the client story on the recovery since February, not a single year-over-year number.</span></div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
+        <div class="sdrop__body has-top">
           <ul class="comp">
             <li><span><b>Leads.</b> Leads are website form enquiries from analytics (the form-submit event). There is no call tracking installed for this account, so phone calls are not counted; for a mover, calls are usually a large share, which means the true lead total is higher than what is shown.</span></li>
             <li><span><b>The honest year-over-year read.</b> On a like-for-like basis, total form enquiries are down modestly versus a year ago, in line with the traffic drop, but they held up far better than traffic and have been recovering since February (42 to 101 by May, after stripping out job applications and the corporate relocation portals). Lead the client story on that recovery, not on a single year-over-year total.</span></li>
@@ -206,23 +139,23 @@
     </section>
 
     <!-- STRATEGIES -->
-    <section class="mb-6">
-      <h2 class="sec mb-3">The strategies</h2>
+    <section style="margin-bottom:24px">
+      <h2 class="sec">The strategies</h2>
 
-      <details class="drop strat-drop">
+      <details class="sdrop sdrop--num">
         <summary>
           <span class="snum">1</span>
           <div class="sum-main">
-            <div class="sum-hd"><h3>Recover and deepen the pages that already win</h3><span class="tag">highest return</span></div>
+            <div class="sum-hd"><h3>Recover and deepen the pages that already win</h3><span class="tag tag--mint">highest return</span></div>
             <span class="sum-txt">Deepen the service pages sitting just below page one; this is the fastest, lowest-risk path back.</span>
           </div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <div class="wwh">
-            <div class="row"><span class="lbl">What</span><p>Deepen the priority service pages currently sitting just below page one (hot tub, piano, artwork, senior, office, local moving). Refocus the homepage on the brand and the core services. Route internal links and structured data to the priority pages that still lack them.</p></div>
-            <div class="row"><span class="lbl">Why</span><p>Service pages already carry about half the site's search clicks, and a large band of their keywords sits at positions 11 to 50, where small gains turn into traffic. This is the fastest, lowest-risk path back.</p></div>
-            <div class="row"><span class="lbl">How</span><div><ul class="mini" style="margin:0;">
+        <div class="sdrop__body has-top">
+          <div class="wwh__bd" style="padding:0">
+            <div class="row"><div class="k">What</div><div class="v">Deepen the priority service pages currently sitting just below page one (hot tub, piano, artwork, senior, office, local moving). Refocus the homepage on the brand and the core services. Route internal links and structured data to the priority pages that still lack them.</div></div>
+            <div class="row"><div class="k">Why</div><div class="v">Service pages already carry about half the site's search clicks, and a large band of their keywords sits at positions 11 to 50, where small gains turn into traffic. This is the fastest, lowest-risk path back.</div></div>
+            <div class="row"><div class="k">How</div><div class="v"><ul class="mini" style="margin:0">
               <li>Bring each priority service page up to the depth of the long-distance page: process, credentials, pricing, specialty handling, photos.</li>
               <li>On the suburb pages, lead each with genuinely local detail (neighborhood specifics, nearby landmarks) rather than templated copy.</li>
               <li>Add links from the strong pages and the guides into the priority service pages, and add structured data at publish.</li>
@@ -231,56 +164,56 @@
         </div>
       </details>
 
-      <details class="drop strat-drop">
+      <details class="sdrop sdrop--num">
         <summary>
           <span class="snum">2</span>
           <div class="sum-main">
-            <div class="sum-hd"><h3>Strengthen the home-market Google profile</h3><span class="tag">defend the #1</span></div>
+            <div class="sum-hd"><h3>Strengthen the home-market Google profile</h3><span class="tag tag--mint">defend the #1</span></div>
             <span class="sum-txt">Keep the one managed Walled Lake profile fully built out and complete, since the map at home is the strongest asset and the highest-intent channel.</span>
           </div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <div class="wwh">
-            <div class="row"><span class="lbl">What</span><p>Keep the single managed Walled Lake profile fully built out: complete "from the business" details and an accurate, locally anchored products and services list.</p></div>
-            <div class="row"><span class="lbl">Why</span><p>The map position at home is the strongest asset and the highest-intent channel for a mover, and its phone calls are not even tracked, so it contributes more than the form numbers show. The job is to protect and reinforce it, not to chase new areas.</p></div>
-            <div class="row"><span class="lbl">How</span><p>Work the one managed pin: fill in the blank profile sections and anchor the products to the home service area. Stay inside the managed pin's home radius.</p></div>
+        <div class="sdrop__body has-top">
+          <div class="wwh__bd" style="padding:0">
+            <div class="row"><div class="k">What</div><div class="v">Keep the single managed Walled Lake profile fully built out: complete "from the business" details and an accurate, locally anchored products and services list.</div></div>
+            <div class="row"><div class="k">Why</div><div class="v">The map position at home is the strongest asset and the highest-intent channel for a mover, and its phone calls are not even tracked, so it contributes more than the form numbers show. The job is to protect and reinforce it, not to chase new areas.</div></div>
+            <div class="row"><div class="k">How</div><div class="v">Work the one managed pin: fill in the blank profile sections and anchor the products to the home service area. Stay inside the managed pin's home radius.</div></div>
           </div>
         </div>
       </details>
 
-      <details class="drop strat-drop">
+      <details class="sdrop sdrop--num">
         <summary>
           <span class="snum">3</span>
           <div class="sum-main">
-            <div class="sum-hd"><h3>Keep the content momentum and convert the readers</h3><span class="tag">turn readers into enquiries</span></div>
+            <div class="sum-hd"><h3>Keep the content momentum and convert the readers</h3><span class="tag tag--mint">turn readers into enquiries</span></div>
             <span class="sum-txt">The how-to guides pull in a steady new audience but few reach a page that books a move; link each guide to its matching service page and add a few buyer-stage guides.</span>
           </div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <div class="wwh">
-            <div class="row"><span class="lbl">What</span><p>Keep the "how to pack" and "how to move" guides going, since they are the fastest-growing content, and link each guide to the matching service page. The Detroit-area cost and what-to-look-for guides already exist, so link and strengthen those rather than rebuild them, and add a tipping guide if one is missing.</p></div>
-            <div class="row"><span class="lbl">Why</span><p>The guides pull in a steady new audience but few of those readers reach a page that books a move. Linking them to the service pages turns reading traffic into enquiry traffic, and the buyer-stage guides catch people closer to choosing a mover.</p></div>
-            <div class="row"><span class="lbl">How</span><p>Add in-body links from the top guides to the matching service pages (pool table to piano, dishes to packing, fridge to local moving). Link the existing buyer-stage guides (moving cost, what to look for) to the service pages, and add a tipping guide if one does not already exist.</p></div>
+        <div class="sdrop__body has-top">
+          <div class="wwh__bd" style="padding:0">
+            <div class="row"><div class="k">What</div><div class="v">Keep the "how to pack" and "how to move" guides going, since they are the fastest-growing content, and link each guide to the matching service page. The Detroit-area cost and what-to-look-for guides already exist, so link and strengthen those rather than rebuild them, and add a tipping guide if one is missing.</div></div>
+            <div class="row"><div class="k">Why</div><div class="v">The guides pull in a steady new audience but few of those readers reach a page that books a move. Linking them to the service pages turns reading traffic into enquiry traffic, and the buyer-stage guides catch people closer to choosing a mover.</div></div>
+            <div class="row"><div class="k">How</div><div class="v">Add in-body links from the top guides to the matching service pages (pool table to piano, dishes to packing, fridge to local moving). Link the existing buyer-stage guides (moving cost, what to look for) to the service pages, and add a tipping guide if one does not already exist.</div></div>
           </div>
         </div>
       </details>
 
-      <details class="drop strat-drop">
+      <details class="sdrop sdrop--num">
         <summary>
           <span class="snum">4</span>
           <div class="sum-main">
-            <div class="sum-hd"><h3>Own the high-value specialty moves</h3><span class="tag">high value, low volume</span></div>
+            <div class="sum-hd"><h3>Own the high-value specialty moves</h3><span class="tag tag--mint">high value, low volume</span></div>
             <span class="sum-txt">Professional Movers already ranks for the specialty moves (hot tub, piano, pool table, artwork, the LCD and plasma TV page). Make that set the best in the market, and add a high-value occasion page only where demand is real and nothing covers it yet. Low volume, high intent, worth it on a few jobs a year.</span>
           </div>
-          <span class="lm-btn"><span class="lm">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
+          <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
-        <div class="drop-body has-top">
-          <div class="wwh">
-            <div class="row"><span class="lbl">What</span><p>Treat the specialty-move pages as their own high-value line: hot tub, piano, pool table, artwork, and the LCD and plasma TV page that is already a top gainer. Deepen each into the best page in the market, and add a new one (corporate and employee relocation, which the existing corporate accounts already prove demand for) only where it is real and not already covered.</p></div>
-            <div class="row"><span class="lbl">Why</span><p>These searches do not show big volume, but the intent and the per-job value are high, so even a few jobs a year from one page pays off, and they are exactly the pages already recovering. Because this account is in recovery, the rule is to deepen and own the few that win, not mass-produce thin new pages, since thin pages are part of what caused the drop.</p></div>
-            <div class="row"><span class="lbl">How</span><div><ul class="mini" style="margin:0;">
+        <div class="sdrop__body has-top">
+          <div class="wwh__bd" style="padding:0">
+            <div class="row"><div class="k">What</div><div class="v">Treat the specialty-move pages as their own high-value line: hot tub, piano, pool table, artwork, and the LCD and plasma TV page that is already a top gainer. Deepen each into the best page in the market, and add a new one (corporate and employee relocation, which the existing corporate accounts already prove demand for) only where it is real and not already covered.</div></div>
+            <div class="row"><div class="k">Why</div><div class="v">These searches do not show big volume, but the intent and the per-job value are high, so even a few jobs a year from one page pays off, and they are exactly the pages already recovering. Because this account is in recovery, the rule is to deepen and own the few that win, not mass-produce thin new pages, since thin pages are part of what caused the drop.</div></div>
+            <div class="row"><div class="k">How</div><div class="v"><ul class="mini" style="margin:0">
               <li>Make the existing specialty pages the best in the market: real detail, photos, internal links, and a clear quote call to action.</li>
               <li>Add a new specialty or occasion page only where demand is real and nothing covers it (corporate and employee relocation is the clearest); check the live site and Asana first.</li>
               <li>Keep each page unique and substantial; do not template or duplicate, especially while the site is recovering.</li>
@@ -292,50 +225,41 @@
     </section>
 
     <!-- FRAMING NOTE -->
-    <section class="mb-6">
-      <div class="callout" style="background:var(--tealbg);border:1px solid #bae6fd;">
-        <div class="l" style="color:#0369a1;">A note on framing</div>
-        <p style="color:#0c4a6e;">This account is recoverable without building authority from scratch. The brand, the reviews, the credentials, and the service pages are already there and already winning at home. Deepen what already ranks, keep the home-market profile strong, and convert the guide audience into enquiries, and the assets that are already there start working again.</p>
+    <section style="margin-bottom:24px">
+      <div class="notice notice--violet notice__col">
+        <span class="tag">A note on framing</span>
+        <p>This account is recoverable without building authority from scratch. The brand, the reviews, the credentials, and the service pages are already there and already winning at home. Deepen what already ranks, keep the home-market profile strong, and convert the guide audience into enquiries, and the assets that are already there start working again.</p>
       </div>
     </section>
 
     <!-- TASKS -->
-    <section class="mb-6">
-      <h2 class="sec mb-3">Tasks</h2>
-      <style>
-        table.tasks { width:100%; border-collapse:collapse; }
-        table.tasks th, table.tasks td { padding:0.45rem 0.55rem; vertical-align:top; border-bottom:1px solid #f1f5f9; text-align:left; }
-        table.tasks thead th { border-bottom:2px solid var(--line); color:#0b1220; font-weight:700; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.05em; }
-        table.tasks td { font-size:0.82rem; color:#334155; line-height:1.45; }
-        table.tasks td.area { font-weight:700; color:#0b1220; white-space:nowrap; }
-        .pri { display:inline-block; font-size:0.6rem; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; padding:0.12rem 0.5rem; border-radius:999px; white-space:nowrap; }
-        .pri-high { background:#fef2f2; color:#b91c1c; border:1px solid #fecaca; }
-        .pri-med { background:#fffbeb; color:#b45309; border:1px solid #fde68a; }
-        .pri-low { background:#f1f5f9; color:#475569; border:1px solid #e2e8f0; }
-        .pri-ong { background:#ecfeff; color:#0e7490; border:1px solid #bae6fd; }
-      </style>
-      <div class="panel p-4 overflow-x-auto">
-        <table class="tasks">
+    <section style="margin-bottom:24px">
+      <h2 class="sec">Tasks</h2>
+      <div class="card" style="overflow-x:auto">
+        <table class="dt">
           <thead><tr><th>Area</th><th>Task</th><th>What it achieves</th><th>Priority</th></tr></thead>
-          <tbody>
-            <tr><td class="area">Website</td><td>Deepen the priority service pages (hot tub, piano, artwork, senior, office, local)</td><td>Lifts the keywords sitting just below page one, where service pages already carry the traffic</td><td><span class="pri pri-high">High</span></td></tr>            <tr><td class="area">Website</td><td>Replace the placeholder copy on the /locations/ hub page (it is published with Lorem ipsum text in the body and the social description)</td><td>Removes filler text from a live, linkable page</td><td><span class="pri pri-high">High</span></td></tr>
+          <tbody style="text-align:left">
+            <tr><td class="area">Website</td><td>Deepen the priority service pages (hot tub, piano, artwork, senior, office, local)</td><td>Lifts the keywords sitting just below page one, where service pages already carry the traffic</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">Website</td><td>Replace the placeholder copy on the /locations/ hub page (it is published with Lorem ipsum text in the body and the social description)</td><td>Removes filler text from a live, linkable page</td><td><span class="pri pri-high">High</span></td></tr>
             <tr><td class="area">Website</td><td>Remove the internal sales-script leftover published in the piano page body (the "Try calling another piano moving company..." passage)</td><td>Takes an internal note off a live customer-facing page</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">Website</td><td>Refocus the homepage on the brand and core services</td><td>Stops the homepage being stretched across many commercial searches at once</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">Internal links</td><td>Route links and structured data to the priority service pages that still lack them</td><td>Sends authority to the pages most ready to rank, and improves search appearance</td><td><span class="pri pri-high">High</span></td></tr>
             <tr><td class="area">GBP</td><td>Keep the Walled Lake profile fully built out (business details, products and services)</td><td>Defends the #1 home-area map position and the highest-intent channel</td><td><span class="pri pri-high">High</span></td></tr>
             <tr><td class="area">GBP</td><td>Anchor the products and services list to the home service area</td><td>Reinforces local relevance on the managed pin</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">Content</td><td>Link the top guides to the matching service pages</td><td>Turns the growing reading audience into enquiries</td><td><span class="pri pri-high">High</span></td></tr>
-            <tr><td class="area">Content</td><td>Link the existing cost and what-to-look-for guides to the service pages, and add a tipping guide if one is missing</td><td>Catches people closer to choosing a mover without rebuilding guides that already exist</td><td><span class="pri pri-med">Medium</span></td></tr>            <tr><td class="area">Measurement</td><td>Report leads as website form enquiries; note calls are not tracked</td><td>Keeps the lead numbers honest and consistent month to month</td><td><span class="pri pri-low">Low</span></td></tr>
+            <tr><td class="area">Content</td><td>Link the existing cost and what-to-look-for guides to the service pages, and add a tipping guide if one is missing</td><td>Catches people closer to choosing a mover without rebuilding guides that already exist</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Measurement</td><td>Report leads as website form enquiries; note calls are not tracked</td><td>Keeps the lead numbers honest and consistent month to month</td><td><span class="pri pri-low">Low</span></td></tr>
             <tr><td class="area">Content</td><td>Deepen the specialty-move pages (hot tub, piano, pool table, artwork, LCD and plasma TV) into the best in the market; add corporate and employee relocation where demand is real</td><td>Owns the high-value moves already recovering; judged by jobs, not traffic</td><td><span class="pri pri-med">Medium</span></td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <footer class="mt-6 pt-3 border-t border-slate-200 text-[10px] text-slate-500 flex flex-wrap items-center justify-between gap-2" style="color:#0e7490;">
-      <div class="font-semibold">HQDM SEARCH INTELLIGENCE · CUSTOM STRATEGY</div>
-      <div>PROFESSIONALMOVERS.COM · Internal · June 2026</div>
-    </footer>
-  </main>
+    <p class="tiny muted center" style="margin-top:8px">HQDM Search Intelligence &middot; Custom Strategy &middot; professionalmovers.com &middot; Internal &middot; June 2026</p>
+  </div>
+</main>
+
+<script src="../../assets/js/chart.umd.min.js"></script>
+<script src="../../assets/js/report.js"></script>
 </body>
 </html>
