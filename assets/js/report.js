@@ -228,35 +228,58 @@
         payload: function (name, text) { return { type: 'request', person: name, client: client, message: text }; } });
     }
 
-    // add the Action column to the strategy tasks table (the one with priority pills)
+    // add the Action column to the strategy tasks table (the one with priority
+    // pills). Cancel state is saved to /api/cancels so it is shared: a Cancel
+    // (or Revert) shows for everyone who opens the link, not just this browser.
     (function initTasks() {
       var tables = [].slice.call(document.querySelectorAll('table.dt')), table = null;
       for (var i = 0; i < tables.length; i++) { if (tables[i].querySelector('.pri')) { table = tables[i]; break; } }
       if (!table) return;
       var client = clientName();
+      var slug = (location.pathname.split('/').filter(Boolean)[0] || '').toLowerCase();
+      function keyOf(text) { var h = 5381, i = text.length; while (i) { h = (h * 33) ^ text.charCodeAt(--i); } return (h >>> 0).toString(16); }
+      function persist(key, cancelled) {
+        fetch('/api/cancels', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ slug: slug, task: key, cancelled: cancelled }) })
+          .then(function (r) { if (!r.ok) throw new Error(r.status); })
+          .catch(function () { toast('Saved on this screen only, could not reach the server.'); });
+      }
       var headRow = table.querySelector('thead tr');
       if (headRow && !headRow.querySelector('.actcol')) {
         var th = document.createElement('th'); th.className = 'actcol'; th.textContent = 'Action'; headRow.appendChild(th);
       }
-      [].slice.call(table.querySelectorAll('tbody tr')).forEach(function (tr) {
+      function buildRow(tr, cancelledSet) {
         if (tr.querySelector('.task-action')) return;
         var task = (tr.children[1] ? tr.children[1].textContent : '').trim();
+        var key = keyOf(task);
         var td = document.createElement('td'); td.className = 'task-action no-print'; tr.appendChild(td);
-        function render(cancelled) {
+        function render(cancelled, save) {
+          tr.classList.toggle('task-cancelled', cancelled);
           if (cancelled) {
             td.innerHTML = '<button class="tact tact--revert" type="button">Revert</button>';
-            td.querySelector('.tact--revert').onclick = function () { tr.classList.remove('task-cancelled'); render(false); };
+            td.querySelector('.tact--revert').onclick = function () { render(false, true); };
           } else {
             td.innerHTML = '<button class="tact tact--push" type="button" title="Pushes this task to the client Asana board (coming soon)">Push</button>' +
               '<button class="tact tact--issue" type="button">Issue</button>' +
               '<button class="tact tact--cancel" type="button">Cancel</button>';
             td.querySelector('.tact--push').onclick = function () { toast('Asana push is coming soon.'); };
             td.querySelector('.tact--issue').onclick = function () { openIssue(client, task); };
-            td.querySelector('.tact--cancel').onclick = function () { tr.classList.add('task-cancelled'); render(true); };
+            td.querySelector('.tact--cancel').onclick = function () { render(true, true); };
           }
+          if (save) persist(key, cancelled);
         }
-        render(false);
-      });
+        render(cancelledSet[key] === true, false);
+      }
+      function buildAll(cancelledSet) {
+        [].slice.call(table.querySelectorAll('tbody tr')).forEach(function (tr) { buildRow(tr, cancelledSet); });
+      }
+      // load the shared cancel state first, then render rows in the right state
+      fetch('/api/cancels?slug=' + encodeURIComponent(slug), { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : { cancelled: [] }; })
+        .catch(function () { return { cancelled: [] }; })
+        .then(function (data) {
+          var set = {}; (((data && data.cancelled)) || []).forEach(function (k) { set[k] = true; });
+          buildAll(set);
+        });
     })();
 
     // add the Request button to the bottom bar
