@@ -26,6 +26,7 @@ module.exports = async function handler(req, res) {
     let text;
     if (b.type === 'issue') {
       text = ':warning: *Strategy task issue*\n' +
+        '*From:* ' + v(b.person) + '\n' +
         '*Client:* ' + v(b.client) + '\n' +
         '*Task:* ' + v(b.taskTitle) + '\n' +
         '*Comment:* ' + v(b.comment);

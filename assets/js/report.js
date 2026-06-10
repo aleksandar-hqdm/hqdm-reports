@@ -219,9 +219,9 @@
       };
     }
     function openIssue(client, task) {
-      openModal({ title: 'Raise an issue', ctx: client + '   ' + task, askName: false, label: 'What is the issue?',
+      openModal({ title: 'Raise an issue', ctx: client + '   ' + task, askName: true, label: 'What is the issue?',
         placeholder: 'Describe the issue with this task', sendLabel: 'Send',
-        payload: function (name, text) { return { type: 'issue', client: client, taskTitle: task, comment: text }; } });
+        payload: function (name, text) { return { type: 'issue', person: name, client: client, taskTitle: task, comment: text }; } });
     }
     function openRequest(client) {
       openModal({ title: 'Request', askName: true, label: 'Your message', placeholder: 'What do you need?', sendLabel: 'Submit',
@@ -247,10 +247,10 @@
             td.innerHTML = '<button class="tact tact--revert" type="button">Revert</button>';
             td.querySelector('.tact--revert').onclick = function () { tr.classList.remove('task-cancelled'); render(false); };
           } else {
-            td.innerHTML = '<button class="tact tact--push" type="button" title="Push to client Asana board (coming soon)">Push</button>' +
+            td.innerHTML = '<button class="tact tact--push" type="button" title="Pushes this task to the client Asana board (coming soon)">Push</button>' +
               '<button class="tact tact--issue" type="button">Issue</button>' +
               '<button class="tact tact--cancel" type="button">Cancel</button>';
-            td.querySelector('.tact--push').onclick = function () { toast('Asana push is not connected yet.'); };
+            td.querySelector('.tact--push').onclick = function () { toast('Asana push is coming soon.'); };
             td.querySelector('.tact--issue').onclick = function () { openIssue(client, task); };
             td.querySelector('.tact--cancel').onclick = function () { tr.classList.add('task-cancelled'); render(true); };
           }
