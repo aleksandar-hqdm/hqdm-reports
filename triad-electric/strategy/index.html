@@ -52,7 +52,7 @@
         <li><span>New calls <b>dipped from a strong last fall</b> (about 190 a month) to a steady 50 to 68 a month. Visibility is still good, so this is about strengthening what they have, not starting over.</span></li>
         <li><span>The <b>different phone numbers</b> on Google, the website, and social are the call-tracking system, not a mistake. Every number rings the same main line.</span></li>
         <li><span>The biggest wins are the <b>Google profile</b> (clean the name, reply to reviews, keep them coming) and making the <b>website tap-to-call</b> on every page.</span></li>
-        <li><span>Two tracking fixes matter: the website analytics tag is <b>live but its reports have been blank since March</b> (a settings or filter issue, not a missing tag), and calls are <b>not yet tagged</b> as real jobs versus spam. Fixing both makes the report match what the owner hears on the phone.</span></li>
+        <li><span>Two tracking fixes matter: the website analytics <b>stopped recording when the site was rebuilt in March</b> (the tracking tag did not carry over to the new site; dev has now restored it), and calls are <b>not yet tagged</b> as real jobs versus spam. With the tag back, tagging the calls is what is left to make the report match what the owner hears on the phone.</span></li>
       </ul>
     </div>
 
@@ -129,7 +129,7 @@
           <p class="lead2">The phone numbers the client flagged are the call-tracking setup, not an error. The Google profile shows a tracking number (336-962-7549) that forwards to the real line (336-499-2015), and the website uses a small pool of rotating numbers that all forward to the same line. Every number a customer can dial rings the main business line, and the tracking is how we prove which calls Google and the website send. The cleanup is cosmetic: show the real number consistently on the website and social, and list it as a second number on the profile.</p>
           <h3 class="sub-h">Two real gaps to close</h3>
           <ul class="mini">
-            <li>The website's analytics reports have been blank since around March 2026 (around the time of the rebuild), even though the tracking tag is still live and Google is receiving visits, so it is a settings or filter issue inside Analytics, not a missing tag. The earlier data is also inflated by overseas bot traffic. Clear the setting that is blocking the data and filter the bots. Leads never stopped; the call tracking ran the whole time.</li>
+            <li>The website's analytics recorded almost nothing from the March rebuild onward (0 sessions in the 30 days before the fix, against about 600 the month before) because the tracking tag did not carry over to the rebuilt site. Dev has now re-added the tag, so visit reporting resumes from here; the rebuild-to-now gap stays empty, but no leads were lost. The earlier data is also inflated by overseas bot traffic, so filter that out now that data is flowing again. Leads never stopped; the call tracking ran the whole time.</li>
             <li>Calls are not tagged as real jobs versus sales calls, wrong numbers, and repeat callers (only a handful have ever been marked). Turning on tagging lets the monthly report show genuine new leads, which is what the owner counts when they say "only one was a new lead."</li>
           </ul>
         </div>
@@ -204,15 +204,15 @@
           <span class="snum">4</span>
           <div class="sum-main">
             <div class="sum-hd"><h3>Fix the measurement so we can prove it</h3><span class="tag tag--mint">measurement</span></div>
-            <span class="sum-txt">Restore website reporting (the tag is live but its reports have been blank since March, a settings or filter issue), filter bot traffic, and tag real job leads so the report matches the phone.</span>
+            <span class="sum-txt">Website reporting is restored (dev re-added the tag that dropped in the March rebuild); the rest of the measurement work is to filter bot traffic and tag real job leads so the report matches the phone.</span>
           </div>
           <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
         <div class="sdrop__body has-top">
           <div class="wwh__bd" style="padding:0">
-            <div class="row"><div class="k">What</div><div class="v">Clear the Google Analytics setting that is blocking the reports (the tag itself is live), filter the bot and spam traffic, and turn on lead tagging in the call tracking.</div></div>
-            <div class="row"><div class="k">Why</div><div class="v">The website's analytics tag is live and Google is receiving live visits, but the property has recorded almost nothing since the March rebuild, which points to a settings or filter issue rather than a missing tag, and the earlier data is inflated by overseas bot traffic, so it is not a reliable read today. Calls are not tagged, so we cannot separate real jobs from sales calls and wrong numbers, which is exactly why a slow day can look like "only one real lead". Fixing both makes the numbers trustworthy and matches what the owner sees on the phone.</div></div>
-            <div class="row"><div class="k">How</div><div class="v">Check the Google Analytics data filters and settings to find what is blocking traffic from the reports (the tag is live and firing); add bot filtering so overseas spam is excluded; in the call tracking, tag first-time calls as job or not-a-job so the monthly report shows qualified new leads, not raw call counts.</div></div>
+            <div class="row"><div class="k">What</div><div class="v">The Google Analytics tag has been re-added to the rebuilt site, so visits record again (it had stopped firing in March); next, filter the bot and spam traffic, and turn on lead tagging in the call tracking.</div></div>
+            <div class="row"><div class="k">Why</div><div class="v">The website's analytics property recorded almost nothing from the March rebuild until dev re-added the tag this month (0 sessions in the 30 days before the fix, against about 600 the month before the rebuild), because the tracking tag did not carry over to the new site, and the earlier data is inflated by overseas bot traffic, so it is only now becoming a reliable read again. Calls are not tagged, so we cannot separate real jobs from sales calls and wrong numbers, which is exactly why a slow day can look like "only one real lead". Fixing both makes the numbers trustworthy and matches what the owner sees on the phone.</div></div>
+            <div class="row"><div class="k">How</div><div class="v">Dev has re-added the Google Analytics tag to the rebuilt site; confirm it is firing on every page and that visits are recording again, then add bot filtering so overseas spam is excluded; in the call tracking, tag first-time calls as job or not-a-job so the monthly report shows qualified new leads, not raw call counts.</div></div>
           </div>
         </div>
       </details>
@@ -235,7 +235,7 @@
             <tr><td class="area">Website</td><td>Combine the overlapping service-area pages into one and redirect the rest</td><td>Removes thin duplicate pages; one strong area page</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">Content</td><td>Refresh the older national how-to posts toward Greensboro intent</td><td>Turns legacy DIY traffic into local customers</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">Content</td><td>Add local depth to the neighborhood pages (unique today but around 500 words)</td><td>Turns thin pages into ones that can rank and convert</td><td><span class="pri pri-med">Medium</span></td></tr>
-            <tr><td class="area">Measurement</td><td>Clear the Google Analytics setting blocking the reports (the tag is live)</td><td>Restores visit reporting after the March update</td><td><span class="pri pri-high">High</span></td></tr>
+            <tr><td class="area">Measurement</td><td>Confirm the re-added Google Analytics tag is firing site-wide and visits are recording (dev restored it this month)</td><td>Visit reporting resumes after the rebuild gap</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">Measurement</td><td>Filter bot and spam traffic</td><td>Makes the traffic numbers trustworthy</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">Measurement</td><td>Turn on lead tagging in the call tracking</td><td>Report shows real jobs, matching what you hear on the phone</td><td><span class="pri pri-high">High</span></td></tr>
           </tbody>
