@@ -58,6 +58,54 @@
           <span class="pill"><span class="dot"></span>2 of 2 resolved</span>
         </div>
 
+        <!-- ============ CALL PREP CARD (featured, on top) ============ -->
+        <article class="qaItem">
+          <div class="qaItem__hd">
+            <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center">
+              <span class="tag">Call prep</span>
+              <span class="tag">June 2026</span>
+              <span class="tag tag--amber">May lead volume</span>
+            </div>
+            <h2>Ahead of our call: the market explains most of the May dip</h2>
+          </div>
+
+          <!-- The demand picture -->
+          <div class="qaSec">
+            <div class="eyebrow">What the demand data shows</div>
+            <p class="small" style="color:var(--ink-soft); line-height:1.62">Searches for movers fall every May after the late-winter and early-spring planning rush, and this year the whole market is smaller than last year. Both patterns show up below, for the country and for Minnesota, so a softer May tracks the market, not your visibility.</p>
+            <div class="kpis" style="margin:15px 0 16px">
+              <div class="kpi"><div class="l">U.S. demand &middot; May vs spring</div><div class="n">-16%</div><div class="s">below the Feb to Apr run-up</div></div>
+              <div class="kpi"><div class="l">U.S. demand &middot; vs last May</div><div class="n">-23%</div><div class="s">the overall market is smaller</div></div>
+              <div class="kpi"><div class="l">Minnesota &middot; May vs spring</div><div class="n">-8%</div><div class="s">the same dip, closer to home</div></div>
+              <div class="kpi"><div class="l">Minnesota &middot; vs last May</div><div class="n">-32%</div><div class="s">fewer people moving overall</div></div>
+            </div>
+            <div class="grid grid--2" style="gap:16px; align-items:start">
+              <div class="card chart-card">
+                <div class="chart-head"><h3 class="display">U.S. moving-search demand</h3><span class="muted tiny">Google &middot; by month</span></div>
+                <div class="chart-wrap"><canvas id="usDemand"></canvas></div>
+                <p class="chart-note">Total monthly searches for the main moving terms. May sits below its spring run-up in both years (the seasonal dip), and the 2026 line runs below 2025 all year (a smaller market).</p>
+              </div>
+              <div class="card chart-card">
+                <div class="chart-head"><h3 class="display">Minnesota moving-search demand</h3><span class="muted tiny">Google &middot; by month</span></div>
+                <div class="chart-wrap"><canvas id="mnDemand"></canvas></div>
+                <p class="chart-note">The same two patterns close to home: a May dip each year, and a 2026 line that sits below 2025. Long-distance searches are the exception, holding up better through the dip.</p>
+              </div>
+            </div>
+            <p class="chart-note">Search volumes are Google's modeled estimates, so read the direction and the shape, not the exact figure.</p>
+          </div>
+
+          <!-- Bring to the discussion -->
+          <div class="qaSec">
+            <div class="eyebrow">Bring to the discussion</div>
+            <ul class="ov">
+              <li><strong>Moving-search demand, month by month (U.S. and Minnesota).</strong> The May dip shows up in both 2025 and 2026, on top of a year-over-year decline in overall moving demand. This is the charts above.</li>
+              <li><strong>Your tracked calls, month by month across all five locations.</strong> The recent dip shows up at every location together, which is what a market shift looks like rather than a problem at one profile. We will line these up against your own records. Call tracking went live in April, so May onward is the clean comparison.</li>
+              <li><strong>Your visibility and rankings, steady to improving.</strong> Your money pages held or gained position in Google, the map grid is stable across locations, and the competitor set has not changed. Your Bloomington page is up versus last May and Hudson's position improved.</li>
+              <li><strong>The Google profile dashboard.</strong> Google changed how it counts profile views in 2024, so those numbers read lower across the board. We will show your tracked calls next to that figure so a reporting change is not mistaken for lost business.</li>
+            </ul>
+          </div>
+        </article>
+
         <div class="notice notice--good notice__col" style="margin-bottom:4px">
           <span class="tag tag--mint">How this works</span>
           <p>When you raise a question or a request from your report, it lands here once we have looked into it. Each entry holds the question in plain terms, what the data showed, charts you can download and use, and a written answer you can copy and send.</p>
@@ -296,7 +344,36 @@
 </main>
 
 <script>
+/* 2025-vs-2026 seasonal overlay: grey dashed = last year, violet solid = this year */
+function demandLine(cv, y2025, y2026, yfmt) {
+  var C = RPT.C;
+  return new Chart(cv, {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      datasets: [
+        { label: '2025', data: y2025, borderColor: C.grey, backgroundColor: C.grey, borderWidth: 2, borderDash: [4, 3], tension: 0.25, pointRadius: 2, pointHoverRadius: 5 },
+        { label: '2026', data: y2026, borderColor: C.violet, backgroundColor: C.violet, borderWidth: 2.6, tension: 0.25, pointRadius: 2.4, pointHoverRadius: 5 }
+      ]
+    },
+    options: {
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: C.muted, font: { family: "'JetBrains Mono', monospace", size: 9.5 } }, border: { display: false } },
+        y: { beginAtZero: true, grid: { color: C.grid }, ticks: { color: C.muted, font: { family: "'JetBrains Mono', monospace", size: 9.5 }, callback: yfmt }, border: { display: false } }
+      },
+      plugins: {
+        legend: { display: true, position: 'bottom', labels: { boxWidth: 11, boxHeight: 11, color: C.muted, font: { family: "'JetBrains Mono', monospace", size: 10.5 } } },
+        tooltip: { callbacks: { label: function (c) { return c.dataset.label + ': ' + (c.parsed.y != null ? c.parsed.y.toLocaleString() : '-'); } } }
+      }
+    }
+  });
+}
+
 window.CHART_FACTORIES = {
+  usDemand: function (cv) { return demandLine(cv, [1614800,1638300,1825800,1230300,1039000,1155900,1175200,1069800,1092300,993800,668700,849300], [1095800,1081800,983900,793800,802200,null,null,null,null,null,null,null], function (v) { return (v / 1000000).toFixed(1) + 'M'; }); },
+  mnDemand: function (cv) { return demandLine(cv, [27240,19180,22880,17380,15880,20880,22620,20790,18150,14480,8630,9690], [12760,12140,11570,11560,10840,null,null,null,null,null,null,null], function (v) { return (v / 1000).toFixed(0) + 'k'; }); },
   callsByPin: function (cv) {
     var C = RPT.C;
     return new Chart(cv, {
