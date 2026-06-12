@@ -24,6 +24,24 @@
   .chart-head .dlbtn { margin-left: auto; }
   .qaSec .emailcopy { margin-top: 4px; }
   .emailtools { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+  .srclist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .srclist li { line-height: 1.55; color: var(--ink-soft); }
+  .srclist a { color: var(--violet); }
+  .pinsel { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; }
+  .pinbtn { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; padding: 7px 12px; cursor: pointer;
+    color: var(--ink); background: var(--face); border: 1px solid; border-color: var(--b-light) var(--b-dark) var(--b-dark) var(--b-light); }
+  .pinbtn[aria-pressed="true"] { background: var(--violet); color: #fff; }
+  .pinbtn:active { border-color: var(--b-dark) var(--b-light) var(--b-light) var(--b-dark); }
+  .hmlegend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 14px; font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-soft); }
+  .hmlegend span { display: inline-flex; align-items: center; gap: 5px; }
+  .hmlegend i { width: 12px; height: 12px; display: inline-block; border: 1px solid rgba(0,0,0,0.2); }
+  .hmwrap { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; }
+  .hmcard { border: 1px solid var(--line); background: var(--panel); padding: 11px; }
+  .hmcard h4 { font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; line-height: 1.2; }
+  .hmsub { font-family: var(--font-mono); font-size: 0.64rem; color: var(--muted); margin: 3px 0 9px; }
+  .hm { display: grid; gap: 1px; }
+  .hmcell { aspect-ratio: 1 / 1; border-radius: 1px; }
+  .hmcell.ctr { box-shadow: 0 0 0 2px var(--ink); position: relative; z-index: 1; }
 </style>
 </head>
 <body>
@@ -101,8 +119,73 @@
               <li><strong>Moving-search demand, month by month (U.S. and Minnesota).</strong> The May dip shows up in both 2025 and 2026, on top of a year-over-year decline in overall moving demand. This is the charts above.</li>
               <li><strong>Your tracked calls, month by month across all five locations.</strong> The recent dip shows up at every location together, which is what a market shift looks like rather than a problem at one profile. We will line these up against your own records. Call tracking went live in April, so May onward is the clean comparison.</li>
               <li><strong>Your visibility and rankings, steady to improving.</strong> Your money pages held or gained position in Google, the map grid is stable across locations, and the competitor set has not changed. Your Bloomington page is up versus last May and Hudson's position improved.</li>
-              <li><strong>The Google profile dashboard.</strong> Google changed how it counts profile views in 2024, so those numbers read lower across the board. We will show your tracked calls next to that figure so a reporting change is not mistaken for lost business.</li>
+              <li><strong>The Google profile dashboard.</strong> Google changed how it counts profile views in 2024, so those numbers read lower across the board (<a href="https://support.google.com/business/answer/9918094" target="_blank" rel="noopener">Google's guidance</a>). We will show your tracked calls next to that figure so a reporting change is not mistaken for lost business.</li>
             </ul>
+          </div>
+
+          <!-- Sources -->
+          <div class="qaSec">
+            <div class="eyebrow">Sources</div>
+            <ul class="srclist small">
+              <li><strong>Google changed how it counts profile views (2024).</strong> <a href="https://support.google.com/business/answer/9918094" target="_blank" rel="noopener">Google Business Profile Help</a> (&ldquo;a person can only be counted once a day&hellip; this number might be lower&rdquo;); <a href="https://searchengineland.com/google-business-profile-performance-insights-what-you-need-to-know-436468" target="_blank" rel="noopener">Search Engine Land</a>; <a href="https://www.glacial.com/why-your-practices-google-business-profile-views-have-dropped/" target="_blank" rel="noopener">Glacial Multimedia</a>.</li>
+              <li><strong>Fewer people are moving (record-low mobility).</strong> <a href="https://www.jchs.harvard.edu/blog/household-mobility-fell-record-low-2024" target="_blank" rel="noopener">Harvard Joint Center for Housing Studies</a>; <a href="https://www.census.gov/topics/population/migration/guidance/acs-1yr.html" target="_blank" rel="noopener">U.S. Census mobility data</a>.</li>
+              <li><strong>Home sales at a 30-year low.</strong> <a href="https://www.cnn.com/2025/01/24/economy/us-home-sales-worst-year-in-three-decades" target="_blank" rel="noopener">CNN Business</a>; <a href="https://www.pbs.org/newshour/economy/2025-home-sales-stuck-at-30-year-low" target="_blank" rel="noopener">PBS News</a>.</li>
+              <li><strong>Moving demand is seasonal (a spring planning peak, then a dip).</strong> <a href="https://www.movebuddha.com/blog/peak-moving-season/" target="_blank" rel="noopener">moveBuddha</a>; <a href="https://www.supermove.com/blog/2025-top-trends-predictions-by-moving-company-pros" target="_blank" rel="noopener">Supermove</a>.</li>
+              <li><strong>The May demand figures above.</strong> Google Ads search-volume data for the main moving terms (United States and Minnesota), pulled June 2026. These are Google's modeled estimates, so the direction is the point, not the exact figure.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- ============ DAILY CALLS CARD ============ -->
+        <article class="qaItem">
+          <div class="qaItem__hd">
+            <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center">
+              <span class="tag">Call data</span>
+              <span class="tag">CallRail</span>
+              <span class="tag tag--mint">Apr to Jun 2026</span>
+            </div>
+            <h2>Your phone calls, day by day</h2>
+          </div>
+          <div class="qaSec">
+            <div class="eyebrow">Every tracked call since tracking began</div>
+            <p class="small" style="color:var(--ink-soft); line-height:1.62">Each bar is one day of tracked calls; the line is the 7-day average, so the trend is easy to read. The spring high eased to a steadier early-summer level, which matches the softer market, and the volume stays healthy.</p>
+            <div class="kpis" style="margin:15px 0 16px">
+              <div class="kpi"><div class="l">Tracked calls</div><div class="n">1,724</div><div class="s">Apr 1 to Jun 12</div></div>
+              <div class="kpi"><div class="l">Average per day</div><div class="n">~24</div><div class="s">across 73 days</div></div>
+              <div class="kpi"><div class="l">From Google / Maps</div><div class="n">86%</div><div class="s">of all tracked calls</div></div>
+              <div class="kpi"><div class="l">Days tracked</div><div class="n">73</div><div class="s">since Apr 1, 2026</div></div>
+            </div>
+            <div class="card chart-card">
+              <div class="chart-head"><h3 class="display">Daily tracked calls</h3><span class="muted tiny">CallRail &middot; Apr 1 to Jun 12, 2026</span></div>
+              <div class="chart-wrap" style="height:260px"><canvas id="dailyCalls"></canvas></div>
+              <p class="chart-note">Inbound tracked calls per day, with the 7-day average. Day-to-day swings are normal (weekends run lower); the average line shows the real direction.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============ MAP GRID CARD ============ -->
+        <article class="qaItem">
+          <div class="qaItem__hd">
+            <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center">
+              <span class="tag">Map grid</span>
+              <span class="tag">Local Dominator</span>
+              <span class="tag tag--mint">Late May 2026</span>
+            </div>
+            <h2>Where you rank on the map, point by point</h2>
+          </div>
+          <div class="qaSec">
+            <div class="eyebrow">Real Google Maps rankings across a 13 by 13 grid</div>
+            <p class="small" style="color:var(--ink-soft); line-height:1.62">Pick a location below. Each square is a spot on the map around that office, and its color is where you rank for that search from that spot. The center square is the office itself. This is the real scan, not an estimate.</p>
+            <div class="pinsel" id="pinSel"></div>
+            <div class="hmlegend">
+              <span><i style="background:#079A6B"></i> Top 3</span>
+              <span><i style="background:#C77B05"></i> 4 to 10</span>
+              <span><i style="background:#D6456A"></i> 11 to 20</span>
+              <span><i style="background:#D7DAE0"></i> Not in top 20</span>
+              <span><i style="box-shadow:0 0 0 2px var(--ink) inset; background:transparent"></i> The office</span>
+            </div>
+            <div class="hmwrap" id="hmWrap"></div>
+            <p class="chart-note">Stronger nearest the office and easing toward the edges is the normal pattern. The generic &ldquo;near me&rdquo; searches, where the wider-area work focuses, are the ones to grow. Source: Local Dominator scan, latest snapshot.</p>
           </div>
         </article>
 
@@ -343,6 +426,7 @@
   </div>
 </main>
 
+<script src="data.js"></script>
 <script>
 /* 2025-vs-2026 seasonal overlay: grey dashed = last year, violet solid = this year */
 function demandLine(cv, y2025, y2026, yfmt) {
@@ -374,6 +458,30 @@ function demandLine(cv, y2025, y2026, yfmt) {
 window.CHART_FACTORIES = {
   usDemand: function (cv) { return demandLine(cv, [1614800,1638300,1825800,1230300,1039000,1155900,1175200,1069800,1092300,993800,668700,849300], [1095800,1081800,983900,793800,802200,null,null,null,null,null,null,null], function (v) { return (v / 1000000).toFixed(1) + 'M'; }); },
   mnDemand: function (cv) { return demandLine(cv, [27240,19180,22880,17380,15880,20880,22620,20790,18150,14480,8630,9690], [12760,12140,11570,11560,10840,null,null,null,null,null,null,null], function (v) { return (v / 1000).toFixed(0) + 'k'; }); },
+  dailyCalls: function (cv) {
+    var C = RPT.C, D = window.DM_DAILY || { dates: [], total: [], roll7: [] };
+    var labels = D.dates.map(function (s) { var p = s.split('-'); return (+p[1]) + '/' + (+p[2]); });
+    return new Chart(cv, {
+      data: {
+        labels: labels,
+        datasets: [
+          { type: 'bar', label: 'Calls that day', data: D.total, backgroundColor: 'rgba(91,75,208,0.26)', borderWidth: 0, maxBarThickness: 9, order: 2 },
+          { type: 'line', label: '7-day average', data: D.roll7, borderColor: C.mint, backgroundColor: C.mint, borderWidth: 2.6, tension: 0.3, pointRadius: 0, pointHoverRadius: 4, order: 1 }
+        ]
+      },
+      options: {
+        maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: C.muted, maxTicksLimit: 12, autoSkip: true, font: { family: "'JetBrains Mono', monospace", size: 9 } }, border: { display: false } },
+          y: { beginAtZero: true, grid: { color: C.grid }, ticks: { color: C.muted, font: { family: "'JetBrains Mono', monospace", size: 9.5 } }, border: { display: false } }
+        },
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { boxWidth: 11, boxHeight: 11, color: C.muted, font: { family: "'JetBrains Mono', monospace", size: 10 } } },
+          tooltip: { callbacks: { title: function (it) { return D.dates[it[0].dataIndex] || ''; }, label: function (c) { return c.dataset.label + ': ' + c.parsed.y; } } }
+        }
+      }
+    });
+  },
   callsByPin: function (cv) {
     var C = RPT.C;
     return new Chart(cv, {
@@ -449,6 +557,44 @@ function dlData() {
   a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
   a.download = 'daymakers-bloomington-hudson-numbers.csv'; a.click();
 }
+
+/* ---- map-grid heatmaps from real Local Dominator data (window.DM_GRIDS) ---- */
+(function () {
+  var G = window.DM_GRIDS;
+  var wrap = document.getElementById('hmWrap'), sel = document.getElementById('pinSel');
+  if (!G || !G.pins || !wrap || !sel) return;
+  function color(r) { if (r == null) return '#D7DAE0'; if (r <= 3) return '#079A6B'; if (r <= 10) return '#C77B05'; return '#D6456A'; }
+  function render(pin) {
+    var kws = G.pins[pin].keywords; wrap.innerHTML = '';
+    Object.keys(kws).forEach(function (kw) {
+      var k = kws[kw], grid = k.grid, ny = grid.length, nx = grid[0].length, cx = (nx - 1) / 2, cy = (ny - 1) / 2;
+      var card = document.createElement('div'); card.className = 'hmcard';
+      var h = document.createElement('h4'); h.textContent = kw; card.appendChild(h);
+      var sub = document.createElement('div'); sub.className = 'hmsub';
+      sub.textContent = 'avg rank ' + (k.avg != null ? k.avg : '-') + '  |  top 3 in ' + (k.top3 || 0) + ' of ' + k.n_cells + ' spots';
+      card.appendChild(sub);
+      var hm = document.createElement('div'); hm.className = 'hm'; hm.style.gridTemplateColumns = 'repeat(' + nx + ',1fr)';
+      for (var y = 0; y < ny; y++) { for (var x = 0; x < nx; x++) {
+        var r = grid[y][x], c = document.createElement('div');
+        c.className = 'hmcell' + ((x === cx && y === cy) ? ' ctr' : '');
+        c.style.background = color(r);
+        c.title = kw + ' at (' + x + ',' + y + '): ' + (r == null ? 'not in top 20' : 'rank ' + r);
+        hm.appendChild(c);
+      } }
+      card.appendChild(hm); wrap.appendChild(card);
+    });
+  }
+  Object.keys(G.pins).forEach(function (p, i) {
+    var b = document.createElement('button'); b.className = 'pinbtn'; b.type = 'button';
+    b.textContent = p.replace(/,.*/, ''); b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+    b.onclick = function () {
+      sel.querySelectorAll('.pinbtn').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', 'true'); render(p);
+    };
+    sel.appendChild(b);
+  });
+  render(Object.keys(G.pins)[0]);
+})();
 </script>
 <script src="../../assets/js/chart.umd.min.js"></script>
 <script src="../../assets/js/report.js"></script>
