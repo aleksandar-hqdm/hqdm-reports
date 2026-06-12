@@ -136,19 +136,21 @@
           </div>
         </article>
 
-        <!-- ============ DAILY CALLS CARD ============ -->
+        <!-- ============ PERFORMANCE DATA CARD (calls by day + map grid) ============ -->
         <article class="qaItem">
           <div class="qaItem__hd">
             <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center">
-              <span class="tag">Call data</span>
-              <span class="tag">CallRail</span>
-              <span class="tag tag--mint">Apr to Jun 2026</span>
+              <span class="tag">Your data</span>
+              <span class="tag">CallRail + Local Dominator</span>
+              <span class="tag tag--mint">Through May / Jun 2026</span>
             </div>
-            <h2>Your phone calls, day by day</h2>
+            <h2>Your performance data: calls by day, and where you rank on the map</h2>
           </div>
+
+          <!-- Daily calls -->
           <div class="qaSec">
             <div class="eyebrow">Every tracked call since tracking began</div>
-            <p class="small" style="color:var(--ink-soft); line-height:1.62">Each bar is one day of tracked calls; the line is the 7-day average, so the trend is easy to read. The spring high eased to a steadier early-summer level, which matches the softer market, and the volume stays healthy.</p>
+            <p class="small" style="color:var(--ink-soft); line-height:1.62">The two views in this card are the real numbers behind the answer below: how many calls you actually received, day by day, and exactly where you rank on the map around each office. Each bar is one day of tracked calls; the line is the 7-day average, so the trend is easy to read. The spring high eased to a steadier early-summer level, which matches the softer market, and the volume stays healthy.</p>
             <div class="kpis" style="margin:15px 0 16px">
               <div class="kpi"><div class="l">Tracked calls</div><div class="n">1,724</div><div class="s">Apr 1 to Jun 12</div></div>
               <div class="kpi"><div class="l">Average per day</div><div class="n">~24</div><div class="s">across 73 days</div></div>
@@ -161,21 +163,11 @@
               <p class="chart-note">Inbound tracked calls per day, with the 7-day average. Day-to-day swings are normal (weekends run lower); the average line shows the real direction.</p>
             </div>
           </div>
-        </article>
 
-        <!-- ============ MAP GRID CARD ============ -->
-        <article class="qaItem">
-          <div class="qaItem__hd">
-            <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center">
-              <span class="tag">Map grid</span>
-              <span class="tag">Local Dominator</span>
-              <span class="tag tag--mint">Late May 2026</span>
-            </div>
-            <h2>Where you rank on the map, point by point</h2>
-          </div>
+          <!-- Map grid -->
           <div class="qaSec">
-            <div class="eyebrow">Real Google Maps rankings across a 13 by 13 grid</div>
-            <p class="small" style="color:var(--ink-soft); line-height:1.62">Pick a location below. Each square is a spot on the map around that office, and its color is where you rank for that search from that spot. The center square is the office itself. This is the real scan, not an estimate.</p>
+            <div class="eyebrow">Where you rank on the map, point by point</div>
+            <p class="small" style="color:var(--ink-soft); line-height:1.62">Now the map side of the same story. Pick a location below. Each square is a spot on the map around that office, and its color is where you rank for that search from that spot. The center square is the office itself. This is the real scan, not an estimate.</p>
             <div class="pinsel" id="pinSel"></div>
             <div class="hmlegend">
               <span><i style="background:#079A6B"></i> Top 3</span>
