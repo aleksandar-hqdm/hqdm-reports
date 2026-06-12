@@ -44,7 +44,7 @@
           <button class="tab-btn active" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
           <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">Search visibility</span></button>
           <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
-          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Completed and upcoming</span></button>
+          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Our recommendations</span></button>
         </div>
 
         <hr class="divider" style="margin:18px 0">
@@ -86,7 +86,7 @@
           <div class="card chart-card" style="margin-bottom:16px">
             <div class="chart-head"><h3 class="display">Where your website ranks in Google</h3><span class="muted tiny">number of searches by position</span></div>
             <div class="chart-wrap"><canvas id="visibilityChart"></canvas></div>
-            <p class="chart-note">Your site ranks for hundreds of searches, but most are national how-to questions on page 3 and beyond. The local searches that bring customers sit on page 2, close to the first page.</p>
+            <p class="chart-note">Your site ranks for hundreds of searches, but most are national how-to questions on page 3 and beyond. Most of the local searches that bring customers sit just past the first page.</p>
           </div>
 
           <div class="notice notice--warn notice__col" style="margin-bottom:18px">
@@ -169,23 +169,6 @@
             </table>
             <p class="chart-note">These come from the custom strategy. The Google profile and the tap-to-call fixes are the highest-value, and they fold into the regular monthly work.</p>
           </div>
-          <div class="grid grid--2" style="gap:16px; align-items:start">
-            <div class="card">
-              <div class="cardhd" style="margin-bottom:10px">Completed &middot; recent</div>
-              <table class="dt">
-                <thead><tr><th>Work delivered</th><th>When</th></tr></thead>
-                <tbody id="completed"></tbody>
-              </table>
-            </div>
-            <div class="card">
-              <div class="cardhd" style="margin-bottom:10px">In the pipeline &middot; next</div>
-              <table class="dt">
-                <thead><tr><th>Scheduled</th><th>When</th></tr></thead>
-                <tbody id="pipeline"></tbody>
-              </table>
-              <p class="chart-note">This is the work currently scheduled. The monthly content and listings work continues alongside it.</p>
-            </div>
-          </div>
         </section>
 
       </div>
@@ -220,34 +203,18 @@ var DATA = {
   recommendations: [
     {cat:'Google Business Profile', items:[
       ['Clean the business name to "Triad Electric Solutions" (drop the extra search words)','High'],
-      ['Confirm your hours show your 24/7 availability','Medium'],
+      ['Complete your services list with short descriptions','Medium'],
       ['List your main line as a second number so your details match everywhere','Medium']]},
     {cat:'Website', items:[
       ['Make your phone number tap-to-call on every page','High'],
       ['Add your business details to the homepage so Google reads them clearly','High'],
-      ['Put "Greensboro" in your service-page titles and add the missing headings','Medium'],
-      ['Combine the overlapping service-area pages into one strong page','Medium']]},
+      ['Add the missing headings to your service and area pages','Medium']]},
     {cat:'Content', items:[
       ['Refresh the older how-to blog posts so they target Greensboro searches','Medium']]},
     {cat:'Reviews (your team)', items:[
       ['Reply to your Google reviews and keep new ones coming in','Ongoing']]},
     {cat:'Measurement', items:[
       ['Tag real job leads so your report matches what you hear on the phone','High']]},
-  ],
-  completed: [
-    {cat:'Website', items:[['Rebuilt your website','Mar']]},
-    {cat:'Measurement', items:[['Restored your website visit tracking after the rebuild','Jun']]},
-    {cat:'Google profile', items:[['Optimized your Google Business Profile','2025']]},
-    {cat:'Local content', items:[['Greensboro neighborhood pages and electrical guides','Ongoing']]},
-    {cat:'Online listings', items:[['Added and maintained your business directory listings','Monthly']]},
-    {cat:'Authority building', items:[['Off-site brand mentions and links','Ongoing']]},
-    {cat:'Reporting', items:[['Monthly performance report','Monthly']]},
-  ],
-  pipeline: [
-    {cat:'Content', items:[['Three new Greensboro neighborhood pages','Jun'],['New local blog articles (lighting, outdoor wiring, surge protection, commercial)','Jun']]},
-    {cat:'Online listings', items:[['Sync your listings across directories','Jun']]},
-    {cat:'Website', items:[['New answers to common customer questions on the site','Jun']]},
-    {cat:'Reporting', items:[['Monthly performance report','Jun']]},
   ],
 };
 
@@ -261,13 +228,11 @@ document.getElementById('maps').innerHTML = DATA.maps.map(function (row) {
   return '<tr><td>' + row[0] + '</td><td>' + row[1] + '</td><td>' + row[2] + '</td></tr>';
 }).join('');
 
-// tab 4 grouped work tables
+// tab 4 recommendations
 function grpRows(g) {
   return '<tr class="catrow"><td>' + g.cat + '<span class="badge">' + g.items.length + '</span></td><td></td></tr>' +
     g.items.map(function (it) { return '<tr class="itemrow"><td>' + it[0] + '</td><td>' + it[1] + '</td></tr>'; }).join('');
 }
-document.getElementById('completed').innerHTML = DATA.completed.map(grpRows).join('');
-document.getElementById('pipeline').innerHTML = DATA.pipeline.map(grpRows).join('');
 document.getElementById('recommendations').innerHTML = DATA.recommendations.map(grpRows).join('');
 
 // charts
