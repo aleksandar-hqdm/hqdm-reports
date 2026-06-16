@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Body Balance Massage &amp; Float · Performance Report · 2026</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/hqdm.css">
+</head>
+<body>
+
+<div class="nav-wrap no-print">
+  <nav class="nav container" style="max-width:1000px">
+    <a class="brand" href="index.html"><span class="mark">H</span> <span>HQDM<small>search intelligence</small></span></a>
+    <button class="btn" onclick="window.print()" style="padding:8px 15px; font-size:0.8rem">Print / PDF</button>
+  </nav>
+</div>
+
+<main class="section section--tight">
+  <div class="container" style="max-width:1000px">
+
+    <div class="win">
+      <div class="win__bar">
+        <span class="ic">&#9635;</span>
+        <span class="ttl">performance-report.hqdm &ndash; Body Balance Massage &amp; Float</span>
+        <span class="win__controls"><b>_</b><b>&#9633;</b><b>&times;</b></span>
+      </div>
+      <div class="win__body">
+
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:16px">
+          <div>
+            <div class="eyebrow">Marketing Performance Report</div>
+            <h1 class="display" style="font-size:clamp(1.5rem,2.8vw,2.1rem); margin-top:8px">Body Balance Massage &amp; Float</h1>
+            <p class="muted small" style="margin-top:4px">Massage &amp; float studio &middot; American Fork, UT &middot; prepared by HQDM</p>
+          </div>
+          <span class="pill"><span class="dot"></span>Through May 31, 2026</span>
+        </div>
+
+        <div class="tabs no-print">
+          <button class="tab-btn active" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
+          <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">Search performance</span></button>
+          <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
+          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Our recommendations</span></button>
+        </div>
+
+        <hr class="divider" style="margin:18px 0">
+
+        <!-- TAB 1: LEAD GENERATION -->
+        <section data-panel="1">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Booked sessions and website leads are steady and growing: organic visits and booked sessions are both up about <strong>18% year over year</strong>, and the studio takes in roughly 55 to 70 booked sessions and form leads a month from search, plus a similar volume of click-to-call intent.</li>
+            <li>Most of those leads come from organic search and from people who find the studio on its Google profile. <strong>Float therapy is the service Body Balance owns on Google Maps</strong> (number one across the local map), and "massage american fork" is number one as well, so visibility is strong. The growth opportunity now is turning more of that visibility into booked sessions on the website.</li>
+          </ul>
+          <div class="kpis" style="margin-bottom:18px">
+            <div class="kpi"><div class="l">Booked sessions + leads (May)</div><div class="n">67</div><div class="delta up">+6%</div><div class="s">vs 63 in April</div></div>
+            <div class="kpi"><div class="l">Organic visits &middot; YoY</div><div class="n">+18%</div><div class="s">Q1 2025 vs Q1 2026</div></div>
+            <div class="kpi"><div class="l">Float &middot; Google Maps</div><div class="n">#1</div><div class="s">the service they own</div></div>
+            <div class="kpi"><div class="l">Massage American Fork</div><div class="n">#1</div><div class="s">top of the local map</div></div>
+          </div>
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Booked sessions &amp; leads month over month</h3><span class="muted tiny">Jun 2025 &ndash; May 2026</span></div>
+            <div class="chart-wrap"><canvas id="leadsChart"></canvas></div>
+            <p class="chart-note">Booked sessions and website contact-form leads, from Google Analytics. (The Analytics dashboard shows a much higher "conversions" number because it also counts taps on the Google listing and the booking banner, which are not booked sessions. Those are kept out here.) Completed months only.</p>
+          </div>
+          <div class="card chart-card">
+            <div class="chart-head"><h3 class="display">Where your leads come from</h3><span class="muted tiny">By channel &middot; Mar to May</span></div>
+            <div class="chart-wrap chart-wrap--sm"><canvas id="sourceChart"></canvas></div>
+            <p class="chart-note">Booked sessions and form leads by channel over the last three complete months. Direct includes people who found the studio on its Google profile and came straight to the site (Analytics does not break the profile out as its own channel).</p>
+          </div>
+        </section>
+
+        <!-- TAB 2: WEBSITE TRAFFIC -->
+        <section data-panel="2" style="display:none">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Organic visits from Google are up about <strong>18% year over year</strong>, with a strong run through the winter (peaking near 3,500 visits a month in January and February) and a normal spring easing.</li>
+            <li>The number of times the site appears in Google grew sharply, into the <strong>hundreds of thousands of appearances a month</strong>, but the site earns a small share of those clicks. Much of the new visibility is on informational blog topics rather than buyers.</li>
+            <li>The commercial wins are concentrated: <strong>the brand and the "American Fork massage" searches rank at the top</strong> (positions 1 to 3), while the big-volume informational terms sit just below.</li>
+          </ul>
+
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Organic visits by month</h3><span class="muted tiny">Website visits from Google search &middot; GA4</span></div>
+            <div class="chart-wrap"><canvas id="trafficChart"></canvas></div>
+            <p class="chart-note">Organic-search visits to the website (Google Analytics), last 12 completed months. The winter peak and spring easing is a normal seasonal pattern for the studio. Completed months only.</p>
+          </div>
+
+          <div class="notice notice--good notice__col" style="margin-bottom:18px">
+            <span class="tag tag--mint">What this means</span>
+            <p>Visits are healthy and up year over year, and the studio is seen far more often in Google than a year ago. The opportunity is click capture: the site appears a lot but earns a small share of the clicks, partly because the service pages are coded too generically for Google to tell them apart. Sharpening the page titles and the page markup is where the next gain comes from, which is exactly where the plan focuses.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Search clicks &amp; appearances &middot; last 6 months</div>
+              <table class="dt">
+                <thead><tr><th>Month</th><th>Clicks</th><th>Appearances</th></tr></thead>
+                <tbody id="searchTbl"></tbody>
+              </table>
+              <p class="chart-note" style="margin-top:10px">Appearances = times a page showed in Google results (Search Console). The gap between appearances and clicks is the click-capture opportunity.</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">What you rank for &middot; top local searches</div>
+              <table class="dt">
+                <thead><tr><th>Search</th><th>Google position</th></tr></thead>
+                <tbody id="rankKw"></tbody>
+              </table>
+              <p class="chart-note" style="margin-top:10px">Buyer-intent local searches and where the site ranks (DataForSEO). A large set of high-volume informational searches (post-massage questions, technique guides) also rank top-3 but do not drive bookings.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3: MAP PRESENCE -->
+        <section data-panel="3" style="display:none">
+          <div class="cardhd" style="margin-bottom:10px">Single American Fork profile &middot; map momentum</div>
+          <div class="grid grid--3" style="gap:12px; margin-bottom:16px">
+            <div class="card">
+              <div class="stat__num">#1</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px"><strong>Float therapy</strong> is the service Body Balance owns: number one across roughly 9 in 10 points on the local map.</p>
+            </div>
+            <div class="card">
+              <div class="stat__num">#1</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px"><strong>Massage American Fork</strong> sits at the top of the local map across almost the whole grid.</p>
+            </div>
+            <div class="card">
+              <div class="stat__num">Climbing</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">The broad <strong>"massage"</strong> searches gained top-3 coverage through the spring, into the 25% to 30% range of the grid.</p>
+            </div>
+          </div>
+          <p class="chart-note" style="margin-bottom:16px">Top-3 grid share is how much of the local grid around American Fork shows Body Balance in the top 3 for that search. More share means winning the map across a wider area.</p>
+
+          <div class="notice notice--warn notice__col" style="margin-bottom:16px">
+            <span class="tag tag--amber">Why Google Maps matters most here</span>
+            <p>Google Maps is how most people find a local massage studio. Body Balance already owns float and "massage american fork" and is climbing on the broader massage searches, so the Maps engine is strong. The win now is converting that visibility into booked sessions, which is where the website and service-page work in the plan come in.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start; margin-bottom:8px">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Google Maps presence &middot; American Fork grid</div>
+              <table class="dt">
+                <thead><tr><th>Priority search</th><th>Top-3 grid share</th></tr></thead>
+                <tbody id="mapsTbl"></tbody>
+              </table>
+              <div class="chips-wrap" style="margin:14px 0 12px">
+                <span class="vchip good"><b>Float</b> owned across the grid</span>
+                <span class="vchip good"><b>#1</b> massage american fork</span>
+                <span class="vchip"><b>4.9 &middot; 407</b> rating &middot; reviews</span>
+              </div>
+              <p class="small" style="color:var(--ink-soft)">Float and "massage american fork" are top-3 across about 90% of the grid. The broad "massage" terms are climbing but still mid-pack, mostly because the grid is centered on Lehi where several Lehi-based studios crowd the middle.</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:12px">Where Body Balance stands &middot; search by search</div>
+              <div class="tag tag--mint" style="margin-bottom:10px">Owns the map</div>
+              <ul class="ov" style="margin-bottom:14px">
+                <li>Float tank near me <span class="muted">&middot; 94%</span></li>
+                <li>Massage american fork <span class="muted">&middot; 94%</span></li>
+                <li>Float tank <span class="muted">&middot; 92%</span></li>
+                <li>Float therapy <span class="muted">&middot; 88%</span></li>
+              </ul>
+              <div class="tag" style="margin-bottom:10px">Climbing</div>
+              <ul class="ov" style="margin-bottom:14px">
+                <li>Massage therapist near me <span class="muted">&middot; 30%, gaining</span></li>
+                <li>Deep tissue massage near me <span class="muted">&middot; 30%, gaining</span></li>
+                <li>Massage therapy <span class="muted">&middot; 23%, gaining</span></li>
+              </ul>
+              <div class="cardhd" style="margin-bottom:6px">Good to know</div>
+              <p class="small" style="color:var(--ink-soft)">At 4.9 stars on 407 reviews the studio is strong on reputation. A couple of nearby chains carry more reviews, so reviews stay a steady, long-term focus rather than a quick lever.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4: WORK PLAN -->
+        <section data-panel="4" style="display:none">
+          <div class="notice notice__col" style="margin-bottom:16px">
+            <span class="tag">Our recommendations &middot; from the custom strategy</span>
+            <table class="dt">
+              <thead><tr><th>Recommendation</th><th>Priority</th></tr></thead>
+              <tbody id="recommendations"></tbody>
+            </table>
+            <p class="chart-note">These come from the custom strategy. The service-page markup and the trigger-point rewrite are the highest-value items, and the markup is mostly one-time template work that lifts every service page at once.</p>
+          </div>
+        </section>
+
+      </div>
+      <div class="win__status">
+        <span class="cell grow">Marketing Performance Report &middot; Body Balance Massage &amp; Float</span>
+        <span class="cell">Through May 31, 2026</span>
+        <span class="cell">Confidential</span>
+      </div>
+    </div>
+
+    <p class="tiny muted center" style="margin-top:18px">Prepared by HQDM Search Intelligence &middot; bbmassageandfloat.com &middot; Confidential</p>
+  </div>
+</main>
+
+<script>
+var DATA = {
+  leads: {
+    months:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],
+    total:[63,52,72,55,55,46,57,58,56,66,63,67],
+    booked:[54,39,56,46,43,40,48,46,48,53,48,51],
+    forms:[9,13,16,9,12,6,9,12,8,13,15,16]
+  },
+  leadSrc: [['Organic search',109,'56%'],['Direct',65,'33%'],['Referral',17,'9%'],['Other',4,'2%']],
+  traffic: { months:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'], organic:[2476,2157,1955,1862,1815,1770,2367,3461,3577,3410,2601,2674] },
+  searchTbl: [['Dec 2025',1987,238577],['Jan 2026',3512,473862],['Feb 2026',3612,440021],['Mar 2026',3322,410548],['Apr 2026',2568,332433],['May 2026',2680,258407]],
+  rankKw: [
+    {cat:'Brand', items:[['body balance massage and float',1],['body balance massage',2]]},
+    {cat:'American Fork (local intent)', items:[['massage therapist american fork',1],['couples massage american fork',1],['american fork massage',2],['massage american fork utah',2],['massage in american fork',3]]},
+  ],
+  maps: [['Float tank near me','94%'],['Massage american fork','94%'],['Float tank','92%'],['Float therapy','88%'],['Massage therapist near me','30%'],['Deep tissue massage near me','30%'],['Massage therapist','29%'],['Massages','25%'],['Massage therapy','23%']],
+  recommendations: [
+    {cat:'Service-page markup', items:[
+      ['Roll Service + business + FAQ markup across the service pages (they carry a generic day-spa tag only today)','High'],
+      ['Set the homepage business details and reconcile the site phone to the Google profile number','High']]},
+    {cat:'Service pages', items:[
+      ['Rewrite the trigger-point page to the hands-on work you do (drop the medical injection language); owner sign-off first','High'],
+      ['Sharpen deep tissue, float, sports and prenatal: depth, booking call to action, local section, markup','High'],
+      ['Redirect the duplicate trigger-point page; fix the cupping page that returns an error','Medium']]},
+    {cat:'New page', items:[
+      ['Add a lymphatic-drainage page (you already rank for it); owner reviews the outline first','Medium']]},
+    {cat:'Click capture & cleanup', items:[
+      ['Rewrite titles and snippets on high-traffic, low-click pages','Medium'],
+      ['Resolve overlapping pages one at a time (refresh, repurpose, or a small redirect)','Medium'],
+      ['Refresh the blogs that are slipping; steer off-topic pages back to massage topics','Low']]},
+    {cat:'Measurement', items:[
+      ['Report booked sessions and leads by channel, with float on its own line','High'],
+      ['Keep the durable authority work going (citations, PR, partner links)','Medium']]},
+  ],
+};
+
+function chg(b, a) {
+  if (b === 0 && a > 0) return '<span class="new">New</span>';
+  if (b === a) return '<span class="flat" style="color:var(--muted-2);font-weight:700">0%</span>';
+  var p = Math.round((a - b) / b * 100);
+  if (p > 0) return '<span class="up">+' + p + '%</span>';
+  return '<span style="color:var(--rose);font-weight:700">' + p + '%</span>';
+}
+
+// tab 2 search table
+document.getElementById('searchTbl').innerHTML = DATA.searchTbl.map(function (r) {
+  return '<tr><td>' + r[0] + '</td><td>' + r[1].toLocaleString() + '</td><td>' + r[2].toLocaleString() + '</td></tr>';
+}).join('');
+
+// tab 2 ranked keywords (grouped)
+document.getElementById('rankKw').innerHTML = DATA.rankKw.map(function (g) {
+  var head = '<tr class="catrow"><td>' + g.cat + '<span class="badge">' + g.items.length + '</span></td><td></td></tr>';
+  var rows = g.items.map(function (it) {
+    return '<tr class="itemrow"><td><span class="mono" style="font-size:0.8rem;color:var(--violet)">' + it[0] + '</span></td><td>#' + it[1] + '</td></tr>';
+  }).join('');
+  return head + rows;
+}).join('');
+
+// tab 3 maps table
+document.getElementById('mapsTbl').innerHTML = DATA.maps.map(function (r) {
+  return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>';
+}).join('');
+
+// tab 4 recommendations
+function grpRows(g) {
+  return '<tr class="catrow"><td>' + g.cat + '<span class="badge">' + g.items.length + '</span></td><td></td></tr>' +
+    g.items.map(function (it) { return '<tr class="itemrow"><td>' + it[0] + '</td><td>' + it[1] + '</td></tr>'; }).join('');
+}
+document.getElementById('recommendations').innerHTML = DATA.recommendations.map(grpRows).join('');
+
+// charts
+window.CHART_FACTORIES = {
+  leadsChart: function (cv) {
+    return RPT.line(cv, DATA.leads.months, [
+      { label: 'Booked sessions + leads', data: DATA.leads.total, color: RPT.C.mint },
+      { label: 'Booked sessions', data: DATA.leads.booked, color: RPT.C.violet },
+      { label: 'Form leads', data: DATA.leads.forms, color: RPT.C.amber }
+    ]);
+  },
+  trafficChart: function (cv) {
+    return RPT.line(cv, DATA.traffic.months, [{ label: 'Organic visits', data: DATA.traffic.organic, color: RPT.C.violet, fill: true }]);
+  },
+  sourceChart: function (cv) {
+    var rows = DATA.leadSrc;
+    var shares = rows.map(function (r) { return parseInt(r[2], 10); });
+    return RPT.barH(cv, rows.map(function (r) { return r[0]; }), shares,
+      rows.map(function (r, i) { return i === 0 ? RPT.C.mint : RPT.C.grey; }),
+      function (c) { return rows[c.dataIndex][1].toLocaleString() + ' leads . ' + c.parsed.x + '% of leads'; }, 70);
+  }
+};
+</script>
+<script src="../assets/js/chart.umd.min.js"></script>
+<script src="../assets/js/report.js"></script>
+<script>showTab(1);</script>
+</body>
+</html>
