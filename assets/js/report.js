@@ -294,6 +294,59 @@
     })();
   })();
 
+  /* ---------- task table filter (Area + Priority) ---------- */
+  (function initTaskFilter() {
+    var tables = [].slice.call(document.querySelectorAll('table.dt')), table = null;
+    for (var i = 0; i < tables.length; i++) {
+      if (tables[i].querySelector('td.area') && tables[i].querySelector('.pri')) { table = tables[i]; break; }
+    }
+    if (!table) return;
+    var rows = [].slice.call(table.querySelectorAll('tbody tr'));
+    if (rows.length < 3) return;
+
+    function areaOf(tr) { var a = tr.querySelector('td.area'); return a ? a.textContent.replace(/\s*[·•]\s*rec\s*$/i, '').trim() : ''; }
+    function prioOf(tr) { var p = tr.querySelector('.pri'); return p ? p.textContent.trim() : ''; }
+
+    var areas = [], aseen = {};
+    rows.forEach(function (tr) { var v = areaOf(tr); if (v && !aseen[v]) { aseen[v] = 1; areas.push(v); } });
+    if (areas.length < 2) return;
+    var rank = { High: 0, Medium: 1, Low: 2, Ongoing: 3 }, prios = [], pseen = {};
+    rows.forEach(function (tr) { var v = prioOf(tr); if (v && !pseen[v]) { pseen[v] = 1; prios.push(v); } });
+    prios.sort(function (a, b) { return (rank[a] == null ? 9 : rank[a]) - (rank[b] == null ? 9 : rank[b]); });
+
+    function field(label, opts) {
+      var wrap = document.createElement('label'); wrap.className = 'tfilter__field';
+      var cap = document.createElement('span'); cap.className = 'tfilter__cap'; cap.textContent = label;
+      var sel = document.createElement('select'); sel.className = 'tfilter__sel'; sel.setAttribute('aria-label', 'Filter by ' + label.toLowerCase());
+      var all = document.createElement('option'); all.value = ''; all.textContent = 'All ' + label.toLowerCase(); sel.appendChild(all);
+      opts.forEach(function (o) { var op = document.createElement('option'); op.value = o; op.textContent = o; sel.appendChild(op); });
+      wrap.appendChild(cap); wrap.appendChild(sel); return { wrap: wrap, sel: sel };
+    }
+
+    var bar = document.createElement('div'); bar.className = 'tfilter no-print';
+    var aF = field('Area', areas), pF = field('Priority', prios);
+    var reset = document.createElement('button'); reset.type = 'button'; reset.className = 'tfilter__reset'; reset.textContent = 'Reset';
+    var count = document.createElement('span'); count.className = 'tfilter__count';
+    bar.appendChild(aF.wrap); bar.appendChild(pF.wrap); bar.appendChild(reset); bar.appendChild(count);
+    table.parentNode.insertBefore(bar, table);
+
+    function apply() {
+      var av = aF.sel.value, pv = pF.sel.value, shown = 0;
+      rows.forEach(function (tr) {
+        var ok = (!av || areaOf(tr) === av) && (!pv || prioOf(tr) === pv);
+        tr.style.display = ok ? '' : 'none'; if (ok) shown++;
+      });
+      var active = !!(av || pv);
+      count.textContent = active ? (shown + ' of ' + rows.length + ' shown') : '';
+      reset.style.visibility = active ? 'visible' : 'hidden';
+    }
+    aF.sel.addEventListener('change', apply);
+    pF.sel.addEventListener('change', apply);
+    reset.addEventListener('click', function () { aF.sel.value = ''; pF.sel.value = ''; apply(); });
+    window.addEventListener('beforeprint', function () { aF.sel.value = ''; pF.sel.value = ''; apply(); });
+    apply();
+  })();
+
   /* ---------- reveal ---------- */
   var reveals = document.querySelectorAll('.reveal');
   if (reveals.length) {

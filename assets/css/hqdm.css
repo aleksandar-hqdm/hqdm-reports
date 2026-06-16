@@ -894,3 +894,14 @@ table.dt .flat { color: var(--muted-2); font-weight: 700; }
 table.dt tr.tot td { font-weight: 800; color: var(--ink); border-top: 1px solid var(--line-hard); }
 
 @media print { .no-print { display: none !important; } [data-panel] { display: block !important; } .sdrop__body { display: block !important; } body { background: #fff !important; } }
+
+/* ---------- task table filter (Area + Priority), strategy Tasks tables ---------- */
+.tfilter { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; margin: 0 0 14px; }
+.tfilter__field { display: inline-flex; flex-direction: column; gap: 4px; }
+.tfilter__cap { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted-2); }
+.tfilter__sel { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: var(--ink); background-color: var(--panel); border: 1px solid var(--line-hard); box-shadow: var(--shadow-hard-sm); padding: 7px 28px 7px 10px; min-width: 152px; cursor: pointer; border-radius: 0; -webkit-appearance: none; appearance: none; background-repeat: no-repeat; background-position: right 9px center; background-size: 11px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%235C636E' stroke-width='1.6' fill='none'/%3E%3C/svg%3E"); }
+.tfilter__sel:focus { outline: 2px solid var(--mint); outline-offset: 1px; }
+.tfilter__reset { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; color: var(--muted); background: none; border: 0; cursor: pointer; padding: 7px 4px; text-decoration: underline; }
+.tfilter__reset:hover { color: var(--violet); }
+.tfilter__count { margin-left: auto; align-self: center; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+@media (max-width: 560px) { .tfilter { gap: 10px; } .tfilter__field, .tfilter__sel { min-width: 0; flex: 1 1 42%; } }
