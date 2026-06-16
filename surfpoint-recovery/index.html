@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Surfpoint Recovery · Performance Report · 2026</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/hqdm.css">
+</head>
+<body>
+
+<div class="nav-wrap no-print">
+  <nav class="nav container" style="max-width:1000px">
+    <a class="brand" href="index.html"><span class="mark">H</span> <span>HQDM<small>search intelligence</small></span></a>
+    <button class="btn" onclick="window.print()" style="padding:8px 15px; font-size:0.8rem">Print / PDF</button>
+  </nav>
+</div>
+
+<main class="section section--tight">
+  <div class="container" style="max-width:1000px">
+
+    <div class="win">
+      <div class="win__bar">
+        <span class="ic">&#9635;</span>
+        <span class="ttl">performance-report.hqdm &ndash; Surfpoint Recovery</span>
+        <span class="win__controls"><b>_</b><b>&#9633;</b><b>&times;</b></span>
+      </div>
+      <div class="win__body">
+
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:16px">
+          <div>
+            <div class="eyebrow">Marketing Performance Report</div>
+            <h1 class="display" style="font-size:clamp(1.5rem,2.8vw,2.1rem); margin-top:8px">Surfpoint Recovery</h1>
+            <p class="muted small" style="margin-top:4px">Inpatient detox &amp; rehab &middot; Coney Island, Brooklyn &middot; prepared by HQDM</p>
+          </div>
+          <span class="pill"><span class="dot"></span>Through May 31, 2026</span>
+        </div>
+
+        <div class="tabs no-print">
+          <button class="tab-btn active" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
+          <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">Search performance</span></button>
+          <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
+          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Our recommendations</span></button>
+        </div>
+
+        <hr class="divider" style="margin:18px 0">
+
+        <!-- TAB 1 -->
+        <section data-panel="1">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Website form leads have <strong>climbed sharply</strong>, from around 20 a month in early 2025 to <strong>70 to 98 a month this spring</strong>, the strongest stretch on record.</li>
+            <li>The profile is the <strong>best-reviewed in its Brooklyn set</strong> (4.8 stars on 126 reviews) and carries a CARF "Center of Excellence" accreditation, a strong trust signal that most competitors do not have. Search traffic grew dramatically into early 2026 before easing in April.</li>
+          </ul>
+          <div class="kpis" style="margin-bottom:18px">
+            <div class="kpi"><div class="l">Website form leads (Apr)</div><div class="n">98</div><div class="s">up from ~20/mo a year ago</div></div>
+            <div class="kpi"><div class="l">Form-lead trend</div><div class="n">Up sharply</div><div class="s">Mar to May: 90 / 98 / 71</div></div>
+            <div class="kpi"><div class="l">Google rating</div><div class="n">4.8</div><div class="s">126 reviews, the cluster's best</div></div>
+            <div class="kpi"><div class="l">Accreditation</div><div class="n">CARF</div><div class="s">Center of Excellence</div></div>
+          </div>
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Website form leads month over month</h3><span class="muted tiny">Jun 2025 &ndash; May 2026</span></div>
+            <div class="chart-wrap"><canvas id="leadsChart"></canvas></div>
+            <p class="chart-note">Contact-form submissions from the website (Google Analytics). Phone calls to the intake line are tracked separately and not in this number. Completed months only.</p>
+          </div>
+          <div class="card chart-card">
+            <div class="chart-head"><h3 class="display">Where your leads come from</h3><span class="muted tiny">Form leads by channel &middot; Mar to May</span></div>
+            <div class="chart-wrap chart-wrap--sm"><canvas id="sourceChart"></canvas></div>
+            <p class="chart-note">Most form leads are attributed to Direct, which is brand searches, returning visitors, and the path from the Google profile to the site, plus visits where analytics consent was not granted. Organic search is understated here for that reason.</p>
+          </div>
+        </section>
+
+        <!-- TAB 2 -->
+        <section data-panel="2" style="display:none">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Organic search <strong>grew dramatically</strong> into early 2026: clicks rose from the 1,500-a-month range in spring 2025 to a peak of about <strong>7,500 in March 2026</strong>.</li>
+            <li>In April that visibility <strong>pulled back sharply</strong> (to around 2,000 a month), a broad search-visibility shift that mostly affected informational content rather than the core pages.</li>
+            <li>The lever is the website: <strong>service and admission pages carry no structured data</strong>, and one service page is missing its search snippet (meta description).</li>
+          </ul>
+
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Organic clicks by month</h3><span class="muted tiny">Clicks from Google search &middot; Search Console</span></div>
+            <div class="chart-wrap"><canvas id="trafficChart"></canvas></div>
+            <p class="chart-note">Clicks to the website from Google search, last 12 completed months. The sharp climb into early 2026 and the April easing are both clear. Completed months only.</p>
+          </div>
+
+          <div class="notice notice--good notice__col" style="margin-bottom:18px">
+            <span class="tag tag--mint">What this means</span>
+            <p>The big picture is healthy: form leads are at record levels and the profile leads its Brooklyn set on reputation. The April traffic easing is worth watching, but it landed mostly on broad informational content, not the pages that convert. The durable gain is on the website itself: adding the page markup that is missing on the service and admission pages, and filling in the search snippet on the service page that lacks one.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Search clicks &amp; appearances &middot; last 6 months</div>
+              <table class="dt">
+                <thead><tr><th>Month</th><th>Clicks</th><th>Appearances</th></tr></thead>
+                <tbody id="searchTbl"></tbody>
+              </table>
+              <p class="chart-note" style="margin-top:10px">Appearances = times a page showed in Google results (Search Console). The April easing shows in both.</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">What you rank for &middot; brand &amp; the gap</div>
+              <table class="dt">
+                <thead><tr><th>Search</th><th>Google position</th></tr></thead>
+                <tbody id="rankKw"></tbody>
+              </table>
+              <p class="chart-note" style="margin-top:10px">Brand searches lead; the core Brooklyn detox and rehab service pages barely rank, which is where the marked-up service pages can grow (DataForSEO).</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3 -->
+        <section data-panel="3" style="display:none">
+          <div class="cardhd" style="margin-bottom:10px">Coney Island profile &middot; standing</div>
+          <div class="grid grid--3" style="gap:12px; margin-bottom:16px">
+            <div class="card">
+              <div class="stat__num">4.8 ★</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">on <strong>126 reviews</strong>, the best-reviewed addiction-treatment profile in its Brooklyn set, and still climbing (was 4.5 in April).</p>
+            </div>
+            <div class="card">
+              <div class="stat__num">CARF</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">Center of Excellence accreditation, plus state licensing, a strong trust signal most competitors do not carry.</p>
+            </div>
+            <div class="card">
+              <div class="stat__num">South BK</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">single Coney Island profile serving South Brooklyn. The reputation lead is the asset to convert.</p>
+            </div>
+          </div>
+          <p class="chart-note" style="margin-bottom:16px">For a Brooklyn detox and rehab, the Google profile and its reviews are the main way families choose. Surfpoint's reputation is its strongest local-search asset.</p>
+
+          <div class="notice notice--warn notice__col" style="margin-bottom:16px">
+            <span class="tag tag--amber">Why Google Maps matters most here</span>
+            <p>Google Maps and the Google profile are how most people find a Brooklyn detox and rehab, and Surfpoint leads its set on rating and accreditation. The job is to keep that profile strong and connect it to a website that converts, which is what the Work Plan focuses on.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start; margin-bottom:8px">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Profile strength &middot; South Brooklyn</div>
+              <div class="chips-wrap" style="margin:4px 0 12px">
+                <span class="vchip good"><b>4.8 &middot; 126</b> rating &middot; reviews</span>
+                <span class="vchip good"><b>CARF</b> Center of Excellence</span>
+                <span class="vchip"><b>OASAS</b> licensed</span>
+              </div>
+              <p class="small" style="color:var(--ink-soft)">The rating climbed from 4.5 to 4.8 over the spring and the review base grew. Among the nearby Brooklyn addiction-treatment profiles, Surfpoint carries the highest rating and the strongest accreditation. Reviews are the client's own lever and shown here only as context.</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:12px">Where Surfpoint stands</div>
+              <div class="tag tag--mint" style="margin-bottom:10px">Strongest signal</div>
+              <ul class="ov" style="margin-bottom:14px">
+                <li>Reputation <span class="muted">&middot; 4.8 on 126, the set's best</span></li>
+                <li>Accreditation <span class="muted">&middot; CARF + OASAS</span></li>
+              </ul>
+              <div class="cardhd" style="margin-bottom:6px">The opportunity</div>
+              <p class="small" style="color:var(--ink-soft)">The profile and accreditation are stronger than the website that backs them. Surfacing the CARF and OASAS credentials on the site and adding the missing page markup is what turns the reputation lead into more inquiries.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4 -->
+        <section data-panel="4" style="display:none">
+          <div class="notice notice__col" style="margin-bottom:16px">
+            <span class="tag">Our recommendations &middot; from the custom strategy</span>
+            <table class="dt">
+              <thead><tr><th>Recommendation</th><th>Priority</th></tr></thead>
+              <tbody id="recommendations"></tbody>
+            </table>
+            <p class="chart-note">These come from the custom strategy. Adding the missing page markup and surfacing the accreditation are the highest-value items: the profile is strong, the website needs to match it.</p>
+          </div>
+        </section>
+
+      </div>
+      <div class="win__status">
+        <span class="cell grow">Marketing Performance Report &middot; Surfpoint Recovery</span>
+        <span class="cell">Through May 31, 2026</span>
+        <span class="cell">Confidential</span>
+      </div>
+    </div>
+
+    <p class="tiny muted center" style="margin-top:18px">Prepared by HQDM Search Intelligence &middot; surfpointrecovery.com &middot; Confidential</p>
+  </div>
+</main>
+
+<script>
+var DATA = {
+  leads: { months:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'], forms:[35,28,32,6,9,5,11,30,55,90,98,71] },
+  leadSrc: [['Direct',210,'81%'],['Organic search',45,'17%'],['Other',4,'2%']],
+  traffic: { months:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'], organic:[1476,1659,1881,1800,2146,2184,3289,5106,7466,7565,1988,2094] },
+  searchTbl: [['Dec 2025',3289,1011726],['Jan 2026',5106,1621285],['Feb 2026',7466,2095775],['Mar 2026',7565,2292835],['Apr 2026',1988,871272],['May 2026',2094,649199]],
+  rankKw: [
+    {cat:'Brand', items:[['surf point recovery',2],['surfpoint recovery brooklyn','top']]},
+    {cat:'Brooklyn treatment (the gap)', items:[['alcohol detox brooklyn','thin'],['drug rehab brooklyn','thin'],['detox center brooklyn','thin']]},
+  ],
+  recommendations: [
+    {cat:'Service & admission pages', items:[
+      ['Add Service, MedicalBusiness and FAQ structured data to the inner pages (only the homepage has it)','High'],
+      ['Add the missing search snippet (meta description) on the alcohol-detox service page','High'],
+      ['Strengthen the service pages with depth and a clear intake call to action','High']]},
+    {cat:'Trust signals', items:[
+      ['Surface the CARF Center of Excellence and OASAS credentials prominently on the site','Medium']]},
+    {cat:'Visibility', items:[
+      ['Review the April search-visibility easing and protect the core pages','Medium'],
+      ['Tidy the thin neighborhood pages one at a time rather than adding more','Medium']]},
+    {cat:'Site & profile', items:[
+      ['Keep the Google profile services aligned to the rebuilt pages','Low']]},
+    {cat:'Measurement', items:[
+      ['Report form leads and phone taps by channel; keep the Brooklyn map read on the monthly schedule','Medium']]},
+  ],
+};
+
+function chg(b, a) {
+  if (b === 0 && a > 0) return '<span class="new">New</span>';
+  if (b === a) return '<span class="flat" style="color:var(--muted-2);font-weight:700">0%</span>';
+  var p = Math.round((a - b) / b * 100);
+  if (p > 0) return '<span class="up">+' + p + '%</span>';
+  return '<span style="color:var(--rose);font-weight:700">' + p + '%</span>';
+}
+
+document.getElementById('searchTbl').innerHTML = DATA.searchTbl.map(function (r) {
+  return '<tr><td>' + r[0] + '</td><td>' + r[1].toLocaleString() + '</td><td>' + r[2].toLocaleString() + '</td></tr>';
+}).join('');
+
+document.getElementById('rankKw').innerHTML = DATA.rankKw.map(function (g) {
+  var head = '<tr class="catrow"><td>' + g.cat + '<span class="badge">' + g.items.length + '</span></td><td></td></tr>';
+  var rows = g.items.map(function (it) {
+    return '<tr class="itemrow"><td><span class="mono" style="font-size:0.8rem;color:var(--violet)">' + it[0] + '</span></td><td>' + (typeof it[1] === 'number' ? '#' + it[1] : it[1]) + '</td></tr>';
+  }).join('');
+  return head + rows;
+}).join('');
+
+function grpRows(g) {
+  return '<tr class="catrow"><td>' + g.cat + '<span class="badge">' + g.items.length + '</span></td><td></td></tr>' +
+    g.items.map(function (it) { return '<tr class="itemrow"><td>' + it[0] + '</td><td>' + it[1] + '</td></tr>'; }).join('');
+}
+document.getElementById('recommendations').innerHTML = DATA.recommendations.map(grpRows).join('');
+
+window.CHART_FACTORIES = {
+  leadsChart: function (cv) {
+    return RPT.line(cv, DATA.leads.months, [{ label: 'Website form leads', data: DATA.leads.forms, color: RPT.C.mint }]);
+  },
+  trafficChart: function (cv) {
+    return RPT.line(cv, DATA.traffic.months, [{ label: 'Organic clicks', data: DATA.traffic.organic, color: RPT.C.violet, fill: true }]);
+  },
+  sourceChart: function (cv) {
+    var rows = DATA.leadSrc;
+    var shares = rows.map(function (r) { return parseInt(r[2], 10); });
+    return RPT.barH(cv, rows.map(function (r) { return r[0]; }), shares,
+      rows.map(function (r, i) { return i === 0 ? RPT.C.mint : RPT.C.grey; }),
+      function (c) { return rows[c.dataIndex][1].toLocaleString() + ' leads . ' + c.parsed.x + '% of leads'; }, 90);
+  }
+};
+</script>
+<script src="../assets/js/chart.umd.min.js"></script>
+<script src="../assets/js/report.js"></script>
+<script>showTab(1);</script>
+</body>
+</html>

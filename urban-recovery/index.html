@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Urban Recovery · Performance Report · 2026</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/hqdm.css">
+</head>
+<body>
+
+<div class="nav-wrap no-print">
+  <nav class="nav container" style="max-width:1000px">
+    <a class="brand" href="index.html"><span class="mark">H</span> <span>HQDM<small>search intelligence</small></span></a>
+    <button class="btn" onclick="window.print()" style="padding:8px 15px; font-size:0.8rem">Print / PDF</button>
+  </nav>
+</div>
+
+<main class="section section--tight">
+  <div class="container" style="max-width:1000px">
+
+    <div class="win">
+      <div class="win__bar">
+        <span class="ic">&#9635;</span>
+        <span class="ttl">performance-report.hqdm &ndash; Urban Recovery</span>
+        <span class="win__controls"><b>_</b><b>&#9633;</b><b>&times;</b></span>
+      </div>
+      <div class="win__body">
+
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:16px">
+          <div>
+            <div class="eyebrow">Marketing Performance Report</div>
+            <h1 class="display" style="font-size:clamp(1.5rem,2.8vw,2.1rem); margin-top:8px">Urban Recovery</h1>
+            <p class="muted small" style="margin-top:4px">Inpatient detox &amp; rehab &middot; Red Hook, Brooklyn &middot; prepared by HQDM</p>
+          </div>
+          <span class="pill"><span class="dot"></span>Through May 31, 2026</span>
+        </div>
+
+        <div class="tabs no-print">
+          <button class="tab-btn active" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
+          <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">Search performance</span></button>
+          <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
+          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Our recommendations</span></button>
+        </div>
+
+        <hr class="divider" style="margin:18px 0">
+
+        <!-- TAB 1 -->
+        <section data-panel="1">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Website form leads have <strong>grown through 2026</strong>, from the high teens a month in late 2025 to <strong>60 in May</strong>, the strongest month in the period. Phone taps from the website are tracked separately and run higher still, so the phone line remains the main way people reach admissions.</li>
+            <li>That lead growth happened <strong>while overall search traffic was lower year over year</strong>, which means the site is converting better. On Google Maps, the Red Hook profile <strong>held its position across the Brooklyn grid while competitors churned</strong>, and it was the only Brooklyn addiction-treatment profile to gain ground in the window.</li>
+          </ul>
+          <div class="kpis" style="margin-bottom:18px">
+            <div class="kpi"><div class="l">Website form leads (May)</div><div class="n">60</div><div class="delta up">+36%</div><div class="s">vs 44 in April</div></div>
+            <div class="kpi"><div class="l">Form-lead trend</div><div class="n">Rising</div><div class="s">Mar to May: 48 → 44 → 60</div></div>
+            <div class="kpi"><div class="l">Maps grid coverage</div><div class="n">92.8%</div><div class="s">held while rivals churned</div></div>
+            <div class="kpi"><div class="l">Maps momentum</div><div class="n">+21</div><div class="s">only Brooklyn rehab pin gaining</div></div>
+          </div>
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Website form leads month over month</h3><span class="muted tiny">Jul 2025 &ndash; May 2026</span></div>
+            <div class="chart-wrap"><canvas id="leadsChart"></canvas></div>
+            <p class="chart-note">Contact-form submissions from the website (Google Analytics). Phone-tap and email-tap actions are tracked separately as intent and run higher than forms, so total inquiries exceed this line. Completed months only.</p>
+          </div>
+          <div class="card chart-card">
+            <div class="chart-head"><h3 class="display">Where your leads come from</h3><span class="muted tiny">Form leads by channel &middot; Mar to May</span></div>
+            <div class="chart-wrap chart-wrap--sm"><canvas id="sourceChart"></canvas></div>
+            <p class="chart-note">Most form leads are attributed to Direct, which is brand searches, returning visitors, and the path from your Google profile to the site, plus visits where analytics consent was not granted. Organic search is understated here for that reason.</p>
+          </div>
+        </section>
+
+        <!-- TAB 2 -->
+        <section data-panel="2" style="display:none">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Organic clicks softened through 2025 and bottomed in <strong>February 2026</strong>, then rebounded strongly: <strong>May clicks were roughly 4&times; the February low</strong>.</li>
+            <li>Year over year, organic clicks are still down (the first quarter of 2026 ran below the same quarter of 2025), so the recovery is recent and worth protecting.</li>
+            <li>The clearest opportunity is on the website itself: <strong>service and location pages rank but earn very few clicks</strong>, and most inner pages carry no structured data for Google to read.</li>
+          </ul>
+
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Organic clicks by month</h3><span class="muted tiny">Clicks from Google search &middot; Search Console</span></div>
+            <div class="chart-wrap"><canvas id="trafficChart"></canvas></div>
+            <p class="chart-note">Clicks to the website from Google search, last 12 completed months. The clear story is the February 2026 bottom and the spring rebound. Completed months only.</p>
+          </div>
+
+          <div class="notice notice--good notice__col" style="margin-bottom:18px">
+            <span class="tag tag--mint">What this means</span>
+            <p>Search traffic is recovering and leads are growing, which is a healthy combination. The biggest remaining opportunity is click capture and conversion on the website: several Brooklyn searches rank near the top but earn almost no clicks (for example "recovery center brooklyn" showed in Google over 13,000 times in a recent window with effectively no clicks), and the service and admission pages carry no structured data. Fixing titles, snippets, and page markup turns rankings that already exist into visits and inquiries.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Search clicks &amp; appearances &middot; last 6 months</div>
+              <table class="dt">
+                <thead><tr><th>Month</th><th>Clicks</th><th>Appearances</th></tr></thead>
+                <tbody id="searchTbl"></tbody>
+              </table>
+              <p class="chart-note" style="margin-top:10px">Appearances = times a page showed in Google results. The rebound in clicks and appearances since February is clear.</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">What you rank for &middot; brand &amp; Brooklyn intent</div>
+              <table class="dt">
+                <thead><tr><th>Search</th><th>Google position</th></tr></thead>
+                <tbody id="rankKw"></tbody>
+              </table>
+              <p class="chart-note" style="margin-top:10px">Brand searches lead. The Brooklyn service searches rank well but capture few clicks today (DataForSEO), which is the click-capture opportunity.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3 -->
+        <section data-panel="3" style="display:none">
+          <div class="cardhd" style="margin-bottom:10px">Red Hook profile &middot; map momentum</div>
+          <div class="grid grid--3" style="gap:12px; margin-bottom:16px">
+            <div class="card">
+              <div class="stat__num">92.8%</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">of the Brooklyn map grid held in the top tier across the priority searches, while the market churned around it.</p>
+            </div>
+            <div class="card">
+              <div class="stat__num">+21</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">net map spots gained. Urban Recovery was the <strong>only Brooklyn addiction-treatment profile to gain ground</strong> in the window.</p>
+            </div>
+            <div class="card">
+              <div class="stat__num">Improving</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">broad searches strengthened: "alcohol rehab" 5.7 → 4.5 and "drug rehab" 6.5 → 5.6 average position.</p>
+            </div>
+          </div>
+          <p class="chart-note" style="margin-bottom:16px">The map grid is a set of points around Red Hook where the profile shows for each search. Holding coverage while competitors lose it is a sign of a strong, stable local position.</p>
+
+          <div class="notice notice--warn notice__col" style="margin-bottom:16px">
+            <span class="tag tag--amber">Why Google Maps matters most here</span>
+            <p>Google Maps and the Google profile are how most people find a Brooklyn detox and rehab, and they feed the path from the profile to the website to an inquiry. Urban Recovery holds a strong, stable position here. The opportunity is to convert more of that visibility on the website, which is where the Work Plan focuses.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start; margin-bottom:8px">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Google Maps presence &middot; Brooklyn grid</div>
+              <table class="dt">
+                <thead><tr><th>Priority search</th><th>Map spots held</th></tr></thead>
+                <tbody id="mapsTbl"></tbody>
+              </table>
+              <div class="chips-wrap" style="margin:14px 0 12px">
+                <span class="vchip good"><b>92.8%</b> grid coverage</span>
+                <span class="vchip good"><b>+21</b> net map spots</span>
+                <span class="vchip"><b>3.8 &middot; 111</b> rating &middot; reviews</span>
+              </div>
+              <p class="small" style="color:var(--ink-soft)">Coverage held across the 3.25-mile Red Hook catchment on seven of eight priority searches while several competitors lost spots. The rating and review base are a steady, long-term focus and the client's own lever.</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:12px">Where Urban Recovery stands &middot; search by search</div>
+              <div class="tag tag--mint" style="margin-bottom:10px">Holds the map</div>
+              <ul class="ov" style="margin-bottom:14px">
+                <li>Drug detox Brooklyn <span class="muted">&middot; full coverage</span></li>
+                <li>Alcohol detox Brooklyn <span class="muted">&middot; full coverage</span></li>
+                <li>Detox center near me <span class="muted">&middot; strong</span></li>
+              </ul>
+              <div class="tag" style="margin-bottom:10px">Improving</div>
+              <ul class="ov" style="margin-bottom:14px">
+                <li>Alcohol rehab <span class="muted">&middot; 5.7 → 4.5, gaining</span></li>
+                <li>Drug rehab <span class="muted">&middot; 6.5 → 5.6, gaining</span></li>
+              </ul>
+              <div class="cardhd" style="margin-bottom:6px">Good to know</div>
+              <p class="small" style="color:var(--ink-soft)">The softer cells are the ones farthest from Red Hook, in other Brooklyn neighborhoods. That is distance from a single location, which a strong profile and better-connected pages help with more than any one landing page.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4 -->
+        <section data-panel="4" style="display:none">
+          <div class="notice notice__col" style="margin-bottom:16px">
+            <span class="tag">Our recommendations &middot; from the custom strategy</span>
+            <table class="dt">
+              <thead><tr><th>Recommendation</th><th>Priority</th></tr></thead>
+              <tbody id="recommendations"></tbody>
+            </table>
+            <p class="chart-note">These come from the custom strategy. The service-page rebuild and the structured-data rollout are the highest-value items: they turn rankings the site already holds into clicks and inquiries.</p>
+          </div>
+        </section>
+
+      </div>
+      <div class="win__status">
+        <span class="cell grow">Marketing Performance Report &middot; Urban Recovery</span>
+        <span class="cell">Through May 31, 2026</span>
+        <span class="cell">Confidential</span>
+      </div>
+    </div>
+
+    <p class="tiny muted center" style="margin-top:18px">Prepared by HQDM Search Intelligence &middot; urbanrecovery.com &middot; Confidential</p>
+  </div>
+</main>
+
+<script>
+var DATA = {
+  leads: { months:['Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'], forms:[19,10,16,18,20,16,26,17,48,44,60] },
+  leadSrc: [['Direct',124,'82%'],['Organic search',24,'16%'],['Other',4,'2%']],
+  traffic: { months:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'], organic:[6228,5546,5181,5002,3430,2743,2137,1785,1136,1204,2950,4766] },
+  searchTbl: [['Dec 2025',2137,1095105],['Jan 2026',1785,821401],['Feb 2026',1136,371319],['Mar 2026',1204,585304],['Apr 2026',2950,1309664],['May 2026',4766,1883561]],
+  rankKw: [
+    {cat:'Brand', items:[['urban recovery',1],['urban recovery brooklyn',1]]},
+    {cat:'Brooklyn intent (click-capture opportunity)', items:[['recovery center brooklyn',3],['drug rehab brooklyn','top'],['alcohol detox brooklyn','top'],['detox center brooklyn','top']]},
+  ],
+  maps: [['Drug detox Brooklyn','full'],['Alcohol detox Brooklyn','full'],['Opioid detox','strong'],['Detox center near me','strong'],['Alcohol rehab','gaining'],['Drug rehab','gaining']],
+  recommendations: [
+    {cat:'Service & admission pages', items:[
+      ['Rebuild the service and admission pages with clear intake forms and calls to action','High'],
+      ['Add Service, MedicalBusiness and FAQ structured data to the inner pages (only the homepage has it today)','High']]},
+    {cat:'Click capture', items:[
+      ['Rewrite titles and snippets on the Brooklyn searches that rank but earn almost no clicks','High'],
+      ['Tidy the thin neighborhood pages one at a time rather than adding more','Medium']]},
+    {cat:'Site & profile alignment', items:[
+      ['Match the homepage structured-data phone number to the Google profile number','Medium'],
+      ['Keep the Google profile services aligned to the rebuilt pages','Low']]},
+    {cat:'Measurement', items:[
+      ['Report leads as form submissions and phone taps, split by channel','Medium'],
+      ['Track the Red Hook map grid month to month','Low']]},
+  ],
+};
+
+function chg(b, a) {
+  if (b === 0 && a > 0) return '<span class="new">New</span>';
+  if (b === a) return '<span class="flat" style="color:var(--muted-2);font-weight:700">0%</span>';
+  var p = Math.round((a - b) / b * 100);
+  if (p > 0) return '<span class="up">+' + p + '%</span>';
+  return '<span style="color:var(--rose);font-weight:700">' + p + '%</span>';
+}
+
+document.getElementById('searchTbl').innerHTML = DATA.searchTbl.map(function (r) {
+  return '<tr><td>' + r[0] + '</td><td>' + r[1].toLocaleString() + '</td><td>' + r[2].toLocaleString() + '</td></tr>';
+}).join('');
+
+document.getElementById('rankKw').innerHTML = DATA.rankKw.map(function (g) {
+  var head = '<tr class="catrow"><td>' + g.cat + '<span class="badge">' + g.items.length + '</span></td><td></td></tr>';
+  var rows = g.items.map(function (it) {
+    return '<tr class="itemrow"><td><span class="mono" style="font-size:0.8rem;color:var(--violet)">' + it[0] + '</span></td><td>' + (typeof it[1] === 'number' ? '#' + it[1] : it[1]) + '</td></tr>';
+  }).join('');
+  return head + rows;
+}).join('');
+
+document.getElementById('mapsTbl').innerHTML = DATA.maps.map(function (r) {
+  return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>';
+}).join('');
+
+function grpRows(g) {
+  return '<tr class="catrow"><td>' + g.cat + '<span class="badge">' + g.items.length + '</span></td><td></td></tr>' +
+    g.items.map(function (it) { return '<tr class="itemrow"><td>' + it[0] + '</td><td>' + it[1] + '</td></tr>'; }).join('');
+}
+document.getElementById('recommendations').innerHTML = DATA.recommendations.map(grpRows).join('');
+
+window.CHART_FACTORIES = {
+  leadsChart: function (cv) {
+    return RPT.line(cv, DATA.leads.months, [{ label: 'Website form leads', data: DATA.leads.forms, color: RPT.C.mint }]);
+  },
+  trafficChart: function (cv) {
+    return RPT.line(cv, DATA.traffic.months, [{ label: 'Organic clicks', data: DATA.traffic.organic, color: RPT.C.violet, fill: true }]);
+  },
+  sourceChart: function (cv) {
+    var rows = DATA.leadSrc;
+    var shares = rows.map(function (r) { return parseInt(r[2], 10); });
+    return RPT.barH(cv, rows.map(function (r) { return r[0]; }), shares,
+      rows.map(function (r, i) { return i === 0 ? RPT.C.mint : RPT.C.grey; }),
+      function (c) { return rows[c.dataIndex][1].toLocaleString() + ' leads . ' + c.parsed.x + '% of leads'; }, 90);
+  }
+};
+</script>
+<script src="../assets/js/chart.umd.min.js"></script>
+<script src="../assets/js/report.js"></script>
+<script>showTab(1);</script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Arms Acres · Performance Report · 2026</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/hqdm.css">
+</head>
+<body>
+
+<div class="nav-wrap no-print">
+  <nav class="nav container" style="max-width:1000px">
+    <a class="brand" href="index.html"><span class="mark">H</span> <span>HQDM<small>search intelligence</small></span></a>
+    <button class="btn" onclick="window.print()" style="padding:8px 15px; font-size:0.8rem">Print / PDF</button>
+  </nav>
+</div>
+
+<main class="section section--tight">
+  <div class="container" style="max-width:1000px">
+
+    <div class="win">
+      <div class="win__bar">
+        <span class="ic">&#9635;</span>
+        <span class="ttl">performance-report.hqdm &ndash; Arms Acres</span>
+        <span class="win__controls"><b>_</b><b>&#9633;</b><b>&times;</b></span>
+      </div>
+      <div class="win__body">
+
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:16px">
+          <div>
+            <div class="eyebrow">Marketing Performance Report</div>
+            <h1 class="display" style="font-size:clamp(1.5rem,2.8vw,2.1rem); margin-top:8px">Arms Acres</h1>
+            <p class="muted small" style="margin-top:4px">Inpatient addiction treatment &middot; Carmel, NY (Putnam County) &middot; prepared by HQDM</p>
+          </div>
+          <span class="pill"><span class="dot"></span>Through May 31, 2026</span>
+        </div>
+
+        <div class="tabs no-print">
+          <button class="tab-btn active" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
+          <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">Search performance</span></button>
+          <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
+          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Our recommendations</span></button>
+        </div>
+
+        <hr class="divider" style="margin:18px 0">
+
+        <!-- TAB 1 -->
+        <section data-panel="1">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>The Carmel profile <strong>dominates Google Maps across Putnam County</strong> and is still gaining, and organic search has recovered strongly: clicks from Google are up about <strong>76% year over year</strong> for the first quarter, with rankings climbing from the low-20s into the single digits.</li>
+            <li>The clearest opportunity is on the website: the <strong>service and program pages take in about 24,000 visits a year but have no contact form on them</strong>, only a call button, so they convert almost no inquiries. Adding a form there is the single biggest lead win available.</li>
+          </ul>
+          <div class="kpis" style="margin-bottom:18px">
+            <div class="kpi"><div class="l">Organic clicks &middot; YoY</div><div class="n">+76%</div><div class="s">Q1 2025 → Q1 2026</div></div>
+            <div class="kpi"><div class="l">Carmel Maps coverage</div><div class="n">100%</div><div class="s">top-20 on the 3 core searches</div></div>
+            <div class="kpi"><div class="l">Map spots gained</div><div class="n">+31</div><div class="s">drug / alcohol rehab + detox</div></div>
+            <div class="kpi"><div class="l">Service-page forms</div><div class="n">24K → 0</div><div class="s">visits a year with no form</div></div>
+          </div>
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Website form leads month over month</h3><span class="muted tiny">Jun 2025 &ndash; May 2026</span></div>
+            <div class="chart-wrap"><canvas id="leadsChart"></canvas></div>
+            <p class="chart-note">Contact-form submissions from the website (Google Analytics). Today almost all come from the homepage, contact, and admissions pages; the high-traffic service pages convert near zero because they carry no form. Phone calls to the intake line are not in this number. Completed months only.</p>
+          </div>
+          <div class="card chart-card">
+            <div class="chart-head"><h3 class="display">Where your leads come from</h3><span class="muted tiny">Form leads by channel &middot; Mar to May</span></div>
+            <div class="chart-wrap chart-wrap--sm"><canvas id="sourceChart"></canvas></div>
+            <p class="chart-note">Most form leads are attributed to Direct, which is brand searches, returning visitors, and the path from the Google profile to the site, plus visits where analytics consent was not granted. Organic search is understated here for that reason.</p>
+          </div>
+        </section>
+
+        <!-- TAB 2 -->
+        <section data-panel="2" style="display:none">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Organic clicks are up sharply: the first quarter of 2026 ran <strong>about 76% ahead of the same quarter last year</strong>, and May was the strongest month in the period at <strong>11,236 clicks</strong>.</li>
+            <li>Rankings improved alongside it, from an average position in the low-20s in spring 2025 into the <strong>single digits</strong> through 2026.</li>
+            <li>A large insurance and payor article cluster <strong>ranks on page two and earns very little</strong>: strong title and FAQ rewrites on pages that already rank are a low-effort click gain.</li>
+          </ul>
+
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Organic clicks by month</h3><span class="muted tiny">May 2026: <strong>11,236 clicks</strong> &middot; a period high</span></div>
+            <div class="chart-wrap"><canvas id="trafficChart"></canvas></div>
+            <p class="chart-note">Clicks to the website from Google search (Search Console), last 12 completed months. The climb through 2026 is clear. Completed months only.</p>
+          </div>
+
+          <div class="notice notice--good notice__col" style="margin-bottom:18px">
+            <span class="tag tag--mint">What this means</span>
+            <p>Search is in a strong, improving position: more clicks, better rankings, and a Maps profile that leads its market. The growth lever now is converting that traffic. The service pages take the visits but have no form to fill out, and a cluster of insurance and cost articles ranks just below the top with very low click-through. Both are fixes to pages that already perform, not new work from scratch.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Search clicks &amp; appearances &middot; last 6 months</div>
+              <table class="dt">
+                <thead><tr><th>Month</th><th>Clicks</th><th>Appearances</th></tr></thead>
+                <tbody id="searchTbl"></tbody>
+              </table>
+              <p class="chart-note" style="margin-top:10px">Appearances = times a page showed in Google results (Search Console). Both clicks and appearances are climbing through 2026.</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">What you rank for &middot; brand &amp; intent</div>
+              <table class="dt">
+                <thead><tr><th>Search</th><th>Google position</th></tr></thead>
+                <tbody id="rankKw"></tbody>
+              </table>
+              <p class="chart-note" style="margin-top:10px">Brand and location searches lead. The insurance and payor cluster ranks just below the top and is the click-capture opportunity (DataForSEO).</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3 -->
+        <section data-panel="3" style="display:none">
+          <div class="cardhd" style="margin-bottom:10px">Carmel inpatient profile &middot; map momentum</div>
+          <div class="grid grid--3" style="gap:12px; margin-bottom:16px">
+            <div class="card">
+              <div class="stat__num">100%</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">top-20 coverage on the three high-intent searches (drug rehab, alcohol rehab, detox) across the Putnam County grid.</p>
+            </div>
+            <div class="card">
+              <div class="stat__num">+31</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">top-3 map spots gained across the core searches over the spring scans. The pin dominates and is still improving.</p>
+            </div>
+            <div class="card">
+              <div class="stat__num">2&ndash;3</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">average map position on the high-intent searches. Arms Acres leads its Putnam County market.</p>
+            </div>
+          </div>
+          <p class="chart-note" style="margin-bottom:16px">Each map spot is a point on the grid around Carmel where the profile shows in the top 3. More spots means winning the map across a wider area.</p>
+
+          <div class="notice notice--warn notice__col" style="margin-bottom:16px">
+            <span class="tag tag--amber">Why Google Maps matters most here</span>
+            <p>Google Maps and the Google profile are how most people find inpatient treatment near them, and they feed the path to the website and the intake line. Arms Acres already leads its Putnam County market and is still gaining, so the work here is to defend and extend it while the website catches up on conversion.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start; margin-bottom:8px">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Google Maps movement &middot; Putnam County grid</div>
+              <table class="dt">
+                <thead><tr><th>Priority search</th><th>Avg position</th><th>Top-3 spots</th></tr></thead>
+                <tbody id="mapsTbl"></tbody>
+              </table>
+              <div class="chips-wrap" style="margin:14px 0 12px">
+                <span class="vchip good"><b>Leads</b> the Putnam County map</span>
+                <span class="vchip good"><b>+31</b> top-3 spots gained</span>
+                <span class="vchip"><b>3.2 &middot; 135</b> rating &middot; reviews</span>
+              </div>
+              <p class="small" style="color:var(--ink-soft)">The pin is top-3 across most of the grid on the core searches and gained ground on every one of them over the spring. The rating is a steady, long-term focus and the client's own lever.</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:12px">Where Arms Acres stands &middot; search by search</div>
+              <div class="tag tag--mint" style="margin-bottom:10px">Owns the map</div>
+              <ul class="ov" style="margin-bottom:14px">
+                <li>Alcohol detox near me <span class="muted">&middot; 139 spots, +11</span></li>
+                <li>Alcohol rehab near me <span class="muted">&middot; 123 spots, +8</span></li>
+                <li>Drug rehab <span class="muted">&middot; 111 spots, +10</span></li>
+                <li>Detox center near me <span class="muted">&middot; 130 spots, +2</span></li>
+              </ul>
+              <div class="cardhd" style="margin-bottom:6px">Good to know</div>
+              <p class="small" style="color:var(--ink-soft)">The broad term "rehab" on its own is the one soft spot (it pulls national and informational results). The high-intent, near-me searches that lead to admissions are where Arms Acres is strongest.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4 -->
+        <section data-panel="4" style="display:none">
+          <div class="notice notice__col" style="margin-bottom:16px">
+            <span class="tag">Our recommendations &middot; from the custom strategy</span>
+            <table class="dt">
+              <thead><tr><th>Recommendation</th><th>Priority</th></tr></thead>
+              <tbody id="recommendations"></tbody>
+            </table>
+            <p class="chart-note">These come from the custom strategy. Adding a form to the service pages and rolling out structured data are the highest-value items: they convert traffic the site already earns.</p>
+          </div>
+        </section>
+
+      </div>
+      <div class="win__status">
+        <span class="cell grow">Marketing Performance Report &middot; Arms Acres</span>
+        <span class="cell">Through May 31, 2026</span>
+        <span class="cell">Confidential</span>
+      </div>
+    </div>
+
+    <p class="tiny muted center" style="margin-top:18px">Prepared by HQDM Search Intelligence &middot; armsacres.com &middot; Confidential</p>
+  </div>
+</main>
+
+<script>
+var DATA = {
+  leads: { months:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'], forms:[59,63,38,38,22,28,22,48,47,59,64,31] },
+  leadSrc: [['Direct',107,'69%'],['Referral',25,'16%'],['Organic search',22,'15%']],
+  traffic: { months:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'], organic:[6902,5684,5554,6454,5332,4877,5201,8372,9777,9469,9520,11236] },
+  searchTbl: [['Dec 2025',5201,890999],['Jan 2026',8372,1489213],['Feb 2026',9777,1894613],['Mar 2026',9469,1783785],['Apr 2026',9520,1998904],['May 2026',11236,2126952]],
+  rankKw: [
+    {cat:'Brand & location', items:[['arms acres carmel',1],['arms acres carmel hamlet ny',1],['arms acres locations',1]]},
+    {cat:'Insurance / payor (click-capture)', items:[['insurance & cost articles','11-20'],['payor coverage pages','11-20']]},
+  ],
+  maps: [['Alcohol detox near me','2.3','128 → 139'],['Detox center near me','2.5','128 → 130'],['Alcohol rehab near me','2.9','115 → 123'],['Drug rehab','3.3','101 → 111']],
+  recommendations: [
+    {cat:'Service-page conversion', items:[
+      ['Add a contact form to the service and program pages (about 24,000 visits a year land here with no form)','High'],
+      ['Fix the homepage social-share preview, which shows another brand today','High'],
+      ['Strengthen the inpatient page with insurance names, Medicaid, and an FAQ','Medium']]},
+    {cat:'Structured data', items:[
+      ['Roll LocalBusiness, Service and FAQ structured data across the Tier-1 pages (homepage only today)','High']]},
+    {cat:'Insurance / payor content', items:[
+      ['Rewrite titles and add FAQs on the insurance and cost articles that rank just below the top','High'],
+      ['Ship state-level pages for the broad rehab and detox searches','Medium']]},
+    {cat:'Google Business Profile', items:[
+      ['Full optimization pass on the managed Carmel profile to defend and extend the map lead','Medium']]},
+    {cat:'Measurement', items:[
+      ['Report form leads by channel; keep the Carmel map grid on the monthly schedule','Medium']]},
+  ],
+};
+
+function chg(b, a) {
+  if (b === 0 && a > 0) return '<span class="new">New</span>';
+  if (b === a) return '<span class="flat" style="color:var(--muted-2);font-weight:700">0%</span>';
+  var p = Math.round((a - b) / b * 100);
+  if (p > 0) return '<span class="up">+' + p + '%</span>';
+  return '<span style="color:var(--rose);font-weight:700">' + p + '%</span>';
+}
+
+document.getElementById('searchTbl').innerHTML = DATA.searchTbl.map(function (r) {
+  return '<tr><td>' + r[0] + '</td><td>' + r[1].toLocaleString() + '</td><td>' + r[2].toLocaleString() + '</td></tr>';
+}).join('');
+
+document.getElementById('rankKw').innerHTML = DATA.rankKw.map(function (g) {
+  var head = '<tr class="catrow"><td>' + g.cat + '<span class="badge">' + g.items.length + '</span></td><td></td></tr>';
+  var rows = g.items.map(function (it) {
+    return '<tr class="itemrow"><td><span class="mono" style="font-size:0.8rem;color:var(--violet)">' + it[0] + '</span></td><td>' + (typeof it[1] === 'number' ? '#' + it[1] : it[1]) + '</td></tr>';
+  }).join('');
+  return head + rows;
+}).join('');
+
+document.getElementById('mapsTbl').innerHTML = DATA.maps.map(function (r) {
+  return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td></tr>';
+}).join('');
+
+function grpRows(g) {
+  return '<tr class="catrow"><td>' + g.cat + '<span class="badge">' + g.items.length + '</span></td><td></td></tr>' +
+    g.items.map(function (it) { return '<tr class="itemrow"><td>' + it[0] + '</td><td>' + it[1] + '</td></tr>'; }).join('');
+}
+document.getElementById('recommendations').innerHTML = DATA.recommendations.map(grpRows).join('');
+
+window.CHART_FACTORIES = {
+  leadsChart: function (cv) {
+    return RPT.line(cv, DATA.leads.months, [{ label: 'Website form leads', data: DATA.leads.forms, color: RPT.C.mint }]);
+  },
+  trafficChart: function (cv) {
+    return RPT.line(cv, DATA.traffic.months, [{ label: 'Organic clicks', data: DATA.traffic.organic, color: RPT.C.violet, fill: true }]);
+  },
+  sourceChart: function (cv) {
+    var rows = DATA.leadSrc;
+    var shares = rows.map(function (r) { return parseInt(r[2], 10); });
+    return RPT.barH(cv, rows.map(function (r) { return r[0]; }), shares,
+      rows.map(function (r, i) { return i === 0 ? RPT.C.mint : RPT.C.grey; }),
+      function (c) { return rows[c.dataIndex][1].toLocaleString() + ' leads . ' + c.parsed.x + '% of leads'; }, 80);
+  }
+};
+</script>
+<script src="../assets/js/chart.umd.min.js"></script>
+<script src="../assets/js/report.js"></script>
+<script>showTab(1);</script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Elev8 Centers · Performance Report · 2026</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/hqdm.css">
+</head>
+<body>
+
+<div class="nav-wrap no-print">
+  <nav class="nav container" style="max-width:1000px">
+    <a class="brand" href="index.html"><span class="mark">H</span> <span>HQDM<small>search intelligence</small></span></a>
+    <button class="btn" onclick="window.print()" style="padding:8px 15px; font-size:0.8rem">Print / PDF</button>
+  </nav>
+</div>
+
+<main class="section section--tight">
+  <div class="container" style="max-width:1000px">
+
+    <div class="win">
+      <div class="win__bar">
+        <span class="ic">&#9635;</span>
+        <span class="ttl">performance-report.hqdm &ndash; Elev8 Centers</span>
+        <span class="win__controls"><b>_</b><b>&#9633;</b><b>&times;</b></span>
+      </div>
+      <div class="win__body">
+
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:16px">
+          <div>
+            <div class="eyebrow">Marketing Performance Report</div>
+            <h1 class="display" style="font-size:clamp(1.5rem,2.8vw,2.1rem); margin-top:8px">Elev8 Centers</h1>
+            <p class="muted small" style="margin-top:4px">Inpatient addiction treatment &middot; Harlem, Manhattan &middot; prepared by HQDM</p>
+          </div>
+          <span class="pill"><span class="dot"></span>Through May 31, 2026</span>
+        </div>
+
+        <div class="tabs no-print">
+          <button class="tab-btn active" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
+          <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">Search performance</span></button>
+          <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
+          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Our recommendations</span></button>
+        </div>
+
+        <hr class="divider" style="margin:18px 0">
+
+        <!-- TAB 1 -->
+        <section data-panel="1">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Website form leads <strong>ramped strongly through the first quarter</strong>, to a peak of 121 in March, then <strong>eased with an April search-visibility dip</strong> to 37 in May. The credentials are a real asset: the Harlem profile holds <strong>4.5 stars on 101 reviews</strong> and carries four accreditations (OASAS, Joint Commission, LegitScript, NAATP).</li>
+            <li>The website is well marked up on the homepage but <strong>not on the inner pages</strong>, and one expected treatment address returns an error. Fixing the page structure and extending the markup is what steadies the line after the April dip.</li>
+          </ul>
+          <div class="kpis" style="margin-bottom:18px">
+            <div class="kpi"><div class="l">Website form leads (May)</div><div class="n">37</div><div class="s">off the March peak of 121</div></div>
+            <div class="kpi"><div class="l">Q1 lead ramp</div><div class="n">to 121</div><div class="s">Jan → Mar grew, then April dip</div></div>
+            <div class="kpi"><div class="l">Google rating</div><div class="n">4.5</div><div class="s">101 reviews, up from 98</div></div>
+            <div class="kpi"><div class="l">Accreditations</div><div class="n">4 marks</div><div class="s">OASAS, JC, LegitScript, NAATP</div></div>
+          </div>
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Website form leads month over month</h3><span class="muted tiny">Jun 2025 &ndash; May 2026</span></div>
+            <div class="chart-wrap"><canvas id="leadsChart"></canvas></div>
+            <p class="chart-note">Contact-form submissions from the website (Google Analytics). The Q1 ramp and the April easing both show clearly; the one-off November spike was a tracking anomaly. Phone calls to the intake line are not in this number. Completed months only.</p>
+          </div>
+          <div class="card chart-card">
+            <div class="chart-head"><h3 class="display">Where your leads come from</h3><span class="muted tiny">Form leads by channel &middot; Mar to May</span></div>
+            <div class="chart-wrap chart-wrap--sm"><canvas id="sourceChart"></canvas></div>
+            <p class="chart-note">Most form leads are attributed to Direct, which is brand searches, returning visitors, and the path from the Google profile to the site, plus visits where analytics consent was not granted. Organic search is understated here for that reason.</p>
+          </div>
+        </section>
+
+        <!-- TAB 2 -->
+        <section data-panel="2" style="display:none">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Organic clicks <strong>grew steadily into March 2026</strong> (to about 7,400 a month), then <strong>pulled back in April</strong> to around 3,600, a broad search-visibility shift that also shows in the lead line.</li>
+            <li>Most of what the site ranks for is <strong>informational blog content</strong> rather than treatment intent, so that volatile traffic is what moved most.</li>
+            <li>The on-site opportunity is structural: the <strong>treatment and admission pages carry no markup</strong> and an expected treatment address returns an error, so the URL structure needs cleanup.</li>
+          </ul>
+
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Organic clicks by month</h3><span class="muted tiny">Clicks from Google search &middot; Search Console</span></div>
+            <div class="chart-wrap"><canvas id="trafficChart"></canvas></div>
+            <p class="chart-note">Clicks to the website from Google search, completed months through May. The climb into March and the April easing are both clear. Completed months only.</p>
+          </div>
+
+          <div class="notice notice--warn notice__col" style="margin-bottom:18px">
+            <span class="tag tag--amber">What this means</span>
+            <p>The April pullback mostly hit broad informational articles, which is the volatile part of the traffic. The durable assets are the strong profile and accreditations. The on-site work is what makes the recovery stick: the homepage is richly marked up, but the treatment and admission pages are not, and the treatment URLs need cleanup (one expected address returns an error). Extending the markup and fixing the structure is the priority.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Search clicks &amp; appearances &middot; last 6 months</div>
+              <table class="dt">
+                <thead><tr><th>Month</th><th>Clicks</th><th>Appearances</th></tr></thead>
+                <tbody id="searchTbl"></tbody>
+              </table>
+              <p class="chart-note" style="margin-top:10px">Appearances = times a page showed in Google results (Search Console). The April easing shows in both.</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">What you rank for &middot; brand &amp; the gap</div>
+              <table class="dt">
+                <thead><tr><th>Search</th><th>Google position</th></tr></thead>
+                <tbody id="rankKw"></tbody>
+              </table>
+              <p class="chart-note" style="margin-top:10px">Brand searches lead; the treatment pages barely rank, which is where the marked-up pages can grow (DataForSEO).</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3 -->
+        <section data-panel="3" style="display:none">
+          <div class="cardhd" style="margin-bottom:10px">Harlem profile &middot; standing</div>
+          <div class="grid grid--3" style="gap:12px; margin-bottom:16px">
+            <div class="card">
+              <div class="stat__num">4.5 ★</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">on <strong>101 reviews</strong> at the Harlem profile, up from 98, a solid base in a competitive Manhattan market.</p>
+            </div>
+            <div class="card">
+              <div class="stat__num">4 marks</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">accreditations: OASAS, Joint Commission, LegitScript, and NAATP, a strong trust set for the category.</p>
+            </div>
+            <div class="card">
+              <div class="stat__num">Harlem</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">single managed Manhattan profile (Central Harlem). The profile and credentials are the assets to convert.</p>
+            </div>
+          </div>
+          <p class="chart-note" style="margin-bottom:16px">For a Manhattan detox and rehab, the Google profile, its reviews, and its accreditations are how families choose. Elev8's are strong.</p>
+
+          <div class="notice notice--warn notice__col" style="margin-bottom:16px">
+            <span class="tag tag--amber">Why Google Maps matters most here</span>
+            <p>Google Maps and the Google profile are how most people find treatment near them, and Elev8's profile carries a solid rating and a strong accreditation set. The job is to keep that profile strong and connect it to a website that converts, which is what the Work Plan focuses on.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start; margin-bottom:8px">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Profile strength &middot; Harlem</div>
+              <div class="chips-wrap" style="margin:4px 0 12px">
+                <span class="vchip good"><b>4.5 &middot; 101</b> rating &middot; reviews</span>
+                <span class="vchip good"><b>Joint Commission</b> accredited</span>
+                <span class="vchip good"><b>LegitScript</b> certified</span>
+              </div>
+              <p class="small" style="color:var(--ink-soft)">The rating rose over the spring and the review base grew. The accreditation set (OASAS, Joint Commission, LegitScript, NAATP) is among the strongest in the category and supports both ranking trust and conversion. Reviews are the client's own lever and shown here only as context.</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:12px">Where Elev8 stands</div>
+              <div class="tag tag--mint" style="margin-bottom:10px">Strong signals</div>
+              <ul class="ov" style="margin-bottom:14px">
+                <li>Reputation <span class="muted">&middot; 4.5 on 101, climbing</span></li>
+                <li>Accreditation <span class="muted">&middot; four marks</span></li>
+                <li>Homepage markup <span class="muted">&middot; rich and complete</span></li>
+              </ul>
+              <div class="cardhd" style="margin-bottom:6px">The opportunity</div>
+              <p class="small" style="color:var(--ink-soft)">The homepage is well built, but the inner treatment and admission pages do not carry the same markup, and the treatment URLs need cleanup. Bringing the inner pages up to the homepage's standard is the unlock.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4 -->
+        <section data-panel="4" style="display:none">
+          <div class="notice notice__col" style="margin-bottom:16px">
+            <span class="tag">Our recommendations &middot; from the custom strategy</span>
+            <table class="dt">
+              <thead><tr><th>Recommendation</th><th>Priority</th></tr></thead>
+              <tbody id="recommendations"></tbody>
+            </table>
+            <p class="chart-note">These come from the custom strategy. Extending the homepage's markup to the inner pages and fixing the treatment URLs are the highest-value items.</p>
+          </div>
+        </section>
+
+      </div>
+      <div class="win__status">
+        <span class="cell grow">Marketing Performance Report &middot; Elev8 Centers</span>
+        <span class="cell">Through May 31, 2026</span>
+        <span class="cell">Confidential</span>
+      </div>
+    </div>
+
+    <p class="tiny muted center" style="margin-top:18px">Prepared by HQDM Search Intelligence &middot; elev8centers.com &middot; Confidential</p>
+  </div>
+</main>
+
+<script>
+var DATA = {
+  leads: { months:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'], forms:[16,19,15,24,10,114,31,61,80,121,69,37] },
+  leadSrc: [['Direct',196,'86%'],['Organic search',28,'12%'],['Referral',3,'2%']],
+  traffic: { months:['Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'], organic:[4693,4353,4048,3843,3462,4532,5830,7044,7411,3624,4033] },
+  searchTbl: [['Dec 2025',4532,1093518],['Jan 2026',5830,1456711],['Feb 2026',7044,1783102],['Mar 2026',7411,2102049],['Apr 2026',3624,1089741],['May 2026',4033,796072]],
+  rankKw: [
+    {cat:'Brand', items:[['elev8 centers',1],['elev8 harlem',1],['elev8 rehab',2]]},
+    {cat:'Treatment intent (the gap)', items:[['detox / rehab harlem','thin'],['addiction treatment nyc','thin']]},
+  ],
+  recommendations: [
+    {cat:'Treatment & admission pages', items:[
+      ['Extend the homepage markup (Service, MedicalBusiness, FAQ) to the treatment and admission pages','High'],
+      ['Fix the treatment URL structure, including the address that returns an error','High'],
+      ['Strengthen the treatment pages with depth and a clear intake call to action','High']]},
+    {cat:'Recover the April dip', items:[
+      ['Review what lost visibility in April and protect the core treatment pages','Medium'],
+      ['Focus the content program on treatment topics rather than broad articles','Medium']]},
+    {cat:'Profile', items:[
+      ['Reflect the four accreditations in the page markup and on the key pages','Medium'],
+      ['Keep the Harlem profile services aligned to the rebuilt pages','Low']]},
+    {cat:'Measurement', items:[
+      ['Report form leads by channel; keep the Harlem map read on the monthly schedule','Medium']]},
+  ],
+};
+
+function chg(b, a) {
+  if (b === 0 && a > 0) return '<span class="new">New</span>';
+  if (b === a) return '<span class="flat" style="color:var(--muted-2);font-weight:700">0%</span>';
+  var p = Math.round((a - b) / b * 100);
+  if (p > 0) return '<span class="up">+' + p + '%</span>';
+  return '<span style="color:var(--rose);font-weight:700">' + p + '%</span>';
+}
+
+document.getElementById('searchTbl').innerHTML = DATA.searchTbl.map(function (r) {
+  return '<tr><td>' + r[0] + '</td><td>' + r[1].toLocaleString() + '</td><td>' + r[2].toLocaleString() + '</td></tr>';
+}).join('');
+
+document.getElementById('rankKw').innerHTML = DATA.rankKw.map(function (g) {
+  var head = '<tr class="catrow"><td>' + g.cat + '<span class="badge">' + g.items.length + '</span></td><td></td></tr>';
+  var rows = g.items.map(function (it) {
+    return '<tr class="itemrow"><td><span class="mono" style="font-size:0.8rem;color:var(--violet)">' + it[0] + '</span></td><td>' + (typeof it[1] === 'number' ? '#' + it[1] : it[1]) + '</td></tr>';
+  }).join('');
+  return head + rows;
+}).join('');
+
+function grpRows(g) {
+  return '<tr class="catrow"><td>' + g.cat + '<span class="badge">' + g.items.length + '</span></td><td></td></tr>' +
+    g.items.map(function (it) { return '<tr class="itemrow"><td>' + it[0] + '</td><td>' + it[1] + '</td></tr>'; }).join('');
+}
+document.getElementById('recommendations').innerHTML = DATA.recommendations.map(grpRows).join('');
+
+window.CHART_FACTORIES = {
+  leadsChart: function (cv) {
+    return RPT.line(cv, DATA.leads.months, [{ label: 'Website form leads', data: DATA.leads.forms, color: RPT.C.mint }]);
+  },
+  trafficChart: function (cv) {
+    return RPT.line(cv, DATA.traffic.months, [{ label: 'Organic clicks', data: DATA.traffic.organic, color: RPT.C.violet, fill: true }]);
+  },
+  sourceChart: function (cv) {
+    var rows = DATA.leadSrc;
+    var shares = rows.map(function (r) { return parseInt(r[2], 10); });
+    return RPT.barH(cv, rows.map(function (r) { return r[0]; }), shares,
+      rows.map(function (r, i) { return i === 0 ? RPT.C.mint : RPT.C.grey; }),
+      function (c) { return rows[c.dataIndex][1].toLocaleString() + ' leads . ' + c.parsed.x + '% of leads'; }, 90);
+  }
+};
+</script>
+<script src="../assets/js/chart.umd.min.js"></script>
+<script src="../assets/js/report.js"></script>
+<script>showTab(1);</script>
+</body>
+</html>

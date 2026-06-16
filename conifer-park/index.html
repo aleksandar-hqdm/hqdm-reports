@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Conifer Park · Performance Report · 2026</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/hqdm.css">
+</head>
+<body>
+
+<div class="nav-wrap no-print">
+  <nav class="nav container" style="max-width:1000px">
+    <a class="brand" href="index.html"><span class="mark">H</span> <span>HQDM<small>search intelligence</small></span></a>
+    <button class="btn" onclick="window.print()" style="padding:8px 15px; font-size:0.8rem">Print / PDF</button>
+  </nav>
+</div>
+
+<main class="section section--tight">
+  <div class="container" style="max-width:1000px">
+
+    <div class="win">
+      <div class="win__bar">
+        <span class="ic">&#9635;</span>
+        <span class="ttl">performance-report.hqdm &ndash; Conifer Park</span>
+        <span class="win__controls"><b>_</b><b>&#9633;</b><b>&times;</b></span>
+      </div>
+      <div class="win__body">
+
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between; margin-bottom:16px">
+          <div>
+            <div class="eyebrow">Marketing Performance Report</div>
+            <h1 class="display" style="font-size:clamp(1.5rem,2.8vw,2.1rem); margin-top:8px">Conifer Park</h1>
+            <p class="muted small" style="margin-top:4px">Inpatient addiction treatment &middot; Glenville, NY (Capital Region) &middot; prepared by HQDM</p>
+          </div>
+          <span class="pill"><span class="dot"></span>Through May 31, 2026</span>
+        </div>
+
+        <div class="tabs no-print">
+          <button class="tab-btn active" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
+          <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">Search performance</span></button>
+          <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
+          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Our recommendations</span></button>
+        </div>
+
+        <hr class="divider" style="margin:18px 0">
+
+        <!-- TAB 1 -->
+        <section data-panel="1">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Website form leads are <strong>strong and growing</strong>, from the mid-50s a month in late 2025 to about <strong>80 to 90 a month in 2026</strong>, and unusually for this kind of account, <strong>organic search is the largest source of those leads</strong> rather than a tracking-driven Direct number.</li>
+            <li>On Google Maps the Glenville profile <strong>gained ground on every tracked Capital Region search</strong> over the spring, with average positions improving into the top few results.</li>
+          </ul>
+          <div class="kpis" style="margin-bottom:18px">
+            <div class="kpi"><div class="l">Website form leads (May)</div><div class="n">81</div><div class="s">~80/mo, up from the 50s in 2025</div></div>
+            <div class="kpi"><div class="l">Leads from organic</div><div class="n">65%</div><div class="s">of form leads, Mar to May</div></div>
+            <div class="kpi"><div class="l">Maps · rehab upstate NY</div><div class="n">+20</div><div class="s">top-3 spots; avg 2.8 → 1.8</div></div>
+            <div class="kpi"><div class="l">Maps · all 4 searches</div><div class="n">Gaining</div><div class="s">top-3 spots up on every one</div></div>
+          </div>
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Website form leads month over month</h3><span class="muted tiny">Jul 2025 &ndash; May 2026</span></div>
+            <div class="chart-wrap"><canvas id="leadsChart"></canvas></div>
+            <p class="chart-note">Contact-form submissions from the website (Google Analytics). Phone calls to the intake line are not in this number. Completed months only.</p>
+          </div>
+          <div class="card chart-card">
+            <div class="chart-head"><h3 class="display">Where your leads come from</h3><span class="muted tiny">Form leads by channel &middot; Mar to May</span></div>
+            <div class="chart-wrap chart-wrap--sm"><canvas id="sourceChart"></canvas></div>
+            <p class="chart-note">Organic search is the largest source of form leads here, which is a healthy sign for the content and Maps work. Direct (brand searches and the path from the Google profile) is second.</p>
+          </div>
+        </section>
+
+        <!-- TAB 2 -->
+        <section data-panel="2" style="display:none">
+          <div class="eyebrow">Overview</div>
+          <ul class="ov" style="margin:12px 0 18px">
+            <li>Organic clicks are <strong>lower than a year ago</strong>, but the decline is concentrated in informational blog articles that did not convert, not in the treatment pages.</li>
+            <li>At the same time, <strong>rankings improved</strong>: the average position moved from the low-20s in spring 2025 into the low-teens, and form leads grew, so the account is healthier than the click count alone suggests.</li>
+            <li>The opportunity is the treatment pages: they are <strong>locked to a single-city web address</strong> that caps them, and most carry no structured data.</li>
+          </ul>
+
+          <div class="card chart-card" style="margin-bottom:16px">
+            <div class="chart-head"><h3 class="display">Organic clicks by month</h3><span class="muted tiny">Clicks from Google search &middot; Search Console</span></div>
+            <div class="chart-wrap"><canvas id="trafficChart"></canvas></div>
+            <p class="chart-note">Clicks to the website from Google search, last 12 completed months. The decline is mostly informational blog content; the treatment and brand pages held and improved. Completed months only.</p>
+          </div>
+
+          <div class="notice notice--good notice__col" style="margin-bottom:18px">
+            <span class="tag tag--mint">What this means</span>
+            <p>The lower click count looks worse than the reality. The drop is in broad informational articles that brought traffic but not inquiries, while rankings on the core treatment searches improved and form leads grew. The next gain is freeing up the treatment pages, which are tied to a single-city address that limits how widely they can rank, and adding the page markup most of them are missing.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Search clicks &amp; appearances &middot; last 6 months</div>
+              <table class="dt">
+                <thead><tr><th>Month</th><th>Clicks</th><th>Appearances</th></tr></thead>
+                <tbody id="searchTbl"></tbody>
+              </table>
+              <p class="chart-note" style="margin-top:10px">Appearances = times a page showed in Google results (Search Console).</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">What you rank for &middot; brand &amp; location</div>
+              <table class="dt">
+                <thead><tr><th>Search</th><th>Google position</th></tr></thead>
+                <tbody id="rankKw"></tbody>
+              </table>
+              <p class="chart-note" style="margin-top:10px">Brand and location searches lead (DataForSEO). The broad treatment searches are where the freed-up service pages can grow.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3 -->
+        <section data-panel="3" style="display:none">
+          <div class="cardhd" style="margin-bottom:10px">Glenville profile &middot; map momentum</div>
+          <div class="grid grid--3" style="gap:12px; margin-bottom:16px">
+            <div class="card">
+              <div class="stat__num">Gaining</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">on <strong>all four</strong> tracked Capital Region searches over the spring scans. Top-3 map spots up on every one.</p>
+            </div>
+            <div class="card">
+              <div class="stat__num">+20</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">top-3 map spots on "rehab upstate New York", with average position improving from 2.8 to <strong>1.8</strong>.</p>
+            </div>
+            <div class="card">
+              <div class="stat__num">3.2 ★</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">163 reviews on the Glenville profile. Rating is a steady, long-term focus and the client's own lever.</p>
+            </div>
+          </div>
+          <p class="chart-note" style="margin-bottom:16px">Each map spot is a point on the grid around Glenville where the profile shows in the top 3. More spots means winning the map across a wider area.</p>
+
+          <div class="notice notice--warn notice__col" style="margin-bottom:16px">
+            <span class="tag tag--amber">Why Google Maps matters most here</span>
+            <p>Google Maps and the Google profile are how most people find treatment near them, and they feed the path to the website and the intake line. The Glenville profile gained on every tracked search over the spring, so the work here is to keep extending that and to connect it cleanly to the treatment pages on the site.</p>
+          </div>
+
+          <div class="grid grid--2" style="gap:16px; align-items:start; margin-bottom:8px">
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:10px">Google Maps movement &middot; Capital Region grid</div>
+              <table class="dt">
+                <thead><tr><th>Priority search</th><th>Avg position</th><th>Top-3 spots</th></tr></thead>
+                <tbody id="mapsTbl"></tbody>
+              </table>
+              <div class="chips-wrap" style="margin:14px 0 12px">
+                <span class="vchip good"><b>+59</b> top-3 spots across the 4 searches</span>
+                <span class="vchip good"><b>All gaining</b></span>
+                <span class="vchip"><b>3.2 &middot; 163</b> rating &middot; reviews</span>
+              </div>
+              <p class="small" style="color:var(--ink-soft)">The profile gained top-3 coverage on every tracked search over the spring and improved its average position on each. This is the strongest part of the account.</p>
+            </div>
+            <div class="card">
+              <div class="cardhd" style="margin-bottom:12px">Where Conifer Park stands &middot; search by search</div>
+              <div class="tag tag--mint" style="margin-bottom:10px">Gaining ground</div>
+              <ul class="ov" style="margin-bottom:14px">
+                <li>Rehab upstate New York <span class="muted">&middot; 156 spots, avg 1.8</span></li>
+                <li>Drug rehab near me <span class="muted">&middot; 110 spots, +10</span></li>
+                <li>Alcohol rehab <span class="muted">&middot; 84 spots, +13</span></li>
+                <li>Rehab near me <span class="muted">&middot; 54 spots, +16</span></li>
+              </ul>
+              <div class="cardhd" style="margin-bottom:6px">Good to know</div>
+              <p class="small" style="color:var(--ink-soft)">The profile carries a strong set of categories and rich page markup on the homepage. The work is to connect it to the treatment pages and keep the review and trust signals current.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4 -->
+        <section data-panel="4" style="display:none">
+          <div class="notice notice__col" style="margin-bottom:16px">
+            <span class="tag">Our recommendations &middot; from the custom strategy</span>
+            <table class="dt">
+              <thead><tr><th>Recommendation</th><th>Priority</th></tr></thead>
+              <tbody id="recommendations"></tbody>
+            </table>
+            <p class="chart-note">These come from the custom strategy. Freeing up the treatment pages and extending the page markup to them are the highest-value items.</p>
+          </div>
+        </section>
+
+      </div>
+      <div class="win__status">
+        <span class="cell grow">Marketing Performance Report &middot; Conifer Park</span>
+        <span class="cell">Through May 31, 2026</span>
+        <span class="cell">Confidential</span>
+      </div>
+    </div>
+
+    <p class="tiny muted center" style="margin-top:18px">Prepared by HQDM Search Intelligence &middot; coniferpark.com &middot; Confidential</p>
+  </div>
+</main>
+
+<script>
+var DATA = {
+  leads: { months:['Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'], forms:[4,54,54,72,84,67,75,50,91,81,81] },
+  leadSrc: [['Organic search',165,'65%'],['Direct',83,'33%'],['Other',5,'2%']],
+  traffic: { months:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'], organic:[10000,10348,8909,7310,7211,5371,4271,4126,3031,3847,2804,2948] },
+  searchTbl: [['Dec 2025',4271,675531],['Jan 2026',4126,716053],['Feb 2026',3031,476785],['Mar 2026',3847,624220],['Apr 2026',2804,386857],['May 2026',2948,314425]],
+  rankKw: [
+    {cat:'Brand & location', items:[['conifer park glenville',1],['conifer park ny',1],['conifer park',2],['conifer park troy',2]]},
+    {cat:'Treatment intent (freed-up pages can grow)', items:[['conifer park inpatient',2],['conifer park rehab',2],['conifer park detox',2]]},
+  ],
+  maps: [['Rehab upstate New York','1.8','136 → 156'],['Drug rehab near me','3.9','100 → 110'],['Alcohol rehab','4.6','71 → 84'],['Rehab near me','5.6','38 → 54']],
+  recommendations: [
+    {cat:'Treatment pages', items:[
+      ['Free up the treatment pages from their single-city web address so Glenville authority can rank them across the area','High'],
+      ['Roll Service and FAQ structured data across the treatment pages (homepage is well marked up; inner pages are not)','High']]},
+    {cat:'Site cleanup', items:[
+      ['Consolidate the duplicate service pages and the thin auto-built pages','Medium'],
+      ['Fix the stray phone-link pattern and clear old migration files','Medium']]},
+    {cat:'Trust & conversion', items:[
+      ['Surface accreditations and an insurance list on the site (a trust gap vs competitors)','Medium'],
+      ['Refresh the top blog pages so they hold rankings and feed the treatment pages','Low']]},
+    {cat:'Google Business Profile', items:[
+      ['Full optimization pass on the managed Glenville profile, with services pointed at the right pages','Medium']]},
+    {cat:'Measurement', items:[
+      ['Report form leads by channel; keep the Glenville map grid on the monthly schedule','Medium']]},
+  ],
+};
+
+function chg(b, a) {
+  if (b === 0 && a > 0) return '<span class="new">New</span>';
+  if (b === a) return '<span class="flat" style="color:var(--muted-2);font-weight:700">0%</span>';
+  var p = Math.round((a - b) / b * 100);
+  if (p > 0) return '<span class="up">+' + p + '%</span>';
+  return '<span style="color:var(--rose);font-weight:700">' + p + '%</span>';
+}
+
+document.getElementById('searchTbl').innerHTML = DATA.searchTbl.map(function (r) {
+  return '<tr><td>' + r[0] + '</td><td>' + r[1].toLocaleString() + '</td><td>' + r[2].toLocaleString() + '</td></tr>';
+}).join('');
+
+document.getElementById('rankKw').innerHTML = DATA.rankKw.map(function (g) {
+  var head = '<tr class="catrow"><td>' + g.cat + '<span class="badge">' + g.items.length + '</span></td><td></td></tr>';
+  var rows = g.items.map(function (it) {
+    return '<tr class="itemrow"><td><span class="mono" style="font-size:0.8rem;color:var(--violet)">' + it[0] + '</span></td><td>' + (typeof it[1] === 'number' ? '#' + it[1] : it[1]) + '</td></tr>';
+  }).join('');
+  return head + rows;
+}).join('');
+
+document.getElementById('mapsTbl').innerHTML = DATA.maps.map(function (r) {
+  return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td></tr>';
+}).join('');
+
+function grpRows(g) {
+  return '<tr class="catrow"><td>' + g.cat + '<span class="badge">' + g.items.length + '</span></td><td></td></tr>' +
+    g.items.map(function (it) { return '<tr class="itemrow"><td>' + it[0] + '</td><td>' + it[1] + '</td></tr>'; }).join('');
+}
+document.getElementById('recommendations').innerHTML = DATA.recommendations.map(grpRows).join('');
+
+window.CHART_FACTORIES = {
+  leadsChart: function (cv) {
+    return RPT.line(cv, DATA.leads.months, [{ label: 'Website form leads', data: DATA.leads.forms, color: RPT.C.mint }]);
+  },
+  trafficChart: function (cv) {
+    return RPT.line(cv, DATA.traffic.months, [{ label: 'Organic clicks', data: DATA.traffic.organic, color: RPT.C.violet, fill: true }]);
+  },
+  sourceChart: function (cv) {
+    var rows = DATA.leadSrc;
+    var shares = rows.map(function (r) { return parseInt(r[2], 10); });
+    return RPT.barH(cv, rows.map(function (r) { return r[0]; }), shares,
+      rows.map(function (r, i) { return i === 0 ? RPT.C.mint : RPT.C.grey; }),
+      function (c) { return rows[c.dataIndex][1].toLocaleString() + ' leads . ' + c.parsed.x + '% of leads'; }, 80);
+  }
+};
+</script>
+<script src="../assets/js/chart.umd.min.js"></script>
+<script src="../assets/js/report.js"></script>
+<script>showTab(1);</script>
+</body>
+</html>
