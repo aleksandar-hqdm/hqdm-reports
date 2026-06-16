@@ -123,11 +123,11 @@
       <h2 class="sec">Operational (measurement and cleanup)</h2>
       <details class="sdrop">
         <summary>
-          <div class="sum-main"><span class="sum-txt">The www-to-non-www switch is a measurement cleanup, not a migration: add a Search Console property for the host that ranks and confirm the redirect.</span></div>
+          <div class="sum-main"><span class="sum-txt">The www-to-non-www switch is a measurement cleanup, not a migration: add a Search Console property for the host that ranks.</span></div>
           <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
         <div class="sdrop__body has-top">
-          <p class="lead2">Google already serves the non-www host as canonical and is dropping the old www URLs, and GA4 confirms no real traffic loss, so the only thing that matters here is measurement, not a migration project. Add a domain-level (or non-www) property in Search Console so we report on the host that actually ranks, and confirm once that the old www host 301-redirects to non-www. Nothing else is needed.</p>
+          <p class="lead2">Google already serves the non-www host as canonical and is dropping the old www URLs, and GA4 confirms no real traffic loss, so the only thing that matters here is measurement, not a migration project. Add a domain-level (or non-www) property in Search Console so we report on the host that actually ranks. Nothing else is needed.</p>
           <h3 class="sub-h">What to track</h3>
           <ul class="mini">
             <li>The map-grid tracker is loaded mostly with low-demand "near me" variants. Add the storage cluster (storage units near me, storage near me) so the largest local pool is visible, even though it stays a watch-only pack.</li>
@@ -281,7 +281,6 @@
             <tr><td class="area">Location pages &middot; rec</td><td>Give each location page its own asset layer: that location's Google reviews, real photos, map, hours, local phone, and a LocalBusiness entry</td><td>Adds the local elements the pages lack today (no map, hours, reviews widget, or LocalBusiness; all show the central number), so each page is unique and converts</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">Service coverage</td><td>Cover piano and the other niche services under Other Services</td><td>Fills real service gaps and matches the GBP</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">Operational</td><td>Add a domain-level (or non-www) Search Console property</td><td>Measures the host that actually ranks; ends the false "collapse"</td><td><span class="pri pri-med">Medium</span></td></tr>
-            <tr><td class="area">Operational</td><td>Confirm once that the old www host 301-redirects to non-www</td><td>One-time check, closes out the migration</td><td><span class="pri pri-low">Low</span></td></tr>
             <tr><td class="area">Tracking</td><td>Add the storage cluster to the map-grid tracker</td><td>Makes the largest local demand pool visible</td><td><span class="pri pri-low">Low</span></td></tr>
             <tr><td class="area">Tracking</td><td>Track the out-of-state and interstate cluster in an organic rank tracker</td><td>Sees the highest-value upside the map grid cannot</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">Tracking</td><td>Keep "movers" on the map-grid schedule</td><td>June re-scan confirmed it is the weakest tracked term on coverage; keep the number current</td><td><span class="pri pri-low">Low</span></td></tr>
