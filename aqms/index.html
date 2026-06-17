@@ -44,7 +44,7 @@
           <button class="tab-btn active" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
           <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">GA4 performance</span></button>
           <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
-          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Completed and upcoming</span></button>
+          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Our recommendations</span></button>
         </div>
 
         <hr class="divider" style="margin:18px 0">
@@ -231,30 +231,37 @@
 
         <!-- TAB 4: WORK PLAN -->
         <section data-panel="4" style="display:none">
+          <style>
+          .reclist{margin-top:6px;}
+          .reccat{border-top:1px solid var(--line);}
+          .reccat:first-child{border-top:0;}
+          .reccat__sum{list-style:none;cursor:pointer;display:flex;align-items:center;gap:9px;padding:12px 2px;font-family:var(--font-display);font-weight:700;font-size:.95rem;color:var(--ink);}
+          .reccat__sum::-webkit-details-marker{display:none;}
+          .reccat__sum::before{content:"\25B8";color:var(--violet);font-size:.72rem;transition:transform .18s;}
+          .reccat[open]>.reccat__sum::before{transform:rotate(90deg);}
+          .reccat__count{display:inline-block;font-family:var(--font-mono);font-size:.6rem;font-weight:700;color:var(--violet);background:rgba(91,75,208,0.1);border:1px solid rgba(91,75,208,0.3);padding:1px 6px;}
+          .reccat__body{padding:0 0 10px;}
+          .rectask{border-top:1px dashed var(--line);}
+          .rectask__sum{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 6px 9px 24px;}
+          .rectask__sum::-webkit-details-marker{display:none;}
+          .rectask__sum:hover{background:rgba(91,75,208,0.045);}
+          .rectask__name{font-family:var(--font-mono);font-size:.85rem;color:var(--ink-soft);line-height:1.4;}
+          .rectask__meta{display:inline-flex;align-items:center;gap:14px;flex:none;}
+          .rectask__why{font-family:var(--font-mono);font-size:.66rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--violet);white-space:nowrap;}
+          .rectask__why::after{content:" \25BE";}
+          .rectask[open]>.rectask__sum .rectask__why{color:var(--mint);}
+          .rectask[open]>.rectask__sum .rectask__why::after{content:" \25B4";}
+          .rectask__body{padding:2px 16px 12px 24px;font-family:var(--font-mono);font-size:.79rem;line-height:1.55;color:var(--muted);}
+          @media print{.reccat__body,.rectask__body{display:block !important;}}
+          </style>
+          <div class="notice notice--good notice__col" style="margin-bottom:16px">
+            <span class="tag tag--mint">The focus this quarter</span>
+            <p>The plan is built around the two highest-value local-search levers: the <strong>Google Business Profile</strong>, which drives most of the map-pack calls, and the <strong>service-page markup</strong>, since the pages are currently tagged in their code as blog posts and that holds back rich results. The existing-page depth and the measurement fix support those two. Open a group to see its tasks, and tap &ldquo;Why&rdquo; on any task for the reasoning.</p>
+          </div>
           <div class="notice notice__col" style="margin-bottom:16px">
             <span class="tag">Our recommendations &middot; from the custom strategy</span>
-            <table class="dt">
-              <thead><tr><th>Recommendation</th><th>Priority</th></tr></thead>
-              <tbody id="recommendations"></tbody>
-            </table>
-            <p class="chart-note">These come from the Q3 custom strategy, separate from the scheduled work. The Google Business Profile and service-page markup items are the highest-value, and the markup and map can fold into the existing service-page work.</p>
-          </div>
-          <div class="grid grid--2" style="gap:16px; align-items:start">
-            <div class="card">
-              <div class="cardhd" style="margin-bottom:10px">Completed &middot; last 3 months</div>
-              <table class="dt">
-                <thead><tr><th>Work delivered</th><th>When</th></tr></thead>
-                <tbody id="completed"></tbody>
-              </table>
-            </div>
-            <div class="card">
-              <div class="cardhd" style="margin-bottom:10px">In the pipeline &middot; June</div>
-              <table class="dt">
-                <thead><tr><th>Scheduled</th><th>When</th></tr></thead>
-                <tbody id="pipeline"></tbody>
-              </table>
-              <p class="chart-note">This is the work currently scheduled on the board. July continues on the same monthly schedule.</p>
-            </div>
+            <div id="recommendations" class="reclist"></div>
+            <p class="chart-note">These come from the Q3 custom strategy. The Google Business Profile and service-page markup items are the highest-value, and the markup and map can fold into the existing service-page work.</p>
           </div>
         </section>
 
@@ -285,26 +292,20 @@ var DATA = {
     {cat:'Info / Blog', n:32, before:55, after:70, urls:[['/blog/2022/april/moving-to-california-a-checklist',27,24],['/blog/2021/december/how-to-change-your-address',1,9],['/blog/2018/december/preserve-your-culture-when-moving',0,5]]},
   ],
   maps: [['moving company near me','3.1','71%'],['local movers','4.0','49%'],['packing and storage','3.8','49% (gaining)']],
-  completed: [
-    {cat:'Reporting', items:[['Monthly performance report','Mar-May']]},
-    {cat:'Website & technical', items:[['New website content migrated & uploaded','May'],['Duplicate pages fixed & consolidated','May'],['Analytics & tracking audit','Mar'],['Indexing & technical audit','Mar']]},
-    {cat:'Service pages revamped', items:[['International Movers','Apr'],['Office Moving Services','May'],['Commercial Movers (SoCal)','May']]},
-    {cat:'Location pages published', items:[['Mint Canyon','Apr'],['Pico Canyon','Apr'],['Val Verde','Apr'],['Bouquet Junction','Apr'],['Forest Park','Apr'],['Hasley Canyon','May'],['Fair Oaks Ranch','May'],['Copper Hill','May'],['Skyline Ranch','May'],['Las Cantilles','May'],['Tesoro del Valle','May'],['River Village','May'],['Plum Canyon','May'],['Northbridge','Jun'],['Northpark','Jun'],['Central Park Area','Jun']]},
-    {cat:'Blog articles published', items:[['Hidden Costs When Hiring Movers','Apr'],['Essential Moving Checklist','Apr'],['How Much Does a Local Move Cost','Apr'],['Top 10 Packing Tips','Apr'],['Full-Service Moving vs DIY','Apr'],['What Furniture Is Not Worth Moving','Apr'],['Organize Packing Boxes','Apr'],['Items to Pack When Moving Abroad','Apr'],['Questions to Ask Movers','Apr'],['Choosing an International Mover','Apr'],['Documents for a Local Move','May'],['Seasonal Moving Tips','May'],['Moving Large or Fragile Items','May'],['Checklist for a New Home','May'],['How to Save Money on Your Move','May'],['Best Time to Move in Santa Clarita','Jun'],['Comparing Moving Companies in Santa Clarita','Jun'],['Long-Distance Moving from Santa Clarita','Jun'],['Moving Insurance: What You Need','Jun'],['Top Neighborhoods in Santa Clarita','Jun']]},
-    {cat:'Local presence', items:[['Custom Local Placements','Mar-Jun']]},
-  ],
-  pipeline: [
-    {cat:'Reporting', items:[['Monthly performance report','Jun']]},
-    {cat:'Technical', items:[['6-month indexing & technical audit','Jun']]},
-    {cat:'Service pages', items:[['Moving Help in Santa Clarita (in progress)','Jun'],['Service page batch','Jun']]},
-    {cat:'Location pages', items:[['Suburb pages x3','Jun']]},
-    {cat:'Local presence', items:[['Custom Local Placements','Jun']]},
-  ],
   recommendations: [
-    {cat:'Google Business Profile', items:[['Confirm the primary category is "Mover" (the single biggest map ranking lever)','High'],['Add "Piano moving service" as a category','High'],['Fill the missing profile attributes (online estimates, appointments, payments)','High'],['Tidy and complete the services list','Medium']]},
-    {cat:'Service-page markup', items:[['Mark the 9 service pages up as services, not blog posts','High'],['Add FAQ and breadcrumb markup','Medium']]},
-    {cat:'Existing pages', items:[['Strengthen the out-of-state moving page (its strongest organic page)','Medium'],['Add a Google map of the business to the 9 service pages','Medium']]},
-    {cat:'Measurement', items:[['Add a Search Console property for the live (non-www) address','Medium']]},
+    {cat:'Google Business Profile', items:[
+      ['Confirm the primary category is "Mover"','High','The primary category is the single biggest lever for map-pack ranking. The live profile shows "Mover", but the services tab carried a "Removals company" label, so this is a quick check that the primary did not change.'],
+      ['Add "Piano moving service" as a category','High','Every competitor that currently outranks AQMS for piano moves carries this secondary category and AQMS does not. AQMS already offers piano moving, so adding it is a no-cost relevance gain.'],
+      ['Fill the missing profile attributes (online estimates, appointments, payments)','High','Rival profiles list these attributes and the AQMS profile does not. They show right in the profile and help a searcher choose AQMS before they even click through.'],
+      ['Tidy and complete the services list','Medium','A clean, complete services list is a clearer relevance signal to Google and a clearer menu for searchers. It also drops the duplicate and filler entries that dilute the list today.']]},
+    {cat:'Service-page markup', items:[
+      ['Mark the 9 service pages up as services, not blog posts','High','The nine service pages are tagged in their code as blog articles, which tells Google they are articles rather than services and forfeits rich-result eligibility. Switching to Service markup fixes the signal without changing anything a visitor sees.'],
+      ['Add FAQ and breadcrumb markup','Medium','FAQ and breadcrumb markup make the pages eligible for richer listings (expandable questions and a breadcrumb trail), which earns more space and more clicks on the results page.']]},
+    {cat:'Existing pages', items:[
+      ['Strengthen the out-of-state moving page (its strongest organic page)','Medium','This single page already carries the widest organic footprint of any AQMS page. Page one for the money terms is locked by national directories, so the realistic win is harvesting the long-tail and near-me variants on the page that already ranks.'],
+      ['Add a Google map of the business to the 9 service pages','Medium','The service pages have no map today while every competitor page shows one. The map is a trust, contact, and location signal that helps one consolidated page earn its local intent.']]},
+    {cat:'Measurement', items:[
+      ['Add a Search Console property for the live (non-www) address','Medium','The current Search Console property tracks the old www address, which Google is dropping, so it reports a false collapse. A property for the live non-www address measures the host that actually ranks.']]},
   ],
 };
 
@@ -335,13 +336,16 @@ document.getElementById('maps').innerHTML = DATA.maps.map(function (row) {
   return '<tr><td>' + row[0] + '</td><td>' + row[1] + '</td><td>' + row[2] + '</td></tr>';
 }).join('');
 
-// tab 4 grouped work tables (from Asana)
+// tab 4 recommendations: collapsible categories + per-task "why" dropdown
+function priCls(p){ return p === 'High' ? 'pri-high' : p === 'Medium' ? 'pri-med' : 'pri-low'; }
 function grpRows(g) {
-  return '<tr class="catrow"><td>' + g.cat + '<span class="badge">' + g.items.length + '</span></td><td></td></tr>' +
-    g.items.map(function (it) { return '<tr class="itemrow"><td>' + it[0] + '</td><td>' + it[1] + '</td></tr>'; }).join('');
+  return '<details class="reccat"><summary class="reccat__sum"><span class="reccat__name">' + g.cat + '</span><span class="reccat__count">' + g.items.length + '</span></summary><div class="reccat__body">' +
+    g.items.map(function (it) {
+      return '<details class="rectask"><summary class="rectask__sum"><span class="rectask__name">' + it[0] + '</span>' +
+        '<span class="rectask__meta"><span class="rectask__why">Why</span><span class="pri ' + priCls(it[1]) + '">' + it[1] + '</span></span></summary>' +
+        '<div class="rectask__body">' + (it[2] || '') + '</div></details>';
+    }).join('') + '</div></details>';
 }
-document.getElementById('completed').innerHTML = DATA.completed.map(grpRows).join('');
-document.getElementById('pipeline').innerHTML = DATA.pipeline.map(grpRows).join('');
 document.getElementById('recommendations').innerHTML = DATA.recommendations.map(grpRows).join('');
 
 // charts
