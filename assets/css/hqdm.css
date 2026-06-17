@@ -905,3 +905,22 @@ table.dt tr.tot td { font-weight: 800; color: var(--ink); border-top: 1px solid 
 .tfilter__reset:hover { color: var(--violet); }
 .tfilter__count { margin-left: auto; align-self: center; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
 @media (max-width: 560px) { .tfilter { gap: 10px; } .tfilter__field, .tfilter__sel { min-width: 0; flex: 1 1 42%; } }
+
+/* ---------- "Save PNG" export button (injected on every chart / map / graphic card) ---------- */
+.pngbar { display: flex; justify-content: flex-end; margin: 0 0 9px; }
+.pngbtn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  padding: 3px 9px; color: var(--ink-soft); background: var(--face);
+  border: 1px solid; border-color: var(--b-light) var(--b-dark) var(--b-dark) var(--b-light);
+  box-shadow: inset -1px -1px 0 var(--b-lo), inset 1px 1px 0 var(--b-hi);
+  transition: filter 0.12s;
+}
+.pngbtn:hover { filter: brightness(1.04); color: var(--violet); }
+.pngbtn:active { border-color: var(--b-dark) var(--b-light) var(--b-light) var(--b-dark);
+  box-shadow: inset 1px 1px 0 var(--b-lo), inset -1px -1px 0 var(--b-hi); transform: translateY(1px); }
+.pngbtn svg { width: 13px; height: 13px; flex: none; }
+.pngbtn[disabled] { opacity: 0.6; cursor: default; }
+/* when dropped into a chart's title row, push it to the far right */
+.chart-head .pngbtn { margin-left: auto; align-self: center; }

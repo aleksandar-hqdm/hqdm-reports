@@ -428,4 +428,132 @@
     }
     if (document.body) inject(); else document.addEventListener('DOMContentLoaded', inject);
   })();
+
+  /* ---------- save any chart / map / graphic as a PNG (every report, no per-page work) ----------
+     Injects a small "PNG" button onto each chart card and each map/graphic card, lazy-loads
+     html2canvas from the same /assets/js/ folder on first click, and downloads a white-background
+     PNG of that card (with a small client + period + HQDM footer added only to the saved image). */
+  (function initPng() {
+    var DL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="M7.5 10l4.5 4.5 4.5-4.5"/><path d="M5 20h14"/></svg>';
+
+    // lazy-load html2canvas from wherever report.js itself was loaded from
+    var h2cP = null;
+    function assetBase() {
+      var s = document.querySelector('script[src*="report.js"]');
+      var src = s ? s.getAttribute('src') : '';
+      return src ? src.replace(/report\.js(?:\?.*)?$/, '') : '../assets/js/';
+    }
+    function loadH2C() {
+      if (window.html2canvas) return Promise.resolve(window.html2canvas);
+      if (h2cP) return h2cP;
+      h2cP = new Promise(function (resolve, reject) {
+        var sc = document.createElement('script');
+        sc.src = assetBase() + 'html2canvas.min.js';
+        sc.onload = function () { window.html2canvas ? resolve(window.html2canvas) : reject(new Error('html2canvas missing')); };
+        sc.onerror = function () { reject(new Error('html2canvas failed to load')); };
+        document.head.appendChild(sc);
+      });
+      return h2cP;
+    }
+
+    function slugify(s) { return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || 'graphic'; }
+    function clientSlug() { return (location.pathname.split('/').filter(Boolean)[0] || 'report').toLowerCase(); }
+    function titleOf(card) {
+      var t = card.querySelector('.chart-head h3, .cardhd, .hmsub, h3');
+      var s = t ? t.textContent.trim() : 'graphic';
+      return s.split('·')[0].trim() || s; // drop trailing " · subtitle/stat" so filenames stay clean
+    }
+    function pageMeta() {
+      var h = document.querySelector('h1.display');
+      var pill = document.querySelector('.pill');
+      return { name: h ? h.textContent.trim() : '', period: pill ? pill.textContent.replace(/\s+/g, ' ').trim() : '' };
+    }
+    function downloadCanvas(canvas, fname) {
+      if (canvas.toBlob) {
+        canvas.toBlob(function (blob) {
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a'); a.href = url; a.download = fname;
+          document.body.appendChild(a); a.click(); a.remove();
+          setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+        }, 'image/png');
+      } else {
+        var a2 = document.createElement('a'); a2.href = canvas.toDataURL('image/png'); a2.download = fname;
+        document.body.appendChild(a2); a2.click(); a2.remove();
+      }
+    }
+
+    function setLabel(btn, text, restore) {
+      if (!btn._lbl) btn._lbl = btn.innerHTML;
+      btn.innerHTML = DL + '<span>' + text + '</span>';
+      if (restore) setTimeout(function () { btn.innerHTML = btn._lbl; btn.disabled = false; }, restore);
+    }
+
+    function capture(btn) {
+      var card = btn.closest('.chart-card, .card');
+      if (!card || btn.disabled) return;
+      btn.disabled = true; setLabel(btn, 'Saving');
+      var fname = clientSlug() + '-' + slugify(titleOf(card)) + '.png';
+      var m = pageMeta();
+      var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+      Promise.all([loadH2C(), fontsReady]).then(function (res) {
+        var html2canvas = res[0];
+        card.setAttribute('data-png-target', '1');
+        return html2canvas(card, {
+          backgroundColor: '#ffffff',
+          scale: Math.min(3, Math.max(2, window.devicePixelRatio || 1)),
+          useCORS: true, logging: false,
+          ignoreElements: function (el) { return !!(el.classList && el.classList.contains('no-print')); },
+          onclone: function (doc) {
+            try {
+              var c = doc.querySelector('[data-png-target="1"]');
+              if (c && (m.name || m.period)) {
+                var f = doc.createElement('div');
+                f.style.cssText = 'margin-top:14px;padding-top:10px;border-top:1px solid #B7BCC4;' +
+                  "font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.03em;color:#5C636E;";
+                f.textContent = [m.name, m.period, 'HQDM Search Intelligence'].filter(Boolean).join('   ·   ');
+                c.appendChild(f);
+              }
+            } catch (e) {}
+          }
+        });
+      }).then(function (canvas) {
+        card.removeAttribute('data-png-target');
+        downloadCanvas(canvas, fname);
+        btn.disabled = false; setLabel(btn, 'Saved', 1600);
+      }).catch(function () {
+        card.removeAttribute('data-png-target');
+        btn.disabled = false; setLabel(btn, 'Retry', 2200);
+      });
+    }
+
+    function makeBtn() {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'pngbtn no-print';
+      b.title = 'Save this as a PNG image'; b.setAttribute('aria-label', 'Save as PNG');
+      b.innerHTML = DL + '<span>PNG</span>';
+      b.addEventListener('click', function () { capture(b); });
+      return b;
+    }
+    function addBar(card) {
+      var bar = document.createElement('div'); bar.className = 'pngbar no-print';
+      bar.appendChild(makeBtn()); card.insertBefore(bar, card.firstChild);
+    }
+
+    function inject() {
+      // chart cards: drop the button into the existing title row when there is one
+      [].forEach.call(document.querySelectorAll('.chart-card'), function (card) {
+        if (card.querySelector('.pngbtn')) return;
+        var head = card.querySelector('.chart-head');
+        if (head) head.appendChild(makeBtn()); else addBar(card);
+      });
+      // map / graphic cards: any card holding a heatmap grid that is not already a chart card
+      [].forEach.call(document.querySelectorAll('.card'), function (card) {
+        if (card.classList.contains('chart-card') || card.querySelector('.pngbtn')) return;
+        if (!card.querySelector('.hm')) return;
+        addBar(card);
+      });
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', inject); else inject();
+  })();
 })();
