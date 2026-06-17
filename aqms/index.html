@@ -114,22 +114,81 @@
 
         <!-- TAB 3: MAP PRESENCE -->
         <section data-panel="3" style="display:none">
+          <style>
+          .hmlegend{display:flex;flex-wrap:wrap;align-items:center;gap:11px;margin:0 0 11px;font-family:var(--font-mono);font-size:.64rem;color:var(--ink-soft);}
+          .hmlegend span{display:inline-flex;align-items:center;gap:5px;}
+          .hmlegend i{width:11px;height:11px;display:inline-block;border:1px solid rgba(0,0,0,0.18);}
+          .hmlegend .hmmonth{margin-left:auto;font-family:var(--font-display);font-weight:700;font-size:.82rem;color:var(--ink);}
+          .hm{display:grid;gap:1px;margin-bottom:8px;}
+          .hmcell{aspect-ratio:1/1;border-radius:1px;background:#D7DAE0;transition:background-color .8s ease;}
+          .hmcell.ctr{box-shadow:0 0 0 2px var(--ink);position:relative;z-index:1;}
+          .hmsub{font-family:var(--font-mono);font-size:.62rem;color:var(--muted);margin:0 0 9px;line-height:1.3;}
+          .hmmo{font-style:italic;font-family:var(--font-mono);font-size:.68rem;color:var(--ink-soft);text-align:center;margin:5px 0 2px;}
+          @media (prefers-reduced-motion:reduce){.hmcell{transition:none;}}
+          </style>
           <div class="cardhd" style="margin-bottom:10px">Three-month map momentum &middot; March to May</div>
-          <div class="grid grid--3" style="gap:12px; margin-bottom:16px">
+          <div class="hmlegend">
+            <span><i style="background:#079A6B"></i> Top 3</span>
+            <span><i style="background:#C77B05"></i> 4 to 10</span>
+            <span><i style="background:#D6456A"></i> 11 to 20</span>
+            <span><i style="background:#D7DAE0"></i> Not in top 20</span>
+            <span><i style="box-shadow:0 0 0 2px var(--ink) inset; background:transparent"></i> The office</span>
+          </div>
+          <div class="grid grid--3" style="gap:12px; margin-bottom:10px">
             <div class="card">
+              <div class="hm" id="hmGrid0"></div>
+              <div class="hmmo" id="hmMo0"></div>
+              <div class="hmsub" id="hmSub0"></div>
               <div class="stat__num">511 <span class="muted">&rarr;</span> 557</div>
               <p class="small" style="color:var(--ink-soft); margin-top:6px">Combined top-3 map spots across tracked searches (March to May, +46). The next-closest mover, J&amp;G Full Service Moving, sits at 348 and has been climbing fast.</p>
             </div>
             <div class="card">
+              <div class="hm" id="hmGrid1"></div>
+              <div class="hmmo" id="hmMo1"></div>
+              <div class="hmsub" id="hmSub1"></div>
               <div class="stat__num">77 <span class="muted">&rarr;</span> 91</div>
               <p class="small" style="color:var(--ink-soft); margin-top:6px">Top-3 map spots for <strong>moving company</strong> since March (+14).</p>
             </div>
             <div class="card">
+              <div class="hm" id="hmGrid2"></div>
+              <div class="hmmo" id="hmMo2"></div>
+              <div class="hmsub" id="hmSub2"></div>
               <div class="stat__num">60 <span class="muted">&rarr;</span> 70</div>
               <p class="small" style="color:var(--ink-soft); margin-top:6px">Top-3 map spots for <strong>packing and storage</strong> since March (+10), the clearest gainer.</p>
             </div>
           </div>
-          <p class="chart-note" style="margin-bottom:16px">Each map spot is a point on the grid around the business where AQMS shows in the top 3 for that search. More spots means winning the map across a wider area.</p>
+          <p class="chart-note" style="margin-bottom:16px">Each square is a point on the grid around the office, colored by where AQMS ranks for that search from that spot, with the office outlined at the center. The map animates across the last three scans (Local Dominator, March to May) so you can watch the footprint grow. Card one shows the flagship search, &ldquo;moving company near me&rdquo;.</p>
+          <script>
+          (function(){
+            var SQ={"moving company near me": {"months": [{"label": "March", "grid": [[3, 4, 4, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1], [6, 6, 5, 2, 2, 2, 2, 1, 1, 1, 2, 1, 1], [4, 2, 5, 3, 2, 2, 2, 1, 1, 2, 2, 3, 2], [2, 2, 3, 3, 4, 4, 1, 1, 1, 2, 2, 3, 3], [2, 2, 3, 3, 3, 4, 1, 1, 2, 2, 2, 2, 2], [1, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2, 2, 2], [1, 1, 1, 1, 2, 2, 1, 2, 2, 1, 2, 2, 2], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10], [3, 16, 2, 2, 2, 1, 1, 1, 2, 5, 5, 17, 10], [19, 16, 18, 18, 2, 11, 10, 10, 2, 19, 19, 17, null]], "avg": 2.89}, {"label": "April", "grid": [[3, 5, 5, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1], [5, 5, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1], [4, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1], [3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 2, 1, 1], [3, 3, 3, 3, 3, 2, 1, 1, 1, 1, 2, 2, 2], [2, 3, 3, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2], [2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10], [1, 12, 1, 1, 1, 1, 1, 1, 7, 4, 4, 15, 10], [17, 12, 16, 16, 1, 6, 6, 6, 7, 18, 18, 15, null]], "avg": 2.54}, {"label": "May", "grid": [[2, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [5, 5, 3, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1], [4, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1], [3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 2, 1, 1], [3, 3, 3, 3, 3, 2, 1, 1, 1, 1, 2, 2, 2], [2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2], [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6], [2, 10, 1, 1, 1, 1, 1, 1, 6, 4, 4, 12, 6], [15, 10, 16, 16, 1, 5, 4, 4, 6, 15, 15, 12, 17]], "avg": 2.33}], "office": [6, 6]}, "moving company": {"months": [{"label": "March", "grid": [[6, 5, 5, 5, 2, 2, 2, 2, 2, 2, 2, 2, 1], [6, 6, 6, 5, 5, 2, 4, 4, 2, 2, 3, 1, 1], [6, 6, 6, 5, 2, 2, 4, 4, 4, 4, 3, 4, 3], [6, 6, 4, 5, 4, 4, 4, 2, 2, 4, 2, 4, 4], [6, 6, 4, 3, 3, 4, 1, 2, 1, 1, 2, 4, 4], [5, 2, 2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 3], [5, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 3], [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 11], [1, 16, 1, 1, 2, 1, 1, 1, null, 9, 9, null, 11], [19, 16, null, null, 2, 20, null, null, null, null, null, null, null]], "avg": 2.85}, {"label": "April", "grid": [[6, 6, 6, 5, 4, 4, 2, 2, 2, 2, 2, 2, 1], [6, 6, 6, 5, 5, 5, 3, 3, 2, 2, 2, 1, 1], [5, 5, 6, 5, 5, 5, 3, 3, 3, 4, 2, 3, 2], [5, 5, 4, 5, 3, 3, 3, 2, 2, 4, 2, 3, 3], [6, 6, 4, 3, 3, 3, 1, 2, 1, 1, 2, 2, 2], [5, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2], [5, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2], [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 9], [1, 18, 1, 1, 1, 1, 1, 1, null, 10, 10, null, 9], [19, 18, null, null, 1, null, null, null, null, null, null, null, null]], "avg": 2.68}, {"label": "May", "grid": [[5, 5, 5, 4, 2, 2, 2, 2, 2, 2, 1, 1, 1], [6, 6, 4, 4, 4, 5, 3, 3, 2, 2, 1, 1, 1], [5, 5, 4, 5, 5, 5, 3, 3, 3, 1, 1, 2, 1], [5, 5, 4, 5, 3, 3, 3, 1, 1, 1, 1, 2, 2], [4, 4, 4, 3, 3, 3, 1, 1, 1, 1, 1, 2, 2], [4, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2], [4, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 10], [1, 11, 1, 1, 1, 1, 1, 1, 10, 5, 5, 17, 10], [12, 11, 18, 18, 1, 11, 14, 14, 10, null, null, 17, null]], "avg": 2.88}], "office": [6, 6]}, "packing and storage": {"months": [{"label": "March", "grid": [[7, 11, 11, 6, 4, 4, 2, 1, 1, 1, 4, 4, 4], [9, 9, 10, 6, 6, 5, 1, 1, 1, 1, 2, 5, 5], [9, 7, 10, 6, 5, 5, 1, 1, 1, 5, 2, 5, 9], [7, 7, 4, 6, 3, 3, 1, 3, 3, 5, 3, 5, 5], [6, 6, 4, 3, 3, 3, 1, 3, 3, 3, 3, 8, 8], [5, 2, 2, 1, 2, 2, 1, 1, 1, 2, 1, 1, 10], [5, 1, 1, 1, 2, 2, 1, 1, 1, 2, 5, 5, 10], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 7], [1, 1, 1, 1, 1, 2, 1, 3, 1, 1, 2, 2, 2], [1, 1, 1, 1, 1, 2, 3, 3, 1, 1, 1, 2, 2], [1, 1, 1, 1, 1, 2, 7, 7, 5, 5, 4, 4, 18], [1, 12, 1, 1, 3, 2, 7, 7, 17, 17, 17, null, 18], [20, 12, null, null, 3, 12, 16, 16, 17, null, null, null, null]], "avg": 4.23}, {"label": "April", "grid": [[9, 11, 11, 8, 6, 6, 2, 2, 2, 1, 1, 1, 4], [11, 11, 10, 8, 8, 6, 2, 2, 1, 1, 2, 3, 3], [10, 7, 10, 8, 6, 6, 2, 2, 2, 5, 2, 4, 7], [7, 7, 4, 8, 5, 5, 2, 1, 1, 5, 2, 4, 4], [8, 8, 4, 3, 3, 5, 1, 1, 2, 2, 2, 7, 7], [4, 2, 2, 1, 2, 2, 1, 1, 1, 1, 2, 2, 11], [4, 1, 1, 1, 2, 2, 1, 1, 1, 1, 5, 5, 11], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 6], [1, 1, 1, 1, 1, 5, 1, 5, 1, 1, 2, 2, 2], [1, 1, 3, 3, 1, 5, 5, 5, 1, 2, 2, 2, 2], [2, 2, 2, 5, 5, 4, 9, 9, 5, 5, 3, 3, 17], [2, 12, 5, 5, 4, 4, 9, 9, null, 16, 16, null, 17], [19, 12, null, null, 4, 18, null, null, null, null, null, null, null]], "avg": 4.34}, {"label": "May", "grid": [[7, 10, 10, 6, 2, 2, 2, 2, 2, 1, 1, 1, 4], [8, 8, 7, 6, 6, 3, 3, 1, 1, 1, 1, 1, 1], [7, 6, 7, 6, 3, 3, 3, 1, 1, 1, 1, 1, 2], [6, 6, 3, 6, 3, 3, 1, 1, 1, 1, 1, 1, 1], [5, 5, 3, 3, 3, 3, 1, 1, 1, 1, 1, 3, 3], [4, 2, 2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 4], [4, 1, 1, 1, 2, 2, 1, 1, 1, 1, 3, 3, 4], [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3], [1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 2], [1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 2, 2], [1, 2, 2, 4, 4, 4, 6, 6, 4, 4, 2, 2, 14], [1, 9, 3, 3, 3, 4, 6, 6, 17, 13, 13, null, 14], [18, 9, 18, 18, 3, 12, 14, 14, 17, null, null, null, null]], "avg": 3.53}], "office": [6, 6]}};
+            var cards=[{kw:"moving company near me",label:"moving company near me"},{kw:"moving company",label:"moving company"},{kw:"packing and storage",label:"packing and storage"}];
+            function color(r){return r==null?'#D7DAE0':(r<=3?'#079A6B':(r<=10?'#C77B05':'#D6456A'));}
+            var built=cards.map(function(c,idx){
+              var d=SQ[c.kw]; if(!d) return null;
+              var ny=d.months[0].grid.length,nx=d.months[0].grid[0].length,ox=d.office[0],oy=d.office[1];
+              var hm=document.getElementById('hmGrid'+idx); if(!hm) return null;
+              hm.style.gridTemplateColumns='repeat('+nx+',1fr)';
+              var cells=[];
+              for(var y=0;y<ny;y++){for(var x=0;x<nx;x++){var el=document.createElement('div');el.className='hmcell'+((x===ox&&y===oy)?' ctr':'');hm.appendChild(el);cells.push(el);}}
+              return {d:d,cells:cells,nx:nx,ny:ny,sub:document.getElementById('hmSub'+idx),mo:document.getElementById('hmMo'+idx),label:c.label};
+            }).filter(Boolean);
+            if(!built.length) return;
+            function render(mi){
+              built.forEach(function(b){
+                var m=b.d.months[mi],g=m.grid,k=0;
+                for(var y=0;y<b.ny;y++){for(var x=0;x<b.nx;x++){b.cells[k++].style.background=color(g[y][x]);}}
+                if(b.mo) b.mo.textContent=m.label+' 2026';
+                if(b.sub) b.sub.textContent=b.label+' · avg rank '+(m.avg!=null?m.avg:'-');
+              });
+            }
+            var n=built[0].d.months.length;
+            if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches){render(n-1);return;}
+            var i=0;render(0);
+            var paused=false,sec=document.querySelector('section[data-panel="3"]');
+            setInterval(function(){if(paused)return;i=(i+1)%n;render(i);},2600);
+            if(sec){sec.addEventListener('mouseenter',function(){paused=true;});sec.addEventListener('mouseleave',function(){paused=false;});}
+          })();
+          </script>
 
           <div class="notice notice--warn notice__col" style="margin-bottom:16px">
             <span class="tag tag--amber">Why Google Maps matters most here</span>
