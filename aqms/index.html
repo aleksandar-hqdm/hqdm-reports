@@ -184,9 +184,7 @@
             var n=built[0].d.months.length;
             if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches){render(n-1);return;}
             var i=0;render(0);
-            var paused=false,sec=document.querySelector('section[data-panel="3"]');
-            setInterval(function(){if(paused)return;i=(i+1)%n;render(i);},2600);
-            if(sec){sec.addEventListener('mouseenter',function(){paused=true;});sec.addEventListener('mouseleave',function(){paused=false;});}
+            setInterval(function(){i=(i+1)%n;render(i);},2600);
           })();
           </script>
 
