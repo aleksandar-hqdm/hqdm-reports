@@ -44,7 +44,7 @@
           <button class="tab-btn active" data-tab="1" onclick="showTab(1)"><span class="t">Lead Generation</span><span class="s">Overall</span></button>
           <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Website Traffic</span><span class="s">GA4 performance</span></button>
           <button class="tab-btn" data-tab="3" onclick="showTab(3)"><span class="t">Map Presence</span><span class="s">Google Maps visibility</span></button>
-          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Completed and upcoming</span></button>
+          <button class="tab-btn" data-tab="4" onclick="showTab(4)"><span class="t">Work Plan</span><span class="s">Our recommendations</span></button>
         </div>
 
         <hr class="divider" style="margin:18px 0">
@@ -117,22 +117,71 @@
 
         <!-- TAB 3: MAP PRESENCE -->
         <section data-panel="3" style="display:none">
-          <div class="cardhd" style="margin-bottom:10px">Six-month map momentum</div>
-          <div class="grid grid--3" style="gap:12px; margin-bottom:12px">
+          <style>
+          .hmlegend{display:flex;flex-wrap:wrap;align-items:center;gap:11px;margin:0 0 11px;font-family:var(--font-mono);font-size:.64rem;color:var(--ink-soft);}
+          .hmlegend span{display:inline-flex;align-items:center;gap:5px;}
+          .hmlegend i{width:11px;height:11px;display:inline-block;border:1px solid rgba(0,0,0,0.18);}
+          .hm{display:grid;gap:2px;margin-bottom:8px;}
+          .hmcell{aspect-ratio:1/1;border-radius:1px;background:#D7DAE0;transition:background-color .8s ease;}
+          .hmcell.ctr{box-shadow:0 0 0 2px var(--ink);position:relative;z-index:1;}
+          .hmsub{font-family:var(--font-mono);font-size:.62rem;color:var(--muted);margin:0 0 9px;line-height:1.3;}
+          .hmmo{font-style:italic;font-family:var(--font-mono);font-size:.68rem;color:var(--ink-soft);text-align:center;margin:5px 0 2px;}
+          @media (prefers-reduced-motion:reduce){.hmcell{transition:none;}}
+          </style>
+          <div class="cardhd" style="margin-bottom:10px">Six-month map momentum &middot; November to May</div>
+          <div class="hmlegend">
+            <span><i style="background:#079A6B"></i> Top 3</span>
+            <span><i style="background:#C77B05"></i> 4 to 10</span>
+            <span><i style="background:#D6456A"></i> 11 to 20</span>
+            <span><i style="background:#D7DAE0"></i> Not in top 20</span>
+            <span><i style="box-shadow:0 0 0 2px var(--ink) inset; background:transparent"></i> The clinic</span>
+          </div>
+          <div class="grid grid--2" style="gap:16px; margin:0 auto 10px; max-width:720px">
             <div class="card">
-              <div style="font-family:var(--font-display); font-weight:700; font-size:1.5rem; color:var(--ink); line-height:1.1">18 <span class="muted">&rarr;</span> 47</div>
+              <div class="hm" id="hmGrid0"></div>
+              <div class="hmmo" id="hmMo0"></div>
+              <div class="hmsub" id="hmSub0"></div>
+              <div class="stat__num">18 <span class="muted">&rarr;</span> 47</div>
               <p class="small" style="color:var(--ink-soft); margin-top:6px">Top-3 map spots for <strong>deep tissue massage</strong> since November (+29). The nearest competitor sits at 25.</p>
             </div>
             <div class="card">
-              <div style="font-family:var(--font-display); font-weight:700; font-size:1.5rem; color:var(--ink); line-height:1.1">35 <span class="muted">&rarr;</span> 64</div>
-              <p class="small" style="color:var(--ink-soft); margin-top:6px">Combined top-3 map spots across your tracked services over six months (+29).</p>
-            </div>
-            <div class="card">
-              <div style="font-family:var(--font-display); font-weight:700; font-size:1.5rem; color:var(--ink); line-height:1.1">3 <span class="muted">&rarr;</span> 20</div>
-              <p class="small" style="color:var(--ink-soft); margin-top:6px">Top-3 map spots for <strong>massage therapy</strong> since October (+17), built from near zero.</p>
+              <div class="hm" id="hmGrid1"></div>
+              <div class="hmmo" id="hmMo1"></div>
+              <div class="hmsub" id="hmSub1"></div>
+              <div class="stat__num">3 <span class="muted">&rarr;</span> 20</div>
+              <p class="small" style="color:var(--ink-soft); margin-top:6px">Top-3 map spots for <strong>massage therapy</strong> since November (+17), built from near zero.</p>
             </div>
           </div>
-          <p class="chart-note" style="margin-bottom:16px">Each map spot is a point on the grid around the clinic where you show in the top 3 for that search. More spots means winning the map across a wider area.</p>
+          <p class="chart-note" style="margin-bottom:16px">Each square is a point on the grid around the clinic, colored by where Deep Relief ranks from that spot, zoomed in to the core service area. The map animates between the first scan (November) and the latest (May) so you can watch the footprint grow. The first card is your strongest service, deep tissue; the second is massage therapy near me.</p>
+          <script>
+          (function(){
+            var SQ={"deep tissue massage":{"months":[{"label":"Nov 2025","grid":[[null,10,7,17,17,15,20,null,null,null],[7,12,3,9,3,13,14,12,null,null],[8,3,3,5,5,2,6,7,8,4],[5,6,3,2,3,null,5,3,7,18],[7,8,4,4,2,2,1,5,11,null],[8,8,4,4,3,4,2,8,13,null],[7,2,2,6,2,20,6,null,13,null],[null,8,6,3,11,7,13,null,null,null],[null,null,7,7,10,13,null,null,null,null],[null,null,10,14,18,null,null,null,null,null]],"avg":7.6},{"label":"May 2026","grid":[[null,7,1,14,6,8,14,11,null,null],[3,5,1,3,1,6,4,5,20,null],[2,1,1,1,1,1,1,1,1,2],[2,1,1,1,2,null,1,2,1,3],[6,2,1,2,1,1,1,4,2,4],[7,3,1,1,1,1,1,1,3,7],[6,3,1,2,1,5,1,null,6,null],[null,7,3,1,4,1,4,4,15,20],[null,null,6,4,6,8,null,12,null,null],[null,null,6,5,11,13,null,17,null,null]],"avg":4.4}],"office":[6,4]},"massage therapy near me":{"months":[{"label":"Nov 2025","grid":[[null,9,7,16,8,8,16,null,null,null],[7,11,4,7,6,5,10,11,null,null],[8,7,5,4,4,4,6,8,13,18],[6,5,6,4,4,null,5,4,11,null],[8,5,5,5,4,3,1,5,13,null],[11,7,5,5,5,5,2,8,14,null],[10,6,6,7,6,12,7,null,null,null],[null,8,8,9,12,6,10,15,17,null],[null,null,7,9,11,12,null,20,null,null],[null,null,10,11,12,19,null,null,null,null]],"avg":8.2},{"label":"May 2026","grid":[[null,10,3,null,5,7,10,10,null,null],[8,12,2,4,3,5,4,6,null,null],[9,4,4,3,4,4,5,5,7,5],[5,5,3,2,3,null,4,3,5,9],[10,6,4,3,1,1,1,5,6,15],[17,8,4,2,2,3,2,5,9,14],[15,8,6,3,1,7,4,null,11,null],[null,10,13,6,3,2,4,9,15,null],[null,null,8,9,4,4,null,11,null,null],[null,null,7,5,4,11,null,17,null,null]],"avg":6.2}],"office":[6,4]}};
+            var cards=[{kw:"deep tissue massage",label:"deep tissue massage"},{kw:"massage therapy near me",label:"massage therapy near me"}];
+            function color(r){return r==null?'#D7DAE0':(r<=3?'#079A6B':(r<=10?'#C77B05':'#D6456A'));}
+            var built=cards.map(function(c,idx){
+              var d=SQ[c.kw]; if(!d) return null;
+              var ny=d.months[0].grid.length,nx=d.months[0].grid[0].length,ox=d.office[0],oy=d.office[1];
+              var hm=document.getElementById('hmGrid'+idx); if(!hm) return null;
+              hm.style.gridTemplateColumns='repeat('+nx+',1fr)';
+              var cells=[];
+              for(var y=0;y<ny;y++){for(var x=0;x<nx;x++){var el=document.createElement('div');el.className='hmcell'+((x===ox&&y===oy)?' ctr':'');hm.appendChild(el);cells.push(el);}}
+              return {d:d,cells:cells,nx:nx,ny:ny,sub:document.getElementById('hmSub'+idx),mo:document.getElementById('hmMo'+idx),label:c.label};
+            }).filter(Boolean);
+            if(!built.length) return;
+            function render(mi){
+              built.forEach(function(b){
+                var m=b.d.months[mi],g=m.grid,k=0;
+                for(var y=0;y<b.ny;y++){for(var x=0;x<b.nx;x++){b.cells[k++].style.background=color(g[y][x]);}}
+                if(b.mo) b.mo.textContent=m.label;
+                if(b.sub) b.sub.textContent=b.label+' · avg rank '+(m.avg!=null?m.avg:'-');
+              });
+            }
+            var n=built[0].d.months.length;
+            if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches){render(n-1);return;}
+            var i=0;render(0);
+            setInterval(function(){i=(i+1)%n;render(i);},2600);
+          })();
+          </script>
 
           <div class="notice notice--warn notice__col" style="margin-bottom:16px">
             <span class="tag tag--amber">Why Google Maps matters most here</span>
@@ -197,93 +246,37 @@
 
         <!-- TAB 4: WORK PLAN -->
         <section data-panel="4" style="display:none">
+          <style>
+          .reclist{margin-top:6px;}
+          .reccat{border-top:1px solid var(--line);}
+          .reccat:first-child{border-top:0;}
+          .reccat__sum{list-style:none;cursor:pointer;display:flex;align-items:center;gap:9px;padding:12px 2px;font-family:var(--font-display);font-weight:700;font-size:.95rem;color:var(--ink);}
+          .reccat__sum::-webkit-details-marker{display:none;}
+          .reccat__sum::before{content:"▸";color:var(--violet);font-size:.72rem;transition:transform .18s;}
+          .reccat[open]>.reccat__sum::before{transform:rotate(90deg);}
+          .reccat__count{display:inline-block;font-family:var(--font-mono);font-size:.6rem;font-weight:700;color:var(--violet);background:rgba(91,75,208,0.1);border:1px solid rgba(91,75,208,0.3);padding:1px 6px;}
+          .reccat__body{padding:0 0 10px;}
+          .rectask{border-top:1px dashed var(--line);}
+          .rectask__sum{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 6px 9px 24px;}
+          .rectask__sum::-webkit-details-marker{display:none;}
+          .rectask__sum:hover{background:rgba(91,75,208,0.045);}
+          .rectask__name{font-family:var(--font-mono);font-size:.85rem;color:var(--ink-soft);line-height:1.4;}
+          .rectask__meta{display:inline-flex;align-items:center;gap:14px;flex:none;}
+          .rectask__why{font-family:var(--font-mono);font-size:.66rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--violet);white-space:nowrap;}
+          .rectask__why::after{content:" ▾";}
+          .rectask[open]>.rectask__sum .rectask__why{color:var(--mint);}
+          .rectask[open]>.rectask__sum .rectask__why::after{content:" ▴";}
+          .rectask__body{padding:2px 16px 12px 24px;font-family:var(--font-mono);font-size:.79rem;line-height:1.55;color:var(--muted);}
+          @media print{.reccat__body,.rectask__body{display:block !important;}}
+          </style>
+          <div class="notice notice--good notice__col" style="margin-bottom:16px">
+            <span class="tag tag--mint">The focus this quarter</span>
+            <p>The plan centers on the two highest-value moves. First, fill out the service pages and link them together, so the right page ranks instead of your homepage, which takes about 78% of your search clicks today. Second, build the high-intent pages people actually search for, like couples massage, and rebuild the Oak Hill page that was removed. The Business Profile fixes, page markup, and lead tracking support those two. Open a group to see its tasks, and tap &ldquo;Why&rdquo; on any task for the reasoning.</p>
+          </div>
           <div class="notice notice__col" style="margin-bottom:16px">
             <span class="tag">Our recommendations &middot; from the custom strategy</span>
-            <table class="dt">
-              <thead><tr><th>Recommendation</th><th>Priority</th></tr></thead>
-              <tbody id="recommendations"></tbody>
-            </table>
-            <p class="chart-note">These come from the June custom strategy, separate from the scheduled work. The service-page depth, internal linking, and the new high-intent pages are the highest-value, and the markup and tracking fold into the existing service-page work.</p>
-          </div>
-          <div class="grid grid--2" style="gap:16px; align-items:start">
-            <div class="card">
-              <div class="cardhd" style="margin-bottom:10px; display:flex; align-items:center; justify-content:space-between; gap:8px">Completed &middot; last 3 months <a href="https://app.asana.com/0/1211724233139271" target="_blank" rel="noopener" class="muted tiny" style="font-weight:400; text-transform:none; letter-spacing:0">from Asana</a></div>
-              <table class="dt">
-                <thead><tr><th>Work delivered</th><th>When</th></tr></thead>
-                <tbody>
-                  <tr class="catrow"><td>Reporting <span class="badge">1</span></td><td></td></tr>
-                  <tr class="itemrow"><td>Monthly performance report</td><td>Mar-May</td></tr>
-                  <tr class="catrow"><td>Website &amp; technical <span class="badge">3</span></td><td></td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1211735036664213" target="_blank" rel="noopener">Analytics &amp; tracking audit</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1211734949136052" target="_blank" rel="noopener">Indexing &amp; technical audit</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213476542632116" target="_blank" rel="noopener">Content calendar &amp; keyword research</a></td><td>May</td></tr>
-                  <tr class="catrow"><td>Service pages revamped &amp; added <span class="badge">2</span></td><td></td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213509608908776" target="_blank" rel="noopener">Prenatal massage</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213962434513686" target="_blank" rel="noopener">Trigger point therapy</a></td><td>May</td></tr>
-                  <tr class="catrow"><td>Location pages published <span class="badge">12</span></td><td></td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213453298549242" target="_blank" rel="noopener">Village at Western Oaks</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213453298549248" target="_blank" rel="noopener">Barton Creek West</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213453298549245" target="_blank" rel="noopener">West Oak Hill</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213117249101574" target="_blank" rel="noopener">Foothills of Barton Creek</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213117249101568" target="_blank" rel="noopener">Oak Hill</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213117249101571" target="_blank" rel="noopener">Travis Country</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213962995838796" target="_blank" rel="noopener">Southwest Austin</a></td><td>May</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213962995838793" target="_blank" rel="noopener">South Austin</a></td><td>May</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213962995838790" target="_blank" rel="noopener">Bee Cave</a></td><td>May</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1214694535053354" target="_blank" rel="noopener">Dripping Springs</a></td><td>May</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1214694535053351" target="_blank" rel="noopener">Circle C</a></td><td>May</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1214694535053357" target="_blank" rel="noopener">Lakeway</a></td><td>May</td></tr>
-                  <tr class="catrow"><td>Blog content published <span class="badge">15</span></td><td></td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213514471959287" target="_blank" rel="noopener">Long-term pain relief (FAQ)</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213514471959294" target="_blank" rel="noopener">Hit-the-spot method explained</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213514471959292" target="_blank" rel="noopener">Best choice for therapeutic massage</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213514471959298" target="_blank" rel="noopener">Ultimate guide to massage in Austin</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213514471959296" target="_blank" rel="noopener">Chronic back pain relief</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213920113642187" target="_blank" rel="noopener">How many sessions for pain relief (FAQ)</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213920113642192" target="_blank" rel="noopener">Swedish vs deep tissue massage</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213920113642194" target="_blank" rel="noopener">Prenatal massage for moms-to-be</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213920113642196" target="_blank" rel="noopener">Trigger point therapy for pain</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1213920113642198" target="_blank" rel="noopener">Ashiatsu barefoot techniques</a></td><td>Apr</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1214389977897354" target="_blank" rel="noopener">Cold laser therapy benefits</a></td><td>May</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1214389977897359" target="_blank" rel="noopener">Cold laser: client results</a></td><td>May</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1214465881476661" target="_blank" rel="noopener">Cryotherapy for pain &amp; inflammation</a></td><td>May</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1214465881476657" target="_blank" rel="noopener">Integrating multiple modalities</a></td><td>May</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1214465881476650" target="_blank" rel="noopener">First visit: what to expect (FAQ)</a></td><td>May</td></tr>
-                  <tr class="catrow"><td>Off-site authority &amp; local signals <span class="badge">4</span></td><td></td></tr>
-                  <tr class="itemrow"><td>Custom Local Placements</td><td>Mar-May</td></tr>
-                  <tr class="itemrow"><td>Authority backlink building</td><td>Apr</td></tr>
-                  <tr class="itemrow"><td>Local map &amp; proximity signals</td><td>Mar-May</td></tr>
-                  <tr class="itemrow"><td>Engagement &amp; community presence</td><td>Apr-Jun</td></tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div class="card">
-              <div class="cardhd" style="margin-bottom:10px; display:flex; align-items:center; justify-content:space-between; gap:8px">In the pipeline &middot; June to July <a href="https://app.asana.com/0/1211724233139271" target="_blank" rel="noopener" class="muted tiny" style="font-weight:400; text-transform:none; letter-spacing:0">from Asana</a></div>
-              <table class="dt">
-                <thead><tr><th>Scheduled</th><th>When</th></tr></thead>
-                <tbody>
-                  <tr class="catrow"><td>Location pages in production <span class="badge">3</span></td><td></td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1215439135380035" target="_blank" rel="noopener">Sunset Valley</a></td><td>Jun</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1215439135380038" target="_blank" rel="noopener">Tanglewood Forest</a></td><td>Jun</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1215399182388219" target="_blank" rel="noopener">Next suburb batch (x3)</a></td><td>Jun</td></tr>
-                  <tr class="catrow"><td>Blog content in production <span class="badge">5</span></td><td></td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1215436447808958" target="_blank" rel="noopener">Insurance coverage (FAQ)</a></td><td>Jun</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1215436447808963" target="_blank" rel="noopener">Relaxation massage</a></td><td>Jun</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1215436447808965" target="_blank" rel="noopener">Sports recovery</a></td><td>Jun</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1215436447808967" target="_blank" rel="noopener">Office-worker muscle pain</a></td><td>Jun</td></tr>
-                  <tr class="itemrow"><td><a href="https://app.asana.com/0/1211724233139271/1215436447808969" target="_blank" rel="noopener">Natural pain management</a></td><td>Jun</td></tr>
-                  <tr class="catrow"><td>Off-site authority &amp; local signals <span class="badge">3</span></td><td></td></tr>
-                  <tr class="itemrow"><td>Custom Local Placements</td><td>ongoing</td></tr>
-                  <tr class="itemrow"><td>Authority backlinks + digital press release</td><td>Jul</td></tr>
-                  <tr class="itemrow"><td>Local map &amp; proximity signals</td><td>ongoing</td></tr>
-                  <tr class="catrow"><td>Reporting &amp; technical <span class="badge">2</span></td><td></td></tr>
-                  <tr class="itemrow"><td>Monthly performance report</td><td>Jun</td></tr>
-                  <tr class="itemrow"><td>Indexing &amp; technical audit (9-month)</td><td>Jul</td></tr>
-                </tbody>
-              </table>
-              <p class="chart-note">This is the work currently scheduled on the board. Recurring monthly items (citations, reporting) are shown once.</p>
-            </div>
+            <div id="recommendations" class="reclist"></div>
+            <p class="chart-note">These come from the June custom strategy. The service-page depth, internal linking, and the new high-intent pages are the highest-value, and the markup and tracking fold into the existing service-page work.</p>
           </div>
         </section>
 
@@ -310,13 +303,7 @@ var DATA = {
     {cat:'Info', n:20, before:84, after:135, urls:[['/what-to-do-after-a-deep-tissue-massage-for-best-results/',21,77],['/how-often-can-you-do-dry-needling/',22,34],['/who-is-not-a-good-candidate-for-a-deep-tissue-massage/',6,8],['/workers-compensation-and-the-benefits-of-massage-acupuncture-and-physical-therapy/',2,4]]},
   ],
   maps: [['deep tissue massage','1.4','92%'],['massage therapy','3.1','76%'],['prenatal massage','3.2','64%']],
-  recommendations: [
-    {cat:'Service pages', items:[['Deepen the deep tissue page and the massage-services hub','High'],['Strengthen the cupping and sports massage pages','High'],['Add internal links to every service page so the right page ranks, not the homepage','High'],['Revamp the cold laser therapy page and merge a duplicate page into it','Medium']]},
-    {cat:'New & reclaimed pages', items:[['New page: Couples Massage in Austin (already #2 in Maps, no page yet)','High'],['Rebuild the Oak Hill location page to win back the traffic it lost','High'],['New Gift Certificates page with directions, plus optimize the existing Membership page','Medium']]},
-    {cat:'Google Business Profile', items:[['Complete the booking button, add the sports category, tidy the services list','High'],['Add cold laser therapy to your Business Profile services','High']]},
-    {cat:'Topical blogs', items:[['New blog: deep tissue cost guide (linked to the pricing page)','Medium']]},
-    {cat:'Tracking, structure & reporting', items:[['Set up lead tracking in analytics (form and membership clicks)','High'],['Standardize service-page markup for rich results','Medium'],['Add cupping and sports to rank tracking','Medium'],['Make sure the removed pages redirect to their live replacements','Medium']]},
-  ],
+  recommendations: [{"cat": "Service pages", "items": [["Deepen the deep tissue page and the massage-services hub", "High", "Google already puts you #1 on the map for deep tissue, but on the web your homepage shows up instead of the deep tissue page, because that page is thin. The pages that rank are the deep ones, so filling these out brings the right page forward for searches you nearly own."], ["Strengthen the cupping and sports massage pages", "High", "Cupping and sports massage already win the area right around the clinic, yet they are among your least-developed pages and no one is defending them. A content pass protects two services you quietly lead."], ["Add internal links to every service page so the right page ranks, not the homepage", "High", "Your homepage takes about 78% of your search clicks because the service pages barely link to one another, so Google falls back to the homepage. Linking the homepage and the services hub down to each service page lets the correct page rank for its own search."], ["Revamp the cold laser therapy page and merge a duplicate page into it", "Medium", "Cold laser runs on two competing pages today. Combining them into one deeper page, and pointing the cold laser posts at it, captures the cold laser and branded demand at the clinic (you sit around #5 there) and stops the two pages splitting each other."]]}, {"cat": "New & reclaimed pages", "items": [["New page: Couples Massage in Austin (already #2 in Maps, no page yet)", "High", "You already rank #2 on the map for couples massage with no page for it, while a key competitor has one. It is the clearest money-term gap, with the demand already proven on the map."], ["Rebuild the Oak Hill location page to win back the traffic it lost", "High", "The Oak Hill page was your strongest neighborhood page (about 116 clicks and 20,000 impressions) and it was removed in December 2025. Rebuilding it at its original address wins that traffic back."], ["New Gift Certificates page with directions, plus optimize the existing Membership page", "Medium", "You sell gift cards and memberships but have no indexed page for them, and the person a gift is bought for is never pointed to your location. A real page, with a get-directions prompt, turns gifting into rankable pages and actual visits."]]}, {"cat": "Google Business Profile", "items": [["Complete the booking button, add the sports category, tidy the services list", "High", "Your Book Online button is empty (the booking link only sits in the contact field), and the services list has duplicate entries. You also rank #1 on the map for sports massage without carrying the Sports massage therapist category. These are quick, high-leverage profile fixes."], ["Add cold laser therapy to your Business Profile services", "High", "There is no cold-laser-specific category to claim, so listing it as a service on your profile is what makes you show up for cold laser and branded searches right at the clinic."]]}, {"cat": "Topical blogs", "items": [["New blog: deep tissue cost guide (linked to the pricing page)", "Medium", "A deep tissue cost guide targets a high-intent search the site does not cover yet. Linked to your pricing page, it reaches people who are close to booking. Topics like cupping what-to-expect already live on the service pages, so no new post is needed there."]]}, {"cat": "Tracking, structure & reporting", "items": [["Set up lead tracking in analytics (form and membership clicks)", "High", "Your leads are healthy and already tracked in your booking systems, but Google Analytics has zero lead events, so we cannot see which pages and channels drive them without manual exports. Wiring it makes the work measurable."], ["Standardize service-page markup for rich results", "Medium", "The service pages use inconsistent behind-the-scenes markup (some have it, some do not), which limits how richly they can appear in search. One consistent template makes them eligible for richer listings."], ["Add cupping and sports to rank tracking", "Medium", "Cupping and sports massage already own the area near the clinic but are not tracked, so wins (or any slips) go unseen. Adding them lets us defend services you already lead."], ["Make sure the removed pages redirect to their live replacements", "Medium", "When duplicate or old pages are merged or removed, redirecting them passes their existing value to the live page instead of losing it."]]}],
 };
 
 function chg(b, a) {
@@ -351,11 +338,17 @@ document.getElementById('maps').innerHTML = DATA.maps.map(function (r) {
   return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td></tr>';
 }).join('');
 
-// tab 4 recommendations
-document.getElementById('recommendations').innerHTML = DATA.recommendations.map(function (g) {
-  return '<tr class="catrow"><td>' + g.cat + ' <span class="badge">' + g.items.length + '</span></td><td></td></tr>' +
-    g.items.map(function (it) { return '<tr class="itemrow"><td>' + it[0] + '</td><td>' + pri(it[1]) + '</td></tr>'; }).join('');
-}).join('');
+// tab 4 recommendations: collapsible groups + per-task "why" dropdown
+function priCls(p){ return p === 'High' ? 'pri-high' : p === 'Medium' ? 'pri-med' : 'pri-low'; }
+function grpRows(g) {
+  return '<details class="reccat"><summary class="reccat__sum"><span class="reccat__name">' + g.cat + '</span><span class="reccat__count">' + g.items.length + '</span></summary><div class="reccat__body">' +
+    g.items.map(function (it) {
+      return '<details class="rectask"><summary class="rectask__sum"><span class="rectask__name">' + it[0] + '</span>' +
+        '<span class="rectask__meta"><span class="rectask__why">Why</span><span class="pri ' + priCls(it[1]) + '">' + it[1] + '</span></span></summary>' +
+        '<div class="rectask__body">' + (it[2] || '') + '</div></details>';
+    }).join('') + '</div></details>';
+}
+document.getElementById('recommendations').innerHTML = DATA.recommendations.map(grpRows).join('');
 
 var LMONTHS = ['Mar','Apr','May'];
 window.CHART_FACTORIES = {
