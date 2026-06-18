@@ -51,7 +51,7 @@
         <li><span>Their business <b>runs on Google</b>. About 9 in 10 new-customer calls come straight from the Google Business Profile, so the map is the engine.</span></li>
         <li><span>New calls <b>dipped from a strong last fall</b> (about 190 a month) to a steady 50 to 68 a month. Visibility is still good, so this is about strengthening what they have, not starting over.</span></li>
         <li><span>The <b>different phone numbers</b> on Google, the website, and social are the call-tracking system, not a mistake. Every number rings the same main line.</span></li>
-        <li><span>The biggest wins are the <b>Google profile</b> (clean the name, reply to reviews, keep them coming) and making the <b>website tap-to-call</b> on every page.</span></li>
+        <li><span>The biggest win by far is the <b>Google profile</b> (clean the name, reply to reviews, keep them coming), since that is where the calls come from. The website already has <b>tap-to-call on every page</b>, so the on-page work left is minor cleanup.</span></li>
         <li><span>Two tracking fixes matter: the website analytics <b>stopped recording when the site was rebuilt in March</b> (the tracking tag did not carry over to the new site; dev has now restored it), and calls are <b>not yet tagged</b> as real jobs versus spam. With the tag back, tagging the calls is what is left to make the report match what the owner hears on the phone.</span></li>
       </ul>
     </div>
@@ -61,11 +61,11 @@
       <h2 class="sec">The frame</h2>
       <details class="sdrop">
         <summary>
-          <div class="sum-main"><span class="sum-txt">Triad runs on its Google Business Profile (about 92% of new calls). Calls dipped from a strong fall, but visibility is still strong, so the plan is to win more of the map, make the website easy to call, point content at local customers, and fix the broken measurement.</span></div>
+          <div class="sum-main"><span class="sum-txt">Triad runs on its Google Business Profile (about 92% of new calls). Calls dipped from a strong fall, but visibility is still strong, so the plan is to win more of the map, tidy the website's on-page details, point content at local customers, and finish the measurement fixes.</span></div>
           <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
         <div class="sdrop__body has-top">
-          <p class="lead2">The call tracking is clear: about <b>92% of first-time calls</b> come straight through the Google Business Profile, with most of the rest from Google search. The website form is a small add-on. New-customer calls peaked last fall (about <b>190 a month in October and November</b>), then settled to a steady <b>50 to 68 a month</b> through 2026. That is a real dip, but it is a dip in map-driven calls, not a website collapse: the site's search visibility held over the same window. Triad still ranks top 3 for the core "electrician in Greensboro" searches in the north and central parts of town, with a strong 4.8 rating on 128 reviews. So the play is not to start over. It is to win more of the map (the profile and reviews), make the website easy to call and tuned for local searches, point new content at Greensboro customers instead of national DIY readers, and fix the two measurement gaps so the numbers can be trusted.</p>
+          <p class="lead2">The call tracking is clear: about <b>92% of first-time calls</b> come straight through the Google Business Profile, with most of the rest from Google search. The website form is a small add-on. New-customer calls peaked last fall (about <b>190 a month in October and November</b>), then settled to a steady <b>50 to 68 a month</b> through 2026. That is a real dip, but it is a dip in map-driven calls, not a website collapse: the site's search visibility held over the same window. Triad still ranks top 3 for the core "electrician in Greensboro" searches in the north and central parts of town, with a strong 4.8 rating on 128 reviews. So the play is not to start over. It is to win more of the map (the profile and reviews), tidy the website's on-page details, point new content at Greensboro customers instead of national DIY readers, and finish the measurement fixes so the numbers can be trusted.</p>
           <p class="tiny muted" style="margin-top:12px">Search volumes are DataForSEO estimates, not literal counts. All profile work is the single managed Greensboro pin only.</p>
         </div>
       </details>
@@ -162,19 +162,18 @@
         <summary>
           <span class="snum">2</span>
           <div class="sum-main">
-            <div class="sum-hd"><h3>Make the website easy to call and easy to find</h3><span class="tag tag--mint">conversion + on-page basics</span></div>
-            <span class="sum-txt">Add tap-to-call on every page and put the business details on the homepage so Google reads them.</span>
+            <div class="sum-hd"><h3>Help Google read the website's business details</h3><span class="tag tag--mint">on-page basics</span></div>
+            <span class="sum-txt">Add the business details (LocalBusiness) to the homepage and the two area pages so Google reads the name, address, phone, and hours cleanly.</span>
           </div>
           <span class="lm"><span class="lm-t">Learn more</span><span class="sl">Show less</span><span class="chev">&#9662;</span></span>
         </summary>
         <div class="sdrop__body has-top">
           <div class="wwh__bd" style="padding:0">
-            <div class="row"><div class="k">What</div><div class="v">Add tap-to-call to the homepage and every service page; add the business details (LocalBusiness) to the homepage; add the missing headings.</div></div>
-            <div class="row"><div class="k">Why</div><div class="v">Most visitors are on a phone, ready to call, but the displayed number is not a tap-to-call link in the page itself on the homepage or the service pages (only the contact page has it), which loses mobile callers. The homepage carries only basic markup, so Google cannot cleanly read the business name, address, phone, and hours. Several service and area pages are missing their main heading. These are quick fixes to pages that already exist.</div></div>
+            <div class="row"><div class="k">What</div><div class="v">Add LocalBusiness structured data to the homepage so Google can read the business name, address, phone, and hours, and add the same business details to the two area pages, which carry none today.</div></div>
+            <div class="row"><div class="k">Why</div><div class="v">The homepage's structured data is limited to the business name and logo, with no address, phone, or hours, so Google has to read those from the page text instead of clean markup. The two area pages carry no structured data at all. The service pages already include their address and contact details in markup, so this just brings the homepage and area pages up to the same standard. It is a quick fix to pages that already exist. This is a minor lever, since about 92% of leads come through the Google profile rather than search, but it is cheap to do and helps Google read the site cleanly.</div></div>
             <div class="row"><div class="k">How</div><div class="v"><ul class="mini" style="margin:0">
-              <li>Wrap the displayed phone number in a tap-to-call link across the whole site, and keep a clear "Call now" button near the top of every page.</li>
-              <li>Add LocalBusiness details to the homepage (name, address, phone, hours, location), matching the markup the service pages already have.</li>
-              <li>Add the missing H1 headings to the service and area pages that lack one.</li>
+              <li>Add LocalBusiness structured data to the homepage (name, address, phone, hours, service area), keeping the details identical to the Google profile.</li>
+              <li>Add the same business details to the two area pages, which have no structured data today.</li>
             </ul></div></div>
           </div>
         </div>
@@ -228,9 +227,7 @@
             <tr><td class="area">GBP</td><td>Add +1-336-499-2015 as a secondary number, keep the tracking number primary</td><td>Keeps your details consistent everywhere while calls stay measured</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">GBP</td><td>Complete the services list with descriptions</td><td>Helps you show for specific service searches</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">GBP &middot; rec</td><td>Reply to every review and keep a steady review flow</td><td>Prominence signal that widens map coverage and wins the call (client's team)</td><td><span class="pri pri-ongoing">Ongoing</span></td></tr>
-            <tr><td class="area">Website</td><td>Add tap-to-call on the homepage and every service page</td><td>Captures the mobile callers you may be losing today</td><td><span class="pri pri-high">High</span></td></tr>
-            <tr><td class="area">Website</td><td>Add LocalBusiness details to the homepage</td><td>Lets Google cleanly read your name, address, phone, and hours</td><td><span class="pri pri-high">High</span></td></tr>
-            <tr><td class="area">Website</td><td>Add the missing headings to the service and area pages</td><td>Pushes these pages toward page 1 in regular search</td><td><span class="pri pri-med">Medium</span></td></tr>
+            <tr><td class="area">Website</td><td>Add LocalBusiness details to the homepage and the two area pages</td><td>Lets Google cleanly read your name, address, phone, and hours</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">Content</td><td>Refresh the older national how-to posts toward Greensboro intent</td><td>Turns legacy DIY traffic into local customers</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">Content</td><td>Add local depth to the neighborhood pages (unique today but around 500 words)</td><td>Turns thin pages into ones that can rank and convert</td><td><span class="pri pri-med">Medium</span></td></tr>
             <tr><td class="area">Measurement</td><td>Confirm the re-added Google Analytics tag is firing site-wide and visits are recording (dev restored it this month)</td><td>Visit reporting resumes after the rebuild gap</td><td><span class="pri pri-med">Medium</span></td></tr>
