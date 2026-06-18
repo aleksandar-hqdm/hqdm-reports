@@ -55,13 +55,13 @@
           <ul class="ov" style="margin:12px 0 18px">
             <li>Website leads have been climbing back since February, from <strong>42 in February to 101 in May</strong>, the strongest month so far this year.</li>
             <li><strong>Organic search drives most of the form leads</strong> we can measure, about three-quarters. Phone calls from your Google Business Profile are not tracked, so the profile's real contribution is larger than the form numbers alone show.</li>
-            <li>On Google Maps in your home area you hold the <strong>#1 spot across all ten tracked searches</strong>, backed by <strong>537 reviews at 4.9 stars</strong>, the strongest review base among local movers nearby.</li>
+            <li>On Google Maps, right at your Walled Lake location you hold the <strong>#1 spot for your core moving searches</strong>, backed by <strong>537 reviews at 4.9 stars</strong>, the strongest review base among local movers nearby.</li>
           </ul>
           <div class="kpis" style="margin-bottom:18px">
             <div class="kpi"><div class="l">Leads &middot; last 90 days</div><div class="n">236</div><div class="s">website form enquiries</div></div>
             <div class="kpi"><div class="l">Leads &middot; May</div><div class="n">101</div><div class="delta up">+55%</div><div class="s">vs 65 in April</div></div>
             <div class="kpi"><div class="l">Reviews &middot; rating</div><div class="n">537 &middot; 4.9</div><div class="s">strongest local review base</div></div>
-            <div class="kpi"><div class="l">Google Maps &middot; home area</div><div class="n">#1</div><div class="s">on all 10 tracked searches</div></div>
+            <div class="kpi"><div class="l">Google Maps &middot; at your location</div><div class="n">#1</div><div class="s">top mover for your core searches</div></div>
           </div>
           <div class="card chart-card" style="margin-bottom:16px">
             <div class="chart-head"><h3 class="display">Website leads month over month</h3><span class="muted tiny">recovering since February</span></div>
@@ -117,58 +117,97 @@
 
         <!-- TAB 3: MAP PRESENCE -->
         <section data-panel="3" style="display:none">
+          <style>
+          .hmlegend{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:0 0 10px;font-family:var(--font-mono);font-size:.6rem;color:var(--ink-soft);}
+          .hmlegend span{display:inline-flex;align-items:center;gap:4px;}
+          .hmlegend i{width:11px;height:11px;display:inline-block;border:1px solid rgba(0,0,0,0.18);}
+          .hm{display:grid;gap:2px;margin:0 auto 8px;}
+          .hmcell{aspect-ratio:1/1;border-radius:1px;background:#D7DAE0;}
+          .hmcell.ctr{box-shadow:0 0 0 2px var(--ink);position:relative;z-index:1;}
+          </style>
           <div class="notice notice--warn notice__col" style="margin-bottom:16px">
             <span class="tag tag--amber">Why Google Maps matters most here</span>
-            <p>Most people choosing a mover start on Google Maps and local search, where booking intent is highest. In your home area around Walled Lake, Professional Movers holds the top spot and the strongest review base of any nearby mover. That is the position the map work is built to defend and strengthen.</p>
+            <p>Most people choosing a mover start on Google Maps and local search, where booking intent is highest. Around your Walled Lake storefront you hold the top spot and the strongest review base of any nearby mover. That is the position the map work is built to defend and widen.</p>
           </div>
 
           <div class="grid grid--2" style="gap:16px; align-items:start; margin-bottom:16px">
             <div class="card">
-              <div class="cardhd" style="margin-bottom:10px">The foundation in place</div>
-              <div class="chips-wrap" style="margin-bottom:12px">
-                <span class="vchip good"><b>537 &middot; 4.9</b> reviews &middot; rating</span>
-                <span class="vchip good"><b>#1</b> on all 10 tracked map searches</span>
-                <span class="vchip good"><b>45 years</b> established Detroit-area brand</span>
-                <span class="vchip"><b>Award</b> "Best Moving Company" press coverage</span>
+              <div class="cardhd" style="margin-bottom:10px">Your live Google Maps coverage &middot; within 2 miles</div>
+              <div class="hmlegend">
+                <span><i style="background:#079A6B"></i> #1</span>
+                <span><i style="background:#3FB68B"></i> Top 3</span>
+                <span><i style="background:#D7DAE0"></i> Not in pack</span>
+                <span><i style="box-shadow:0 0 0 2px var(--ink) inset; background:transparent"></i> You</span>
               </div>
-              <p class="small" style="color:var(--ink-soft)">Your review base is the largest of any local mover we track near Walled Lake, and the profile carries the full license and credential signals Google rewards (USDOT, MCICC, CVED). These are exactly the signals that hold the top map position in your home market.</p>
+              <div class="hm" id="bubbleGrid"></div>
+              <p class="chart-note">Live Google Maps results at 100 points around your Walled Lake storefront (June 2026). Green means you are the top of the map; grey means you are not in the local pack. You are #1 across a tight core that leans north and west, and you fade out to the south (toward Novi) past about a mile.</p>
+              <div class="chips-wrap" style="margin-top:10px">
+                <span class="vchip good"><b>#1</b> at 45 of 48 points</span>
+                <span class="vchip good"><b>~1 mi</b> #1 core</span>
+                <span class="vchip"><b>off-map</b> past ~1.5 mi</span>
+              </div>
             </div>
-            <div class="card">
-              <div class="cardhd" style="margin-bottom:10px">Your review lead over the nearest local mover</div>
-              <table class="dt">
-                <thead><tr><th>Business</th><th>Reviews</th><th>Rating</th></tr></thead>
-                <tbody>
-                  <tr><td>Professional Movers.com</td><td>537</td><td>4.9</td></tr>
-                  <tr><td>Nearest local mover</td><td>23</td><td>4.3</td></tr>
-                </tbody>
-              </table>
-              <p class="chart-note">On the same map searches, the nearest competing local mover carries a small fraction of your reviews at a lower rating. The other movers Google shows rank well below you on reviews and rating, which underlines how strong your position is at home.</p>
+            <div>
+              <div class="card" style="margin-bottom:16px">
+                <div class="cardhd" style="margin-bottom:10px">The foundation in place</div>
+                <div class="chips-wrap" style="margin-bottom:12px">
+                  <span class="vchip good"><b>537 &middot; 4.9</b> reviews &middot; rating</span>
+                  <span class="vchip good"><b>#1</b> at your location on every moving search</span>
+                  <span class="vchip good"><b>45 years</b> established Detroit-area brand</span>
+                  <span class="vchip"><b>Award</b> "Best Moving Company" press coverage</span>
+                </div>
+                <p class="small" style="color:var(--ink-soft)">Your review base is the largest of any local mover we track near Walled Lake, and the profile carries the full license and credential signals Google rewards (USDOT, MCICC, CVED). These are the signals that hold the top map position in your core.</p>
+              </div>
+              <div class="card">
+                <div class="cardhd" style="margin-bottom:10px">Your review lead over the nearest local mover</div>
+                <table class="dt">
+                  <thead><tr><th>Business</th><th>Reviews</th><th>Rating</th></tr></thead>
+                  <tbody>
+                    <tr><td>Professional Movers.com</td><td>537</td><td>4.9</td></tr>
+                    <tr><td>Nearest local mover</td><td>23</td><td>4.3</td></tr>
+                  </tbody>
+                </table>
+                <p class="chart-note">In your core, the nearest competing local mover carries a small fraction of your reviews at a lower rating. That review lead is why you hold #1 where you appear.</p>
+              </div>
             </div>
           </div>
 
+          <script>
+          (function(){
+            var GRID=[[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,1,1,1,1,1,1,1,1,null],[null,1,1,1,1,1,1,1,1,null],[null,1,1,1,1,1,1,1,1,null],[null,1,1,1,1,1,1,1,1,null],[null,2,1,1,1,1,1,1,1,null],[null,2,2,1,1,1,1,1,1,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null]];
+            var OFFICE=[5,6];
+            function color(r){return r==null?'#D7DAE0':(r<=1?'#079A6B':(r<=3?'#3FB68B':(r<=10?'#C77B05':'#D6456A')));}
+            var hm=document.getElementById('bubbleGrid'); if(!hm) return;
+            var ny=GRID.length,nx=GRID[0].length;
+            hm.style.gridTemplateColumns='repeat('+nx+',1fr)';
+            for(var y=0;y<ny;y++){for(var x=0;x<nx;x++){
+              var el=document.createElement('div');
+              el.className='hmcell'+((x===OFFICE[0]&&y===OFFICE[1])?' ctr':'');
+              el.style.background=color(GRID[y][x]);
+              hm.appendChild(el);
+            }}
+          })();
+          </script>
+
           <div class="card" style="margin-bottom:16px">
-            <div class="cardhd" style="margin-bottom:12px">Where Professional Movers ranks #1 on Google Maps</div>
+            <div class="cardhd" style="margin-bottom:12px">Your average Google Maps position by distance</div>
             <table class="dt">
-              <thead><tr><th>Tracked search</th><th>Map rank</th></tr></thead>
+              <thead><tr><th>Tracked search</th><th>At storefront</th><th>0.5 mile</th><th>1 mile</th><th>2 miles</th></tr></thead>
               <tbody>
-                <tr><td>moving companies near me</td><td><span class="up">#1</span></td></tr>
-                <tr><td>cheap movers near me</td><td><span class="up">#1</span></td></tr>
-                <tr><td>Detroit moving services</td><td><span class="up">#1</span></td></tr>
-                <tr><td>movers in Detroit MI</td><td><span class="up">#1</span></td></tr>
-                <tr><td>Detroit relocation specialists</td><td><span class="up">#1</span></td></tr>
-                <tr><td>affordable moving assistance in Detroit</td><td><span class="up">#1</span></td></tr>
-                <tr><td>best local movers for apartments in Detroit</td><td><span class="up">#1</span></td></tr>
-                <tr><td>professional packing services Detroit</td><td><span class="up">#1</span></td></tr>
-                <tr><td>movers</td><td><span class="up">#1</span></td></tr>
-                <tr><td>moving services</td><td><span class="up">#1</span></td></tr>
+                <tr><td>moving companies near me</td><td><span class="up">#1</span></td><td><span class="up">#1.1</span></td><td><span class="up">#1</span> <span class="muted tiny">5/8 dirs</span></td><td><span class="muted">not in pack</span></td></tr>
+                <tr><td>cheap movers near me</td><td><span class="up">#1</span></td><td><span class="up">#1</span></td><td><span class="up">#1</span> <span class="muted tiny">5/8 dirs</span></td><td><span class="muted">not in pack</span></td></tr>
+                <tr><td>Detroit moving services</td><td><span class="up">#1</span></td><td><span class="up">#1</span></td><td><span class="up">#1.2</span> <span class="muted tiny">5/8 dirs</span></td><td><span class="muted">not in pack</span></td></tr>
+                <tr><td>movers in Detroit MI</td><td><span class="up">#1</span></td><td><span class="up">#1</span></td><td><span class="up">#1</span> <span class="muted tiny">5/8 dirs</span></td><td><span class="muted">not in pack</span></td></tr>
+                <tr><td>movers</td><td><span class="up">#1</span></td><td><span class="up">#1</span></td><td><span class="up">#1</span> <span class="muted tiny">5/8 dirs</span></td><td><span class="muted">not in pack</span></td></tr>
+                <tr><td>moving services</td><td><span class="up">#1</span></td><td><span class="up">#1</span></td><td><span class="up">#1</span> <span class="muted tiny">5/8 dirs</span></td><td><span class="muted">not in pack</span></td></tr>
               </tbody>
             </table>
-            <p class="chart-note">Live Google Maps results centered on the Walled Lake location. Professional Movers holds the #1 spot on every tracked search in its home area.</p>
+            <p class="chart-note">Live Google Maps average position, measured right at your storefront, then sampled in eight directions at each distance (June 2026). You are #1 in every direction at half a mile, still #1 in five of eight directions at a mile (the south side drops first), and not in the local pack at all by two miles. The map above shows the same footprint.</p>
           </div>
 
           <div class="notice notice--good notice__col">
-            <span class="tag tag--mint">The focus from here</span>
-            <p>The home-market position is strong and the goal is to protect and strengthen it: keep the Google profile fully built out and complete, and keep the website and content recovery feeding the same searches. The work plan covers each of these.</p>
+            <span class="tag tag--mint">The opportunity</span>
+            <p>You own the map in a tight core around your storefront, where your 537 reviews make you almost unbeatable. The growth move is widening that core so your #1 reach pushes further out, especially to the south where it drops off first. The work plan keeps your Google profile and service-area signals strong to do exactly that.</p>
           </div>
         </section>
 
