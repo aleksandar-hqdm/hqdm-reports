@@ -10,6 +10,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/hqdm.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <style>
   /* ---- menu ---- */
   .step-eyebrow { display:flex; align-items:center; gap:10px; margin:22px 0 12px; }
@@ -87,6 +89,34 @@
   .cl-start { font-size:0.76rem; color:var(--ink-soft); background:var(--paper);
     border-left:3px solid var(--violet); padding:7px 10px; margin-top:auto; }
   .cl-start b { color:var(--ink); }
+  /* ---- live rank grid map ---- */
+  #rankMap { height:540px; width:100%; background:#e8eaed; }
+  .leaflet-container { font-family:var(--font-mono); }
+  .rk { width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+        font-family:var(--font-mono); font-weight:700; font-size:11px; border:1.5px solid rgba(0,0,0,0.35);
+        box-shadow:0 1px 2px rgba(0,0,0,0.30); }
+  .rk-miss { width:22px; height:22px; background:#D6607F; color:#fff; font-size:9px;
+             border-color:rgba(0,0,0,0.22); box-shadow:0 1px 1px rgba(0,0,0,0.20); }
+  .dm { width:18px; height:18px; border-radius:50%; border:1.5px solid rgba(255,255,255,0.85);
+        box-shadow:0 1px 2px rgba(0,0,0,0.30); }
+  .ctr { width:16px; height:16px; border-radius:50%; background:#5B4BD0; border:2px solid #fff;
+         box-shadow:0 1px 3px rgba(0,0,0,0.4); }
+  .rk-controls { display:flex; flex-wrap:wrap; gap:12px 18px; align-items:flex-end; margin-bottom:14px; }
+  .rk-field label { display:block; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em;
+                    color:var(--muted); margin-bottom:5px; font-weight:700; }
+  .seg { display:inline-flex; border:2px solid; border-color:var(--b-light) var(--b-dark) var(--b-dark) var(--b-light); }
+  .seg button { padding:7px 14px; background:var(--face); border:none; font-family:var(--font-display);
+                font-weight:700; font-size:0.8rem; color:var(--ink-soft); cursor:pointer; }
+  .seg button.on { background:var(--violet); color:#fff; }
+  .kwsel { font-family:var(--font-mono); padding:7px 10px; border:2px solid;
+           border-color:var(--b-dark) var(--b-light) var(--b-light) var(--b-dark); background:#fff;
+           font-size:0.84rem; min-width:230px; color:var(--ink); }
+  .chk { font-size:0.78rem; color:var(--ink-soft); display:flex; align-items:center; gap:6px; }
+  .rk-legend { display:flex; flex-wrap:wrap; gap:8px 16px; margin:12px 0 0; }
+  .rk-status { display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:12px; padding:11px 14px;
+               background:var(--paper); border:1px solid var(--line); font-size:0.82rem; color:var(--ink-soft); }
+  .rk-status b { color:var(--ink); }
+  @media (max-width:620px){ #rankMap { height:430px; } }
 </style>
 </head>
 <body>
@@ -124,7 +154,7 @@
 
         <div class="tabs no-print">
           <button class="tab-btn active" data-tab="1" onclick="showTab(1)"><span class="t">Service Menu</span><span class="s">Organized for buyers</span></button>
-          <button class="tab-btn" data-tab="2" onclick="showTab(2)"><span class="t">Area Opportunity</span><span class="s">Where the events are</span></button>
+          <button class="tab-btn" data-tab="2" onclick="showTab(2); areaTabShown()"><span class="t">Area Opportunity</span><span class="s">Google Maps rank by area</span></button>
         </div>
 
         <hr class="divider" style="margin:18px 0">
@@ -223,45 +253,68 @@
         <section data-panel="2" style="display:none">
           <div class="notice notice--warn notice__col" style="margin-bottom:16px">
             <span class="tag tag--amber">How to read this map</span>
-            <p>Color shows where each kind of event is busiest across Miami (darker means more potential). The dot on each area shows how visible MIA already is on Google Maps there. Switch the lens to see weddings, corporate or parties on their own. The pattern is the point: the busiest event areas are the coast and center, and that is exactly where MIA is least visible today.</p>
+            <p id="howRead">Loading&hellip;</p>
           </div>
 
-          <div class="lens-bar no-print">
-            <button class="lens-btn active" data-lens="all" onclick="setLens('all')">All events</button>
-            <button class="lens-btn" data-lens="w" onclick="setLens('w')">Weddings</button>
-            <button class="lens-btn" data-lens="c" onclick="setLens('c')">Corporate</button>
-            <button class="lens-btn" data-lens="p" onclick="setLens('p')">Parties &amp; quinces</button>
-          </div>
-
-          <div class="map-shell">
-            <div class="map-card">
-              <svg id="miaMap" viewBox="0 0 860 498" role="img" aria-label="Miami event opportunity map"></svg>
-            </div>
-
-            <div>
-              <div id="zoneDetail" class="detail" style="margin-bottom:14px"></div>
-              <div class="detail legend">
-                <div>
-                  <div class="cardhd" style="margin-bottom:8px">Event potential <span id="legLens" class="muted small">(all events)</span></div>
-                  <div class="legrow">
-                    <span class="leg"><span class="swatch" style="background:#4A38C2"></span>Very high</span>
-                    <span class="leg"><span class="swatch" style="background:#6E5DEC"></span>High</span>
-                    <span class="leg"><span class="swatch" style="background:#A99FF0"></span>Moderate</span>
-                    <span class="leg"><span class="swatch" style="background:#DAD5F6"></span>Lower</span>
-                  </div>
-                </div>
-                <div>
-                  <div class="cardhd" style="margin-bottom:8px">MIA visibility on Google Maps</div>
-                  <div class="legrow">
-                    <span class="leg"><span class="cov-dot" style="background:#079A6B"></span>On the map</span>
-                    <span class="leg"><span class="cov-dot" style="background:#C77B05"></span>Partly visible</span>
-                    <span class="leg"><span class="cov-dot" style="background:#D6456A"></span>Barely / not visible</span>
-                    <span class="leg"><span class="cov-dot" style="background:#9AA0A8"></span>Not yet tracked</span>
-                  </div>
-                </div>
+          <div class="rk-controls no-print">
+            <div class="rk-field">
+              <label>Show</label>
+              <div class="seg" id="modeSeg">
+                <button data-m="demand" class="on">Event demand</button>
+                <button data-m="rank">Maps rank</button>
               </div>
             </div>
+
+            <div class="rk-field mode-demand">
+              <label>Event type</label>
+              <div class="seg" id="lensSeg">
+                <button data-l="all" class="on">All</button>
+                <button data-l="w">Weddings</button>
+                <button data-l="c">Corporate</button>
+                <button data-l="p">Parties</button>
+              </div>
+            </div>
+
+            <div class="rk-field mode-rank" style="display:none">
+              <label>Search type</label>
+              <div class="seg" id="groupSeg">
+                <button data-g="interest" class="on">General searches</button>
+                <button data-g="service">By service</button>
+              </div>
+            </div>
+            <div class="rk-field mode-rank" style="display:none">
+              <label>Keyword</label>
+              <select class="kwsel" id="kwSelect"></select>
+            </div>
+            <div class="rk-field mode-rank" style="display:none">
+              <label>Display</label>
+              <label class="chk"><input type="checkbox" id="hideMiss"> Hide the &ldquo;20+&rdquo; points</label>
+            </div>
+
+            <div class="rk-field" style="margin-left:auto">
+              <a class="btn btn--ghost" href="grid/index.html" style="padding:7px 12px; font-size:0.78rem">Full rank grid &rarr;</a>
+            </div>
           </div>
+
+          <div class="map-card" style="padding:6px">
+            <div id="rankMap"></div>
+          </div>
+
+          <div class="rk-legend mode-demand">
+            <span class="leg"><span class="cov-dot" style="background:#4A38C2"></span>Very high demand</span>
+            <span class="leg"><span class="cov-dot" style="background:#6E5DEC"></span>High</span>
+            <span class="leg"><span class="cov-dot" style="background:#A99FF0"></span>Moderate</span>
+            <span class="leg"><span class="cov-dot" style="background:#DAD5F6"></span>Lower</span>
+            <span class="leg" style="color:var(--muted)">red outline = service region</span>
+          </div>
+          <div class="rk-legend mode-rank" style="display:none">
+            <span class="leg"><span class="cov-dot" style="background:#079A6B"></span>1 to 3 &middot; wins the map</span>
+            <span class="leg"><span class="cov-dot" style="background:#C77B05"></span>4 to 10 &middot; first screen</span>
+            <span class="leg"><span class="cov-dot" style="background:#E8833A"></span>11 to 20 &middot; buried</span>
+            <span class="leg"><span class="cov-dot" style="background:#D6456A"></span>20+ &middot; not in top 20</span>
+            <span class="leg" style="color:var(--muted)">red outline = service region</span>
+          </div>
+          <div id="rkStatus" class="rk-status"><span>Loading the map&hellip;</span></div>
 
           <div class="cardhd" style="margin-top:22px; margin-bottom:3px; font-size:1rem">Where to send each service cluster</div>
           <p class="small muted" style="margin:2px 0 12px">The same booths from the menu, pointed at the Miami areas where that kind of event is busiest. The chip shows how visible MIA is there today, so the gaps are the priorities.</p>
@@ -278,7 +331,7 @@
             </div>
           </div>
 
-          <p class="chart-note" style="margin-top:14px">Potential is a planning estimate based on where Miami's wedding, corporate and party venues actually cluster (hotels, ballrooms, waterfront and rooftop venues, banquet halls), not a count of searches. Local search volumes for these areas are too small to rank on reliably. Visibility comes from the Local Dominator Google Maps scans, latest reading, best position across the main commercial searches. Areas marked "not yet tracked" sit outside the current scan grid, which currently leans inland and west.</p>
+          <p class="chart-note" style="margin-top:14px">The map shades each part of Miami by event demand, a read of where the wedding, corporate and party venues cluster (hotels, ballrooms, waterfront and rooftop venues, banquet halls), since local search counts are too small to rank on. The toggle flips the same map to MIA's live Google Maps position for any search. The service-cluster targets below use the same demand read. Both point the same way: the events sit on the coast and center, where MIA is least visible.</p>
         </section>
 
       </div>
@@ -293,8 +346,10 @@
   </div>
 </main>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
-/* ---- zone data (Local Dominator coverage + venue-density potential) ---- */
+/* ---- zone + cluster data (venue-density planning model) ---- */
 var ZONES = [
 {"name":"Sunny Isles & Aventura","lat":25.95,"lng":-80.13,"w":3,"c":2,"p":3,"drivers":"JW Marriott Turnberry, oceanfront resorts, Aventura Mall, big quinces","coverage":"untracked","medRank":null},
 {"name":"Bal Harbour & Surfside","lat":25.89,"lng":-80.12,"w":3,"c":2,"p":2,"drivers":"St. Regis, Ritz-Carlton, luxury beach weddings","coverage":"untracked","medRank":null},
@@ -314,7 +369,6 @@ var ZONES = [
 {"name":"North Miami & NMB","lat":25.90,"lng":-80.18,"w":2,"c":2,"p":2,"drivers":"Banquet halls, FIU Biscayne, mixed events","coverage":"untracked","medRank":null}
 ];
 
-var DEMAND_COLORS = ['#DAD5F6','#A99FF0','#6E5DEC','#4A38C2']; // tier 0..3
 var COV = {
   strong:   {c:'#079A6B', label:'On the map'},
   partial:  {c:'#C77B05', label:'Partly visible'},
@@ -322,115 +376,146 @@ var COV = {
   gap:      {c:'#D6456A', label:'Not visible'},
   untracked:{c:'#9AA0A8', label:'Not yet tracked'}
 };
-var LENS_NAME = {all:'all events', w:'weddings', c:'corporate', p:'parties & quinces'};
 var CLUSTERS = [
   {key:'w', name:'Weddings', icon:'💍', booths:['Glam Booth','360','Audio Guestbook','Studio']},
   {key:'c', name:'Corporate & brand', icon:'🏢', booths:['Social Booth','360','Roamer']},
   {key:'p', name:'Parties & quinces', icon:'🎉', booths:['360','Social Booth','Classic']}
 ];
-var SVGNS = 'http://www.w3.org/2000/svg';
-var curLens = 'all', selIdx = 2; // default selection: Miami Beach
+/* ---- live Google Maps rank grid (Local Dominator style), data in grid/grid_data.json ---- */
+var DATA=null, rmap=null, foundLayer=null, missLayer=null, mapReady=false, regionDone=false;
+var curKw=null, curGroup='interest', hideMiss=false, mode='demand', curLens='all';
+var RANK_BINS=[{max:3,c:'#079A6B'},{max:10,c:'#C77B05'},{max:20,c:'#E8833A'}];
+function rankStyle(r){ if(r==null) return {c:'#cbd0d8',t:'#5C636E',miss:true};
+  for(var i=0;i<RANK_BINS.length;i++) if(r<=RANK_BINS[i].max) return {c:RANK_BINS[i].c,t:'#fff',miss:false};
+  return {c:'#D6456A',t:'#fff',miss:false}; }
+function esc(s){ return (s==null?'':String(s)).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
 
-/* geographic tile-grid layout: [col 0=west..5=east, row 0=north..5=south] */
-var GRID = {
-  'Sunny Isles & Aventura':[5,0], 'North Miami & NMB':[4,0],
-  'Doral':[0,1], 'Miami Springs & Airport':[1,1], 'Hialeah':[2,1], 'Bal Harbour & Surfside':[5,1],
-  'Wynwood & Design District':[3,2], 'Downtown & Edgewater':[4,2], 'Miami Beach & South Beach':[5,2],
-  'Westchester & Sweetwater':[0,3], 'Brickell':[4,3],
-  'Coral Gables':[2,4], 'Coconut Grove':[3,4],
-  'Kendall':[0,5], 'Pinecrest & Palmetto Bay':[1,5], 'Key Biscayne':[5,5]
-};
-var TW=118, TH=56, GAPX=10, GAPY=11, MARX=22, MARY=64;
-function tileXY(name){ var g=GRID[name]; return {x:MARX+g[0]*(TW+GAPX), y:MARY+g[1]*(TH+GAPY)}; }
-var GRID_RIGHT = MARX + 6*(TW+GAPX) - GAPX; // east edge of tiles
-
-function demandVal(z, lens){ return lens==='all' ? (z.w+z.c+z.p)/3 : z[lens]; }
-function tierFor(z, lens){
-  if(lens==='all'){ var a=(z.w+z.c+z.p)/3; return a>=2.34?3:a>=1.67?2:a>=0.84?1:0; }
-  return z[lens];
+function loadRankData(){
+  fetch('grid/grid_data.json?t='+Date.now()).then(function(r){ if(!r.ok) throw 0; return r.json(); })
+    .then(function(d){ DATA=d; if(mapReady) applyData(); })
+    .catch(function(){ var s=document.getElementById('rkStatus');
+      if(s) s.innerHTML='<span>The Google Maps rank scan is still being pulled. Reload in a moment.</span>'; });
 }
-function recBooths(z){
-  var m=Math.max(z.w,z.c,z.p);
-  if(z.w===m) return 'Glam Booth, 360, Audio Guestbook';
-  if(z.c===m) return 'Social Booth, 360, Roamer';
-  return '360, Social Booth, Classic';
+function areaTabShown(){ ensureMap(); }
+function ensureMap(){
+  if(mapReady){ if(rmap) rmap.invalidateSize(); return; }
+  if(typeof L==='undefined' || !document.getElementById('rankMap')) return;
+  var center=(DATA && DATA.center) || [25.7617,-80.1918];
+  rmap=L.map('rankMap',{scrollWheelZoom:false}).setView(center,10);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+    {attribution:'&copy; OpenStreetMap, &copy; CARTO', subdomains:'abcd', maxZoom:19}).addTo(rmap);
+  missLayer=L.layerGroup().addTo(rmap); foundLayer=L.layerGroup().addTo(rmap);
+  mapReady=true;
+  if(DATA) applyData();
+  setTimeout(function(){ if(rmap) rmap.invalidateSize(); },60);
 }
-function el(tag, attrs){ var e=document.createElementNS(SVGNS,tag); for(var k in attrs) e.setAttribute(k,attrs[k]); return e; }
-
-function buildMap(){
-  var svg=document.getElementById('miaMap'); svg.innerHTML='';
-  /* land background */
-  svg.appendChild(el('rect',{x:0,y:0,width:860,height:498,fill:'#EDEAE0'}));
-  /* Atlantic Ocean band on the far east + bay seam */
-  svg.appendChild(el('rect',{x:GRID_RIGHT+10,y:30,width:860-(GRID_RIGHT+10),height:452,fill:'#BFD9E6'}));
-  svg.appendChild(el('rect',{x:GRID_RIGHT+3,y:30,width:6,height:452,fill:'#CFE3EC'}));
-  var ocean=el('text',{x:GRID_RIGHT+45,y:256,fill:'#5E8DA6','font-size':11,'font-family':'JetBrains Mono, monospace','font-weight':700,'text-anchor':'middle',transform:'rotate(90 '+(GRID_RIGHT+45)+' 256)'});
-  ocean.textContent='ATLANTIC OCEAN'; svg.appendChild(ocean);
-  /* heading + compass */
-  var n=el('text',{x:MARX,y:26,fill:'#5C636E','font-size':12,'font-family':'Space Mono, monospace','font-weight':700}); n.textContent='MIAMI-DADE'; svg.appendChild(n);
-  var c=el('text',{x:GRID_RIGHT-58,y:26,fill:'#9AA0A8','font-size':11,'font-family':'JetBrains Mono, monospace'}); c.textContent='N ↑   coast →'; svg.appendChild(c);
-
-  ZONES.forEach(function(z,i){
-    if(!GRID[z.name]) return;
-    var p=tileXY(z.name);
-    var grp=el('g',{'class':'zcell','data-i':i});
-    grp.appendChild(el('rect',{'class':'fill',x:p.x,y:p.y,width:TW,height:TH,rx:5,
-      fill:DEMAND_COLORS[tierFor(z,curLens)], stroke:'rgba(20,24,33,.30)','stroke-width':1}));
-    // coverage dot, top-right corner
-    grp.appendChild(el('circle',{'class':'cov',cx:p.x+TW-13,cy:p.y+13,r:6.5,
-      fill:COV[z.coverage].c, stroke:'#fff','stroke-width':1.5}));
-    // wrapped label
-    grp.appendChild(makeLabel(z.name, p.x+9, p.y, TH, tierFor(z,curLens)>=2));
-    grp.addEventListener('click', function(){ selIdx=i; refresh(); });
-    svg.appendChild(grp);
+function applyData(){
+  if(!DATA || !mapReady) return;
+  if(!regionDone){
+    if(DATA.region_polygon && DATA.region_polygon.length){
+      var poly=L.polygon(DATA.region_polygon,{color:'#D6456A',weight:2.5,fill:false,interactive:false}).addTo(rmap);
+      rmap.fitBounds(poly.getBounds().pad(0.06));
+    }
+    L.marker(DATA.center,{icon:L.divIcon({className:'',html:'<div class="ctr"></div>',iconSize:[16,16],iconAnchor:[8,8]})})
+      .addTo(rmap).bindTooltip('Downtown Miami');
+    wireControls(); regionDone=true;
+  }
+  syncGroupUI(); fillSelect(); syncLensUI(); syncModeUI(); setHowRead();
+  renderCurrent();
+}
+function tipText(cell,r,t1){
+  var who=t1?('Top here: '+esc(t1)):'No local results here';
+  var me=(r==null)?'MIA: not in top 20':('MIA: #'+r);
+  return '<b>'+me+'</b><br>'+cell.dist.toFixed(0)+' mi '+cell.sector+'<br><span style="color:#5C636E">'+who+'</span>';
+}
+function renderKeyword(kw){
+  if(!DATA.keywords[kw]) return; curKw=kw; var kd=DATA.keywords[kw];
+  foundLayer.clearLayers(); missLayer.clearLayers();
+  DATA.cells.forEach(function(cell,i){
+    if(!cell.in) return;
+    var r=kd.ranks[i], st=rankStyle(r), t1=kd.top1?kd.top1[i]:null, ll=[cell.lat,cell.lng];
+    if(st.miss){
+      if(hideMiss) return;
+      var ic=L.divIcon({className:'',iconSize:[24,24],iconAnchor:[12,12],html:'<div class="rk rk-miss">20+</div>'});
+      L.marker(ll,{icon:ic}).bindTooltip(tipText(cell,null,t1)).addTo(missLayer);
+    } else {
+      var ic2=L.divIcon({className:'',iconSize:[26,26],iconAnchor:[13,13],
+        html:'<div class="rk" style="background:'+st.c+';color:'+st.t+'">'+String(r)+'</div>'});
+      L.marker(ll,{icon:ic2}).bindTooltip(tipText(cell,r,t1)).addTo(foundLayer);
+    }
+  });
+  var sel=document.getElementById('kwSelect'); if(sel) sel.value=kw;
+  updateStatus(kd.summary);
+}
+function updateStatus(s){
+  document.getElementById('rkStatus').innerHTML=
+    '<span><b>'+s.found+'</b> / '+s.in_radius_cells+' points show MIA</span>'+
+    '<span><b>'+s.coverage_pct+'%</b> of the region covered</span>'+
+    '<span><b>'+(s.avg_rank!=null?s.avg_rank:'-')+'</b> average rank where shown</span>'+
+    '<span><b>'+s.top3+'</b> points in the top 3</span>'+
+    '<span><b>'+(s.best!=null?'#'+s.best:'-')+'</b> best position</span>';
+}
+function wireControls(){
+  document.querySelectorAll('#modeSeg button').forEach(function(b){ b.onclick=function(){ setMode(b.getAttribute('data-m')); }; });
+  document.querySelectorAll('#lensSeg button').forEach(function(b){ b.onclick=function(){ setLens(b.getAttribute('data-l')); }; });
+  document.querySelectorAll('#groupSeg button').forEach(function(b){
+    b.onclick=function(){ curGroup=b.getAttribute('data-g'); syncGroupUI(); fillSelect();
+      var f=DATA.groups[curGroup].find(function(k){return DATA.keywords[k];}) || DATA.groups[curGroup][0];
+      renderKeyword(f); };
+  });
+  var sel=document.getElementById('kwSelect'); if(sel) sel.onchange=function(e){ renderKeyword(e.target.value); };
+  var hm=document.getElementById('hideMiss'); if(hm) hm.onchange=function(e){ hideMiss=e.target.checked; if(curKw) renderKeyword(curKw); };
+}
+function syncGroupUI(){ document.querySelectorAll('#groupSeg button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-g')===curGroup); }); }
+function fillSelect(){
+  var sel=document.getElementById('kwSelect'); if(!sel) return; sel.innerHTML='';
+  DATA.groups[curGroup].forEach(function(k){
+    var o=document.createElement('option'); o.value=k;
+    o.textContent=k+(DATA.keywords[k]?'':'  (pending)'); o.disabled=!DATA.keywords[k]; sel.appendChild(o);
   });
 }
-function makeLabel(name, x, ty, th, light){
-  var fill=light?'#fff':'#15171C';
-  var grp=el('g',{});
-  var words=name.split(' '); var lines=[], cur='';
-  words.forEach(function(wd){ if((cur+' '+wd).trim().length>15){ lines.push(cur.trim()); cur=wd; } else cur=(cur+' '+wd).trim(); });
-  if(cur) lines.push(cur);
-  lines=lines.slice(0,2);
-  var startY = ty + (lines.length===1 ? th/2+4 : th/2-3);
-  lines.forEach(function(ln,k){ var t=el('text',{'class':'zlabel',x:x,y:startY+k*13,fill:fill}); t.textContent=ln; grp.appendChild(t); });
-  return grp;
-}
 
-function recolor(){
-  var svg=document.getElementById('miaMap');
-  svg.querySelectorAll('.zcell').forEach(function(grp){
-    var z=ZONES[+grp.getAttribute('data-i')], tier=tierFor(z,curLens);
-    grp.querySelector('rect.fill').setAttribute('fill',DEMAND_COLORS[tier]);
-    grp.querySelectorAll('text.zlabel').forEach(function(t){ t.setAttribute('fill',tier>=2?'#fff':'#15171C'); });
-    grp.classList.toggle('sel', +grp.getAttribute('data-i')===selIdx);
+/* ---- regional event-demand layer (venue-density model, same basemap + grid) ---- */
+var DEMAND_COLORS=['#DAD5F6','#A99FF0','#6E5DEC','#4A38C2'];
+function demandTier(z,lens){ if(lens==='all'){ var a=(z.w+z.c+z.p)/3; return a>=2.34?3:a>=1.67?2:a>=0.84?1:0; } return z[lens]; }
+function nearestZone(lat,lng){ var best=ZONES[0],bd=1e9; for(var i=0;i<ZONES.length;i++){ var z=ZONES[i],d=(lat-z.lat)*(lat-z.lat)+(lng-z.lng)*(lng-z.lng); if(d<bd){bd=d;best=z;} } return best; }
+function recBooths(z){ var m=Math.max(z.w,z.c,z.p); if(z.w===m) return 'Glam Booth, 360, Audio Guestbook'; if(z.c===m) return 'Social Booth, 360, Roamer'; return '360, Social Booth, Classic'; }
+function renderDemand(lens){
+  curLens=lens; if(!foundLayer) return;
+  foundLayer.clearLayers(); missLayer.clearLayers();
+  DATA.cells.forEach(function(cell){ if(!cell.in) return;
+    var z=nearestZone(cell.lat,cell.lng), col=DEMAND_COLORS[demandTier(z,lens)];
+    var ic=L.divIcon({className:'',iconSize:[18,18],iconAnchor:[9,9],html:'<div class="dm" style="background:'+col+'"></div>'});
+    L.marker([cell.lat,cell.lng],{icon:ic}).bindTooltip('<b>'+esc(z.name)+'</b><br><span style="color:#5C636E">'+esc(z.drivers)+'</span><br>Push here: '+esc(recBooths(z))).addTo(foundLayer);
   });
+  var lname={all:'event',w:'wedding',c:'corporate',p:'party and quince'}[lens];
+  var top=topZones(lens,3);
+  document.getElementById('rkStatus').innerHTML=
+    '<span>Strongest '+lname+' demand: <b>'+top.join('</b>, <b>')+'</b></span>'+
+    '<span style="color:var(--muted)">Shaded by venue density (hotels, ballrooms, waterfront and rooftop venues, banquet halls), not search counts.</span>';
+}
+function setLens(l){ curLens=l; syncLensUI(); if(mapReady && DATA && mode==='demand') renderDemand(l); }
+function syncLensUI(){ document.querySelectorAll('#lensSeg button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-l')===curLens); }); }
+function setMode(m){
+  mode=m;
+  document.querySelectorAll('.mode-demand').forEach(function(e){ e.style.display=(m==='demand')?'':'none'; });
+  document.querySelectorAll('.mode-rank').forEach(function(e){ e.style.display=(m==='rank')?'':'none'; });
+  syncModeUI(); setHowRead();
+  if(mapReady && DATA) renderCurrent();
+}
+function syncModeUI(){ document.querySelectorAll('#modeSeg button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-m')===mode); }); }
+function renderCurrent(){
+  if(mode==='rank'){ var f=(curKw && DATA.keywords[curKw]) ? curKw : (DATA.groups[curGroup].find(function(k){return DATA.keywords[k];}) || DATA.keyword_order[0]); renderKeyword(f); }
+  else { renderDemand(curLens); }
+}
+function setHowRead(){
+  var el=document.getElementById('howRead'); if(!el) return;
+  el.innerHTML = (mode==='demand')
+    ? 'Each dot is a spot in Miami, shaded by how much event business is nearby: darker means more weddings, corporate events and parties happen there. Switch the event type to see each on its own. This is where the bookings are, so it is where the Maps work and the content should aim. Flip to <b>Maps rank</b> to see where MIA shows up today.'
+    : 'Each dot shows MIA’s current Google Maps position there: <b>green</b> (1 to 3) wins the map, <b>amber</b> and <b>orange</b> are visible, <b>pink "20+"</b> means not in the top 20. Pick a search to see its map. The full rank grid with the leaderboard is linked on the right.';
 }
 
 function pips(n){ var s='<span class="pot-pips">'; for(var i=0;i<3;i++) s+='<span class="pip'+(i<n?' on':'')+'"></span>'; return s+'</span>'; }
-function tierWord(t){ return ['Lower','Moderate','High','Very high'][t]; }
-
-function renderDetail(){
-  var z=ZONES[selIdx], cov=COV[z.coverage];
-  var covExtra = z.medRank!=null ? (' &middot; typical Maps spot #'+z.medRank) : '';
-  document.getElementById('zoneDetail').innerHTML =
-    '<h4>'+z.name+'</h4>'+
-    '<div class="meta">'+z.drivers+'</div>'+
-    '<div class="dline"><span class="k">Wedding potential</span><span class="v">'+pips(z.w)+'</span></div>'+
-    '<div class="dline"><span class="k">Corporate potential</span><span class="v">'+pips(z.c)+'</span></div>'+
-    '<div class="dline"><span class="k">Party / quince potential</span><span class="v">'+pips(z.p)+'</span></div>'+
-    '<div class="dline"><span class="k">MIA on Google Maps</span><span class="v"><span class="covbadge" style="color:'+cov.c+';border-color:'+cov.c+'">'+cov.label+'</span></span></div>'+
-    (z.medRank!=null?'<div class="dline"><span class="k">Typical Maps position</span><span class="v">#'+z.medRank+'</span></div>':'')+
-    '<div class="dline"><span class="k">Booths to push here</span><span class="v">'+recBooths(z)+'</span></div>';
-}
-
-function setLens(lens){
-  curLens=lens;
-  document.querySelectorAll('.lens-btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lens')===lens); });
-  document.getElementById('legLens').textContent='('+LENS_NAME[lens]+')';
-  recolor();
-}
-function refresh(){ recolor(); renderDetail(); }
 
 /* fill the menu "busiest in" lines from the same data */
 function topZones(lens,n){
@@ -474,12 +559,11 @@ function buildClusters(){
 
 window.addEventListener('DOMContentLoaded', function(){
   fillBusy();
-  buildMap();
   buildClusters();
-  refresh();
-  if(location.hash === '#area'){ showTab(2); }
+  loadRankData();
+  if(location.hash === '#area'){ showTab(2); areaTabShown(); }
 });
-window.addEventListener('hashchange', function(){ if(location.hash === '#area'){ showTab(2); } });
+window.addEventListener('hashchange', function(){ if(location.hash === '#area'){ showTab(2); areaTabShown(); } });
 
 </script>
 <script src="../assets/js/report.js"></script>

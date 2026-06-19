@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>MIA Photo Booth Regional Rank Grid · HQDM</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/hqdm.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+  #map { height: 620px; width: 100%; background: #e8eaed; border: 1px solid var(--line); }
+  .leaflet-container { font-family: var(--font-mono); }
+  .rk { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center;
+        justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: 11px;
+        border: 1.5px solid rgba(0,0,0,0.35); box-shadow: 0 1px 2px rgba(0,0,0,0.30); }
+  .rk-miss { width: 22px; height: 22px; background: #D6607F; color: #fff; font-size: 9px;
+             border-color: rgba(0,0,0,0.22); box-shadow: 0 1px 1px rgba(0,0,0,0.20); }
+  .ctr { width: 16px; height: 16px; border-radius: 50%; background: #5B4BD0; border: 2px solid #fff;
+         box-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+  .controls { display: flex; flex-wrap: wrap; gap: 16px 22px; align-items: center; }
+  .seg { display: inline-flex; border: 2px solid; border-color: var(--b-light) var(--b-dark) var(--b-dark) var(--b-light); }
+  .seg button { padding: 7px 15px; background: var(--face); border: none; font-family: var(--font-mono);
+                font-weight: 700; font-size: 0.8rem; color: var(--ink-soft); }
+  .seg button.on { background: var(--violet); color: #fff; }
+  .field label { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em;
+                 color: var(--muted); margin-bottom: 4px; font-weight: 700; }
+  select.kw { font-family: var(--font-mono); padding: 7px 10px; border: 2px solid;
+              border-color: var(--b-dark) var(--b-light) var(--b-light) var(--b-dark); background: #fff;
+              font-size: 0.85rem; min-width: 250px; color: var(--ink); }
+  .chk { font-size: 0.8rem; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 6px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 14px; font-size: 0.8rem; align-items: center; }
+  .legend .k { display: inline-flex; align-items: center; gap: 7px; }
+  .legend .sw { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid rgba(0,0,0,0.3); }
+  table.lb { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  table.lb th, table.lb td { padding: 6px 9px; border-bottom: 1px solid var(--line); text-align: left; }
+  table.lb th { font-family: var(--font-display); font-size: 0.68rem; text-transform: uppercase;
+                letter-spacing: 0.05em; color: var(--muted); white-space: nowrap; }
+  table.lb td.num, table.lb th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  table.lb tbody tr { cursor: pointer; }
+  table.lb tbody tr:hover { background: rgba(91,75,208,0.06); }
+  table.lb tbody tr.on { background: rgba(91,75,208,0.13); }
+  table.lb .gtag { font-size: 0.64rem; padding: 1px 6px; border: 1px solid var(--line); color: var(--muted); }
+  .ringtab { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .ringtab th, .ringtab td { padding: 5px 9px; border-bottom: 1px solid var(--line); }
+  .ringtab th { font-family: var(--font-display); font-size: 0.68rem; text-transform: uppercase; color: var(--muted); }
+  .ringtab td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .secgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 12px; }
+  .secchip { padding: 7px 4px; text-align: center; border: 1px solid var(--line); font-size: 0.72rem;
+             background: var(--paper); color: var(--muted); }
+  .secchip b { display: block; font-size: 0.95rem; color: var(--ink); }
+  .secchip.hot { background: rgba(7,154,107,0.12); border-color: var(--mint); }
+  .secchip.warm { background: rgba(199,123,5,0.10); border-color: var(--amber); }
+  .banner { background: #FBF3DE; border: 1px solid var(--amber); padding: 10px 14px; font-size: 0.82rem;
+            margin-bottom: 16px; display: flex; gap: 12px; align-items: center; justify-content: space-between; }
+  .banner b { color: var(--amber); }
+  @media (max-width: 620px) { .secgrid { grid-template-columns: repeat(2, 1fr); } #map { height: 460px; } }
+</style>
+</head>
+<body>
+
+<div class="nav-wrap no-print">
+  <nav class="nav container" style="max-width:1080px">
+    <a class="brand" href="../index.html"><span class="mark">H</span> <span>HQDM<small>search intelligence</small></span></a>
+    <div style="display:flex; gap:8px; align-items:center">
+      <a class="btn" href="../index.html" style="padding:8px 15px; font-size:0.8rem">Report</a>
+      <a class="btn" href="../strategy/index.html" style="padding:8px 15px; font-size:0.8rem">Strategy</a>
+      <button class="btn" onclick="window.print()" style="padding:8px 15px; font-size:0.8rem">Print / PDF</button>
+    </div>
+  </nav>
+</div>
+
+<main class="section section--tight">
+  <div class="container" style="max-width:1080px">
+
+    <!-- header window -->
+    <div class="win" style="margin-bottom:22px">
+      <div class="win__bar">
+        <span class="ic">&#9635;</span>
+        <span class="ttl">regional-grid.hqdm &ndash; MIA Photo Booth</span>
+        <span class="win__controls"><b>_</b><b>&#9633;</b><b>&times;</b></span>
+      </div>
+      <div class="win__body">
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; justify-content:space-between">
+          <div>
+            <div class="eyebrow">Regional Rank Grid</div>
+            <h1 class="display" style="font-size:clamp(1.5rem,2.8vw,2.1rem); margin-top:8px">MIA Photo Booth</h1>
+            <p class="muted small" style="margin-top:4px">Google Maps rank across your selected Miami region &middot; 32&times;32 sampling &middot; companion to the report</p>
+          </div>
+          <span class="pill"><span class="dot dot--violet"></span>Internal &middot; June 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="banner"></div>
+
+    <!-- HOW TO READ -->
+    <div class="tldr" style="margin-bottom:22px">
+      <div class="kicker">How to read this</div>
+      <h2>What the map shows</h2>
+      <div class="sub">A live snapshot of where MIA Photo Booth appears in the Google Maps pack across the metro.</div>
+      <ul>
+        <li><span>We checked MIA's Google Maps ranking on a dense grid across the <b>region you selected</b> (the urban core from Aventura down to Key Biscayne and Kendall). Each dot is one point, and the number on it is MIA's position there.</span></li>
+        <li><span><b>Green (1&ndash;3)</b> is where MIA wins the map. <b>Amber (4&ndash;10)</b> is on the first screen. <b>Orange (11&ndash;20)</b> is visible but buried. <b>Faded grey</b> means MIA does not appear in the top 20 at that spot.</span></li>
+        <li><span>Switch between the head searches people type ("keywords of interest") and the booth-type searches ("service-specific") using the toggle, and pick any single keyword to see its map.</span></li>
+        <li><span>The aim: see the band where MIA already shows up versus the open region (the coastal event corridor) it could realistically take next.</span></li>
+      </ul>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="win" style="margin-bottom:18px">
+      <div class="win__bar is-idle"><span class="ic">&#9776;</span><span class="ttl">controls</span></div>
+      <div class="win__body win__body--pad-sm">
+        <div class="controls">
+          <div class="field">
+            <label>Keyword group</label>
+            <div class="seg" id="groupSeg">
+              <button data-g="interest" class="on">Keywords of interest</button>
+              <button data-g="service">Service-specific</button>
+            </div>
+          </div>
+          <div class="field">
+            <label>Keyword</label>
+            <select class="kw" id="kwSelect"></select>
+          </div>
+          <div class="field">
+            <label>Display</label>
+            <label class="chk"><input type="checkbox" id="hideMiss"> Hide points where MIA isn&rsquo;t in the top 20</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="win" style="margin-bottom:22px">
+      <div class="win__bar"><span class="ic">&#9678;</span><span class="ttl" id="mapTitle">loading&hellip;</span><span class="win__controls"><b>&#9633;</b></span></div>
+      <div class="win__body win__body--pad-sm">
+        <div id="map"></div>
+        <div class="legend">
+          <span class="k"><span class="sw" style="background:#079A6B"></span> 1&ndash;3 &middot; wins the map</span>
+          <span class="k"><span class="sw" style="background:#C77B05"></span> 4&ndash;10 &middot; first screen</span>
+          <span class="k"><span class="sw" style="background:#E8833A"></span> 11&ndash;20 &middot; buried</span>
+          <span class="k"><span class="sw" style="background:#D6607F"></span> 20+ &middot; not in top 20</span>
+          <span class="k"><span class="sw" style="background:#5B4BD0"></span> downtown Miami</span>
+          <span class="k" style="color:var(--muted)">&middot; red outline = your selected region</span>
+        </div>
+      </div>
+      <div class="win__status" id="statusBar">
+        <div class="cell grow">Pick a keyword to see its coverage.</div>
+      </div>
+    </div>
+
+    <!-- REGION READ -->
+    <div class="win" style="margin-bottom:22px">
+      <div class="win__bar is-idle"><span class="ic">&#9788;</span><span class="ttl">the region they can tackle</span></div>
+      <div class="win__body">
+        <p class="lead2" id="regionSentence" style="margin-bottom:14px">&nbsp;</p>
+        <div class="grid grid--2" style="gap:22px">
+          <div>
+            <h3 class="display" style="font-size:1rem; margin-bottom:8px">By distance from center</h3>
+            <table class="ringtab" id="ringTab">
+              <thead><tr><th>Ring</th><th class="num">Shows up</th><th class="num">Avg rank</th><th class="num">In top 3</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div>
+            <h3 class="display" style="font-size:1rem; margin-bottom:8px">By direction</h3>
+            <div class="secgrid" id="secGrid"></div>
+            <p class="tiny muted" style="margin-top:10px">Share of points where MIA appears in the local pack, by compass direction from downtown. Green = strongest, amber = partial.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALL KEYWORDS -->
+    <div class="win" style="margin-bottom:22px">
+      <div class="win__bar is-idle"><span class="ic">&#9783;</span><span class="ttl">all keywords &ndash; click a row to load it</span></div>
+      <div class="win__body win__body--pad-sm">
+        <table class="lb" id="lbTable">
+          <thead><tr>
+            <th>Keyword</th><th>Group</th>
+            <th class="num">Shows up</th><th class="num">Avg rank</th>
+            <th class="num">Top-3 pts</th><th class="num">Top-10 pts</th><th class="num">Best</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="tiny muted" id="method" style="margin-bottom:30px">&nbsp;</p>
+
+  </div>
+</main>
+
+<footer class="no-print" style="border-top:1px solid var(--line); padding:18px 0; margin-top:10px">
+  <div class="container" style="max-width:1080px; display:flex; flex-wrap:wrap; gap:8px; justify-content:space-between; align-items:center">
+    <span class="tiny muted">HQDM Search Intelligence &middot; MIA Photo Booth &middot; internal companion to the marketing report</span>
+    <span class="tiny muted">Single managed Miami pin &middot; service area</span>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+const DIRNAMES = {N:'north', NE:'northeast', E:'east (coast)', SE:'southeast',
+                  S:'south', SW:'southwest', W:'west (inland)', NW:'northwest'};
+const RANK_BINS = [{max:3,c:'#079A6B'},{max:10,c:'#C77B05'},{max:20,c:'#E8833A'}];
+let DATA=null, map, foundLayer, missLayer, canvasR, curKw=null, hideMiss=false, curGroup='interest';
+
+function rankStyle(r){
+  if(r==null) return {c:'#cbd0d8', t:'#5C636E', miss:true};
+  for(const b of RANK_BINS) if(r<=b.max) return {c:b.c, t:'#fff', miss:false};
+  return {c:'#D6456A', t:'#fff', miss:false};
+}
+function esc(s){ return (s==null?'':String(s)).replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+let booted=false, pollTimer=null;
+
+function load(){
+  fetch('grid_data.json?t=' + Date.now()).then(r=>{ if(!r.ok) throw 0; return r.json(); })
+    .then(d=>{ DATA=d; if(booted){ refreshFromData(false); } else { boot(); } })
+    .catch(()=>{ notReady(); });
+}
+function notReady(){
+  document.getElementById('banner').innerHTML =
+    '<div class="banner"><span>The live grid pull is starting. This page fills in automatically as data lands &ndash; no need to refresh.</span></div>';
+  setTimeout(load, 15000);
+}
+function boot(){
+  booted = true;
+  initMap();
+  wireControls();
+  document.getElementById('method').textContent =
+    'Method: live Google Maps pack rank for MIA on a 32×32 grid clipped to your selected Miami region (' +
+    inRadiusCount() + ' points), pulled ' + (DATA.generated_utc||'').slice(0,10) +
+    '. "Not in top 20" means MIA did not appear in the local pack at that point.';
+  refreshFromData(true);
+  schedulePoll();
+}
+function refreshFromData(firstTime){
+  const order = DATA.keyword_order || Object.keys(DATA.keywords);
+  const have = order.filter(k=>DATA.keywords[k]);
+  updateBanner(have.length, order.length);
+  buildLeaderboard();
+  const prev = (curKw && DATA.keywords[curKw]) ? curKw : null;
+  if(firstTime || !prev){
+    const first = have[0] || order[0];
+    curGroup = DATA.groups.interest.includes(first) ? 'interest' : 'service';
+    syncGroupUI(); fillSelect();
+    if(DATA.keywords[first]) renderKeyword(first);
+  } else {
+    fillSelect();
+    document.getElementById('kwSelect').value = prev;
+    renderKeyword(prev);
+  }
+}
+function updateBanner(haveN, total){
+  const b = document.getElementById('banner');
+  if(haveN >= total){ b.innerHTML=''; return; }
+  b.innerHTML =
+    '<div class="banner"><span>Live pull in progress: <b>'+haveN+' of '+total+
+    '</b> keywords loaded. New keywords appear automatically.</span></div>';
+}
+function schedulePoll(){
+  if(pollTimer) clearInterval(pollTimer);
+  pollTimer = setInterval(function(){
+    const order = DATA.keyword_order || [];
+    const haveNow = order.filter(k=>DATA.keywords[k]).length;
+    if(haveNow >= order.length){ clearInterval(pollTimer); pollTimer=null; return; }
+    fetch('grid_data.json?t='+Date.now()).then(r=> r.ok ? r.json() : null).then(d=>{
+      if(!d) return;
+      const newHave = (d.keyword_order||[]).filter(k=>d.keywords[k]).length;
+      if(newHave > haveNow){ DATA = d; refreshFromData(false); }
+    }).catch(function(){});
+  }, 20000);
+}
+function inRadiusCount(){ return DATA.cells.filter(c=>c.in).length; }
+
+function initMap(){
+  map = L.map('map', {scrollWheelZoom:false}).setView(DATA.center, 10);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution:'&copy; OpenStreetMap, &copy; CARTO', subdomains:'abcd', maxZoom:19
+  }).addTo(map);
+  canvasR = L.canvas({padding:0.5});
+  if(DATA.region_polygon && DATA.region_polygon.length){
+    var poly = L.polygon(DATA.region_polygon, {color:'#D6456A', weight:2.5, fill:false, interactive:false}).addTo(map);
+    map.fitBounds(poly.getBounds().pad(0.06));
+  } else {
+    L.circle(DATA.center, {radius: DATA.radius_miles*1609.34, color:'#5B4BD0', weight:1.5,
+      dashArray:'6 7', fill:false, interactive:false}).addTo(map);
+  }
+  L.marker(DATA.center, {icon: L.divIcon({className:'', html:'<div class="ctr"></div>', iconSize:[16,16], iconAnchor:[8,8]})})
+    .addTo(map).bindTooltip('Downtown Miami');
+  missLayer = L.layerGroup().addTo(map);
+  foundLayer = L.layerGroup().addTo(map);
+}
+
+function tip(cell, r, t1){
+  const who = t1 ? ('Here #1: ' + esc(t1)) : 'No local results at this point';
+  const me  = (r==null) ? 'MIA: not in top 20' : ('MIA: #' + r);
+  return '<b>' + me + '</b><br>' + cell.dist.toFixed(0) + ' mi ' + cell.sector +
+         ' of center<br><span style="color:#5C636E">' + who + '</span>';
+}
+
+function renderKeyword(kw){
+  if(!DATA.keywords[kw]) return;
+  curKw = kw;
+  const kd = DATA.keywords[kw];
+  foundLayer.clearLayers(); missLayer.clearLayers();
+  DATA.cells.forEach((cell,i)=>{
+    if(!cell.in) return;
+    const r = kd.ranks[i];
+    const st = rankStyle(r);
+    const t1 = kd.top1 ? kd.top1[i] : null;
+    const ll = [cell.lat, cell.lng];
+    if(st.miss){
+      if(hideMiss) return;
+      const ic = L.divIcon({className:'', iconSize:[24,24], iconAnchor:[12,12],
+        html:'<div class="rk rk-miss">20+</div>'});
+      const m = L.marker(ll, {icon:ic}); m.bindTooltip(tip(cell, null, t1)); missLayer.addLayer(m);
+    } else {
+      const ic = L.divIcon({className:'', iconSize:[26,26], iconAnchor:[13,13],
+        html:'<div class="rk" style="background:'+st.c+';color:'+st.t+'">'+String(r)+'</div>'});
+      const m = L.marker(ll, {icon:ic}); m.bindTooltip(tip(cell, r, t1)); foundLayer.addLayer(m);
+    }
+  });
+  document.getElementById('mapTitle').textContent = kw;
+  document.getElementById('kwSelect').value = kw;
+  updateStatus(kd.summary);
+  updateRegion(kd.summary);
+  setActiveRow(kw);
+}
+
+function updateStatus(s){
+  const cov = s.coverage_pct, n = s.in_radius_cells;
+  document.getElementById('statusBar').innerHTML =
+    '<div class="cell"><b>'+ s.found +'</b> / '+ n +' points show MIA</div>' +
+    '<div class="cell"><b>'+ cov +'%</b> coverage</div>' +
+    '<div class="cell"><b>'+ (s.avg_rank!=null? s.avg_rank : '–') +'</b> avg rank (where shown)</div>' +
+    '<div class="cell"><b>'+ s.top3 +'</b> points in top 3</div>' +
+    '<div class="cell"><b>'+ s.top10 +'</b> points in top 10</div>' +
+    '<div class="cell"><b>'+ (s.best!=null? '#'+s.best : '–') +'</b> best position</div>';
+}
+
+function updateRegion(s){
+  // rings
+  const rb = document.querySelector('#ringTab tbody'); rb.innerHTML='';
+  [['0-10','Within 10 mi'],['10-20','10 to 20 mi'],['20-30','20 to 30 mi']].forEach(([k,label])=>{
+    const x = s.rings[k] || {};
+    rb.innerHTML += '<tr><td>'+label+'</td><td class="num">'+(x.coverage_pct!=null?x.coverage_pct+'%':'–')+
+      '</td><td class="num">'+(x.avg_rank!=null?x.avg_rank:'–')+'</td><td class="num">'+(x.top3!=null?x.top3:0)+'</td></tr>';
+  });
+  // sectors
+  const sg = document.getElementById('secGrid'); sg.innerHTML='';
+  ['NW','N','NE','W','E','SW','S','SE'].forEach(d=>{
+    const x = s.sectors[d] || {coverage_pct:0, found:0};
+    let cls = ''; if(x.found>0 && x.coverage_pct>=40) cls='hot'; else if(x.found>0) cls='warm';
+    sg.innerHTML += '<div class="secchip '+cls+'"><b>'+x.coverage_pct+'%</b>'+DIRNAMES[d]+'</div>';
+  });
+  document.getElementById('regionSentence').innerHTML = regionSentence(s);
+}
+
+function regionSentence(s){
+  const present = Object.entries(s.sectors).filter(([k,v])=>v.found>0)
+                    .sort((a,b)=>(a[1].avg_rank||99)-(b[1].avg_rank||99));
+  if(!present.length)
+    return 'For this search MIA does not appear in the Maps pack anywhere in your selected region yet. The whole region is open to take.';
+  const best = present[0];
+  const absent = Object.entries(s.sectors).filter(([k,v])=>v.cells>0 && v.found===0).map(([k])=>DIRNAMES[k]);
+  let t = 'MIA appears in <b>'+s.coverage_pct+'%</b> of your selected region for this search, strongest to the <b>'+
+          DIRNAMES[best[0]]+'</b> (avg #'+best[1].avg_rank+').';
+  if(present.length>1){
+    const others = present.slice(1,3).map(p=>DIRNAMES[p[0]]);
+    if(others.length) t += ' It also shows up toward the '+others.join(' and ')+'.';
+  }
+  if(absent.length) t += ' It is absent (not in the top 20) across the '+absent.join(', ')+' – open ground.';
+  return t;
+}
+
+function wireControls(){
+  document.querySelectorAll('#groupSeg button').forEach(b=>{
+    b.onclick = ()=>{ curGroup=b.dataset.g; syncGroupUI(); fillSelect();
+      const first=DATA.groups[curGroup].find(k=>DATA.keywords[k]) || DATA.groups[curGroup][0];
+      renderKeyword(first); };
+  });
+  document.getElementById('kwSelect').onchange = e=> renderKeyword(e.target.value);
+  document.getElementById('hideMiss').onchange = e=>{ hideMiss=e.target.checked; if(curKw) renderKeyword(curKw); };
+}
+function syncGroupUI(){
+  document.querySelectorAll('#groupSeg button').forEach(b=> b.classList.toggle('on', b.dataset.g===curGroup));
+}
+function fillSelect(){
+  const sel = document.getElementById('kwSelect'); sel.innerHTML='';
+  DATA.groups[curGroup].forEach(k=>{
+    const o=document.createElement('option'); o.value=k;
+    o.textContent = k + (DATA.keywords[k] ? '' : '  (pending…)');
+    o.disabled = !DATA.keywords[k];
+    sel.appendChild(o);
+  });
+}
+
+function buildLeaderboard(){
+  const order = DATA.keyword_order || Object.keys(DATA.keywords);
+  const tb = document.querySelector('#lbTable tbody'); tb.innerHTML='';
+  order.forEach(k=>{
+    const kd = DATA.keywords[k];
+    const g = DATA.groups.interest.includes(k) ? 'interest' : 'service';
+    const tr = document.createElement('tr'); tr.dataset.kw=k;
+    if(!kd){
+      tr.innerHTML = '<td>'+esc(k)+'</td><td><span class="gtag">'+g+'</span></td>'+
+        '<td class="num" colspan="5" style="color:var(--muted)">pending…</td>';
+      tr.style.cursor='default';
+    } else {
+      const s=kd.summary;
+      tr.innerHTML = '<td>'+esc(k)+'</td>'+
+        '<td><span class="gtag">'+g+'</span></td>'+
+        '<td class="num">'+s.coverage_pct+'%</td>'+
+        '<td class="num">'+(s.avg_rank!=null?s.avg_rank:'–')+'</td>'+
+        '<td class="num">'+s.top3+'</td>'+
+        '<td class="num">'+s.top10+'</td>'+
+        '<td class="num">'+(s.best!=null?'#'+s.best:'–')+'</td>';
+      tr.onclick = ()=>{ curGroup=g; syncGroupUI(); fillSelect(); renderKeyword(k);
+        document.getElementById('map').scrollIntoView({behavior:'smooth', block:'center'}); };
+    }
+    tb.appendChild(tr);
+  });
+}
+function setActiveRow(kw){
+  document.querySelectorAll('#lbTable tbody tr').forEach(tr=> tr.classList.toggle('on', tr.dataset.kw===kw));
+}
+
+load();
+</script>
+</body>
+</html>
